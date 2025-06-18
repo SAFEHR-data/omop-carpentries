@@ -2,7 +2,7 @@
 # UCL/H OMOP course
 A course introducing the OMOP vacubularies and data structure to new users of OMOP data extracts provided by OMOP-ES / CRDM.
 
-rendered version of the lesson - even though this is typically included in the About section of the repository, it is always useful to link to the URL where the rendered lesson is available
+rendered version of the lesson - https://safehr-data.github.io/omop-carpentries/
 
 contact information - include up-to-date email addresses or mailing lists or other details on how to get in touch with the lesson maintainers
 
