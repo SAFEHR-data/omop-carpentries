@@ -21,7 +21,7 @@ Learning objectives
   * Make an analytical view
   * Create a statistical summary
 
-:::::: preq
+:::::: prereq
 
 - basic R
 
