@@ -7,6 +7,10 @@ exercises: 0
 :::::::::::::::::::::::::::::::::::::: questions 
 
 - Why use OMOP?
+- Why not use spreadsheets?
+- What are the advantages of OMOP?
+- What are the disadvantages of OMOP?
+
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -14,6 +18,8 @@ exercises: 0
 
 - Examine the diagram of the OMOP tables and the data specification
 - Familiarise with the vocab schema
+- Join two or more tables together
+- Attempt to join data from spreadsheets with different structures
 - Describe the pros and cons on using OMOP vs raw data, why this is the way forward
 - Use Athena and other OHDSI tools for reference
 - Describe the full landscape of OMOP tools and the community
@@ -47,14 +53,62 @@ associated with the lessons. They appear in the "Instructor View"
 
 ::::::::::::::::::::::::::::::::::::: challenge 
 
-## Challenge 1: Can you do it?
+## Challenge 1: Compare data from two separate OMOP data sets
 
-What is the output of this command?
-
+Let's read in an OMOP extract called extract_1 from the local files.
 ```r
-paste("This", "new", "lesson", "looks", "good")
+omop_dataset_file_location_1 <- here::here("extracts/uclh1")
+
+extract_1 <- read_omop_dataset(omop_dataset_file_location_1)
 ```
 
+A colleague at the hospital is familiar with the events that occurred in hospital to one of the patients in the dataset.  This patient has been identified by the data team as the anonymised patient with person id 7.
+
+```r
+extract_1$person |>
+  filter(person_id==7) |>
+  select(person_id, race_concept_id, gender_concept_id, year_of_birth) |>
+  omopcept::omop_join_name_all() |>
+  collect()
+```
+
+:::::: checklist
+
+Verify that the patient details match your colleague's description.
+
+::::::::::::::::
+
+Let's take a sample of patients in this dataset, selecting those same columns.
+```r
+extract_1_pt_sample <- extract_1$person |>
+  slice_sample(n = 10) |>
+  select(person_id, race_concept_id, gender_concept_id, year_of_birth) |>
+  collect()
+```
+
+We've received another OMOP dataset from another site.
+```r
+omop_dataset_file_location_2 <- here::here("extracts/other_site_1")
+
+extract_2 <- read_omop_dataset(omop_dataset_file_location_2)
+```
+
+Let's take a sample of patients from the second extract and bind them together.
+
+::::: callout
+
+Note that, because the structure of the data (table names, columns and data types) are set as standard by the OMOP specification, we are guaranteed to be able to bind these two datasets together without error.  We can also re-apply the same code, only changing the reference to the new extract.
+
+:::::::::::::
+
+```r
+extract_2_pt_sample <- extract_2$person |>
+  slice_sample(n = 10) |>
+  select(person_id, race_concept_id, gender_concept_id, year_of_birth) |>
+  collect()
+  
+ bind_rows(extract_1_pt_sample, extract_2_pt_sample)
+```
 :::::::::::::::::::::::: solution 
 
 ## Output
@@ -73,6 +127,7 @@ paste("This", "new", "lesson", "looks", "good")
 You can add a line with at least three colons and a `solution` tag.
 
 :::::::::::::::::::::::::::::::::
+
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## Figures
