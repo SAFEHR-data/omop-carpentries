@@ -69,6 +69,12 @@ episodes:
 - introduction.Rmd
 - chapter1.Rmd
 - chapter2.Rmd
+- chapter3.Rmd
+- chapter4.Rmd
+- chapter5.Rmd
+- chapter6.Rmd
+- chapter7.Rmd
+- chapter8.Rmd
 
 # Information for Learners
 learners: setup.md
