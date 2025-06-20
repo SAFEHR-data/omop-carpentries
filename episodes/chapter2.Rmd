@@ -113,8 +113,8 @@ extract_2_pt_sample <- extract_2$person |>
 
 ## Output
  
-```output
-[1] "This new lesson looks good"
+```r
+dplyr::tibble(person_id = c(101,102,201,202), year_of_birth = c(1992,1993,1994,1995))
 ```
 
 :::::::::::::::::::::::::::::::::
