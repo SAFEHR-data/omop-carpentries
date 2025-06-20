@@ -21,6 +21,8 @@ exercises: 0
 
 ## Introduction
 
+OMOP is a format for recording Electronic Healthcare Records. It allows you to follow a patient journey through a hospital by linking every aspect to a standard vocabulary thus enabling easy sharing of data between hospitals, trusts and even countries.
+
 This is a lesson created via The Carpentries Workbench. It is written in
 [Pandoc-flavored Markdown](https://pandoc.org/MANUAL.txt) for static files and
 [R Markdown][r-markdown] for dynamic files that can render code into output. 
@@ -39,8 +41,7 @@ Carpentries lesson template:
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: instructor
 
-Inline instructor notes can help inform instructors of timing challenges
-associated with the lessons. They appear in the "Instructor View"
+Make sure everyone has R open
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
