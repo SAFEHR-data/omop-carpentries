@@ -18,7 +18,7 @@ carpentry: 'incubator'
 carpentry_description: 'Lesson Description'
 
 # Overall title for pages.
-title: 'UCL OMOP course'
+title: 'UCL/H OMOP course'
 
 # Date the lesson was created (YYYY-MM-DD, this is empty by default)
 created: 2025-06-18
@@ -34,7 +34,7 @@ life_cycle: 'pre-alpha' # FIXME
 license: 'CC-BY 4.0'
 
 # Link to the source repository for this lesson
-source: 'https://github.com/dcartner/omop-carpentries/workbench-template-rmd' 
+source: 'https://github.com/SAFEHR-data/omop-carpentries'
 
 # Default branch of your lesson
 branch: 'main'
@@ -68,6 +68,7 @@ contact: 'team@carpentries.org' # FIXME
 episodes: 
 - introduction.Rmd
 - chapter1.Rmd
+- chapter2.Rmd
 
 # Information for Learners
 learners: setup.md
