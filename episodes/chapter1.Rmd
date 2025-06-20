@@ -21,6 +21,8 @@ exercises: 0
 
 ## Introduction
 
+OMOP is a format for recording Electronic Healthcare Records. It allows you to follow a patient journey through a hospital by linking every aspect to a standard vocabulary thus enabling easy sharing of data between hospitals, trusts and even countries.
+
 This is a lesson created via The Carpentries Workbench. It is written in
 [Pandoc-flavored Markdown](https://pandoc.org/MANUAL.txt) for static files and
 [R Markdown][r-markdown] for dynamic files that can render code into output. 
@@ -39,19 +41,59 @@ Carpentries lesson template:
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: instructor
 
-Inline instructor notes can help inform instructors of timing challenges
-associated with the lessons. They appear in the "Instructor View"
+Make sure everyone has R open
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: challenge 
 
-## Challenge 1: Can you do it?
+## Challenge 1: Find the age and ethnicity of a patient.
 
-What is the output of this command?
+What is the age an ethnicity or patient with patient_id = "2" ?
 
 ```r
-paste("This", "new", "lesson", "looks", "good")
+ install omopcept from Github if not installed
+if (!requireNamespace("omopcept", quietly=TRUE)) 
+{
+  if (!requireNamespace("remotes", quietly=TRUE)) install.packages("remotes")
+  
+  remotes::install_github("SAFEHR-data/omopcept")
+}
+
+library(readr)
+library(dplyr)
+library(here)
+library(gh)
+library(omopcept)
+library(ggplot2)
+library(stringr)
+library(lubridate)
+
+repo <- "SAFEHR-data/uclh-research-discovery"
+path <- "_projects/uclh_cchic_s0/data"
+destdata <- here("dynamic-docs/02-omop-walkthrough-critical-care/data")
+
+# only download if not already present
+if (! file.exists(file.path(destdata,"person.csv")))
+{
+  # Make GitHub API request to list contents of given path
+  response <- gh::gh(glue::glue("/repos/{repo}/contents/{path}"))
+
+  # Download all files to the destination dir
+  purrr::walk(response, ~ download.file(.x$download_url, destfile = file.path(destdata, .x$name)))
+
+  list.files(destdata)
+}
+
+omop <- omopcept::omop_cdm_read(destdata, filetype="csv")
+
+# names() can show us names of the tables read in
+names(omop)
+
+# names() can also show column names for one of the tables
+names(omop$person)
+
+
 ```
 
 :::::::::::::::::::::::: solution 
@@ -59,7 +101,7 @@ paste("This", "new", "lesson", "looks", "good")
 ## Output
  
 ```output
-[1] "This new lesson looks good"
+[1] Not finished yet!!!
 ```
 
 :::::::::::::::::::::::::::::::::
