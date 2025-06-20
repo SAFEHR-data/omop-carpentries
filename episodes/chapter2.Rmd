@@ -1,21 +1,22 @@
 ---
-title: "What is OMOP?"
+title: "Why OMOP?"
 teaching: 0
 exercises: 0
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions 
 
-- What is OMOP?
-- What information would you expect to find in the person table?
+- Why use OMOP?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
 
 - Examine the diagram of the OMOP tables and the data specification
-- Open a parquet file
-- Interrogate the data in the person table
+- Familiarise with the vocab schema
+- Describe the pros and cons on using OMOP vs raw data, why this is the way forward
+- Use Athena and other OHDSI tools for reference
+- Describe the full landscape of OMOP tools and the community
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 

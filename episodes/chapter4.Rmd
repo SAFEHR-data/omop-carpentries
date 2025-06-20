@@ -1,21 +1,18 @@
 ---
-title: "What is OMOP?"
+title: "Placeholder Chapter 4"
 teaching: 0
 exercises: 0
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions 
 
-- What is OMOP?
-- What information would you expect to find in the person table?
+- What
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
 
-- Examine the diagram of the OMOP tables and the data specification
-- Open a parquet file
-- Interrogate the data in the person table
+- 1
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
