@@ -7,6 +7,10 @@ exercises: 0
 :::::::::::::::::::::::::::::::::::::: questions 
 
 - Why use OMOP?
+- Why not use spreadsheets?
+- What are the advantages of OMOP?
+- What are the disadvantages of OMOP?
+
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -14,6 +18,8 @@ exercises: 0
 
 - Examine the diagram of the OMOP tables and the data specification
 - Familiarise with the vocab schema
+- Join two or more tables together
+- Attempt to join data from spreadsheets with different structures
 - Describe the pros and cons on using OMOP vs raw data, why this is the way forward
 - Use Athena and other OHDSI tools for reference
 - Describe the full landscape of OMOP tools and the community
