@@ -1,87 +1,129 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://dcartner.github.io/omop-carpentries/01-introduction.html</loc>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/01-introduction.html</loc>
   </url>
   <url>
-    <loc>https://dcartner.github.io/omop-carpentries/404.html</loc>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/404.html</loc>
   </url>
   <url>
-    <loc>https://dcartner.github.io/omop-carpentries/CODE_OF_CONDUCT.html</loc>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/CODE_OF_CONDUCT.html</loc>
   </url>
   <url>
-    <loc>https://dcartner.github.io/omop-carpentries/LICENSE.html</loc>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/LICENSE.html</loc>
   </url>
   <url>
-    <loc>https://dcartner.github.io/omop-carpentries/aio.html</loc>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/aio.html</loc>
   </url>
   <url>
-    <loc>https://dcartner.github.io/omop-carpentries/chapter1.html</loc>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/chapter1.html</loc>
   </url>
   <url>
-    <loc>https://dcartner.github.io/omop-carpentries/images.html</loc>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/chapter2.html</loc>
   </url>
   <url>
-    <loc>https://dcartner.github.io/omop-carpentries/index.html</loc>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/chapter3.html</loc>
   </url>
   <url>
-    <loc>https://dcartner.github.io/omop-carpentries/instructor/01-introduction.html</loc>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/chapter4.html</loc>
   </url>
   <url>
-    <loc>https://dcartner.github.io/omop-carpentries/instructor/404.html</loc>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/chapter5.html</loc>
   </url>
   <url>
-    <loc>https://dcartner.github.io/omop-carpentries/instructor/CODE_OF_CONDUCT.html</loc>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/chapter6.html</loc>
   </url>
   <url>
-    <loc>https://dcartner.github.io/omop-carpentries/instructor/LICENSE.html</loc>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/chapter7.html</loc>
   </url>
   <url>
-    <loc>https://dcartner.github.io/omop-carpentries/instructor/aio.html</loc>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/chapter8.html</loc>
   </url>
   <url>
-    <loc>https://dcartner.github.io/omop-carpentries/instructor/chapter1.html</loc>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/images.html</loc>
   </url>
   <url>
-    <loc>https://dcartner.github.io/omop-carpentries/instructor/images.html</loc>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/index.html</loc>
   </url>
   <url>
-    <loc>https://dcartner.github.io/omop-carpentries/instructor/index.html</loc>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/instructor/01-introduction.html</loc>
   </url>
   <url>
-    <loc>https://dcartner.github.io/omop-carpentries/instructor/instructor-notes.html</loc>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/instructor/404.html</loc>
   </url>
   <url>
-    <loc>https://dcartner.github.io/omop-carpentries/instructor/introduction.html</loc>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/instructor/CODE_OF_CONDUCT.html</loc>
   </url>
   <url>
-    <loc>https://dcartner.github.io/omop-carpentries/instructor/key-points.html</loc>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/instructor/LICENSE.html</loc>
   </url>
   <url>
-    <loc>https://dcartner.github.io/omop-carpentries/instructor/keypoints.html</loc>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/instructor/aio.html</loc>
   </url>
   <url>
-    <loc>https://dcartner.github.io/omop-carpentries/instructor/profiles.html</loc>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/instructor/chapter1.html</loc>
   </url>
   <url>
-    <loc>https://dcartner.github.io/omop-carpentries/instructor/reference.html</loc>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/instructor/chapter2.html</loc>
   </url>
   <url>
-    <loc>https://dcartner.github.io/omop-carpentries/instructor-notes.html</loc>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/instructor/chapter3.html</loc>
   </url>
   <url>
-    <loc>https://dcartner.github.io/omop-carpentries/introduction.html</loc>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/instructor/chapter4.html</loc>
   </url>
   <url>
-    <loc>https://dcartner.github.io/omop-carpentries/key-points.html</loc>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/instructor/chapter5.html</loc>
   </url>
   <url>
-    <loc>https://dcartner.github.io/omop-carpentries/keypoints.html</loc>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/instructor/chapter6.html</loc>
   </url>
   <url>
-    <loc>https://dcartner.github.io/omop-carpentries/profiles.html</loc>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/instructor/chapter7.html</loc>
   </url>
   <url>
-    <loc>https://dcartner.github.io/omop-carpentries/reference.html</loc>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/instructor/chapter8.html</loc>
+  </url>
+  <url>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/instructor/images.html</loc>
+  </url>
+  <url>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/instructor/index.html</loc>
+  </url>
+  <url>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/instructor/instructor-notes.html</loc>
+  </url>
+  <url>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/instructor/introduction.html</loc>
+  </url>
+  <url>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/instructor/key-points.html</loc>
+  </url>
+  <url>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/instructor/keypoints.html</loc>
+  </url>
+  <url>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/instructor/profiles.html</loc>
+  </url>
+  <url>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/instructor/reference.html</loc>
+  </url>
+  <url>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/instructor-notes.html</loc>
+  </url>
+  <url>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/introduction.html</loc>
+  </url>
+  <url>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/key-points.html</loc>
+  </url>
+  <url>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/keypoints.html</loc>
+  </url>
+  <url>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/profiles.html</loc>
+  </url>
+  <url>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/reference.html</loc>
   </url>
 </urlset>
