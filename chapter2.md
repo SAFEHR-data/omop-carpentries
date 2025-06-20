@@ -1,21 +1,22 @@
 ---
-title: "What is OMOP?"
+title: "Why OMOP?"
 teaching: 0
 exercises: 0
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions 
 
-- What is OMOP?
-- What information would you expect to find in the person table?
+- Why use OMOP?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
 
 - Examine the diagram of the OMOP tables and the data specification
-- Open a parquet file
-- Interrogate the data in the person table
+- Familiarise with the vocab schema
+- Describe the pros and cons on using OMOP vs raw data, why this is the way forward
+- Use Athena and other OHDSI tools for reference
+- Describe the full landscape of OMOP tools and the community
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -89,7 +90,7 @@ pie(
 ```
 
 <div class="figure" style="text-align: center">
-<img src="fig/chapter1-rendered-pyramid-1.png" alt="pie chart illusion of a pyramid"  />
+<img src="fig/chapter2-rendered-pyramid-1.png" alt="pie chart illusion of a pyramid"  />
 <p class="caption">Sun arise each and every morning</p>
 </div>
 
