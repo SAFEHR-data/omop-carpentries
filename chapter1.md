@@ -25,7 +25,7 @@ OMOP is a format for recording Electronic Healthcare Records. It allows you to f
 
 ### OMOP CDM Diagram
 
-![ALTERNATIVE TEXT](./figures/OMOP-CDM.png)
+![ALTERNATIVE TEXT](https://safehr-data.github.io/omop-carpentries/figures/OMOP-CDM.png)
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: instructor
 
