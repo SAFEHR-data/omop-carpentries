@@ -24,7 +24,7 @@ OMOP is a format for recording Electronic Healthcare Records. It allows you to f
 
 ### OMOP CDM Diagram
 
-![ALTERNATIVE TEXT](figures/OMOP-CDM.png)
+![OMOP ](OMOP-CDM.png)
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: instructor
 
@@ -34,20 +34,22 @@ Make sure everyone has R open
 
 ::::::::::::::::::::::::::::::::::::: challenge 
 
-## Looking at the diagram answer the following:
-
-Which table is the key to all the other tables in the standardized clinical data?
+## Which table is the key to all the other tables in the standardized clinical data?
 
 :::::::::::::::::::::::: solution 
 The **Person** table
 :::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::: challenge 
 
-2. Which table it allows you to distinguish between different stays in hospital?
+## Which table it allows you to distinguish between different stays in hospital?
 
 :::::::::::::::::::::::: solution 
 The **Visit_occurrence** table
 :::::::::::::::::::::::::::::::::
 :::::::::::::::::::::::::::::::::::::::::::::::
+
+## Why you use OMOP?
 
 ::::::::::::::::::::::::::::::::::::: challenge 
 :::::::::::::::::::::::::::::::::::::::::::::::
