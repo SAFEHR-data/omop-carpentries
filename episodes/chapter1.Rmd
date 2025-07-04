@@ -25,7 +25,7 @@ OMOP is a format for recording Electronic Healthcare Records. It allows you to f
 
 ### OMOP CDM Diagram
 
-![ALTERNATIVE TEXT](https://github.com/SAFEHR-data/omop-carpentries/blob/festival/figures/OMOP-CDM.png)
+![ALTERNATIVE TEXT](./figures/OMOP-CDM.png)
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: instructor
 
@@ -33,6 +33,21 @@ Make sure everyone has R open
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
+::::::::::::::::::::::::::::::::::::: challenge 
+
+## Looking at the diagram answered the following:
+
+1. Which table is the key to all the other tables in the standardized clinical data?
+
+2. Which table would you also need to link to, to find information about Measurements made?
+
+:::::::::::::::::::::::: solution 
+
+1. The **Person** table
+
+2. The **Visit_occurrence** table
+:::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::: challenge 
 
 ## Challenge 1: Find the age and ethnicity of a patient.
