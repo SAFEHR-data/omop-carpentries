@@ -24,7 +24,7 @@ OMOP is a format for recording Electronic Healthcare Records. It allows you to f
 
 ### OMOP CDM Diagram
 
-![OMOP ](OMOP-CDM.png)
+![OMOP ](figures/OMOP-CDM.png)
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: instructor
 
@@ -34,29 +34,118 @@ Make sure everyone has R open
 
 ::::::::::::::::::::::::::::::::::::: challenge 
 
-## Which table is the key to all the other tables in the standardized clinical data?
+## Test yourself
+
+Look at the OMOP-CDM figure and answer the following questions:
+
+1. Which table is the key to all the other tables?
+2. Which table allows you to distinguish between different stays in hospital?
 
 :::::::::::::::::::::::: solution 
-The **Person** table
-:::::::::::::::::::::::::::::::::
-:::::::::::::::::::::::::::::::::::::::::::::::
-::::::::::::::::::::::::::::::::::::: challenge 
+1. The **Person** table
 
-## Which table it allows you to distinguish between different stays in hospital?
-
-:::::::::::::::::::::::: solution 
-The **Visit_occurrence** table
+2. The **Visit_occurrence** table
 :::::::::::::::::::::::::::::::::
 :::::::::::::::::::::::::::::::::::::::::::::::
 
 ## Why you use OMOP?
 
+![text](figures/Why-CDM.png)
+
+Once a database has been converted to the OMOP CDM, evidence can be generated using standardized analytics tools. This means that different tools can also be shared and reused. So using OMOP can help make your research FAIR.
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: instructor
+
+Check that everyone knows what FAIR stands for
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::: challenge 
 :::::::::::::::::::::::::::::::::::::::::::::::
 
+## Some simple tables
+
+### Getting started
+
+Since we want to import the files called `*.csv` into our R
+environment, we need to be able to tell our computer where the file is.
+To do this, we will create a "Project" with RStudio that contains the
+data we want to work with.
+The "Projects" interface in RStudio not only creates a working directory for
+you, but also remembers its location (allowing you to quickly navigate to it).
+The interface also (optionally) preserves custom settings and open files to
+make it easier to resume work after a break.
+
+### Create a new project
+
+
+::::::::::::::::::::::::::::::::::::: group-tab
+
+### Experienced
+Create a new project in your environment.
+
+### Need a reminder
+- Under the `File` menu in RStudio, click on `New project`, choose
+  `New directory`, then `New project`
+- Enter a name for this new folder (or "directory") and choose a convenient
+  location for it. This will be your **working directory** for the rest of the
+  day (e.g., `~/Desktop/r-omop`).
+- Click on `Create project`
+- Create a new file where we will type our scripts. Go to File > New File > R
+  script. Click the save icon on your toolbar and save your script as
+  "`script.R`".
+- Make sure you copy the data for the lesson into this folder, if they're
+  not there already.
+:::::::::::::::::::::::::::::::::::::::::::::::
+
+### Loading Data
+
+Now that we are set up with an Rstudio project, we are sure that the
+data and scripts we are using are all in our working directory.
+The data files should be located in the directory `data`, inside the working
+directory. Now we can load the data into R, there are three data files `person.csv`, `condition_occurrence.csv` and `drug_exposure.csv`. Read each of these into a table with the same name.
+
+::::::::::::::::::::::::::::::::::::: group-tab
+
+### Experienced
+
+Use the function read.csv.
+
+### Need a reminder
+The expression `read.csv(...)` is a [function call](../learners/reference.md#function-call) that asks R to run the function `read.csv`.
+
+`read.csv` has two [arguments](../learners/reference.md#argument): the name of the file we want to read, and whether the first line of the file contains names for the columns of data.
+
+The filename needs to be a character string (or [string](../learners/reference.md#string) for short), so we put it in quotes. Assigning the second argument, `header`, to be `FALSE` indicates that the data file does not have column headers.  
+:::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::: challenge 
+## Read the Data
+
+There are three data files `person.csv`, `condition_occurrence.csv` and `drug_exposure.csv`. Read each of these into a table with the same name.
+
+NOTE: The data does have headers.
+
+:::::::::::::::::::::::: solution 
+```{r}
+person <- read.csv(file = "data/person.csv", header = TRUE)
+condition_occurrence <- read.csv(file = "data/condition_occurrence.csv", header = TRUE)
+drug_exposure <- read.csv(file = "data/drug_exposure.csv", header = TRUE)
+```
+::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::::::::::
+
+When you have read the data in, take some time to explore it.
+
+
+## Adding concept names
+
+## Interrogating the tables
+
+## Joining the tables
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
-- Use `.md` files for episodes when you want static content
+- Using a standard makes it much easier to share data
 - Use `.Rmd` files for episodes when you need to generate output
 - Run `sandpaper::check_lesson()` to identify any issues with your lesson
 - Run `sandpaper::build_lesson()` to preview your lesson locally
