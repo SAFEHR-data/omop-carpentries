@@ -4,11 +4,6 @@ teaching: 0
 exercises: 0
 ---
 
-```{r setup, echo=FALSE}
-source("setup.R")
-knitr::opts_chunk$set(fig.height = 6)
-```
-
 :::::::::::::::::::::::::::::::::::::: questions 
 
 - What is OMOP?
