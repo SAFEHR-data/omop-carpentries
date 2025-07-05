@@ -24,7 +24,7 @@ OMOP is a format for recording Electronic Healthcare Records. It allows you to f
 
 ### OMOP CDM Diagram
 
-![OMOP ](figures/OMOP-CDM.png)
+![OMOP ](./figures/OMOP-CDM.png)
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: instructor
 
@@ -50,7 +50,7 @@ Look at the OMOP-CDM figure and answer the following questions:
 
 ## Why you use OMOP?
 
-![text](figures/Why-CDM.png)
+![text](./figures/Why-CDM.png)
 
 Once a database has been converted to the OMOP CDM, evidence can be generated using standardized analytics tools. This means that different tools can also be shared and reused. So using OMOP can help make your research FAIR.
 
