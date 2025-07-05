@@ -306,7 +306,7 @@
         
 <section id="aio-chapter1"><p>Content from <a href="chapter1.html">What is OMOP?</a></p>
 <hr>
-<p>Last updated on 2025-07-04 |
+<p>Last updated on 2025-07-05 |
 
         <a href="https://github.com/SAFEHR-data/omop-carpentries/edit/main/episodes/chapter1.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 0 minutes</p>
@@ -351,7 +351,7 @@ between hospitals, trusts and even countries.</p>
 <div class="section level3">
 <h3 id="omop-cdm-diagram">OMOP CDM Diagram<a class="anchor" aria-label="anchor" href="#omop-cdm-diagram"></a>
 </h3>
-<figure><img src="../OMOP-CDM.png" alt="OMOP" class="figure mx-auto d-block"><div class="figcaption">OMOP</div>
+<figure><img src="../figures/OMOP-CDM.png" alt="OMOP" class="figure mx-auto d-block"><div class="figcaption">OMOP</div>
 </figure><div id="accordionInstructor1" class="accordion instructor-note accordion-flush">
 <div class="accordion-item">
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
@@ -364,14 +364,19 @@ between hospitals, trusts and even countries.</p>
 </div>
 </div>
 </div>
-<div id="which-table-is-the-key-to-all-the-other-tables-in-the-standardized-clinical-data" class="callout challenge">
+<div id="test-yourself" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
-<div id="which-table-is-the-key-to-all-the-other-tables-in-the-standardized-clinical-data" class="callout-inner">
-<h3 class="callout-title">Which table is the key to all the other tables in the standardized clinical data?</h3>
+<div id="test-yourself" class="callout-inner">
+<h3 class="callout-title">Test yourself</h3>
 <div class="callout-content">
-
+<p>Look at the OMOP-CDM figure and answer the following questions:</p>
+<ol style="list-style-type: decimal">
+<li>Which table is the key to all the other tables?</li>
+<li>Which table allows you to distinguish between different stays in
+hospital?</li>
+</ol>
 </div>
 </div>
 </div>
@@ -382,19 +387,144 @@ between hospitals, trusts and even countries.</p>
 </button>
 <div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
-<p>The <strong>Person</strong> table</p>
+<ol style="list-style-type: decimal">
+<li><p>The <strong>Person</strong> table</p></li>
+<li><p>The <strong>Visit_occurrence</strong> table</p></li>
+</ol>
 </div>
 </div>
 </div>
 </div>
-<div id="which-table-it-allows-you-to-distinguish-between-different-stays-in-hospital" class="callout challenge">
+</div>
+</section><section><h2 class="section-heading" id="why-you-use-omop">Why you use OMOP?<a class="anchor" aria-label="anchor" href="#why-you-use-omop"></a>
+</h2>
+<hr class="half-width">
+<figure><img src="../figures/Why-CDM.png" alt="text" class="figure mx-auto d-block"><div class="figcaption">text</div>
+</figure><p>Once a database has been converted to the OMOP CDM, evidence can be
+generated using standardized analytics tools. This means that different
+tools can also be shared and reused. So using OMOP can help make your
+research FAIR.</p>
+<div id="accordionInstructor2" class="accordion instructor-note accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor2" aria-expanded="false" aria-controls="collapseInstructor2">
+  <h3 class="accordion-header" id="headingInstructor2">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
+</button>
+<div id="collapseInstructor2" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor2" aria-labelledby="headingInstructor2">
+<div class="accordion-body">
+<p>Check that everyone knows what FAIR stands for</p>
+</div>
+</div>
+</div>
+</div>
+</section><section><h2 class="section-heading" id="some-simple-tables">Some simple tables<a class="anchor" aria-label="anchor" href="#some-simple-tables"></a>
+</h2>
+<hr class="half-width">
+<div class="section level3">
+<h3 id="getting-started">Getting started<a class="anchor" aria-label="anchor" href="#getting-started"></a>
+</h3>
+<p>Since we want to import the files called <code>*.csv</code> into our
+R environment, we need to be able to tell our computer where the file
+is. To do this, we will create a “Project” with RStudio that contains
+the data we want to work with. The “Projects” interface in RStudio not
+only creates a working directory for you, but also remembers its
+location (allowing you to quickly navigate to it). The interface also
+(optionally) preserves custom settings and open files to make it easier
+to resume work after a break.</p>
+</div>
+<div class="section level3">
+<h3 id="create-a-new-project">Create a new project<a class="anchor" aria-label="anchor" href="#create-a-new-project"></a>
+</h3>
+<div class="tabs">
+<nav><div id="nav-tab-1" class="nav nav-tabs" role="tablist">
+<button class="nav-link active" id="nav-tab-1-Experienced" name="Experienced" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-1-Experienced" type="button" role="tab" aria-controls="nav-tabpanel-1-Experienced" aria-selected="true">
+  <h3 class="tab-header" id="nav-tab-heading-1-Experienced">
+  Experienced
+  </h3>
+</button>
+<button class="nav-link" id="nav-tab-1-Needareminder" name="Needareminder" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-1-Needareminder" type="button" role="tab" aria-controls="nav-tabpanel-1-Needareminder" aria-selected="false">
+  <h3 class="tab-header" id="nav-tab-heading-1-Needareminder">
+  Need a reminder
+  </h3>
+</button>
+</div>
+</nav><div id="nav-tabContent-1" class="tab-content">
+<div id="nav-tabpanel-1-Experienced" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-1-Experienced">
+<p>Create a new project in your environment.</p>
+</div>
+<div id="nav-tabpanel-1-Needareminder" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-Needareminder">
+<ul>
+<li>Under the <code>File</code> menu in RStudio, click on
+<code>New project</code>, choose <code>New directory</code>, then
+<code>New project</code>
+</li>
+<li>Enter a name for this new folder (or “directory”) and choose a
+convenient location for it. This will be your <strong>working
+directory</strong> for the rest of the day (e.g.,
+<code>~/Desktop/r-omop</code>).</li>
+<li>Click on <code>Create project</code>
+</li>
+<li>Create a new file where we will type our scripts. Go to File &gt;
+New File &gt; R script. Click the save icon on your toolbar and save
+your script as “<code>script.R</code>”.</li>
+<li>Make sure you copy the data for the lesson into this folder, if
+they’re not there already.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="section level3">
+<h3 id="loading-data">Loading Data<a class="anchor" aria-label="anchor" href="#loading-data"></a>
+</h3>
+<p>Now that we are set up with an Rstudio project, we are sure that the
+data and scripts we are using are all in our working directory. The data
+files should be located in the directory <code>data</code>, inside the
+working directory. Now we can load the data into R, there are three data
+files <code>person.csv</code>, <code>condition_occurrence.csv</code> and
+<code>drug_exposure.csv</code>. Read each of these into a table with the
+same name.</p>
+<div class="tabs">
+<nav><div id="nav-tab-2" class="nav nav-tabs" role="tablist">
+<button class="nav-link active" id="nav-tab-2-Experienced" name="Experienced" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-2-Experienced" type="button" role="tab" aria-controls="nav-tabpanel-2-Experienced" aria-selected="true">
+  <h3 class="tab-header" id="nav-tab-heading-2-Experienced">
+  Experienced
+  </h3>
+</button>
+<button class="nav-link" id="nav-tab-2-Needareminder" name="Needareminder" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-2-Needareminder" type="button" role="tab" aria-controls="nav-tabpanel-2-Needareminder" aria-selected="false">
+  <h3 class="tab-header" id="nav-tab-heading-2-Needareminder">
+  Need a reminder
+  </h3>
+</button>
+</div>
+</nav><div id="nav-tabContent-2" class="tab-content">
+<div id="nav-tabpanel-2-Experienced" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-2-Experienced">
+<p>Use the function read.csv.</p>
+</div>
+<div id="nav-tabpanel-2-Needareminder" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-Needareminder">
+<p>The expression <code>read.csv(...)</code> is a <a href="reference.html#function-call">function call</a> that asks R to run
+the function <code>read.csv</code>.</p>
+<p><code>read.csv</code> has two <a href="reference.html#argument">arguments</a>: the name of the file we
+want to read, and whether the first line of the file contains names for
+the columns of data.</p>
+<p>The filename needs to be a character string (or <a href="reference.html#string">string</a> for short), so we put it in
+quotes. Assigning the second argument, <code>header</code>, to be
+<code>FALSE</code> indicates that the data file does not have column
+headers.</p>
+</div>
+</div>
+</div>
+<div id="read-the-data" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
-<div id="which-table-it-allows-you-to-distinguish-between-different-stays-in-hospital" class="callout-inner">
-<h3 class="callout-title">Which table it allows you to distinguish between different stays in hospital?</h3>
+<div id="read-the-data" class="callout-inner">
+<h3 class="callout-title">Read the Data</h3>
 <div class="callout-content">
-
+<p>There are three data files <code>person.csv</code>,
+<code>condition_occurrence.csv</code> and
+<code>drug_exposure.csv</code>. Read each of these into a table with the
+same name.</p>
+<p>NOTE: The data does have headers.</p>
 </div>
 </div>
 </div>
@@ -405,13 +535,35 @@ between hospitals, trusts and even countries.</p>
 </button>
 <div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
-<p>The <strong>Visit_occurrence</strong> table</p>
+<div class="codewrapper sourceCode" id="cb1">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">person</span> <span class="op">&lt;-</span> <span class="fu">read.csv</span><span class="op">(</span>file <span class="op">=</span> <span class="st">"data/person.csv"</span>, header <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">condition_occurrence</span> <span class="op">&lt;-</span> <span class="fu">read.csv</span><span class="op">(</span>file <span class="op">=</span> <span class="st">"data/condition_occurrence.csv"</span>, header <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="error" tabindex="0"><code>Error in read.table(file = file, header = header, sep = sep, quote = quote, : duplicate 'row.names' are not allowed</code></pre>
+</div>
+<div class="codewrapper sourceCode" id="cb3">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">drug_exposure</span> <span class="op">&lt;-</span> <span class="fu">read.csv</span><span class="op">(</span>file <span class="op">=</span> <span class="st">"data/drug_exposure.csv"</span>, header <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-</section><section><h2 class="section-heading" id="why-you-use-omop">Why you use OMOP?<a class="anchor" aria-label="anchor" href="#why-you-use-omop"></a>
+<p>When you have read the data in, take some time to explore it.</p>
+</div>
+</section><section><h2 class="section-heading" id="adding-concept-names">Adding concept names<a class="anchor" aria-label="anchor" href="#adding-concept-names"></a>
+</h2>
+<hr class="half-width"></section><section><h2 class="section-heading" id="interrogating-the-tables">Interrogating the tables<a class="anchor" aria-label="anchor" href="#interrogating-the-tables"></a>
+</h2>
+<hr class="half-width"></section><section><h2 class="section-heading" id="joining-the-tables">Joining the tables<a class="anchor" aria-label="anchor" href="#joining-the-tables"></a>
 </h2>
 <hr class="half-width">
 <div id="keypoints1" class="callout keypoints">
@@ -422,8 +574,7 @@ between hospitals, trusts and even countries.</p>
 <h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
 <ul>
-<li>Use <code>.md</code> files for episodes when you want static
-content</li>
+<li>Using a standard makes it much easier to share data</li>
 <li>Use <code>.Rmd</code> files for episodes when you need to generate
 output</li>
 <li>Run <code>sandpaper::check_lesson()</code> to identify any issues
@@ -486,8 +637,8 @@ any links that you are not going to use.
   "url": "https://SAFEHR-data.github.io/omop-carpentries/instructor/aio.html",
   "identifier": "https://SAFEHR-data.github.io/omop-carpentries/instructor/aio.html",
   "dateCreated": "2025-06-18",
-  "dateModified": "2025-07-04",
-  "datePublished": "2025-07-04"
+  "dateModified": "2025-07-05",
+  "datePublished": "2025-07-05"
 }
 
   </script><script>
