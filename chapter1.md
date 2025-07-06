@@ -24,7 +24,7 @@ OMOP is a format for recording Electronic Healthcare Records. It allows you to f
 
 ### OMOP CDM Diagram
 
-![OMOP ](figures/OMOP-CDM.png)
+![OMOP ](./figures/OMOP-CDM.png)
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: instructor
 
@@ -50,7 +50,7 @@ Look at the OMOP-CDM figure and answer the following questions:
 
 ## Why you use OMOP?
 
-![text](figures/Why-CDM.png)
+![text](./figures/Why-CDM.png)
 
 Once a database has been converted to the OMOP CDM, evidence can be generated using standardized analytics tools. This means that different tools can also be shared and reused. So using OMOP can help make your research FAIR.
 
@@ -130,13 +130,6 @@ NOTE: The data does have headers.
 ``` r
 person <- read.csv(file = "data/person.csv", header = TRUE)
 condition_occurrence <- read.csv(file = "data/condition_occurrence.csv", header = TRUE)
-```
-
-``` error
-Error in read.table(file = file, header = header, sep = sep, quote = quote, : duplicate 'row.names' are not allowed
-```
-
-``` r
 drug_exposure <- read.csv(file = "data/drug_exposure.csv", header = TRUE)
 ```
 ::::::::::::::::::::::::::::::::
@@ -147,6 +140,46 @@ When you have read the data in, take some time to explore it.
 
 
 ## Adding concept names
+
+You will have noticed that content of the tables are not terribly easy to understand. This is because everything in OMOP is viewed as a concept that allows it to be related to several standard vocabularies e.g. SNOMED, ICD-10, etc.
+
+We have developed a package that makes it very easy to add concept names to the tables.
+
+You will need the function omopcept::omop_join_name_all(). This will look up the concept_id in the main table of concepts and add a column for the name of the concept associated with that id.
+
+::::::::::::::::::::::::::::::::::::: challenge 
+
+## Who's who?
+
+By creating tables that also have the name of the concepts answer the following questions 
+
+1. How old is the black gentleman?
+2. In which month was an unspecified fever prevalent in the hospital?
+3. What was the gender of the patient not affected by this fever?
+4. Give a description of the patient who received Amoxicillin because they were wheezing?
+
+:::::::::::::::::::::::: hint 
+
+``` r
+person_named <- person |> omop_join_name_all()
+```
+
+``` error
+Error in omop_join_name_all(person): could not find function "omop_join_name_all"
+```
+::::::::::::::::::::::::::::::::
+
+ 
+:::::::::::::::::::::::: solution 
+
+1. 25 (or 24 if he hasn't had his birthday this year)
+2. July
+3. Don't know - it hasn't been specified
+4. A 53/54 white female
+::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::::::::::
+
 
 ## Interrogating the tables
 
