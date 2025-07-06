@@ -24,7 +24,7 @@ OMOP is a format for recording Electronic Healthcare Records. It allows you to f
 
 ### OMOP CDM Diagram
 
-![OMOP ](./figures/OMOP-CDM.png)
+![The OMOP Common Data Model ](fig/OMOP-CDM.png)
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: instructor
 
@@ -50,7 +50,7 @@ Look at the OMOP-CDM figure and answer the following questions:
 
 ## Why you use OMOP?
 
-![text](./figures/Why-CDM.png)
+![text](fig/Why-CDM.png)
 
 Once a database has been converted to the OMOP CDM, evidence can be generated using standardized analytics tools. This means that different tools can also be shared and reused. So using OMOP can help make your research FAIR.
 
@@ -59,10 +59,9 @@ Once a database has been converted to the OMOP CDM, evidence can be generated us
 Check that everyone knows what FAIR stands for
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-::::::::::::::::::::::::::::::::::::: challenge 
-:::::::::::::::::::::::::::::::::::::::::::::::
 
-## Some simple tables
+
+## Setting up R
 
 ### Getting started
 
@@ -97,6 +96,7 @@ Create a new project in your environment.
   not there already.
 :::::::::::::::::::::::::::::::::::::::::::::::
 
+## Some simple tables
 ### Loading Data
 
 Now that we are set up with an Rstudio project, we are sure that the
@@ -136,12 +136,12 @@ drug_exposure <- read.csv(file = "data/drug_exposure.csv", header = TRUE)
 
 :::::::::::::::::::::::::::::::::::::::::::::::
 
-When you have read the data in, take some time to explore it.
+When you have read in the data, take some time to explore it.
 
 
 ## Adding concept names
 
-You will have noticed that content of the tables are not terribly easy to understand. This is because everything in OMOP is viewed as a concept that allows it to be related to several standard vocabularies e.g. SNOMED, ICD-10, etc.
+You will have noticed that content of the tables are not terribly easy to understand. This is because everything in OMOP is viewed as a concept that allows it to be related to one or more standard vocabularies such as SNOMED, ICD-10, etc.
 
 We have developed a package that makes it very easy to add concept names to the tables.
 
@@ -155,7 +155,7 @@ By creating tables that also have the name of the concepts answer the following 
 
 1. How old is the black gentleman?
 2. In which month was an unspecified fever prevalent in the hospital?
-3. What was the gender of the patient not affected by this fever?
+3. What was the ethnicity of the patient not affected by this fever?
 4. Give a description of the patient who received Amoxicillin because they were wheezing?
 
 :::::::::::::::::::::::: hint 
@@ -181,16 +181,14 @@ Error in omop_join_name_all(person): could not find function "omop_join_name_all
 :::::::::::::::::::::::::::::::::::::::::::::::
 
 
-## Interrogating the tables
-
-## Joining the tables
+## Joining and interrogating the tables
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
 - Using a standard makes it much easier to share data
-- Use `.Rmd` files for episodes when you need to generate output
+- OMOP uses concepts to link dated to standard vocabularies
 - Run `sandpaper::check_lesson()` to identify any issues with your lesson
 - Run `sandpaper::build_lesson()` to preview your lesson locally
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-[r-markdown]: https://rmarkdown.rstudio.com/
+
