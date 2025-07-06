@@ -17,50 +17,7 @@ exercises: 0
 - Interrogate the data in the person table
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
-
-## Introduction
-
-OMOP is a format for recording Electronic Healthcare Records. It allows you to follow a patient journey through a hospital by linking every aspect to a standard vocabulary thus enabling easy sharing of data between hospitals, trusts and even countries.
-
-### OMOP CDM Diagram
-
-![The OMOP Common Data Model ](fig/OMOP-CDM.png)
-
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: instructor
-
-Make sure everyone has R open
-
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
-::::::::::::::::::::::::::::::::::::: challenge 
-
-## Test yourself
-
-Look at the OMOP-CDM figure and answer the following questions:
-
-1. Which table is the key to all the other tables?
-2. Which table allows you to distinguish between different stays in hospital?
-
-:::::::::::::::::::::::: solution 
-1. The **Person** table
-
-2. The **Visit_occurrence** table
-:::::::::::::::::::::::::::::::::
-:::::::::::::::::::::::::::::::::::::::::::::::
-
-## Why you use OMOP?
-
-![text](fig/Why-CDM.png)
-
-Once a database has been converted to the OMOP CDM, evidence can be generated using standardized analytics tools. This means that different tools can also be shared and reused. So using OMOP can help make your research FAIR.
-
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: instructor
-
-Check that everyone knows what FAIR stands for
-
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
-
+ 
 ## Setting up R
 
 ### Getting started
@@ -95,6 +52,49 @@ Create a new project in your environment.
 - Make sure you copy the data for the lesson into this folder, if they're
   not there already.
 :::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: instructor
+
+Make sure everyone has R open
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+## Introduction
+
+OMOP is a format for recording Electronic Healthcare Records. It allows you to follow a patient journey through a hospital by linking every aspect to a standard vocabulary thus enabling easy sharing of data between hospitals, trusts and even countries.
+
+### OMOP CDM Diagram
+
+![The OMOP Common Data Model ](fig/OMOP-CDM.png)
+
+
+::::::::::::::::::::::::::::::::::::: challenge 
+
+## Test yourself
+
+Look at the OMOP-CDM figure and answer the following questions:
+
+1. Which table is the key to all the other tables?
+2. Which table allows you to distinguish between different stays in hospital?
+
+:::::::::::::::::::::::: solution 
+1. The **Person** table
+
+2. The **Visit_occurrence** table
+:::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::::::::::::::::::::::
+
+## Why you use OMOP?
+
+![Why use the OMOP-CDM](fig/Why-CDM.png)
+
+Once a database has been converted to the OMOP CDM, evidence can be generated using standardized analytics tools. This means that different tools can also be shared and reused. So using OMOP can help make your research FAIR.
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: instructor
+
+Check that everyone knows what FAIR stands for
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## Some simple tables
 ### Loading Data
@@ -158,7 +158,7 @@ By creating tables that also have the name of the concepts answer the following 
 4. Give a description of the patient who received Amoxicillin because they were wheezing?
 
 :::::::::::::::::::::::: hint 
-```{r error=TRUE}
+```{r error=TRUE, echo=FALSE}
 person_named <- person |> omop_join_name_all()
 ```
 ::::::::::::::::::::::::::::::::
