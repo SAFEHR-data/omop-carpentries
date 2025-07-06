@@ -215,9 +215,9 @@
 
     <div id="flush-collapsecurrent" class="accordion-collapse collapse show" aria-labelledby="flush-headingcurrent" data-bs-parent="#accordionFlushcurrent">
       <div class="accordion-body">
-        <ul><li><a href="#introduction">Introduction</a></li>
+        <ul><li><a href="#setting-up-r">Setting up R</a></li>
+<li><a href="#introduction">Introduction</a></li>
 <li><a href="#why-you-use-omop">Why you use OMOP?</a></li>
-<li><a href="#setting-up-r">Setting up R</a></li>
 <li><a href="#some-simple-tables">Some simple tables</a></li>
 <li><a href="#adding-concept-names">Adding concept names</a></li>
 <li><a href="#joining-and-interrogating-the-tables">Joining and interrogating the tables</a></li>
@@ -322,73 +322,7 @@ specification</li>
 </div>
 </div>
 </div>
-<section><h2 class="section-heading" id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a></h2>
-<hr class="half-width"><p>OMOP is a format for recording Electronic Healthcare Records. It
-allows you to follow a patient journey through a hospital by linking
-every aspect to a standard vocabulary thus enabling easy sharing of data
-between hospitals, trusts and even countries.</p>
-<div class="section level3">
-<h3 id="omop-cdm-diagram">OMOP CDM Diagram<a class="anchor" aria-label="anchor" href="#omop-cdm-diagram"></a></h3>
-<figure><img src="../fig/OMOP-CDM.png" alt="The OMOP Common Data Model" class="figure mx-auto d-block"><div class="figcaption">The OMOP Common Data Model</div>
-</figure><div id="accordionInstructor1" class="accordion instructor-note accordion-flush">
-<div class="accordion-item">
-<button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
-  <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
-</button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
-<div class="accordion-body">
-<p>Make sure everyone has R open</p>
-</div>
-</div>
-</div>
-</div>
-<div id="test-yourself" class="callout challenge">
-<div class="callout-square">
-<i class="callout-icon" data-feather="zap"></i>
-</div>
-<div id="test-yourself" class="callout-inner">
-<h3 class="callout-title">Test yourself</h3>
-<div class="callout-content">
-<p>Look at the OMOP-CDM figure and answer the following questions:</p>
-<ol style="list-style-type: decimal"><li>Which table is the key to all the other tables?</li>
-<li>Which table allows you to distinguish between different stays in
-hospital?</li>
-</ol></div>
-</div>
-</div>
-<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
-<div class="accordion-item">
-<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
-  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
-</button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
-<div class="accordion-body">
-<ol style="list-style-type: decimal"><li><p>The <strong>Person</strong> table</p></li>
-<li><p>The <strong>Visit_occurrence</strong> table</p></li>
-</ol></div>
-</div>
-</div>
-</div>
-</div>
-</section><section><h2 class="section-heading" id="why-you-use-omop">Why you use OMOP?<a class="anchor" aria-label="anchor" href="#why-you-use-omop"></a></h2>
-<hr class="half-width"><figure><img src="../fig/Why-CDM.png" alt="text" class="figure mx-auto d-block"><div class="figcaption">text</div>
-</figure><p>Once a database has been converted to the OMOP CDM, evidence can be
-generated using standardized analytics tools. This means that different
-tools can also be shared and reused. So using OMOP can help make your
-research FAIR.</p>
-<div id="accordionInstructor2" class="accordion instructor-note accordion-flush">
-<div class="accordion-item">
-<button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor2" aria-expanded="false" aria-controls="collapseInstructor2">
-  <h3 class="accordion-header" id="headingInstructor2">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
-</button>
-<div id="collapseInstructor2" class="accordion-collapse collapse" aria-labelledby="headingInstructor2" data-bs-parent="#accordionInstructor2">
-<div class="accordion-body">
-<p>Check that everyone knows what FAIR stands for</p>
-</div>
-</div>
-</div>
-</div>
-</section><section><h2 class="section-heading" id="setting-up-r">Setting up R<a class="anchor" aria-label="anchor" href="#setting-up-r"></a></h2>
+<section><h2 class="section-heading" id="setting-up-r">Setting up R<a class="anchor" aria-label="anchor" href="#setting-up-r"></a></h2>
 <hr class="half-width"><div class="section level3">
 <h3 id="getting-started">Getting started<a class="anchor" aria-label="anchor" href="#getting-started"></a></h3>
 <p>Since we want to import the files called <code>*.csv</code> into our
@@ -416,10 +350,10 @@ to resume work after a break.</p>
 </button>
 </div>
 </nav><div id="nav-tabContent-1" class="tab-content">
-<div id="nav-tabpanel-1-Experienced" class="tab-pane show active" aria-labelledby="nav-tab-1-Experienced" role="tabpanel">
+<div id="nav-tabpanel-1-Experienced" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-1-Experienced">
 <p>Create a new project in your environment.</p>
 </div>
-<div id="nav-tabpanel-1-Needareminder" class="tab-pane" aria-labelledby="nav-tab-1-Needareminder" role="tabpanel">
+<div id="nav-tabpanel-1-Needareminder" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-Needareminder">
 <ul><li>Under the <code>File</code> menu in RStudio, click on
 <code>New project</code>, choose <code>New directory</code>, then
 <code>New project</code>
@@ -436,6 +370,72 @@ your script as “<code>script.R</code>”.</li>
 <li>Make sure you copy the data for the lesson into this folder, if
 they’re not there already.</li>
 </ul></div>
+</div>
+</div>
+<div id="accordionInstructor1" class="accordion instructor-note accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
+  <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
+</button>
+<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
+<div class="accordion-body">
+<p>Make sure everyone has R open</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section><section><h2 class="section-heading" id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a></h2>
+<hr class="half-width"><p>OMOP is a format for recording Electronic Healthcare Records. It
+allows you to follow a patient journey through a hospital by linking
+every aspect to a standard vocabulary thus enabling easy sharing of data
+between hospitals, trusts and even countries.</p>
+<div class="section level3">
+<h3 id="omop-cdm-diagram">OMOP CDM Diagram<a class="anchor" aria-label="anchor" href="#omop-cdm-diagram"></a></h3>
+<figure><img src="../fig/OMOP-CDM.png" alt="The OMOP Common Data Model" class="figure mx-auto d-block"><div class="figcaption">The OMOP Common Data Model</div>
+</figure><div id="test-yourself" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="test-yourself" class="callout-inner">
+<h3 class="callout-title">Test yourself</h3>
+<div class="callout-content">
+<p>Look at the OMOP-CDM figure and answer the following questions:</p>
+<ol style="list-style-type: decimal"><li>Which table is the key to all the other tables?</li>
+<li>Which table allows you to distinguish between different stays in
+hospital?</li>
+</ol></div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div class="accordion-body">
+<ol style="list-style-type: decimal"><li><p>The <strong>Person</strong> table</p></li>
+<li><p>The <strong>Visit_occurrence</strong> table</p></li>
+</ol></div>
+</div>
+</div>
+</div>
+</div>
+</section><section><h2 class="section-heading" id="why-you-use-omop">Why you use OMOP?<a class="anchor" aria-label="anchor" href="#why-you-use-omop"></a></h2>
+<hr class="half-width"><figure><img src="../fig/Why-CDM.png" alt="Why use the OMOP-CDM" class="figure mx-auto d-block"><div class="figcaption">Why use the OMOP-CDM</div>
+</figure><p>Once a database has been converted to the OMOP CDM, evidence can be
+generated using standardized analytics tools. This means that different
+tools can also be shared and reused. So using OMOP can help make your
+research FAIR.</p>
+<div id="accordionInstructor2" class="accordion instructor-note accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor2" aria-expanded="false" aria-controls="collapseInstructor2">
+  <h3 class="accordion-header" id="headingInstructor2">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
+</button>
+<div id="collapseInstructor2" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor2" aria-labelledby="headingInstructor2">
+<div class="accordion-body">
+<p>Check that everyone knows what FAIR stands for</p>
+</div>
 </div>
 </div>
 </div>
@@ -463,10 +463,10 @@ same name.</p>
 </button>
 </div>
 </nav><div id="nav-tabContent-2" class="tab-content">
-<div id="nav-tabpanel-2-Experienced" class="tab-pane show active" aria-labelledby="nav-tab-2-Experienced" role="tabpanel">
+<div id="nav-tabpanel-2-Experienced" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-2-Experienced">
 <p>Use the function read.csv.</p>
 </div>
-<div id="nav-tabpanel-2-Needareminder" class="tab-pane" aria-labelledby="nav-tab-2-Needareminder" role="tabpanel">
+<div id="nav-tabpanel-2-Needareminder" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-Needareminder">
 <p>The expression <code>read.csv(...)</code> is a <a href="reference.html#function-call">function call</a> that asks R to run
 the function <code>read.csv</code>.</p>
 <p><code>read.csv</code> has two <a href="reference.html#argument">arguments</a>: the name of the file we
@@ -499,7 +499,7 @@ same name.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -549,14 +549,8 @@ they were wheezing?</li>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
   <h4 class="accordion-header" id="headingHint1"> Give me a hint </h4>
 </button>
-<div id="collapseHint1" class="accordion-collapse collapse" aria-labelledby="headingHint1" data-bs-parent="#accordionHint1">
+<div id="collapseHint1" class="accordion-collapse collapse" data-bs-parent="#accordionHint1" aria-labelledby="headingHint1">
 <div class="accordion-body">
-<div class="codewrapper sourceCode" id="cb2">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">person_named</span> <span class="op">&lt;-</span> <span class="va">person</span> <span class="op">|&gt;</span> <span class="fu">omop_join_name_all</span><span class="op">(</span><span class="op">)</span></span></code></pre>
-</div>
 <div class="codewrapper">
 <h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -571,7 +565,7 @@ they were wheezing?</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <ol style="list-style-type: decimal"><li>25 (or 24 if he hasn’t had his birthday this year)</li>
 <li>July</li>
