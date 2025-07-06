@@ -217,10 +217,10 @@
       <div class="accordion-body">
         <ul><li><a href="#introduction">Introduction</a></li>
 <li><a href="#why-you-use-omop">Why you use OMOP?</a></li>
+<li><a href="#setting-up-r">Setting up R</a></li>
 <li><a href="#some-simple-tables">Some simple tables</a></li>
 <li><a href="#adding-concept-names">Adding concept names</a></li>
-<li><a href="#interrogating-the-tables">Interrogating the tables</a></li>
-<li><a href="#joining-the-tables">Joining the tables</a></li>
+<li><a href="#joining-and-interrogating-the-tables">Joining and interrogating the tables</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
 
@@ -328,7 +328,7 @@ every aspect to a standard vocabulary thus enabling easy sharing of data
 between hospitals, trusts and even countries.</p>
 <div class="section level3">
 <h3 id="omop-cdm-diagram">OMOP CDM Diagram<a class="anchor" aria-label="anchor" href="#omop-cdm-diagram"></a></h3>
-<figure><img src="./figures/OMOP-CDM.png" alt="OMOP" class="figure mx-auto d-block"><div class="figcaption">OMOP</div>
+<figure><img src="fig/OMOP-CDM.png" alt="The OMOP Common Data Model" class="figure mx-auto d-block"><div class="figcaption">The OMOP Common Data Model</div>
 </figure><div id="test-yourself" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
@@ -358,13 +358,13 @@ hospital?</li>
 </div>
 </div>
 </section><section><h2 class="section-heading" id="why-you-use-omop">Why you use OMOP?<a class="anchor" aria-label="anchor" href="#why-you-use-omop"></a></h2>
-<hr class="half-width"><figure><img src="./figures/Why-CDM.png" alt="text" class="figure mx-auto d-block"><div class="figcaption">text</div>
+<hr class="half-width"><figure><img src="fig/Why-CDM.png" alt="text" class="figure mx-auto d-block"><div class="figcaption">text</div>
 </figure><p>Once a database has been converted to the OMOP CDM, evidence can be
 generated using standardized analytics tools. This means that different
 tools can also be shared and reused. So using OMOP can help make your
 research FAIR.</p>
 
-</section><section><h2 class="section-heading" id="some-simple-tables">Some simple tables<a class="anchor" aria-label="anchor" href="#some-simple-tables"></a></h2>
+</section><section><h2 class="section-heading" id="setting-up-r">Setting up R<a class="anchor" aria-label="anchor" href="#setting-up-r"></a></h2>
 <hr class="half-width"><div class="section level3">
 <h3 id="getting-started">Getting started<a class="anchor" aria-label="anchor" href="#getting-started"></a></h3>
 <p>Since we want to import the files called <code>*.csv</code> into our
@@ -415,7 +415,8 @@ they’re not there already.</li>
 </div>
 </div>
 </div>
-<div class="section level3">
+</section><section><h2 class="section-heading" id="some-simple-tables">Some simple tables<a class="anchor" aria-label="anchor" href="#some-simple-tables"></a></h2>
+<hr class="half-width"><div class="section level3">
 <h3 id="loading-data">Loading Data<a class="anchor" aria-label="anchor" href="#loading-data"></a></h3>
 <p>Now that we are set up with an Rstudio project, we are sure that the
 data and scripts we are using are all in our working directory. The data
@@ -488,13 +489,13 @@ same name.</p>
 </div>
 </div>
 </div>
-<p>When you have read the data in, take some time to explore it.</p>
+<p>When you have read in the data, take some time to explore it.</p>
 </div>
 </section><section><h2 class="section-heading" id="adding-concept-names">Adding concept names<a class="anchor" aria-label="anchor" href="#adding-concept-names"></a></h2>
 <hr class="half-width"><p>You will have noticed that content of the tables are not terribly
 easy to understand. This is because everything in OMOP is viewed as a
-concept that allows it to be related to several standard vocabularies
-e.g. SNOMED, ICD-10, etc.</p>
+concept that allows it to be related to one or more standard
+vocabularies such as SNOMED, ICD-10, etc.</p>
 <p>We have developed a package that makes it very easy to add concept
 names to the tables.</p>
 <p>You will need the function omopcept::omop_join_name_all(). This will
@@ -512,7 +513,8 @@ following questions</p>
 <ol style="list-style-type: decimal"><li>How old is the black gentleman?</li>
 <li>In which month was an unspecified fever prevalent in the
 hospital?</li>
-<li>What was the gender of the patient not affected by this fever?</li>
+<li>What was the ethnicity of the patient not affected by this
+fever?</li>
 <li>Give a description of the patient who received Amoxicillin because
 they were wheezing?</li>
 </ol></div>
@@ -555,8 +557,7 @@ they were wheezing?</li>
 </div>
 </div>
 </div>
-</section><section><h2 class="section-heading" id="interrogating-the-tables">Interrogating the tables<a class="anchor" aria-label="anchor" href="#interrogating-the-tables"></a></h2>
-<hr class="half-width"></section><section><h2 class="section-heading" id="joining-the-tables">Joining the tables<a class="anchor" aria-label="anchor" href="#joining-the-tables"></a></h2>
+</section><section><h2 class="section-heading" id="joining-and-interrogating-the-tables">Joining and interrogating the tables<a class="anchor" aria-label="anchor" href="#joining-and-interrogating-the-tables"></a></h2>
 <hr class="half-width"><div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -565,8 +566,7 @@ they were wheezing?</li>
 <h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
 <ul><li>Using a standard makes it much easier to share data</li>
-<li>Use <code>.Rmd</code> files for episodes when you need to generate
-output</li>
+<li>OMOP uses concepts to link dated to standard vocabularies</li>
 <li>Run <code>sandpaper::check_lesson()</code> to identify any issues
 with your lesson</li>
 <li>Run <code>sandpaper::build_lesson()</code> to preview your lesson
