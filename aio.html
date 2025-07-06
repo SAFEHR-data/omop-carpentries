@@ -306,7 +306,7 @@
         
 <section id="aio-chapter1"><p>Content from <a href="chapter1.html">What is OMOP?</a></p>
 <hr>
-<p>Last updated on 2025-07-05 |
+<p>Last updated on 2025-07-06 |
 
         <a href="https://github.com/SAFEHR-data/omop-carpentries/edit/main/episodes/chapter1.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -350,7 +350,7 @@ between hospitals, trusts and even countries.</p>
 <div class="section level3">
 <h3 id="omop-cdm-diagram">OMOP CDM Diagram<a class="anchor" aria-label="anchor" href="#omop-cdm-diagram"></a>
 </h3>
-<figure><img src="figures/OMOP-CDM.png" alt="OMOP" class="figure mx-auto d-block"><div class="figcaption">OMOP</div>
+<figure><img src="./figures/OMOP-CDM.png" alt="OMOP" class="figure mx-auto d-block"><div class="figcaption">OMOP</div>
 </figure><div id="test-yourself" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
@@ -372,7 +372,7 @@ hospital?</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <ol style="list-style-type: decimal">
 <li><p>The <strong>Person</strong> table</p></li>
@@ -386,7 +386,7 @@ hospital?</li>
 </section><section><h2 class="section-heading" id="why-you-use-omop">Why you use OMOP?<a class="anchor" aria-label="anchor" href="#why-you-use-omop"></a>
 </h2>
 <hr class="half-width">
-<figure><img src="figures/Why-CDM.png" alt="text" class="figure mx-auto d-block"><div class="figcaption">text</div>
+<figure><img src="./figures/Why-CDM.png" alt="text" class="figure mx-auto d-block"><div class="figcaption">text</div>
 </figure><p>Once a database has been converted to the OMOP CDM, evidence can be
 generated using standardized analytics tools. This means that different
 tools can also be shared and reused. So using OMOP can help make your
@@ -424,10 +424,10 @@ to resume work after a break.</p>
 </button>
 </div>
 </nav><div id="nav-tabContent-1" class="tab-content">
-<div id="nav-tabpanel-1-Experienced" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-1-Experienced">
+<div id="nav-tabpanel-1-Experienced" class="tab-pane show active" aria-labelledby="nav-tab-1-Experienced" role="tabpanel">
 <p>Create a new project in your environment.</p>
 </div>
-<div id="nav-tabpanel-1-Needareminder" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-Needareminder">
+<div id="nav-tabpanel-1-Needareminder" class="tab-pane" aria-labelledby="nav-tab-1-Needareminder" role="tabpanel">
 <ul>
 <li>Under the <code>File</code> menu in RStudio, click on
 <code>New project</code>, choose <code>New directory</code>, then
@@ -473,10 +473,10 @@ same name.</p>
 </button>
 </div>
 </nav><div id="nav-tabContent-2" class="tab-content">
-<div id="nav-tabpanel-2-Experienced" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-2-Experienced">
+<div id="nav-tabpanel-2-Experienced" class="tab-pane show active" aria-labelledby="nav-tab-2-Experienced" role="tabpanel">
 <p>Use the function read.csv.</p>
 </div>
-<div id="nav-tabpanel-2-Needareminder" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-Needareminder">
+<div id="nav-tabpanel-2-Needareminder" class="tab-pane" aria-labelledby="nav-tab-2-Needareminder" role="tabpanel">
 <p>The expression <code>read.csv(...)</code> is a <a href="reference.html#function-call">function call</a> that asks R to run
 the function <code>read.csv</code>.</p>
 <p><code>read.csv</code> has two <a href="reference.html#argument">arguments</a>: the name of the file we
@@ -509,25 +509,15 @@ same name.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">person</span> <span class="op">&lt;-</span> <span class="fu">read.csv</span><span class="op">(</span>file <span class="op">=</span> <span class="st">"data/person.csv"</span>, header <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="va">condition_occurrence</span> <span class="op">&lt;-</span> <span class="fu">read.csv</span><span class="op">(</span>file <span class="op">=</span> <span class="st">"data/condition_occurrence.csv"</span>, header <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="error" tabindex="0"><code>Error in read.table(file = file, header = header, sep = sep, quote = quote, : duplicate 'row.names' are not allowed</code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb3">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">drug_exposure</span> <span class="op">&lt;-</span> <span class="fu">read.csv</span><span class="op">(</span>file <span class="op">=</span> <span class="st">"data/drug_exposure.csv"</span>, header <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre>
+<span><span class="va">condition_occurrence</span> <span class="op">&lt;-</span> <span class="fu">read.csv</span><span class="op">(</span>file <span class="op">=</span> <span class="st">"data/condition_occurrence.csv"</span>, header <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">drug_exposure</span> <span class="op">&lt;-</span> <span class="fu">read.csv</span><span class="op">(</span>file <span class="op">=</span> <span class="st">"data/drug_exposure.csv"</span>, header <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre>
 </div>
 </div>
 </div>
@@ -537,7 +527,76 @@ same name.</p>
 </div>
 </section><section><h2 class="section-heading" id="adding-concept-names">Adding concept names<a class="anchor" aria-label="anchor" href="#adding-concept-names"></a>
 </h2>
-<hr class="half-width"></section><section><h2 class="section-heading" id="interrogating-the-tables">Interrogating the tables<a class="anchor" aria-label="anchor" href="#interrogating-the-tables"></a>
+<hr class="half-width">
+<p>You will have noticed that content of the tables are not terribly
+easy to understand. This is because everything in OMOP is viewed as a
+concept that allows it to be related to several standard vocabularies
+e.g. SNOMED, ICD-10, etc.</p>
+<p>We have developed a package that makes it very easy to add concept
+names to the tables.</p>
+<p>You will need the function omopcept::omop_join_name_all(). This will
+look up the concept_id in the main table of concepts and add a column
+for the name of the concept associated with that id.</p>
+<div id="whos-who" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="whos-who" class="callout-inner">
+<h3 class="callout-title">Who’s who?</h3>
+<div class="callout-content">
+<p>By creating tables that also have the name of the concepts answer the
+following questions</p>
+<ol style="list-style-type: decimal">
+<li>How old is the black gentleman?</li>
+<li>In which month was an unspecified fever prevalent in the
+hospital?</li>
+<li>What was the gender of the patient not affected by this fever?</li>
+<li>Give a description of the patient who received Amoxicillin because
+they were wheezing?</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="accordionHint1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
+  <h4 class="accordion-header" id="headingHint1"> Give me a hint </h4>
+</button>
+<div id="collapseHint1" class="accordion-collapse collapse" aria-labelledby="headingHint1" data-bs-parent="#accordionHint1">
+<div class="accordion-body">
+<div class="codewrapper sourceCode" id="cb2">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">person_named</span> <span class="op">&lt;-</span> <span class="va">person</span> <span class="op">|&gt;</span> <span class="fu">omop_join_name_all</span><span class="op">(</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="error" tabindex="0"><code>Error in omop_join_name_all(person): could not find function "omop_join_name_all"</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="accordionSolution3" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
+  <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
+</button>
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div class="accordion-body">
+<ol style="list-style-type: decimal">
+<li>25 (or 24 if he hasn’t had his birthday this year)</li>
+<li>July</li>
+<li>Don’t know - it hasn’t been specified</li>
+<li>A 53/54 white female</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</section><section><h2 class="section-heading" id="interrogating-the-tables">Interrogating the tables<a class="anchor" aria-label="anchor" href="#interrogating-the-tables"></a>
 </h2>
 <hr class="half-width"></section><section><h2 class="section-heading" id="joining-the-tables">Joining the tables<a class="anchor" aria-label="anchor" href="#joining-the-tables"></a>
 </h2>
@@ -613,8 +672,8 @@ any links that you are not going to use.
   "url": "https://SAFEHR-data.github.io/omop-carpentries/aio.html",
   "identifier": "https://SAFEHR-data.github.io/omop-carpentries/aio.html",
   "dateCreated": "2025-06-18",
-  "dateModified": "2025-07-05",
-  "datePublished": "2025-07-05"
+  "dateModified": "2025-07-06",
+  "datePublished": "2025-07-06"
 }
 
   </script><script>
