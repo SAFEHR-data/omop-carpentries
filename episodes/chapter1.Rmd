@@ -158,11 +158,15 @@ By creating tables that also have the name of the concepts answer the following 
 4. Give a description of the patient who received Amoxicillin because they were wheezing?
 
 :::::::::::::::::::::::: hint 
-```{r error=TRUE, echo=FALSE}
+```{r error=TRUE, message=FALSE}
 person_named <- person |> omop_join_name_all()
 ```
 ::::::::::::::::::::::::::::::::
-
+:::::::::::::::::::::::: hint 
+```{r error=TRUE, warning=FALSE}
+person_named <- person |> omop_join_name_all()
+```
+::::::::::::::::::::::::::::::::
  
 :::::::::::::::::::::::: solution 
 
