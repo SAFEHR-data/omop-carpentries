@@ -160,11 +160,24 @@ By creating tables that also have the name of the concepts answer the following 
 
 :::::::::::::::::::::::: hint 
 
+``` r
+person_named <- person |> omop_join_name_all()
+```
+
 ``` error
 Error in omop_join_name_all(person): could not find function "omop_join_name_all"
 ```
 ::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::: hint 
 
+``` r
+person_named <- person |> omop_join_name_all()
+```
+
+``` error
+Error in omop_join_name_all(person): could not find function "omop_join_name_all"
+```
+::::::::::::::::::::::::::::::::
  
 :::::::::::::::::::::::: solution 
 
