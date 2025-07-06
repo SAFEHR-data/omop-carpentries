@@ -159,7 +159,7 @@ By creating tables that also have the name of the concepts answer the following 
 
 :::::::::::::::::::::::: hint 
 ```{r error=TRUE}
-person_named <- person |> omopcept::omop_join_name_all()
+person_named <- person |> omop_join_name_all()
 ```
 ::::::::::::::::::::::::::::::::
 
