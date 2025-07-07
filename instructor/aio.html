@@ -402,7 +402,7 @@ they’re not there already.</li>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
   <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
 <div class="accordion-body">
 <p>Make sure everyone has R open</p>
 </div>
@@ -442,7 +442,7 @@ hospital?</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <ol style="list-style-type: decimal">
 <li><p>The <strong>Person</strong> table</p></li>
@@ -466,7 +466,7 @@ research FAIR.</p>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor2" aria-expanded="false" aria-controls="collapseInstructor2">
   <h3 class="accordion-header" id="headingInstructor2">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
 </button>
-<div id="collapseInstructor2" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor2" aria-labelledby="headingInstructor2">
+<div id="collapseInstructor2" class="accordion-collapse collapse" aria-labelledby="headingInstructor2" data-bs-parent="#accordionInstructor2">
 <div class="accordion-body">
 <p>Check that everyone knows what FAIR stands for</p>
 </div>
@@ -536,7 +536,7 @@ same name.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -590,7 +590,7 @@ they were wheezing?</li>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
   <h4 class="accordion-header" id="headingHint1"> Give me a hint </h4>
 </button>
-<div id="collapseHint1" class="accordion-collapse collapse" data-bs-parent="#accordionHint1" aria-labelledby="headingHint1">
+<div id="collapseHint1" class="accordion-collapse collapse" aria-labelledby="headingHint1" data-bs-parent="#accordionHint1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -634,7 +634,7 @@ they were wheezing?</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <ol style="list-style-type: decimal">
 <li>25 (or 24 if he hasn’t had his birthday this year)</li>
@@ -649,10 +649,19 @@ they were wheezing?</li>
 </section><section><h2 class="section-heading" id="joining-and-interrogating-the-tables">Joining and interrogating the tables<a class="anchor" aria-label="anchor" href="#joining-and-interrogating-the-tables"></a>
 </h2>
 <hr class="half-width">
+<div class="section level3">
+<h3 id="using-join">Using <code>join</code>
+<a class="anchor" aria-label="anchor" href="#using-join"></a>
+</h3>
 <p>We established when looking at the diagram that the person table was
-the key to accessing all the other tables. Infact it is there person_id
-column that is the actual key that will allow us to join with other
-tables.</p>
+the key to accessing all the other tables. Infact it is the![.]
+person_id column that is the actual key that will allow us to join with
+other tables.</p>
+<p>So we can join two of the tables together to get information about
+the different conditions suffered by each person.</p>
+<p>[R documentation - join][join]</p>
+<p>I am going to use a left join because I want a record of every person
+and the conditions they may have.</p>
 <div class="codewrapper sourceCode" id="cb8">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -666,13 +675,117 @@ tables.</p>
 </h3>
 <pre class="error" tabindex="0"><code>Error in left_join(person_named, condition_occurrence_named, by = join_by(person_id)): could not find function "left_join"</code></pre>
 </div>
-<div id="discussion1" class="callout discussion">
-<div class="callout-square">
-<i class="callout-icon" data-feather="message-circle"></i>
+<p>This produces a new table</p>
+<table style="width:100%;" class="table">
+<colgroup>
+<col width="10%">
+<col width="10%">
+<col width="10%">
+<col width="10%">
+<col width="10%">
+<col width="10%">
+<col width="10%">
+<col width="10%">
+<col width="10%">
+<col width="10%">
+</colgroup>
+<thead><tr class="header">
+<th align="center">person_id</th>
+<th align="center">year_of_birth</th>
+<th align="center">gender_concept_id</th>
+<th align="center">gender_concept_name</th>
+<th align="center">race_concept_id</th>
+<th align="center">race_concept_name</th>
+<th align="center">condition_occurrence_id</th>
+<th align="center">condition_concept_id</th>
+<th align="center">condition_concept_name</th>
+<th align="center">condition_start_date</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">1980</td>
+<td align="center">8532</td>
+<td align="center">FEMALE</td>
+<td align="center">46285833</td>
+<td align="center">Asian or Asian British: Bangladeshi - England and
+Wales ethnic category 2011 census</td>
+<td align="center">1</td>
+<td align="center">45582716</td>
+<td align="center">Fever</td>
+<td align="center">unspecified</td>
+</tr>
+<tr class="even">
+<td align="center">1</td>
+<td align="center">1980</td>
+<td align="center">8532</td>
+<td align="center">FEMALE</td>
+<td align="center">46285833</td>
+<td align="center">Asian or Asian British: Bangladeshi - England and
+Wales ethnic category 2011 census</td>
+<td align="center">2</td>
+<td align="center">45539317</td>
+<td align="center">Nausea and vomiting</td>
+<td align="center">2025-01-21</td>
+</tr>
+<tr class="odd">
+<td align="center">2</td>
+<td align="center">1971</td>
+<td align="center">8532</td>
+<td align="center">FEMALE</td>
+<td align="center">46286810</td>
+<td align="center">White: English or Welsh or Scottish or Northern Irish
+or British - England and Wales ethnic category 2011 census</td>
+<td align="center">3</td>
+<td align="center">45582716</td>
+<td align="center">Fever</td>
+<td align="center">unspecified</td>
+</tr>
+<tr class="even">
+<td align="center">2</td>
+<td align="center">1971</td>
+<td align="center">8532</td>
+<td align="center">FEMALE</td>
+<td align="center">46286810</td>
+<td align="center">White: English or Welsh or Scottish or Northern Irish
+or British - England and Wales ethnic category 2011 census</td>
+<td align="center">4</td>
+<td align="center">45548946</td>
+<td align="center">Wheezing</td>
+<td align="center">2025-01-21</td>
+</tr>
+<tr class="odd">
+<td align="center">3</td>
+<td align="center">2000</td>
+<td align="center">8507</td>
+<td align="center">MALE</td>
+<td align="center">46285836</td>
+<td align="center">Black or African or Caribbean or Black British:
+Caribbean - England and Wales ethnic category 2011 census</td>
+<td align="center">5</td>
+<td align="center">45582716</td>
+<td align="center">Fever</td>
+<td align="center">unspecified</td>
+</tr>
+<tr class="even">
+<td align="center">4</td>
+<td align="center">2010</td>
+<td align="center">8507</td>
+<td align="center">MALE</td>
+<td align="center">37394011</td>
+<td align="center">Ethnicity not stated</td>
+<td align="center">6</td>
+<td align="center">45539317</td>
+<td align="center">Nausea and vomiting</td>
+<td align="center">2025-07-02</td>
+</tr>
+</tbody>
+</table>
 </div>
-<div class="callout-inner">
-<h3 class="callout-title">Challenge</h3>
-<div class="callout-content">
+<div class="section level3">
+<h3 id="using-count">Using <code>count</code>
+<a class="anchor" aria-label="anchor" href="#using-count"></a>
+</h3>
 <div class="tabs">
 <nav><div id="nav-tab-3" class="nav nav-tabs" role="tablist">
 
@@ -682,18 +795,33 @@ tables.</p>
 
 </div>
 <div id="nav-tabpanel-3-Needareminder" class="tab-pane" aria-labelledby="nav-tab-3-Needareminder" role="tabpanel">
-<p>Count the number of people with each condition</p>
+<p>You know what count is</p>
 </div>
 <div id="nav-tabpanel-3-Experienced" class="tab-pane" aria-labelledby="nav-tab-3-Experienced" role="tabpanel">
 <p>count: Count observations by group Description count() lets you
-quickly count the unique values of one or more variables: df %&gt;%
+quickly count the unique values of one or more variables: df |&gt;
 count(a, b)</p>
 </div>
 </div>
 </div>
+<div id="challenge4" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Challenge</h3>
+<div class="callout-content">
+<p>Count the number of people with each condition</p>
 </div>
 </div>
 </div>
+<div id="accordionSolution4" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
+  <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
+</button>
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
+<div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb10">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -704,6 +832,10 @@ count(a, b)</p>
 <h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="error" tabindex="0"><code>Error in count(person_condition, gender_concept_name, condition_concept_name): could not find function "count"</code></pre>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
@@ -723,10 +855,12 @@ locally</li>
 </div>
 </div>
 </div>
+<p><a href="https://www.rdocumentation.org/packages/dplyr/versions/0.7.8/topics/join" class="external-link">join</a></p>
 <!--
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
+</div>
 </section></section>
 </div>
     </main>
