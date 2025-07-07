@@ -178,23 +178,48 @@ drug_exposure_named <- person |> omop_join_name_all()
 
 ## Joining and interrogating the tables
 
-We established when looking at the diagram that the person table was the key to accessing all the other tables. Infact it is there person_id column that is the actual key that will allow us to join with other tables.
+### Using `join`
 
-```{r}
+We established when looking at the diagram that the person table was the key to accessing all the other tables. Infact it is the![] person_id column that is the actual key that will allow us to join with other tables.
+
+So we can join two of the tables together to get information about the different conditions suffered by each person.
+
+[R documentation - join][join]
+
+I am going to use a left join because I want a record of every person and the conditions they may have.
+
+```{r error=TRUE}
 person_condition <- 
   person_named |> 
   left_join(condition_occurrence_named, by = join_by(person_id) )
 ```
-::::::::::::::::::::::::::::::::::::: challenge 
+This produces a new table
+
+|person_id|year_of_birth|gender_concept_id|gender_concept_name|race_concept_id|race_concept_name|condition_occurrence_id|condition_concept_id|condition_concept_name|condition_start_date|
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+|1|1980|8532|FEMALE|46285833|Asian or Asian British: Bangladeshi - England and Wales ethnic category 2011 census|1|45582716|Fever| unspecified|2025-07-02|
+|1|1980|8532|FEMALE|46285833|Asian or Asian British: Bangladeshi - England and Wales ethnic category 2011 census|2|45539317|Nausea and vomiting|2025-01-21|
+|2|1971|8532|FEMALE|46286810|White: English or Welsh or Scottish or Northern Irish or British - England and Wales ethnic category 2011 census|3|45582716|Fever| unspecified|2025-07-02|
+|2|1971|8532|FEMALE|46286810|White: English or Welsh or Scottish or Northern Irish or British - England and Wales ethnic category 2011 census|4|45548946|Wheezing|2025-01-21|
+|3|2000|8507|MALE|46285836|Black or African or Caribbean or Black British: Caribbean - England and Wales ethnic category 2011 census|5|45582716|Fever| unspecified|2025-07-02|
+|4|2010|8507|MALE|37394011|Ethnicity not stated|6|45539317|Nausea and vomiting|2025-07-02|
+
+### Using `count`
+
 ::::::::::::::::::::::::::::::::::::: group-tab
 ## Experienced
+::::::::::::::::::::::::::::::::::::: challenge 
 Count the number of people with each condition
-
+:::::::::::::::::::::::::::::::::::::::::::::::
 ## Need a reminder
+
+
 count: Count observations by group
 Description
 count() lets you quickly count the unique values of one or more variables: 
-df %>% count(a, b)
+df |> count(a, b)
+::::::::::::::::::::::::::::::::::::: challenge 
+Count the number of people with each condition
 
 :::::::::::::::::::::::::::::::::::::::::::::::
 :::::::::::::::::::::::::::::::::::::::::::::::
@@ -211,4 +236,4 @@ person_condition |> count(gender_concept_name, condition_concept_name)
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-
+[join](https://www.rdocumentation.org/packages/dplyr/versions/0.7.8/topics/join)
