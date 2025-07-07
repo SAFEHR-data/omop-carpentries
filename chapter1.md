@@ -200,7 +200,7 @@ Error in omop_join_name_all(person): could not find function "omop_join_name_all
 
 ### Using `join`
 
-We established when looking at the diagram that the person table was the key to accessing all the other tables. Infact it is the![] person_id column that is the actual key that will allow us to join with other tables.
+We established when looking at the diagram that the person table was the key to accessing all the other tables. Infact it is the![.] person_id column that is the actual key that will allow us to join with other tables.
 
 So we can join two of the tables together to get information about the different conditions suffered by each person.
 
@@ -233,9 +233,9 @@ This produces a new table
 
 ::::::::::::::::::::::::::::::::::::: group-tab
 ## Experienced
-::::::::::::::::::::::::::::::::::::: challenge 
-Count the number of people with each condition
-:::::::::::::::::::::::::::::::::::::::::::::::
+
+You know what count is
+
 ## Need a reminder
 
 
@@ -243,11 +243,13 @@ count: Count observations by group
 Description
 count() lets you quickly count the unique values of one or more variables: 
 df |> count(a, b)
+
+:::::::::::::::::::::::::::::::::::::::::::::::
+
 ::::::::::::::::::::::::::::::::::::: challenge 
 Count the number of people with each condition
 
-:::::::::::::::::::::::::::::::::::::::::::::::
-:::::::::::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::: solution 
 
 ``` r
 person_condition |> count(gender_concept_name, condition_concept_name)
@@ -256,6 +258,8 @@ person_condition |> count(gender_concept_name, condition_concept_name)
 ``` error
 Error in count(person_condition, gender_concept_name, condition_concept_name): could not find function "count"
 ```
+:::::::::::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
