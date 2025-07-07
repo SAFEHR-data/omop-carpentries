@@ -197,6 +197,7 @@ count() lets you quickly count the unique values of one or more variables:
 df %>% count(a, b)
 
 :::::::::::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::::::::::::::::::::::
 ```{r}
 person_condition |> count(gender_concept_name, condition_concept_name)
 ```
