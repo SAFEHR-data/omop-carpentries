@@ -218,26 +218,16 @@ person_condition <-
 ``` error
 Error in left_join(person_named, condition_occurrence_named, by = join_by(person_id)): could not find function "left_join"
 ```
-This produces a new table
-
-|person_id|year_of_birth|gender_concept_id|gender_concept_name|race_concept_id|race_concept_name|condition_occurrence_id|condition_concept_id|condition_concept_name|condition_start_date|
-| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-|1|1980|8532|FEMALE|46285833|Asian or Asian British: Bangladeshi - England and Wales ethnic category 2011 census|1|45582716|Fever| unspecified|2025-07-02|
-|1|1980|8532|FEMALE|46285833|Asian or Asian British: Bangladeshi - England and Wales ethnic category 2011 census|2|45539317|Nausea and vomiting|2025-01-21|
-|2|1971|8532|FEMALE|46286810|White: English or Welsh or Scottish or Northern Irish or British - England and Wales ethnic category 2011 census|3|45582716|Fever| unspecified|2025-07-02|
-|2|1971|8532|FEMALE|46286810|White: English or Welsh or Scottish or Northern Irish or British - England and Wales ethnic category 2011 census|4|45548946|Wheezing|2025-01-21|
-|3|2000|8507|MALE|46285836|Black or African or Caribbean or Black British: Caribbean - England and Wales ethnic category 2011 census|5|45582716|Fever| unspecified|2025-07-02|
-|4|2010|8507|MALE|37394011|Ethnicity not stated|6|45539317|Nausea and vomiting|2025-07-02|
+This produces a new table with all the column names from both tables and six rows.
 
 ### Using `count`
 
 ::::::::::::::::::::::::::::::::::::: group-tab
-## Experienced
+### Experienced
 
 You know what count is
 
-## Need a reminder
-
+### Need a reminder
 
 count: Count observations by group
 Description
@@ -258,6 +248,25 @@ person_condition |> count(gender_concept_name, condition_concept_name)
 ``` error
 Error in count(person_condition, gender_concept_name, condition_concept_name): could not find function "count"
 ```
+:::::::::::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::::::::::::::::::::::
+
+This produces a table:
+
+![A table of the condition counts](fig/condition_counts.png)
+
+::::::::::::::::::::::::::::::::::::: group-tab
+### Happy-ish
+
+::::::::::::::::::::::::::::::::::::: challenge 
+Solve the questions in Who's who programmatically.
+
+:::::::::::::::::::::::::::::::::::::::::::::::
+
+### Confident
+
+::::::::::::::::::::::::::::::::::::: challenge 
+Work out the number of patients of each gender with each condition in the "GiBleed" database.
 :::::::::::::::::::::::::::::::::::::::::::::::
 :::::::::::::::::::::::::::::::::::::::::::::::
 
