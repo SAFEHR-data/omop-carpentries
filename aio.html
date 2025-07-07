@@ -652,112 +652,8 @@ and the conditions they may have.</p>
 </h3>
 <pre class="error" tabindex="0"><code>Error in left_join(person_named, condition_occurrence_named, by = join_by(person_id)): could not find function "left_join"</code></pre>
 </div>
-<p>This produces a new table</p>
-<table style="width:100%;" class="table">
-<colgroup>
-<col width="10%">
-<col width="10%">
-<col width="10%">
-<col width="10%">
-<col width="10%">
-<col width="10%">
-<col width="10%">
-<col width="10%">
-<col width="10%">
-<col width="10%">
-</colgroup>
-<thead><tr class="header">
-<th align="center">person_id</th>
-<th align="center">year_of_birth</th>
-<th align="center">gender_concept_id</th>
-<th align="center">gender_concept_name</th>
-<th align="center">race_concept_id</th>
-<th align="center">race_concept_name</th>
-<th align="center">condition_occurrence_id</th>
-<th align="center">condition_concept_id</th>
-<th align="center">condition_concept_name</th>
-<th align="center">condition_start_date</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="center">1</td>
-<td align="center">1980</td>
-<td align="center">8532</td>
-<td align="center">FEMALE</td>
-<td align="center">46285833</td>
-<td align="center">Asian or Asian British: Bangladeshi - England and
-Wales ethnic category 2011 census</td>
-<td align="center">1</td>
-<td align="center">45582716</td>
-<td align="center">Fever</td>
-<td align="center">unspecified</td>
-</tr>
-<tr class="even">
-<td align="center">1</td>
-<td align="center">1980</td>
-<td align="center">8532</td>
-<td align="center">FEMALE</td>
-<td align="center">46285833</td>
-<td align="center">Asian or Asian British: Bangladeshi - England and
-Wales ethnic category 2011 census</td>
-<td align="center">2</td>
-<td align="center">45539317</td>
-<td align="center">Nausea and vomiting</td>
-<td align="center">2025-01-21</td>
-</tr>
-<tr class="odd">
-<td align="center">2</td>
-<td align="center">1971</td>
-<td align="center">8532</td>
-<td align="center">FEMALE</td>
-<td align="center">46286810</td>
-<td align="center">White: English or Welsh or Scottish or Northern Irish
-or British - England and Wales ethnic category 2011 census</td>
-<td align="center">3</td>
-<td align="center">45582716</td>
-<td align="center">Fever</td>
-<td align="center">unspecified</td>
-</tr>
-<tr class="even">
-<td align="center">2</td>
-<td align="center">1971</td>
-<td align="center">8532</td>
-<td align="center">FEMALE</td>
-<td align="center">46286810</td>
-<td align="center">White: English or Welsh or Scottish or Northern Irish
-or British - England and Wales ethnic category 2011 census</td>
-<td align="center">4</td>
-<td align="center">45548946</td>
-<td align="center">Wheezing</td>
-<td align="center">2025-01-21</td>
-</tr>
-<tr class="odd">
-<td align="center">3</td>
-<td align="center">2000</td>
-<td align="center">8507</td>
-<td align="center">MALE</td>
-<td align="center">46285836</td>
-<td align="center">Black or African or Caribbean or Black British:
-Caribbean - England and Wales ethnic category 2011 census</td>
-<td align="center">5</td>
-<td align="center">45582716</td>
-<td align="center">Fever</td>
-<td align="center">unspecified</td>
-</tr>
-<tr class="even">
-<td align="center">4</td>
-<td align="center">2010</td>
-<td align="center">8507</td>
-<td align="center">MALE</td>
-<td align="center">37394011</td>
-<td align="center">Ethnicity not stated</td>
-<td align="center">6</td>
-<td align="center">45539317</td>
-<td align="center">Nausea and vomiting</td>
-<td align="center">2025-07-02</td>
-</tr>
-</tbody>
-</table>
+<p>This produces a new table with all the column names from both tables
+and six rows.</p>
 </div>
 <div class="section level3">
 <h3 id="using-count">Using <code>count</code>
@@ -765,16 +661,22 @@ Caribbean - England and Wales ethnic category 2011 census</td>
 </h3>
 <div class="tabs">
 <nav><div id="nav-tab-3" class="nav nav-tabs" role="tablist">
-
+<button class="nav-link active" id="nav-tab-3-Experienced" name="Experienced" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-3-Experienced" type="button" role="tab" aria-controls="nav-tabpanel-3-Experienced" aria-selected="true">
+  <h3 class="tab-header" id="nav-tab-heading-3-Experienced">
+  Experienced
+  </h3>
+</button>
+<button class="nav-link" id="nav-tab-3-Needareminder" name="Needareminder" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-3-Needareminder" type="button" role="tab" aria-controls="nav-tabpanel-3-Needareminder" aria-selected="false">
+  <h3 class="tab-header" id="nav-tab-heading-3-Needareminder">
+  Need a reminder
+  </h3>
+</button>
 </div>
 </nav><div id="nav-tabContent-3" class="tab-content">
 <div id="nav-tabpanel-3-Experienced" class="tab-pane show active" aria-labelledby="nav-tab-3-Experienced" role="tabpanel">
-
-</div>
-<div id="nav-tabpanel-3-Needareminder" class="tab-pane" aria-labelledby="nav-tab-3-Needareminder" role="tabpanel">
 <p>You know what count is</p>
 </div>
-<div id="nav-tabpanel-3-Experienced" class="tab-pane" aria-labelledby="nav-tab-3-Experienced" role="tabpanel">
+<div id="nav-tabpanel-3-Needareminder" class="tab-pane" aria-labelledby="nav-tab-3-Needareminder" role="tabpanel">
 <p>count: Count observations by group Description count() lets you
 quickly count the unique values of one or more variables: df |&gt;
 count(a, b)</p>
@@ -809,6 +711,94 @@ count(a, b)</p>
 <h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="error" tabindex="0"><code>Error in count(person_condition, gender_concept_name, condition_concept_name): could not find function "count"</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>This produces a table:</p>
+<figure><img src="fig/condition_counts.png" alt="A table of the condition counts" class="figure mx-auto d-block"><div class="figcaption">A table of the condition counts</div>
+</figure><div class="tabs">
+<nav><div id="nav-tab-4" class="nav nav-tabs" role="tablist">
+<button class="nav-link active" id="nav-tab-4-Happy-ish" name="Happy-ish" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-4-Happy-ish" type="button" role="tab" aria-controls="nav-tabpanel-4-Happy-ish" aria-selected="true">
+  <h3 class="tab-header" id="nav-tab-heading-4-Happy-ish">
+  Happy-ish
+  </h3>
+</button>
+<button class="nav-link" id="nav-tab-4-Challenge" name="Challenge" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-4-Challenge" type="button" role="tab" aria-controls="nav-tabpanel-4-Challenge" aria-selected="false">
+  <h3 class="tab-header" id="nav-tab-heading-4-Challenge">
+  Challenge
+  </h3>
+</button>
+<button class="nav-link" id="nav-tab-4-Confident" name="Confident" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-4-Confident" type="button" role="tab" aria-controls="nav-tabpanel-4-Confident" aria-selected="false">
+  <h3 class="tab-header" id="nav-tab-heading-4-Confident">
+  Confident
+  </h3>
+</button>
+<button class="nav-link" id="nav-tab-4-Challenge" name="Challenge" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-4-Challenge" type="button" role="tab" aria-controls="nav-tabpanel-4-Challenge" aria-selected="false">
+  <h3 class="tab-header" id="nav-tab-heading-4-Challenge">
+  Challenge
+  </h3>
+</button>
+</div>
+</nav><div id="nav-tabContent-4" class="tab-content">
+<div id="nav-tabpanel-4-Experienced" class="tab-pane show active" aria-labelledby="nav-tab-4-Experienced" role="tabpanel">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+</div>
+<div id="nav-tabpanel-4-Needareminder" class="tab-pane" aria-labelledby="nav-tab-4-Needareminder" role="tabpanel">
+<p>Solve the questions in Who’s who programmatically.</p>
+<div class="callout-content">
+<p>Solve the questions in Who’s who programmatically.</p>
+</div>
+<div class="section level3 callout-title callout-inner">
+<h3 class="callout-title">Challenge</h3>
+<div class="callout-content">
+<p>Solve the questions in Who’s who programmatically.</p>
+</div>
+</div>
+<div id="discussion1" class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Challenge</h3>
+<div class="callout-content">
+<p>Solve the questions in Who’s who programmatically.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="nav-tabpanel-4-Experienced" class="tab-pane" aria-labelledby="nav-tab-4-Experienced" role="tabpanel">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+</div>
+<div id="nav-tabpanel-4-Needareminder" class="tab-pane" aria-labelledby="nav-tab-4-Needareminder" role="tabpanel">
+<p>Work out the number of patients of each gender with each condition in
+the “GiBleed” database.</p>
+<div class="callout-content">
+<p>Work out the number of patients of each gender with each condition in
+the “GiBleed” database.</p>
+</div>
+<div class="section level3 callout-title callout-inner">
+<h3 class="callout-title">Challenge</h3>
+<div class="callout-content">
+<p>Work out the number of patients of each gender with each condition in
+the “GiBleed” database.</p>
+</div>
+</div>
+<div id="discussion2" class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Challenge</h3>
+<div class="callout-content">
+<p>Work out the number of patients of each gender with each condition in
+the “GiBleed” database.</p>
+</div>
 </div>
 </div>
 </div>
