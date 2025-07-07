@@ -84,7 +84,7 @@ Look at the OMOP-CDM figure and answer the following questions:
 :::::::::::::::::::::::::::::::::
 :::::::::::::::::::::::::::::::::::::::::::::::
 
-## Why you use OMOP?
+## Why use OMOP?
 
 ![Why use the OMOP-CDM](fig/Why-CDM.png)
 
@@ -167,11 +167,17 @@ person_named <- person |> omop_join_name_all()
 ``` error
 Error in omop_join_name_all(person): could not find function "omop_join_name_all"
 ```
-::::::::::::::::::::::::::::::::
-:::::::::::::::::::::::: hint 
 
 ``` r
-person_named <- person |> omop_join_name_all()
+condition_occurrence_named <- condition_occurrence |> omop_join_name_all()
+```
+
+``` error
+Error in omop_join_name_all(condition_occurrence): could not find function "omop_join_name_all"
+```
+
+``` r
+drug_exposure_named <- person |> omop_join_name_all()
 ```
 
 ``` error
@@ -191,6 +197,41 @@ Error in omop_join_name_all(person): could not find function "omop_join_name_all
 
 
 ## Joining and interrogating the tables
+
+We established when looking at the diagram that the person table was the key to accessing all the other tables. Infact it is there person_id column that is the actual key that will allow us to join with other tables.
+
+
+``` r
+person_condition <- 
+  person_named |> 
+  left_join(condition_occurrence_named, by = join_by(person_id) )
+```
+
+``` error
+Error in left_join(person_named, condition_occurrence_named, by = join_by(person_id)): could not find function "left_join"
+```
+::::::::::::::::::::::::::::::::::::: challenge 
+::::::::::::::::::::::::::::::::::::: group-tab
+## Experienced
+Count the number of people with each condition
+
+## Need a reminder
+count: Count observations by group
+Description
+count() lets you quickly count the unique values of one or more variables: 
+df %>% count(a, b)
+
+:::::::::::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::::::::::::::::::::::
+
+``` r
+person_condition |> count(gender_concept_name, condition_concept_name)
+```
+
+``` error
+Error in count(person_condition, gender_concept_name, condition_concept_name): could not find function "count"
+```
+
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
 - Using a standard makes it much easier to share data
