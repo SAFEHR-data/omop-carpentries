@@ -306,7 +306,7 @@
         
 <section id="aio-chapter1"><p>Content from <a href="chapter1.html">What is OMOP?</a></p>
 <hr>
-<p>Last updated on 2025-07-06 |
+<p>Last updated on 2025-07-07 |
 
         <a href="https://github.com/SAFEHR-data/omop-carpentries/edit/main/episodes/chapter1.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -372,10 +372,10 @@ to resume work after a break.</p>
 </button>
 </div>
 </nav><div id="nav-tabContent-1" class="tab-content">
-<div id="nav-tabpanel-1-Experienced" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-1-Experienced">
+<div id="nav-tabpanel-1-Experienced" class="tab-pane show active" aria-labelledby="nav-tab-1-Experienced" role="tabpanel">
 <p>Create a new project in your environment.</p>
 </div>
-<div id="nav-tabpanel-1-Needareminder" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-Needareminder">
+<div id="nav-tabpanel-1-Needareminder" class="tab-pane" aria-labelledby="nav-tab-1-Needareminder" role="tabpanel">
 <ul>
 <li>Under the <code>File</code> menu in RStudio, click on
 <code>New project</code>, choose <code>New directory</code>, then
@@ -441,7 +441,7 @@ hospital?</li>
 </div>
 </div>
 </div>
-</section><section><h2 class="section-heading" id="why-you-use-omop">Why you use OMOP?<a class="anchor" aria-label="anchor" href="#why-you-use-omop"></a>
+</section><section><h2 class="section-heading" id="why-use-omop">Why use OMOP?<a class="anchor" aria-label="anchor" href="#why-use-omop"></a>
 </h2>
 <hr class="half-width">
 <figure><img src="fig/Why-CDM.png" alt="Why use the OMOP-CDM" class="figure mx-auto d-block"><div class="figcaption">Why use the OMOP-CDM</div>
@@ -477,10 +477,10 @@ same name.</p>
 </button>
 </div>
 </nav><div id="nav-tabContent-2" class="tab-content">
-<div id="nav-tabpanel-2-Experienced" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-2-Experienced">
+<div id="nav-tabpanel-2-Experienced" class="tab-pane show active" aria-labelledby="nav-tab-2-Experienced" role="tabpanel">
 <p>Use the function read.csv.</p>
 </div>
-<div id="nav-tabpanel-2-Needareminder" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-Needareminder">
+<div id="nav-tabpanel-2-Needareminder" class="tab-pane" aria-labelledby="nav-tab-2-Needareminder" role="tabpanel">
 <p>The expression <code>read.csv(...)</code> is a <a href="reference.html#function-call">function call</a> that asks R to run
 the function <code>read.csv</code>.</p>
 <p><code>read.csv</code> has two <a href="reference.html#argument">arguments</a>: the name of the file we
@@ -580,22 +580,22 @@ they were wheezing?</li>
 </h3>
 <pre class="error" tabindex="0"><code>Error in omop_join_name_all(person): could not find function "omop_join_name_all"</code></pre>
 </div>
-</div>
-</div>
-</div>
-</div>
-<div id="accordionHint2" class="accordion challenge-accordion accordion-flush">
-<div class="accordion-item">
-<button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint2" aria-expanded="false" aria-controls="collapseHint2">
-  <h4 class="accordion-header" id="headingHint2"> Give me a hint </h4>
-</button>
-<div id="collapseHint2" class="accordion-collapse collapse" data-bs-parent="#accordionHint2" aria-labelledby="headingHint2">
-<div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">person_named</span> <span class="op">&lt;-</span> <span class="va">person</span> <span class="op">|&gt;</span> <span class="fu">omop_join_name_all</span><span class="op">(</span><span class="op">)</span></span></code></pre>
+<code class="sourceCode R"><span><span class="va">condition_occurrence_named</span> <span class="op">&lt;-</span> <span class="va">condition_occurrence</span> <span class="op">|&gt;</span> <span class="fu">omop_join_name_all</span><span class="op">(</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="error" tabindex="0"><code>Error in omop_join_name_all(condition_occurrence): could not find function "omop_join_name_all"</code></pre>
+</div>
+<div class="codewrapper sourceCode" id="cb6">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">drug_exposure_named</span> <span class="op">&lt;-</span> <span class="va">person</span> <span class="op">|&gt;</span> <span class="fu">omop_join_name_all</span><span class="op">(</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -626,6 +626,62 @@ they were wheezing?</li>
 </section><section><h2 class="section-heading" id="joining-and-interrogating-the-tables">Joining and interrogating the tables<a class="anchor" aria-label="anchor" href="#joining-and-interrogating-the-tables"></a>
 </h2>
 <hr class="half-width">
+<p>We established when looking at the diagram that the person table was
+the key to accessing all the other tables. Infact it is there person_id
+column that is the actual key that will allow us to join with other
+tables.</p>
+<div class="codewrapper sourceCode" id="cb8">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">person_condition</span> <span class="op">&lt;-</span> </span>
+<span>  <span class="va">person_named</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">left_join</span><span class="op">(</span><span class="va">condition_occurrence_named</span>, by <span class="op">=</span> <span class="fu">join_by</span><span class="op">(</span><span class="va">person_id</span><span class="op">)</span> <span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="error" tabindex="0"><code>Error in left_join(person_named, condition_occurrence_named, by = join_by(person_id)): could not find function "left_join"</code></pre>
+</div>
+<div id="discussion1" class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Challenge</h3>
+<div class="callout-content">
+<div class="tabs">
+<nav><div id="nav-tab-3" class="nav nav-tabs" role="tablist">
+
+</div>
+</nav><div id="nav-tabContent-3" class="tab-content">
+<div id="nav-tabpanel-3-Experienced" class="tab-pane show active" aria-labelledby="nav-tab-3-Experienced" role="tabpanel">
+
+</div>
+<div id="nav-tabpanel-3-Needareminder" class="tab-pane" aria-labelledby="nav-tab-3-Needareminder" role="tabpanel">
+<p>Count the number of people with each condition</p>
+</div>
+<div id="nav-tabpanel-3-Experienced" class="tab-pane" aria-labelledby="nav-tab-3-Experienced" role="tabpanel">
+<p>count: Count observations by group Description count() lets you
+quickly count the unique values of one or more variables: df %&gt;%
+count(a, b)</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="codewrapper sourceCode" id="cb10">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">person_condition</span> <span class="op">|&gt;</span> <span class="fu">count</span><span class="op">(</span><span class="va">gender_concept_name</span>, <span class="va">condition_concept_name</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="error" tabindex="0"><code>Error in count(person_condition, gender_concept_name, condition_concept_name): could not find function "count"</code></pre>
+</div>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -696,8 +752,8 @@ any links that you are not going to use.
   "url": "https://SAFEHR-data.github.io/omop-carpentries/aio.html",
   "identifier": "https://SAFEHR-data.github.io/omop-carpentries/aio.html",
   "dateCreated": "2025-06-18",
-  "dateModified": "2025-07-06",
-  "datePublished": "2025-07-06"
+  "dateModified": "2025-07-07",
+  "datePublished": "2025-07-07"
 }
 
   </script><script>
