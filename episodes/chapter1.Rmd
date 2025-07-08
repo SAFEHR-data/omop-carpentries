@@ -66,7 +66,6 @@ install.packages("tidyverse")
 
 install.packages("remotes")
 
-<!--remotes::install_github("SAFEHR-data/omopcept")-->
 ```
 
 
@@ -317,16 +316,10 @@ cdm$condition_occurrence |>
   collect() 
 ```
 
-The command above gives us a list of concept ids. To get the names of the conditions you can use the omopcept package as before
-TODO
-<!--
-```{r error=TRUE}
-cdm$condition_occurrence |> 
-  count(condition_concept_id, sort=TRUE) |> 
-  collect() |> 
-  omopcept::omop_join_name_all()
-```
--->
+The command above gives us a list of concept ids. To get the names of the conditions you can use the omopcept package as before.
+
+fixme
+
 Alternatively using CDMConnector also gives us access to a table called `concept` that can be used to join on the concept names. 
 NOTE: Because of the way `join` works, it is easier to `arrange` the table after it is collected.
 ```{r error=TRUE}
