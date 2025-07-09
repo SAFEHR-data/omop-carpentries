@@ -34,13 +34,11 @@ make it easier to resume work after a break.
 
 ### Install the required packages
 
-You will need the `tidyverse` package from CRAN (the official package repository).
+You will need the `dplyr` package from CRAN (the official package repository).
 You will also need a package we have developed `omopcept`.
 
 
 ```{r}
-
-install.packages("tidyverse")
 
 install.packages("dplyr")
 
@@ -210,6 +208,7 @@ So we can join two of the tables together to get information about the different
 I am going to use a left join because I want a record of every person and the conditions they may have.
 
 ```{r}
+library(dplyr)
 person_condition <- 
   person_named |> 
   left_join(condition_occurrence_named, by = join_by(person_id) )
@@ -257,6 +256,7 @@ The CDMConnector package allows connection to an OMOP Common Data Model in a dat
 
 ```{r}
 install.packages("CDMConnector")
+install.packages("duckdb")
 
 library(CDMConnector)
 ```
@@ -322,7 +322,12 @@ cdm$condition_occurrence |>
 
 The command above gives us a list of concept ids. To get the names of the conditions you can use the omopcept package as before.
 
-fixme
+```{r}
+cdm$condition_occurrence |> 
+  count(condition_concept_id, sort=TRUE) |> 
+  collect() |> 
+  omopcept::omop_join_name_all()
+```
 
 Alternatively using CDMConnector also gives us access to a table called `concept` that can be used to join on the concept names. 
 NOTE: Because of the way `join` works, it is easier to `arrange` the table after it is collected.
@@ -341,7 +346,18 @@ For the Confident
 Using the "GiBleed" database work out the number of male and female patients with each condition_concept_id
 
 :::::::::::::::::::::::: solution 
-to be done
+```{r}
+cdm$person |> 
+  left_join( cdm$condition_occurrence, by = join_by(person_id) ) |> 
+  group_by(condition_concept_id, gender_concept_id) |>
+  summarise(num_persons = n_distinct(person_id)) |>
+  collect() |>
+  ungroup() |> 
+  omopcept::omop_join_name_all() |> 
+  #remove some columns to make display clearer
+  select(-condition_concept_id, -gender_concept_id) |> 
+  arrange(condition_concept_name)  
+```
 :::::::::::::::::::::::::::::::::::::::::::::::
 :::::::::::::::::::::::::::::::::::::::::::::::
 
