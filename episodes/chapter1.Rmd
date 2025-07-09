@@ -38,7 +38,7 @@ You will need the `dplyr` package from CRAN (the official package repository).
 You will also need a package we have developed `omopcept`.
 
 
-```{r}
+```{r, warning = FALSE, message = FALSE, results = 'hide'}
 
 install.packages("dplyr")
 
@@ -57,6 +57,8 @@ remotes::install_github("SAFEHR-data/omopcept")
 Create a new project in your environment.
 
 ### Need a reminder
+
+
 - Under the `File` menu in RStudio, click on `New project`, choose
   `New directory`, then `New project`
 - Enter a name for this new folder (or "directory") and choose a convenient
@@ -145,13 +147,12 @@ There are three data files `person.csv`, `condition_occurrence.csv` and `drug_ex
 NOTE: The data does have headers.
 
 :::::::::::::::::::::::: solution 
-```{r}
+```{r, warning = FALSE, message = FALSE}
 person <- read.csv(file = "data/person.csv", header = TRUE)
 condition_occurrence <- read.csv(file = "data/condition_occurrence.csv", header = TRUE)
 drug_exposure <- read.csv(file = "data/drug_exposure.csv", header = TRUE)
 ```
 ::::::::::::::::::::::::::::::::
-
 :::::::::::::::::::::::::::::::::::::::::::::::
 
 When you have read in the data, take some time to explore it.
@@ -177,7 +178,7 @@ By creating tables that also have the name of the concepts answer the following 
 4. Give a description of the patient who received Amoxicillin because they were wheezing?
 
 :::::::::::::::::::::::: hint 
-```{r}
+```{r, warning = FALSE, message = FALSE}
 person_named <- person |> omopcept::omop_join_name_all()
 condition_occurrence_named <- condition_occurrence |> omopcept::omop_join_name_all()
 drug_exposure_named <- person |> omopcept::omop_join_name_all()
@@ -207,7 +208,7 @@ So we can join two of the tables together to get information about the different
 
 I am going to use a left join because I want a record of every person and the conditions they may have.
 
-```{r}
+```{r, warning = FALSE, message = FALSE}
 library(dplyr)
 person_condition <- 
   person_named |> 
@@ -235,7 +236,7 @@ df |> count(a, b)
 Count the number of people with each condition
 
 :::::::::::::::::::::::: solution 
-```{r}
+```{r, warning = FALSE, message = FALSE}
 person_condition |> count(gender_concept_name, condition_concept_name)
 ```
 :::::::::::::::::::::::::::::::::::::::::::::::
@@ -254,7 +255,7 @@ Solve the questions in Who's who programmatically.
 
 The CDMConnector package allows connection to an OMOP Common Data Model in a database it also contains synthetic example data that can be used to demonstrate querying the data
 
-```{r}
+```{r, warning = FALSE, message = FALSE}
 install.packages("CDMConnector")
 install.packages("duckdb")
 
@@ -264,13 +265,13 @@ library(CDMConnector)
 A set of synthetic example data is called Eunomia and one example called GiBleed contains 2,600 patients representing a gastrointestinal bleeding study
 
 Download these data
-```{r}
+```{r, warning = FALSE, message = FALSE}
 dbName <- "GiBleed"
 CDMConnector::requireEunomia(datasetName = dbName)
 ```
 
 We can use the DBI & duckdb packages to connect to this local database
-```{r}
+```{r, warning = FALSE, message = FALSE}
 db <- DBI::dbConnect(duckdb::duckdb(), dbdir = CDMConnector::eunomiaDir(datasetName = dbName))
 ```
 
@@ -281,7 +282,7 @@ Databases are organised into structures called schemas usually in an omop databa
 The Eunomia example data just has a single schema (called main) that we can use for both.
 
 This is how we make a CDM reference from the database connection we made above.
-```{r}
+```{r, warning = FALSE, message = FALSE}
 cdm <- CDMConnector::cdmFromCon(con = db, cdmSchema = "main", writeSchema = "main") 
 ```
 
@@ -289,7 +290,7 @@ The data themselves are not actually read into the created cdm object.
 Rather it is a reference that allows us to query the data from the database.
 
 Typing `cdm` will give a summary of the tables in the database 
-```{r}
+```{r, warning = FALSE, message = FALSE}
 cdm
 ```
 
@@ -297,24 +298,24 @@ You may recognise table names from the simple examples. earlier
 e.g. `person`, `condition_occurrence` and `drug_exposure`
 
 You can get a glimpse of the data in each table with cdm$table_name e.g.
-```{r}
+```{r, warning = FALSE, message = FALSE}
 cdm$person
 cdm$condition_occurrence
 ```
 
 The names of the columns in each table can be seen with `colnames()`
-```{r}
+```{r, warning = FALSE, message = FALSE}
 colnames(cdm$condition_occurrence)
 ```
 
 If you are familiar with commands from the dplyr and tidyverse packages these can be used on the cdm reference
-```{r}
+```{r, warning = FALSE, message = FALSE}
 library(dplyr)
 ```
 
 For example this code counts the number of records per condition. 
 Using collect() at the end performs the final database query and brings the data into R.
-```{r}
+```{r, warning = FALSE, message = FALSE}
 cdm$condition_occurrence |> 
   count(condition_concept_id, sort=TRUE) |> 
   collect() 
@@ -322,7 +323,7 @@ cdm$condition_occurrence |>
 
 The command above gives us a list of concept ids. To get the names of the conditions you can use the omopcept package as before.
 
-```{r}
+```{r, warning = FALSE, message = FALSE}
 cdm$condition_occurrence |> 
   count(condition_concept_id, sort=TRUE) |> 
   collect() |> 
@@ -331,7 +332,7 @@ cdm$condition_occurrence |>
 
 Alternatively using CDMConnector also gives us access to a table called `concept` that can be used to join on the concept names. 
 NOTE: Because of the way `join` works, it is easier to `arrange` the table after it is collected.
-```{r}
+```{r, warning = FALSE, message = FALSE}
 cdm$condition_occurrence |> 
   count(condition_concept_id) |> 
   left_join(select(cdm$concept, concept_id, concept_name),
@@ -346,7 +347,7 @@ For the Confident
 Using the "GiBleed" database work out the number of male and female patients with each condition_concept_id
 
 :::::::::::::::::::::::: solution 
-```{r}
+```{r, warning = FALSE, message = FALSE}
 cdm$person |> 
   left_join( cdm$condition_occurrence, by = join_by(person_id) ) |> 
   group_by(condition_concept_id, gender_concept_id) |>
@@ -367,7 +368,7 @@ Solutions for working out Who's who programmatically.
 :::::::::::::::::::::::: solution 
 to be done
 :::::::::::::::::::::::::::::::::::::::::::::::
-:::::::::::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
