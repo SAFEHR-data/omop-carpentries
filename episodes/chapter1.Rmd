@@ -86,7 +86,7 @@ OMOP is a format for recording Electronic Healthcare Records. It allows you to f
 
 ### OMOP CDM Diagram
 
-![The OMOP Common Data Model ](fig/OMOP-CDM.png)
+![The OMOP Common Data Model ](fig/OMOP-CDM.png){alt='A diagram showing the tables that occur in the OMOP-CDM , how they relate to each other and standard vocabularies.'}
 
 
 ::::::::::::::::::::::::::::::::::::: challenge 
@@ -107,7 +107,7 @@ Look at the OMOP-CDM figure and answer the following questions:
 
 ## Why use OMOP?
 
-![Why use the OMOP-CDM](fig/Why-CDM.png)
+![Why use the OMOP-CDM](fig/Why-CDM.png){alt='A diagram showing that different sources of data, transformed to OMOP, can then be used by multiple analysis tools.'}
 
 Once a database has been converted to the OMOP CDM, evidence can be generated using standardized analytics tools. This means that different tools can also be shared and reused. So using OMOP can help make your research FAIR.
 
@@ -244,106 +244,23 @@ person_condition |> count(gender_concept_name, condition_concept_name)
 
 This produces a table:
 
-![A table of the condition counts](fig/condition_count.png)
+![A table of the condition counts](fig/condition_count.png){alt='A table showing the different conditions listed with the number of males and females suffering from them'}
 
 ::::::::::::::::::::::::::::::::::::: group-tab
-### Happy-ish
+### Happyish
 
 Solve the questions in Who's who programmatically.
 
 ### Confident
 
-The CDMConnector package allows connection to an OMOP Common Data Model in a database it also contains synthetic example data that can be used to demonstrate querying the data
+The CDMConnector package allows connection to an OMOP Common Data Model in a database. It also contains synthetic example data that can be used to demonstrate querying the data.
 
-```{r, warning = FALSE, message = FALSE}
-install.packages("CDMConnector")
-install.packages("duckdb")
-
-library(CDMConnector)
-```
-
-A set of synthetic example data is called Eunomia and one example called GiBleed contains 2,600 patients representing a gastrointestinal bleeding study
-
-Download these data
-```{r, warning = FALSE, message = FALSE}
-dbName <- "GiBleed"
-CDMConnector::requireEunomia(datasetName = dbName)
-```
-
-We can use the DBI & duckdb packages to connect to this local database
-```{r, warning = FALSE, message = FALSE}
-db <- DBI::dbConnect(duckdb::duckdb(), dbdir = CDMConnector::eunomiaDir(datasetName = dbName))
-```
-
-Databases are organised into structures called schemas usually in an omop database we would have two schemas
-1. cdm schema : containing the Common Data Model tables that have read-only access
-2. write schema : a place where tables can be written
-
-The Eunomia example data just has a single schema (called main) that we can use for both.
-
-This is how we make a CDM reference from the database connection we made above.
-```{r, warning = FALSE, message = FALSE}
-cdm <- CDMConnector::cdmFromCon(con = db, cdmSchema = "main", writeSchema = "main") 
-```
-
-The data themselves are not actually read into the created cdm object.
-Rather it is a reference that allows us to query the data from the database.
-
-Typing `cdm` will give a summary of the tables in the database 
-```{r, warning = FALSE, message = FALSE}
-cdm
-```
-
-You may recognise table names from the simple examples. earlier
-e.g. `person`, `condition_occurrence` and `drug_exposure`
-
-You can get a glimpse of the data in each table with cdm$table_name e.g.
-```{r, warning = FALSE, message = FALSE}
-cdm$person
-cdm$condition_occurrence
-```
-
-The names of the columns in each table can be seen with `colnames()`
-```{r, warning = FALSE, message = FALSE}
-colnames(cdm$condition_occurrence)
-```
-
-If you are familiar with commands from the dplyr and tidyverse packages these can be used on the cdm reference
-```{r, warning = FALSE, message = FALSE}
-library(dplyr)
-```
-
-For example this code counts the number of records per condition. 
-Using collect() at the end performs the final database query and brings the data into R.
-```{r, warning = FALSE, message = FALSE}
-cdm$condition_occurrence |> 
-  count(condition_concept_id, sort=TRUE) |> 
-  collect() 
-```
-
-The command above gives us a list of concept ids. To get the names of the conditions you can use the omopcept package as before.
-
-```{r, warning = FALSE, message = FALSE}
-cdm$condition_occurrence |> 
-  count(condition_concept_id, sort=TRUE) |> 
-  collect() |> 
-  omopcept::omop_join_name_all()
-```
-
-Alternatively using CDMConnector also gives us access to a table called `concept` that can be used to join on the concept names. 
-NOTE: Because of the way `join` works, it is easier to `arrange` the table after it is collected.
-```{r, warning = FALSE, message = FALSE}
-cdm$condition_occurrence |> 
-  count(condition_concept_id) |> 
-  left_join(select(cdm$concept, concept_id, concept_name),
-                   by = join_by(condition_concept_id == concept_id)) |>
-  collect() |> 
-  arrange(desc(n))
-```
 :::::::::::::::::::::::::::::::::::::::::::::::
 
+
+
 ::::::::::::::::::::::::::::::::::::: challenge 
-For the Confident
+###For the Confident
 Using the "GiBleed" database work out the number of male and female patients with each condition_concept_id
 
 :::::::::::::::::::::::: solution 
