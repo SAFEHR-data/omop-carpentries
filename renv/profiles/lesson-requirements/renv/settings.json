@@ -1,6 +1,6 @@
 {
   "bioconductor.version": [],
-  "external.libraries": [],
+  "external.libraries": ["SAFEHR-data/omopcept"],
   "ignored.packages": [],
   "package.dependency.fields": [
     "Imports",
