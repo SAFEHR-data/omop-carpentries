@@ -37,6 +37,10 @@ make it easier to resume work after a break.
 You will need the `dplyr` and `readr` packages from CRAN (the official package repository).
 You will also need a package we have developed `omopcept`.
 
+will need to add the following line:
+
+remotes::install_github("SAFEHR-data/omopcept")
+
 
 ```{r, warning = FALSE, message = FALSE, results = 'hide'}
 
@@ -193,13 +197,7 @@ By creating tables that also have the name of the concepts answer the following 
 3. What was the ethnicity of the patient not affected by this fever?
 4. Give a description of the patient who received Amoxicillin because they were wheezing?
 
-:::::::::::::::::::::::: hint 
-```{r, warning = FALSE, message = FALSE}
-# Uncomment and run the following lines
-# person_named <- person |> omopcept::omop_join_name_all()
-# condition_occurrence_named <- condition_occurrence |> omopcept::omop_join_name_all()
-# drug_exposure_named <- person |> omopcept::omop_join_name_all()
-```
+
 ::::::::::::::::::::::::::::::::
  
 :::::::::::::::::::::::: solution 
@@ -340,13 +338,7 @@ cdm$condition_occurrence |>
 
 The command above gives us a list of concept ids. To get the names of the conditions you can use the omopcept package as before.
 
-```{r, warning = FALSE, message = FALSE}
-# Uncomment and run the following lines
-# cdm$condition_occurrence |> 
-#  count(condition_concept_id, sort=TRUE) |> 
-#  collect() |> 
-#  omopcept::omop_join_name_all()
-```
+
 
 Alternatively using CDMConnector also gives us access to a table called `concept` that can be used to join on the concept names. 
 NOTE: Because of the way `join` works, it is easier to `arrange` the table after it is collected.
