@@ -359,18 +359,7 @@ cdm$condition_occurrence |>
 Using the "GiBleed" database work out the number of male and female patients with each condition_concept_id
 
 :::::::::::::::::::::::: solution 
-```{r, warning = FALSE, message = FALSE}
-cdm$person |> 
-  left_join( cdm$condition_occurrence, by = join_by(person_id) ) |> 
-  group_by(condition_concept_id, gender_concept_id) |>
-  summarise(num_persons = n_distinct(person_id)) |>
-  collect() |>
-  ungroup() |> 
-  omopcept::omop_join_name_all() |> 
-  #remove some columns to make display clearer
-  select(-condition_concept_id, -gender_concept_id) |> 
-  arrange(condition_concept_name)  
-```
+
 :::::::::::::::::::::::::::::::::::::::::::::::
 :::::::::::::::::::::::::::::::::::::::::::::::
 
