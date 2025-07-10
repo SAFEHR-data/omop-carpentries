@@ -1,6 +1,6 @@
 bioconductor.version:
-external.libraries:
-ignored.packages:
+external.libraries:"SAFEHR-data/omopcept"
+ignored.packages:"SAFEHR-data/omopcept"
 package.dependency.fields: Imports, Depends, LinkingTo
 r.version:
 snapshot.type: implicit
