@@ -34,13 +34,15 @@ make it easier to resume work after a break.
 
 ### Install the required packages
 
-You will need the `dplyr` package from CRAN (the official package repository).
+You will need the `dplyr` and `readr` packages from CRAN (the official package repository).
 You will also need a package we have developed `omopcept`.
 
 
 ```{r, warning = FALSE, message = FALSE, results = 'hide'}
 
 install.packages("dplyr")
+
+install.packages("readr")
 
 install.packages("remotes")
 
@@ -142,12 +144,12 @@ directory. Now we can load the data into R, there are three data files `person.c
 
 ### Experienced
 
-Use the function read.csv.
+Use the function read_csv() function from the readr package.
 
 ### Need a reminder
-The expression `read.csv(...)` is a [function call](../learners/reference.md#function-call) that asks R to run the function `read.csv`.
+The expression `read_csv(...)` is a [function call](../learners/reference.md#function-call) that asks R to run the function `read_csv`.
 
-`read.csv` has two [arguments](../learners/reference.md#argument): the name of the file we want to read, and whether the first line of the file contains names for the columns of data.
+`read_csv` has two [arguments](../learners/reference.md#argument): the name of the file we want to read, and whether the first line of the file contains names for the columns of data.
 
 The filename needs to be a character string (or [string](../learners/reference.md#string) for short), so we put it in quotes. Assigning the second argument, `header`, to be `FALSE` indicates that the data file does not have column headers.  
 :::::::::::::::::::::::::::::::::::::::::::::::
@@ -161,9 +163,10 @@ NOTE: The data does have headers.
 
 :::::::::::::::::::::::: solution 
 ```{r, warning = FALSE, message = FALSE}
-person <- read.csv(file = "data/person.csv", header = TRUE)
-condition_occurrence <- read.csv(file = "data/condition_occurrence.csv", header = TRUE)
-drug_exposure <- read.csv(file = "data/drug_exposure.csv", header = TRUE)
+library(readr)
+person <- read_csv(file = "data/person.csv", header = TRUE)
+condition_occurrence <- read_csv(file = "data/condition_occurrence.csv", header = TRUE)
+drug_exposure <- read_csv(file = "data/drug_exposure.csv", header = TRUE)
 ```
 ::::::::::::::::::::::::::::::::
 :::::::::::::::::::::::::::::::::::::::::::::::
