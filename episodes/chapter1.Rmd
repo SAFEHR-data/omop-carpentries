@@ -40,25 +40,11 @@ make it easier to resume work after a break.
 
 ### Install the required packages
 
-You will need the `dplyr` and `readr` packages from CRAN (the official package repository).
+You will need the `dplyr`, `remotes` and `readr` packages from CRAN (the official package repository).
 You will also need a package we have developed `omopcept`.
+This can be installed with:
 
-will need to add the following line:
-
-remotes::install_github("SAFEHR-data/omopcept")
-
-
-```{r, warning = FALSE, message = FALSE, results = 'hide'}
-
-install.packages("dplyr")
-
-install.packages("readr")
-
-install.packages("remotes")
-
-
-```
-
+remotes::install_github("SAFEHR-data/omopcept")m
 ### Create a new project
 
 
@@ -204,14 +190,12 @@ By creating tables that also have the name of the concepts answer the following 
 
 :::::::::::::::::::::::: hint 
 ```{r, warning = FALSE, message = FALSE}
+library(omopcept)
 person_named <- person |> omop_join_name_all()
 condition_occurrence_named <- condition_occurrence |> omop_join_name_all()
 drug_exposure_named <- person |> omop_join_name_all()
 ```
 ::::::::::::::::::::::::::::::::
-
-
- 
 :::::::::::::::::::::::: solution 
 
 1. 25 (or 24 if he hasn't had his birthday this year)
@@ -283,9 +267,6 @@ Solve the questions in Who's who programmatically.
 The CDMConnector package allows connection to an OMOP Common Data Model in a database it also contains synthetic example data that can be used to demonstrate querying the data
 
 ```{r, warning = FALSE, message = FALSE}
-install.packages("CDMConnector")
-install.packages("duckdb")
-[]
 library(CDMConnector)
 ```
 
@@ -349,7 +330,12 @@ cdm$condition_occurrence |>
 ```
 
 The command above gives us a list of concept ids. To get the names of the conditions you can use the omopcept package as before.
-
+```{r, warning = FALSE, message = FALSE}
+cdm$condition_occurrence |> 
+  count(condition_concept_id, sort=TRUE) |> 
+  collect() |> 
+  omop_join_name_all()
+```
 
 
 Alternatively using CDMConnector also gives us access to a table called `concept` that can be used to join on the concept names. 
