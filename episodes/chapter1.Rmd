@@ -3,6 +3,12 @@ title: "What is OMOP?"
 teaching: 0
 exercises: 0
 ---
+
+```{r setup, include = FALSE}
+source("setup.R")
+knitr::opts_chunk$set(fig.height = 6)
+```
+
 :::::::::::::::::::::::::::::::::::::: questions 
 
 - What is OMOP?
@@ -272,7 +278,7 @@ The CDMConnector package allows connection to an OMOP Common Data Model in a dat
 ```{r, warning = FALSE, message = FALSE}
 install.packages("CDMConnector")
 install.packages("duckdb")
-
+[]
 library(CDMConnector)
 ```
 
