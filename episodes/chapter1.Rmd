@@ -190,6 +190,7 @@ By creating tables that also have the name of the concepts answer the following 
 
 :::::::::::::::::::::::: hint 
 ```{r, warning = FALSE, message = FALSE}
+remotes::install_github("SAFEHR-data/omopcept", force = TRUE)
 library(omopcept)
 person_named <- person |> omop_join_name_all()
 condition_occurrence_named <- condition_occurrence |> omop_join_name_all()
