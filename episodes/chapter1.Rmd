@@ -202,6 +202,13 @@ By creating tables that also have the name of the concepts answer the following 
 3. What was the ethnicity of the patient not affected by this fever?
 4. Give a description of the patient who received Amoxicillin because they were wheezing?
 
+:::::::::::::::::::::::: hint 
+```{r, warning = FALSE, message = FALSE}
+person_named <- person |> omop_join_name_all()
+condition_occurrence_named <- condition_occurrence |> omop_join_name_all()
+drug_exposure_named <- person |> omop_join_name_all()
+```
+::::::::::::::::::::::::::::::::
 
 
  
