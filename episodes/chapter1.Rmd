@@ -32,6 +32,27 @@ you, but also remembers its location (allowing you to quickly navigate to it).
 The interface also (optionally) preserves custom settings and open files to
 make it easier to resume work after a break.
 
+### Install the required packages
+
+You will need the `dplyr` and `readr` packages from CRAN (the official package repository).
+You will also need a package we have developed `omopcept`.
+
+will need to add the following line:
+
+remotes::install_github("SAFEHR-data/omopcept")
+
+
+```{r, warning = FALSE, message = FALSE, results = 'hide'}
+
+install.packages("dplyr")
+
+install.packages("readr")
+
+install.packages("remotes")
+
+
+```
+
 ### Create a new project
 
 
@@ -41,6 +62,8 @@ make it easier to resume work after a break.
 Create a new project in your environment.
 
 ### Need a reminder
+
+
 - Under the `File` menu in RStudio, click on `New project`, choose
   `New directory`, then `New project`
 - Enter a name for this new folder (or "directory") and choose a convenient
@@ -54,19 +77,6 @@ Create a new project in your environment.
   not there already.
 :::::::::::::::::::::::::::::::::::::::::::::::
 
-### Install the required packages
-
-You will need the `tidyverse` package from CRAN (the official package repository).
-You will also need a package we have developed `omopcept`.
-
-
-```{r error=TRUE}
-
-install.packages("tidyverse")
-
-install.packages("remotes")
-
-```
 
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: instructor
@@ -81,8 +91,10 @@ OMOP is a format for recording Electronic Healthcare Records. It allows you to f
 
 ### OMOP CDM Diagram
 
-![The OMOP Common Data Model ](fig/OMOP-CDM.png)
+![The OMOP Common Data Model ](fig/OMOP-CDM.png){alt='A diagram showing the tables that occur in the OMOP-CDM , how they relate to each other and standard vocabularies.'}
 
+OMOP CDM stands for the Observational Medical Outcomes Partnership Common Data Model. You don’t really need to remember what OMOP stands for. Remembering that CDM stands for Common Data Model can help you remember that it is a data standard that can be applied to different data sources to create data in a ‘Common’ (same) format.
+The table diagram will look confusing to start with but you can use data in the OMOP CDM without needing to understand (or populate) all 37 tables.
 
 ::::::::::::::::::::::::::::::::::::: challenge 
 
@@ -100,9 +112,20 @@ Look at the OMOP-CDM figure and answer the following questions:
 :::::::::::::::::::::::::::::::::
 :::::::::::::::::::::::::::::::::::::::::::::::
 
+There are a handful of core tables and columns that contain key information about a patient's journey in the hospital. These are 7 tables to get you started :
+
+- [person](https://ohdsi.github.io/CommonDataModel/cdm54.html#person) uniquely identifies each person or patient, and some demographic information. This is the central table that all other tables relate to.
+- [condition_occurrence](https://ohdsi.github.io/CommonDataModel/cdm54.html#condition_occurrence) records relating to a Person suggesting the presence of a medical condition.
+- [drug_exposure](https://ohdsi.github.io/CommonDataModel/cdm54.html#drug_exposure) records about exposure of a patient to a drug.
+- [procedure_occurrence](https://ohdsi.github.io/CommonDataModel/cdm54.html#procedure_occurrence) activities carried out by a healthcare provider on the patient with a diagnostic or therapeutic purpose.
+- [measurement](https://ohdsi.github.io/CommonDataModel/cdm54.html#measurement) numerical or categorical values obtained through standardized examination of a Person or Person’s sample.
+- [observation](https://ohdsi.github.io/CommonDataModel/cdm54.html#observation) clinical facts about a Person obtained in the context of examination, questioning or a procedure.
+- [visit_occurrence](https://ohdsi.github.io/CommonDataModel/cdm54.html#visit_occurrence) records of times where Persons engage with the healthcare system.
+
+
 ## Why use OMOP?
 
-![Why use the OMOP-CDM](fig/Why-CDM.png)
+![Why use the OMOP-CDM](fig/Why-CDM.png){alt='A diagram showing that different sources of data, transformed to OMOP, can then be used by multiple analysis tools.'}
 
 Once a database has been converted to the OMOP CDM, evidence can be generated using standardized analytics tools. This means that different tools can also be shared and reused. So using OMOP can help make your research FAIR.
 
@@ -124,12 +147,12 @@ directory. Now we can load the data into R, there are three data files `person.c
 
 ### Experienced
 
-Use the function read.csv.
+Use the function read_csv() function from the readr package.
 
 ### Need a reminder
-The expression `read.csv(...)` is a [function call](../learners/reference.md#function-call) that asks R to run the function `read.csv`.
+The expression `read_csv(...)` is a [function call](../learners/reference.md#function-call) that asks R to run the function `read_csv`.
 
-`read.csv` has two [arguments](../learners/reference.md#argument): the name of the file we want to read, and whether the first line of the file contains names for the columns of data.
+`read_csv` has two [arguments](../learners/reference.md#argument): the name of the file we want to read, and whether the first line of the file contains names for the columns of data.
 
 The filename needs to be a character string (or [string](../learners/reference.md#string) for short), so we put it in quotes. Assigning the second argument, `header`, to be `FALSE` indicates that the data file does not have column headers.  
 :::::::::::::::::::::::::::::::::::::::::::::::
@@ -142,13 +165,13 @@ There are three data files `person.csv`, `condition_occurrence.csv` and `drug_ex
 NOTE: The data does have headers.
 
 :::::::::::::::::::::::: solution 
-```{r error=TRUE}
-person <- read.csv(file = "data/person.csv", header = TRUE)
-condition_occurrence <- read.csv(file = "data/condition_occurrence.csv", header = TRUE)
-drug_exposure <- read.csv(file = "data/drug_exposure.csv", header = TRUE)
+```{r, warning = FALSE, message = FALSE}
+library(readr)
+person <- read_csv(file = "data/person.csv")
+condition_occurrence <- read_csv(file = "data/condition_occurrence.csv")
+drug_exposure <- read_csv(file = "data/drug_exposure.csv")
 ```
 ::::::::::::::::::::::::::::::::
-
 :::::::::::::::::::::::::::::::::::::::::::::::
 
 When you have read in the data, take some time to explore it.
@@ -173,15 +196,8 @@ By creating tables that also have the name of the concepts answer the following 
 3. What was the ethnicity of the patient not affected by this fever?
 4. Give a description of the patient who received Amoxicillin because they were wheezing?
 
-:::::::::::::::::::::::: hint 
-```{r error=TRUE}
 
 
-person_named <- person |> omop_join_name_all()
-condition_occurrence_named <- condition_occurrence |> omop_join_name_all()
-drug_exposure_named <- person |> omop_join_name_all()
-```
-::::::::::::::::::::::::::::::::
  
 :::::::::::::::::::::::: solution 
 
@@ -206,7 +222,8 @@ So we can join two of the tables together to get information about the different
 
 I am going to use a left join because I want a record of every person and the conditions they may have.
 
-```{r error=TRUE}
+```{r, warning = FALSE, message = FALSE}
+library(dplyr)
 person_condition <- 
   person_named |> 
   left_join(condition_occurrence_named, by = join_by(person_id) )
@@ -233,7 +250,7 @@ df |> count(a, b)
 Count the number of people with each condition
 
 :::::::::::::::::::::::: solution 
-```{r error=TRUE}
+```{r, warning = FALSE, message = FALSE}
 person_condition |> count(gender_concept_name, condition_concept_name)
 ```
 :::::::::::::::::::::::::::::::::::::::::::::::
@@ -241,18 +258,20 @@ person_condition |> count(gender_concept_name, condition_concept_name)
 
 This produces a table:
 
-![A table of the condition counts](fig/condition_count.png)
+![A table of the condition counts](fig/condition_count.png){alt='A table showing the different conditions listed with the n.umber of males and females suffering from them'}
 
-::::::::::::::::::::::::::::::::::::: group-tab
+::::::::::::::::::::::::::::::::::::: tab
 ### Happy-ish
 
 Solve the questions in Who's who programmatically.
 
 ### Confident
+
 The CDMConnector package allows connection to an OMOP Common Data Model in a database it also contains synthetic example data that can be used to demonstrate querying the data
 
-```{r error=TRUE}
+```{r, warning = FALSE, message = FALSE}
 install.packages("CDMConnector")
+install.packages("duckdb")
 
 library(CDMConnector)
 ```
@@ -260,13 +279,13 @@ library(CDMConnector)
 A set of synthetic example data is called Eunomia and one example called GiBleed contains 2,600 patients representing a gastrointestinal bleeding study
 
 Download these data
-```{r error=TRUE}
+```{r, warning = FALSE, message = FALSE}
 dbName <- "GiBleed"
 CDMConnector::requireEunomia(datasetName = dbName)
 ```
 
 We can use the DBI & duckdb packages to connect to this local database
-```{r error=TRUE}
+```{r, warning = FALSE, message = FALSE}
 db <- DBI::dbConnect(duckdb::duckdb(), dbdir = CDMConnector::eunomiaDir(datasetName = dbName))
 ```
 
@@ -277,7 +296,7 @@ Databases are organised into structures called schemas usually in an omop databa
 The Eunomia example data just has a single schema (called main) that we can use for both.
 
 This is how we make a CDM reference from the database connection we made above.
-```{r error=TRUE}
+```{r, warning = FALSE, message = FALSE}
 cdm <- CDMConnector::cdmFromCon(con = db, cdmSchema = "main", writeSchema = "main") 
 ```
 
@@ -285,7 +304,7 @@ The data themselves are not actually read into the created cdm object.
 Rather it is a reference that allows us to query the data from the database.
 
 Typing `cdm` will give a summary of the tables in the database 
-```{r error=TRUE}
+```{r, warning = FALSE, message = FALSE}
 cdm
 ```
 
@@ -293,24 +312,24 @@ You may recognise table names from the simple examples. earlier
 e.g. `person`, `condition_occurrence` and `drug_exposure`
 
 You can get a glimpse of the data in each table with cdm$table_name e.g.
-```{r error=TRUE}
+```{r, warning = FALSE, message = FALSE}
 cdm$person
 cdm$condition_occurrence
 ```
 
 The names of the columns in each table can be seen with `colnames()`
-```{r error=TRUE}
+```{r, warning = FALSE, message = FALSE}
 colnames(cdm$condition_occurrence)
 ```
 
 If you are familiar with commands from the dplyr and tidyverse packages these can be used on the cdm reference
-```{r error=TRUE}
+```{r, warning = FALSE, message = FALSE}
 library(dplyr)
 ```
 
 For example this code counts the number of records per condition. 
 Using collect() at the end performs the final database query and brings the data into R.
-```{r error=TRUE}
+```{r, warning = FALSE, message = FALSE}
 cdm$condition_occurrence |> 
   count(condition_concept_id, sort=TRUE) |> 
   collect() 
@@ -318,11 +337,11 @@ cdm$condition_occurrence |>
 
 The command above gives us a list of concept ids. To get the names of the conditions you can use the omopcept package as before.
 
-fixme
+
 
 Alternatively using CDMConnector also gives us access to a table called `concept` that can be used to join on the concept names. 
 NOTE: Because of the way `join` works, it is easier to `arrange` the table after it is collected.
-```{r error=TRUE}
+```{r, warning = FALSE, message = FALSE}
 cdm$condition_occurrence |> 
   count(condition_concept_id) |> 
   left_join(select(cdm$concept, concept_id, concept_name),
@@ -332,12 +351,15 @@ cdm$condition_occurrence |>
 ```
 :::::::::::::::::::::::::::::::::::::::::::::::
 
+
+
 ::::::::::::::::::::::::::::::::::::: challenge 
-For the Confident
+
+## For the Confident
 Using the "GiBleed" database work out the number of male and female patients with each condition_concept_id
 
 :::::::::::::::::::::::: solution 
-to be done
+
 :::::::::::::::::::::::::::::::::::::::::::::::
 :::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -347,7 +369,7 @@ Solutions for working out Who's who programmatically.
 :::::::::::::::::::::::: solution 
 to be done
 :::::::::::::::::::::::::::::::::::::::::::::::
-:::::::::::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
