@@ -3,11 +3,6 @@ title: "What is OMOP?"
 teaching: 0
 exercises: 0
 ---
-  
-```{r setup, include = FALSE}
-source("setup.R")
-knitr::opts_chunk$set(fig.height = 6)
-```
 :::::::::::::::::::::::::::::::::::::: questions 
 
 - What is OMOP?
@@ -42,6 +37,21 @@ make it easier to resume work after a break.
 You will need the `dplyr` and `readr` packages from CRAN (the official package repository).
 You will also need a package we have developed `omopcept`.
 
+will need to add the following line:
+
+remotes::install_github("SAFEHR-data/omopcept")
+
+
+```{r, warning = FALSE, message = FALSE, results = 'hide'}
+
+install.packages("dplyr")
+
+install.packages("readr")
+
+install.packages("remotes")
+
+
+```
 
 ### Create a new project
 
@@ -137,12 +147,12 @@ directory. Now we can load the data into R, there are three data files `person.c
 
 ### Experienced
 
-Use the function read.csv() function from the readr package.
+Use the function read_csv() function from the readr package.
 
 ### Need a reminder
-The expression `read.csv(...)` is a [function call](../learners/reference.md#function-call) that asks R to run the function `read.csv`.
+The expression `read_csv(...)` is a [function call](../learners/reference.md#function-call) that asks R to run the function `read_csv`.
 
-`read.csv` has two [arguments](../learners/reference.md#argument): the name of the file we want to read, and whether the first line of the file contains names for the columns of data.
+`read_csv` has two [arguments](../learners/reference.md#argument): the name of the file we want to read, and whether the first line of the file contains names for the columns of data.
 
 The filename needs to be a character string (or [string](../learners/reference.md#string) for short), so we put it in quotes. Assigning the second argument, `header`, to be `FALSE` indicates that the data file does not have column headers.  
 :::::::::::::::::::::::::::::::::::::::::::::::
@@ -156,9 +166,10 @@ NOTE: The data does have headers.
 
 :::::::::::::::::::::::: solution 
 ```{r, warning = FALSE, message = FALSE}
-person <- read.csv(file = "data/person.csv")
-condition_occurrence <- read.csv(file = "data/condition_occurrence.csv")
-drug_exposure <- read.csv(file = "data/drug_exposure.csv")
+library(readr)
+person <- read_csv(file = "data/person.csv")
+condition_occurrence <- read_csv(file = "data/condition_occurrence.csv")
+drug_exposure <- read_csv(file = "data/drug_exposure.csv")
 ```
 ::::::::::::::::::::::::::::::::
 :::::::::::::::::::::::::::::::::::::::::::::::
@@ -185,13 +196,7 @@ By creating tables that also have the name of the concepts answer the following 
 3. What was the ethnicity of the patient not affected by this fever?
 4. Give a description of the patient who received Amoxicillin because they were wheezing?
 
-:::::::::::::::::::::::: hint 
-```{r, warning = FALSE, message = FALSE}
-person_named <- person |> omop_join_name_all()
-condition_occurrence_named <- condition_occurrence |> omop_join_name_all()
-drug_exposure_named <- person |> omop_join_name_all()
-```
-::::::::::::::::::::::::::::::::
+
 
  
 :::::::::::::::::::::::: solution 
@@ -265,14 +270,16 @@ Solve the questions in Who's who programmatically.
 The CDMConnector package allows connection to an OMOP Common Data Model in a database it also contains synthetic example data that can be used to demonstrate querying the data
 
 ```{r, warning = FALSE, message = FALSE}
-library(duckdb)
+install.packages("CDMConnector")
+install.packages("duckdb")
+
 library(CDMConnector)
 ```
 
 A set of synthetic example data is called Eunomia and one example called GiBleed contains 2,600 patients representing a gastrointestinal bleeding study
 
 Download these data
-```{r, warning = FALSE, message = FALSE, result = 'hide'}
+```{r, warning = FALSE, message = FALSE}
 dbName <- "GiBleed"
 CDMConnector::requireEunomia(datasetName = dbName)
 ```
@@ -330,12 +337,7 @@ cdm$condition_occurrence |>
 
 The command above gives us a list of concept ids. To get the names of the conditions you can use the omopcept package as before.
 
-```{r, warning = FALSE, message = FALSE}
-cdm$condition_occurrence |> 
-  count(condition_concept_id, sort=TRUE) |> 
-  collect() |> 
-  omop_join_name_all()
-```
+
 
 Alternatively using CDMConnector also gives us access to a table called `concept` that can be used to join on the concept names. 
 NOTE: Because of the way `join` works, it is easier to `arrange` the table after it is collected.
@@ -357,18 +359,7 @@ cdm$condition_occurrence |>
 Using the "GiBleed" database work out the number of male and female patients with each condition_concept_id
 
 :::::::::::::::::::::::: solution 
-```{r, warning = FALSE, message = FALSE}
-cdm$person |> 
-  left_join( cdm$condition_occurrence, by = join_by(person_id) ) |> 
-  group_by(condition_concept_id, gender_concept_id) |>
-  summarise(num_persons = n_distinct(person_id)) |>
-  collect() |>
-  ungroup() |> 
-  omopcept::omop_join_name_all() |> 
-  #remove some columns to make display clearer
-  select(-condition_concept_id, -gender_concept_id) |> 
-  arrange(condition_concept_name)  
-```
+
 :::::::::::::::::::::::::::::::::::::::::::::::
 :::::::::::::::::::::::::::::::::::::::::::::::
 
