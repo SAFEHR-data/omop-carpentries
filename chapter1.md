@@ -32,6 +32,25 @@ you, but also remembers its location (allowing you to quickly navigate to it).
 The interface also (optionally) preserves custom settings and open files to
 make it easier to resume work after a break.
 
+### Install the required packages
+
+You will need the `dplyr` and `readr` packages from CRAN (the official package repository).
+You will also need a package we have developed `omopcept`.
+
+will need to add the following line:
+
+remotes::install_github("SAFEHR-data/omopcept")
+
+
+
+``` r
+install.packages("dplyr")
+
+install.packages("readr")
+
+install.packages("remotes")
+```
+
 ### Create a new project
 
 
@@ -41,6 +60,8 @@ make it easier to resume work after a break.
 Create a new project in your environment.
 
 ### Need a reminder
+
+
 - Under the `File` menu in RStudio, click on `New project`, choose
   `New directory`, then `New project`
 - Enter a name for this new folder (or "directory") and choose a convenient
@@ -54,181 +75,6 @@ Create a new project in your environment.
   not there already.
 :::::::::::::::::::::::::::::::::::::::::::::::
 
-### Install the required packages
-
-You will need the `tidyverse` package from CRAN (the official package repository).
-You will also need a package we have developed `omopcept`.
-
-
-
-``` r
-install.packages("tidyverse")
-```
-
-``` output
-# Downloading packages -------------------------------------------------------
-- Downloading tidyverse from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [415.9 Kb in 0.3s]
-- Downloading broom from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [1.8 Mb in 0.27s]
-- Downloading conflicted from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [53.8 Kb in 0.2s]
-- Downloading dtplyr from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [349.5 Kb in 0.3s]
-- Downloading data.table from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [2.6 Mb in 0.24s]
-- Downloading forcats from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [411.7 Kb in 0.33s]
-- Downloading ggplot2 from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [4.8 Mb in 0.28s]
-- Downloading gtable from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [217.4 Kb in 0.26s]
-- Downloading isoband from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [1.6 Mb in 0.15s]
-- Downloading scales from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [822 Kb in 0.22s]
-- Downloading farver from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [1.4 Mb in 0.18s]
-- Downloading labeling from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [59.5 Kb in 0.23s]
-- Downloading RColorBrewer from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [50.8 Kb in 0.31s]
-- Downloading viridisLite from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [1.2 Mb in 0.22s]
-- Downloading googledrive from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [1.8 Mb in 0.48s]
-- Downloading gargle from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [757.5 Kb in 0.15s]
-- Downloading httr from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [475.7 Kb in 0.2s]
-- Downloading curl from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [770.7 Kb in 0.21s]
-- Downloading openssl from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [1.3 Mb in 0.19s]
-- Downloading askpass from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [21.5 Kb in 0.21s]
-- Downloading sys from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [39.9 Kb in 0.18s]
-- Downloading uuid from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [47.7 Kb in 0.24s]
-- Downloading googlesheets4 from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [504.9 Kb in 0.16s]
-- Downloading cellranger from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [101.5 Kb in 0.23s]
-- Downloading rematch from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [15.9 Kb in 0.14s]
-- Downloading ids from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [119.8 Kb in 0.15s]
-- Downloading rematch2 from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [45 Kb in 0.24s]
-- Downloading haven from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [378.6 Kb in 0.16s]
-- Downloading lubridate from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [969.9 Kb in 0.23s]
-- Downloading timechange from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [166.5 Kb in 0.17s]
-- Downloading modelr from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [196.1 Kb in 0.16s]
-- Downloading ragg from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [646.1 Kb in 0.16s]
-- Downloading systemfonts from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [334.9 Kb in 0.17s]
-- Downloading textshaping from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [179.4 Kb in 0.22s]
-- Downloading readxl from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [398.9 Kb in 0.16s]
-- Downloading reprex from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [483.4 Kb in 0.29s]
-- Downloading callr from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [438.9 Kb in 0.16s]
-- Downloading processx from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [329.4 Kb in 0.16s]
-- Downloading ps from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [488.8 Kb in 0.18s]
-- Downloading rstudioapi from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [310.4 Kb in 0.15s]
-- Downloading rvest from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [293.1 Kb in 0.16s]
-- Downloading selectr from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [491.3 Kb in 0.16s]
-- Downloading xml2 from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [275.2 Kb in 0.14s]
-Successfully downloaded 43 packages in 17 seconds.
-
-The following package(s) will be installed:
-- askpass       [1.2.1]
-- broom         [1.0.8]
-- callr         [3.7.6]
-- cellranger    [1.1.0]
-- conflicted    [1.2.0]
-- curl          [6.4.0]
-- data.table    [1.17.6]
-- dtplyr        [1.3.1]
-- farver        [2.1.2]
-- forcats       [1.0.0]
-- gargle        [1.5.2]
-- ggplot2       [3.5.2]
-- googledrive   [2.1.1]
-- googlesheets4 [1.1.1]
-- gtable        [0.3.6]
-- haven         [2.5.5]
-- httr          [1.4.7]
-- ids           [1.0.1]
-- isoband       [0.2.7]
-- labeling      [0.4.3]
-- lubridate     [1.9.4]
-- modelr        [0.1.11]
-- openssl       [2.3.3]
-- processx      [3.8.6]
-- ps            [1.9.1]
-- ragg          [1.4.0]
-- RColorBrewer  [1.1-3]
-- readxl        [1.4.5]
-- rematch       [2.0.0]
-- rematch2      [2.1.2]
-- reprex        [2.1.1]
-- rstudioapi    [0.17.1]
-- rvest         [1.0.4]
-- scales        [1.4.0]
-- selectr       [0.4-2]
-- sys           [3.4.3]
-- systemfonts   [1.2.3]
-- textshaping   [1.0.1]
-- tidyverse     [2.0.0]
-- timechange    [0.3.0]
-- uuid          [1.2-1]
-- viridisLite   [0.4.2]
-- xml2          [1.3.8]
-These packages will be installed into "~/work/omop-carpentries/omop-carpentries/renv/profiles/lesson-requirements/renv/library/linux-ubuntu-jammy/R-4.5/x86_64-pc-linux-gnu".
-
-The following required system packages are not installed:
-- pandoc  [required by reprex]
-The R packages depending on these system packages may fail to install.
-
-An administrator can install these packages with:
-- sudo apt install pandoc
-
-# Installing packages --------------------------------------------------------
-- Installing broom ...                          OK [installed binary and cached in 0.53s]
-- Installing conflicted ...                     OK [installed binary and cached in 0.26s]
-- Installing data.table ...                     OK [installed binary and cached in 0.28s]
-- Installing dtplyr ...                         OK [installed binary and cached in 0.55s]
-- Installing forcats ...                        OK [installed binary and cached in 0.29s]
-- Installing gtable ...                         OK [installed binary and cached in 0.41s]
-- Installing isoband ...                        OK [installed binary and cached in 0.2s]
-- Installing farver ...                         OK [installed binary and cached in 0.19s]
-- Installing labeling ...                       OK [installed binary and cached in 0.16s]
-- Installing RColorBrewer ...                   OK [installed binary and cached in 0.16s]
-- Installing viridisLite ...                    OK [installed binary and cached in 0.17s]
-- Installing scales ...                         OK [installed binary and cached in 0.39s]
-- Installing ggplot2 ...                        OK [installed binary and cached in 0.75s]
-- Installing curl ...                           OK [installed binary and cached in 0.19s]
-- Installing sys ...                            OK [installed binary and cached in 0.16s]
-- Installing askpass ...                        OK [installed binary and cached in 0.16s]
-- Installing openssl ...                        OK [installed binary and cached in 0.21s]
-- Installing httr ...                           OK [installed binary and cached in 0.17s]
-- Installing gargle ...                         OK [installed binary and cached in 0.33s]
-- Installing uuid ...                           OK [installed binary and cached in 0.16s]
-- Installing googledrive ...                    OK [installed binary and cached in 0.59s]
-- Installing rematch ...                        OK [installed binary and cached in 0.16s]
-- Installing cellranger ...                     OK [installed binary and cached in 0.16s]
-- Installing ids ...                            OK [installed binary and cached in 0.16s]
-- Installing rematch2 ...                       OK [installed binary and cached in 0.39s]
-- Installing googlesheets4 ...                  OK [installed binary and cached in 0.58s]
-- Installing haven ...                          OK [installed binary and cached in 0.42s]
-- Installing timechange ...                     OK [installed binary and cached in 0.17s]
-- Installing lubridate ...                      OK [installed binary and cached in 0.3s]
-- Installing modelr ...                         OK [installed binary and cached in 0.5s]
-- Installing systemfonts ...                    OK [installed binary and cached in 0.27s]
-- Installing textshaping ...                    OK [installed binary and cached in 0.27s]
-- Installing ragg ...                           OK [installed binary and cached in 0.3s]
-- Installing readxl ...                         OK [installed binary and cached in 0.18s]
-- Installing ps ...                             OK [installed binary and cached in 0.17s]
-- Installing processx ...                       OK [installed binary and cached in 0.18s]
-- Installing callr ...                          OK [installed binary and cached in 0.19s]
-- Installing rstudioapi ...                     OK [installed binary and cached in 0.17s]
-- Installing reprex ...                         OK [installed binary and cached in 0.32s]
-- Installing selectr ...                        OK [installed binary and cached in 0.31s]
-- Installing xml2 ...                           OK [installed binary and cached in 0.26s]
-- Installing rvest ...                          OK [installed binary and cached in 0.31s]
-- Installing tidyverse ...                      OK [installed binary and cached in 0.17s]
-Successfully installed 43 packages in 13 seconds.
-```
-
-``` r
-install.packages("remotes")
-```
-
-``` output
-# Downloading packages -------------------------------------------------------
-- Downloading remotes from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [425.9 Kb in 0.17s]
-Successfully downloaded 1 package in 0.38 seconds.
-
-The following package(s) will be installed:
-- remotes [2.5.0]
-These packages will be installed into "~/work/omop-carpentries/omop-carpentries/renv/profiles/lesson-requirements/renv/library/linux-ubuntu-jammy/R-4.5/x86_64-pc-linux-gnu".
-
-# Installing packages --------------------------------------------------------
-- Installing remotes ...                        OK [installed binary and cached in 0.18s]
-Successfully installed 1 package in 0.2 seconds.
-```
 
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: instructor
@@ -243,8 +89,10 @@ OMOP is a format for recording Electronic Healthcare Records. It allows you to f
 
 ### OMOP CDM Diagram
 
-![The OMOP Common Data Model ](fig/OMOP-CDM.png)
+![The OMOP Common Data Model ](fig/OMOP-CDM.png){alt='A diagram showing the tables that occur in the OMOP-CDM , how they relate to each other and standard vocabularies.'}
 
+OMOP CDM stands for the Observational Medical Outcomes Partnership Common Data Model. You don’t really need to remember what OMOP stands for. Remembering that CDM stands for Common Data Model can help you remember that it is a data standard that can be applied to different data sources to create data in a ‘Common’ (same) format.
+The table diagram will look confusing to start with but you can use data in the OMOP CDM without needing to understand (or populate) all 37 tables.
 
 ::::::::::::::::::::::::::::::::::::: challenge 
 
@@ -262,9 +110,20 @@ Look at the OMOP-CDM figure and answer the following questions:
 :::::::::::::::::::::::::::::::::
 :::::::::::::::::::::::::::::::::::::::::::::::
 
+There are a handful of core tables and columns that contain key information about a patient's journey in the hospital. These are 7 tables to get you started :
+
+- [person](https://ohdsi.github.io/CommonDataModel/cdm54.html#person) uniquely identifies each person or patient, and some demographic information. This is the central table that all other tables relate to.
+- [condition_occurrence](https://ohdsi.github.io/CommonDataModel/cdm54.html#condition_occurrence) records relating to a Person suggesting the presence of a medical condition.
+- [drug_exposure](https://ohdsi.github.io/CommonDataModel/cdm54.html#drug_exposure) records about exposure of a patient to a drug.
+- [procedure_occurrence](https://ohdsi.github.io/CommonDataModel/cdm54.html#procedure_occurrence) activities carried out by a healthcare provider on the patient with a diagnostic or therapeutic purpose.
+- [measurement](https://ohdsi.github.io/CommonDataModel/cdm54.html#measurement) numerical or categorical values obtained through standardized examination of a Person or Person’s sample.
+- [observation](https://ohdsi.github.io/CommonDataModel/cdm54.html#observation) clinical facts about a Person obtained in the context of examination, questioning or a procedure.
+- [visit_occurrence](https://ohdsi.github.io/CommonDataModel/cdm54.html#visit_occurrence) records of times where Persons engage with the healthcare system.
+
+
 ## Why use OMOP?
 
-![Why use the OMOP-CDM](fig/Why-CDM.png)
+![Why use the OMOP-CDM](fig/Why-CDM.png){alt='A diagram showing that different sources of data, transformed to OMOP, can then be used by multiple analysis tools.'}
 
 Once a database has been converted to the OMOP CDM, evidence can be generated using standardized analytics tools. This means that different tools can also be shared and reused. So using OMOP can help make your research FAIR.
 
@@ -286,12 +145,12 @@ directory. Now we can load the data into R, there are three data files `person.c
 
 ### Experienced
 
-Use the function read.csv.
+Use the function read_csv() function from the readr package.
 
 ### Need a reminder
-The expression `read.csv(...)` is a [function call](../learners/reference.md#function-call) that asks R to run the function `read.csv`.
+The expression `read_csv(...)` is a [function call](../learners/reference.md#function-call) that asks R to run the function `read_csv`.
 
-`read.csv` has two [arguments](../learners/reference.md#argument): the name of the file we want to read, and whether the first line of the file contains names for the columns of data.
+`read_csv` has two [arguments](../learners/reference.md#argument): the name of the file we want to read, and whether the first line of the file contains names for the columns of data.
 
 The filename needs to be a character string (or [string](../learners/reference.md#string) for short), so we put it in quotes. Assigning the second argument, `header`, to be `FALSE` indicates that the data file does not have column headers.  
 :::::::::::::::::::::::::::::::::::::::::::::::
@@ -306,12 +165,12 @@ NOTE: The data does have headers.
 :::::::::::::::::::::::: solution 
 
 ``` r
-person <- read.csv(file = "data/person.csv", header = TRUE)
-condition_occurrence <- read.csv(file = "data/condition_occurrence.csv", header = TRUE)
-drug_exposure <- read.csv(file = "data/drug_exposure.csv", header = TRUE)
+library(readr)
+person <- read_csv(file = "data/person.csv")
+condition_occurrence <- read_csv(file = "data/condition_occurrence.csv")
+drug_exposure <- read_csv(file = "data/drug_exposure.csv")
 ```
 ::::::::::::::::::::::::::::::::
-
 :::::::::::::::::::::::::::::::::::::::::::::::
 
 When you have read in the data, take some time to explore it.
@@ -336,32 +195,8 @@ By creating tables that also have the name of the concepts answer the following 
 3. What was the ethnicity of the patient not affected by this fever?
 4. Give a description of the patient who received Amoxicillin because they were wheezing?
 
-:::::::::::::::::::::::: hint 
 
-``` r
-person_named <- person |> omop_join_name_all()
-```
 
-``` error
-Error in omop_join_name_all(person): could not find function "omop_join_name_all"
-```
-
-``` r
-condition_occurrence_named <- condition_occurrence |> omop_join_name_all()
-```
-
-``` error
-Error in omop_join_name_all(condition_occurrence): could not find function "omop_join_name_all"
-```
-
-``` r
-drug_exposure_named <- person |> omop_join_name_all()
-```
-
-``` error
-Error in omop_join_name_all(person): could not find function "omop_join_name_all"
-```
-::::::::::::::::::::::::::::::::
  
 :::::::::::::::::::::::: solution 
 
@@ -388,13 +223,14 @@ I am going to use a left join because I want a record of every person and the co
 
 
 ``` r
+library(dplyr)
 person_condition <- 
   person_named |> 
   left_join(condition_occurrence_named, by = join_by(person_id) )
 ```
 
 ``` error
-Error in left_join(person_named, condition_occurrence_named, by = join_by(person_id)): could not find function "left_join"
+Error: object 'person_named' not found
 ```
 This produces a new table with all the column names from both tables and six rows.
 
@@ -424,21 +260,22 @@ person_condition |> count(gender_concept_name, condition_concept_name)
 ```
 
 ``` error
-Error in count(person_condition, gender_concept_name, condition_concept_name): could not find function "count"
+Error: object 'person_condition' not found
 ```
 :::::::::::::::::::::::::::::::::::::::::::::::
 :::::::::::::::::::::::::::::::::::::::::::::::
 
 This produces a table:
 
-![A table of the condition counts](fig/condition_count.png)
+![A table of the condition counts](fig/condition_count.png){alt='A table showing the different conditions listed with the n.umber of males and females suffering from them'}
 
-::::::::::::::::::::::::::::::::::::: group-tab
+::::::::::::::::::::::::::::::::::::: tab
 ### Happy-ish
 
 Solve the questions in Who's who programmatically.
 
 ### Confident
+
 The CDMConnector package allows connection to an OMOP Common Data Model in a database it also contains synthetic example data that can be used to demonstrate querying the data
 
 
@@ -453,7 +290,21 @@ These packages will be installed into "~/work/omop-carpentries/omop-carpentries/
 
 # Installing packages --------------------------------------------------------
 - Installing CDMConnector ...                   OK [linked from cache]
-Successfully installed 1 package in 5.3 milliseconds.
+Successfully installed 1 package in 4.7 milliseconds.
+```
+
+``` r
+install.packages("duckdb")
+```
+
+``` output
+The following package(s) will be installed:
+- duckdb [1.3.2]
+These packages will be installed into "~/work/omop-carpentries/omop-carpentries/renv/profiles/lesson-requirements/renv/library/linux-ubuntu-jammy/R-4.5/x86_64-pc-linux-gnu".
+
+# Installing packages --------------------------------------------------------
+- Installing duckdb ...                         OK [linked from cache]
+Successfully installed 1 package in 5.2 milliseconds.
 ```
 
 ``` r
@@ -470,10 +321,6 @@ CDMConnector::requireEunomia(datasetName = dbName)
 ```
 
 ``` output
-ℹ `EUNOMIA_DATA_FOLDER` set to: '/tmp/Rtmp0TTzPR'.
-```
-
-``` output
 
 Download completed!
 ```
@@ -482,10 +329,6 @@ We can use the DBI & duckdb packages to connect to this local database
 
 ``` r
 db <- DBI::dbConnect(duckdb::duckdb(), dbdir = CDMConnector::eunomiaDir(datasetName = dbName))
-```
-
-``` output
-Creating CDM database /tmp/Rtmp0TTzPR/GiBleed_5.3.zip
 ```
 
 Databases are organised into structures called schemas usually in an omop database we would have two schemas
@@ -509,36 +352,6 @@ Typing `cdm` will give a summary of the tables in the database
 cdm
 ```
 
-``` output
-
-```
-
-``` output
-── # OMOP CDM reference (duckdb) of Synthea ────────────────────────────────────
-```
-
-``` output
-• omop tables: person, observation_period, visit_occurrence, visit_detail,
-condition_occurrence, drug_exposure, procedure_occurrence, device_exposure,
-measurement, observation, death, note, note_nlp, specimen, fact_relationship,
-location, care_site, provider, payer_plan_period, cost, drug_era, dose_era,
-condition_era, metadata, cdm_source, concept, vocabulary, domain,
-concept_class, concept_relationship, relationship, concept_synonym,
-concept_ancestor, source_to_concept_map, drug_strength
-```
-
-``` output
-• cohort tables: -
-```
-
-``` output
-• achilles tables: -
-```
-
-``` output
-• other tables: -
-```
-
 You may recognise table names from the simple examples. earlier
 e.g. `person`, `condition_occurrence` and `drug_exposure`
 
@@ -550,7 +363,7 @@ cdm$person
 
 ``` output
 # Source:   table<person> [?? x 18]
-# Database: DuckDB v1.3.1 [unknown@Linux 6.8.0-1029-azure:R 4.5.1//tmp/Rtmp0TTzPR/file2d9dc1cc992.duckdb]
+# Database: DuckDB v1.3.2 [unknown@Linux 6.8.0-1030-azure:R 4.5.1//tmp/RtmphTChxO/file248830b376bf.duckdb]
    person_id gender_concept_id year_of_birth month_of_birth day_of_birth
        <int>             <int>         <int>          <int>        <int>
  1         6              8532          1963             12           31
@@ -578,7 +391,7 @@ cdm$condition_occurrence
 
 ``` output
 # Source:   table<condition_occurrence> [?? x 16]
-# Database: DuckDB v1.3.1 [unknown@Linux 6.8.0-1029-azure:R 4.5.1//tmp/Rtmp0TTzPR/file2d9dc1cc992.duckdb]
+# Database: DuckDB v1.3.2 [unknown@Linux 6.8.0-1030-azure:R 4.5.1//tmp/RtmphTChxO/file248830b376bf.duckdb]
    condition_occurrence_id person_id condition_concept_id condition_start_date
                      <int>     <int>                <int> <date>              
  1                    4483       263              4112343 2015-10-02          
@@ -623,23 +436,6 @@ If you are familiar with commands from the dplyr and tidyverse packages these ca
 library(dplyr)
 ```
 
-``` output
-
-Attaching package: 'dplyr'
-```
-
-``` output
-The following objects are masked from 'package:stats':
-
-    filter, lag
-```
-
-``` output
-The following objects are masked from 'package:base':
-
-    intersect, setdiff, setequal, union
-```
-
 For example this code counts the number of records per condition. 
 Using collect() at the end performs the final database query and brings the data into R.
 
@@ -668,7 +464,7 @@ cdm$condition_occurrence |>
 
 The command above gives us a list of concept ids. To get the names of the conditions you can use the omopcept package as before.
 
-fixme
+
 
 Alternatively using CDMConnector also gives us access to a table called `concept` that can be used to join on the concept names. 
 NOTE: Because of the way `join` works, it is easier to `arrange` the table after it is collected.
@@ -700,12 +496,15 @@ cdm$condition_occurrence |>
 ```
 :::::::::::::::::::::::::::::::::::::::::::::::
 
+
+
 ::::::::::::::::::::::::::::::::::::: challenge 
-For the Confident
+
+## For the Confident
 Using the "GiBleed" database work out the number of male and female patients with each condition_concept_id
 
 :::::::::::::::::::::::: solution 
-to be done
+
 :::::::::::::::::::::::::::::::::::::::::::::::
 :::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -715,7 +514,7 @@ Solutions for working out Who's who programmatically.
 :::::::::::::::::::::::: solution 
 to be done
 :::::::::::::::::::::::::::::::::::::::::::::::
-:::::::::::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
