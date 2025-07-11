@@ -197,7 +197,7 @@ By creating tables that also have the name of the concepts answer the following 
 4. Give a description of the patient who received Amoxicillin because they were wheezing?
 
 
-::::::::::::::::::::::::::::::::
+
  
 :::::::::::::::::::::::: solution 
 
