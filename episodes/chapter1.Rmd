@@ -139,16 +139,18 @@ directory. Now we can load the data into R, there are three data files `person.c
 
 ### Experienced
 
-Use the function read_csv() function from the readr package.
+Use the function read.csv() function from the readr package.
 
 ### Need a reminder
-The expression `read_csv(...)` is a [function call](../learners/reference.md#function-call) that asks R to run the function `read_csv`.
+The expression `read.csv(...)` is a [function call](../learners/reference.md#function-call) that asks R to run the function `read.csv`.
 
-`read_csv` has two [arguments](../learners/reference.md#argument): the name of the file we want to read, and whether the first line of the file contains names for the columns of data.
+`read.csv` has two [arguments](../learners/reference.md#argument): the name of the file we want to read, and whether the first line of the file contains names for the columns of data.
 
 The filename needs to be a character string (or [string](../learners/reference.md#string) for short), so we put it in quotes. Assigning the second argument, `header`, to be `FALSE` indicates that the data file does not have column headers.  
 :::::::::::::::::::::::::::::::::::::::::::::::
-
+::::::::::::::::::::::::::::::::::::: instructor
+I have used `read.csv` because using the more up to date package caused issues with types, which I would have gone into if it hadn't then caused issues with joining and I ran out of time
+:::::::::::::::::::::::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::: challenge 
 ## Read the Data
 
@@ -158,10 +160,9 @@ NOTE: The data does have headers.
 
 :::::::::::::::::::::::: solution 
 ```{r, warning = FALSE, message = FALSE}
-library(readr)
-person <- read_csv(file = "data/person.csv")
-condition_occurrence <- read_csv(file = "data/condition_occurrence.csv")
-drug_exposure <- read_csv(file = "data/drug_exposure.csv")
+person <- read.csv(file = "data/person.csv")
+condition_occurrence <- read.csv(file = "data/condition_occurrence.csv")
+drug_exposure <- read.csv(file = "data/drug_exposure.csv")
 ```
 ::::::::::::::::::::::::::::::::
 :::::::::::::::::::::::::::::::::::::::::::::::
@@ -331,12 +332,7 @@ cdm$condition_occurrence |>
 ```
 
 The command above gives us a list of concept ids. To get the names of the conditions you can use the omopcept package as before.
-```{r, warning = FALSE, message = FALSE}
-cdm$condition_occurrence |> 
-  count(condition_concept_id, sort=TRUE) |> 
-  collect() |> 
-  omop_join_name_all()
-```
+
 
 
 Alternatively using CDMConnector also gives us access to a table called `concept` that can be used to join on the concept names. 
