@@ -56,6 +56,11 @@ jobs:
         uses: carpentries/actions/setup-lesson-deps@main
         with:
           cache-version: ${{ secrets.CACHE_VERSION }}
+          
+      - name: "Install GitHub Package"
+        run: |
+          Rscript -e 'remotes::install_github("SAFEHR-data/omopcept", dependencies = TRUE)'
+        shell: bash
 
       - name: "Deploy Site"
         run: |
