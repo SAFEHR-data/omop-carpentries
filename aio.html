@@ -306,7 +306,7 @@
         
 <section id="aio-chapter1"><p>Content from <a href="chapter1.html">What is OMOP?</a></p>
 <hr>
-<p>Last updated on 2025-07-08 |
+<p>Last updated on 2025-07-11 |
 
         <a href="https://github.com/SAFEHR-data/omop-carpentries/edit/main/episodes/chapter1.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -359,6 +359,25 @@ location (allowing you to quickly navigate to it). The interface also
 to resume work after a break.</p>
 </div>
 <div class="section level3">
+<h3 id="install-the-required-packages">Install the required packages<a class="anchor" aria-label="anchor" href="#install-the-required-packages"></a>
+</h3>
+<p>You will need the <code>dplyr</code> and <code>readr</code> packages
+from CRAN (the official package repository). You will also need a
+package we have developed <code>omopcept</code>.</p>
+<p>will need to add the following line:</p>
+<p>remotes::install_github(“SAFEHR-data/omopcept”)</p>
+<div class="codewrapper sourceCode" id="cb1">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">install.packages</span><span class="op">(</span><span class="st">"dplyr"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">install.packages</span><span class="op">(</span><span class="st">"readr"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">install.packages</span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span></span></code></pre>
+</div>
+</div>
+<div class="section level3">
 <h3 id="create-a-new-project">Create a new project<a class="anchor" aria-label="anchor" href="#create-a-new-project"></a>
 </h3>
 <div class="tabs">
@@ -399,188 +418,6 @@ they’re not there already.</li>
 </div>
 </div>
 </div>
-</div>
-<div class="section level3">
-<h3 id="install-the-required-packages">Install the required packages<a class="anchor" aria-label="anchor" href="#install-the-required-packages"></a>
-</h3>
-<p>You will need the <code>tidyverse</code> package from CRAN (the
-official package repository). You will also need a package we have
-developed <code>omopcept</code>.</p>
-<div class="codewrapper sourceCode" id="cb1">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">install.packages</span><span class="op">(</span><span class="st">"tidyverse"</span><span class="op">)</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code># Downloading packages -------------------------------------------------------
-- Downloading tidyverse from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [415.9 Kb in 0.3s]
-- Downloading broom from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [1.8 Mb in 0.27s]
-- Downloading conflicted from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [53.8 Kb in 0.2s]
-- Downloading dtplyr from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [349.5 Kb in 0.3s]
-- Downloading data.table from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [2.6 Mb in 0.24s]
-- Downloading forcats from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [411.7 Kb in 0.33s]
-- Downloading ggplot2 from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [4.8 Mb in 0.28s]
-- Downloading gtable from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [217.4 Kb in 0.26s]
-- Downloading isoband from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [1.6 Mb in 0.15s]
-- Downloading scales from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [822 Kb in 0.22s]
-- Downloading farver from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [1.4 Mb in 0.18s]
-- Downloading labeling from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [59.5 Kb in 0.23s]
-- Downloading RColorBrewer from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [50.8 Kb in 0.31s]
-- Downloading viridisLite from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [1.2 Mb in 0.22s]
-- Downloading googledrive from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [1.8 Mb in 0.48s]
-- Downloading gargle from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [757.5 Kb in 0.15s]
-- Downloading httr from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [475.7 Kb in 0.2s]
-- Downloading curl from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [770.7 Kb in 0.21s]
-- Downloading openssl from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [1.3 Mb in 0.19s]
-- Downloading askpass from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [21.5 Kb in 0.21s]
-- Downloading sys from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [39.9 Kb in 0.18s]
-- Downloading uuid from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [47.7 Kb in 0.24s]
-- Downloading googlesheets4 from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [504.9 Kb in 0.16s]
-- Downloading cellranger from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [101.5 Kb in 0.23s]
-- Downloading rematch from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [15.9 Kb in 0.14s]
-- Downloading ids from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [119.8 Kb in 0.15s]
-- Downloading rematch2 from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [45 Kb in 0.24s]
-- Downloading haven from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [378.6 Kb in 0.16s]
-- Downloading lubridate from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [969.9 Kb in 0.23s]
-- Downloading timechange from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [166.5 Kb in 0.17s]
-- Downloading modelr from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [196.1 Kb in 0.16s]
-- Downloading ragg from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [646.1 Kb in 0.16s]
-- Downloading systemfonts from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [334.9 Kb in 0.17s]
-- Downloading textshaping from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [179.4 Kb in 0.22s]
-- Downloading readxl from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [398.9 Kb in 0.16s]
-- Downloading reprex from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [483.4 Kb in 0.29s]
-- Downloading callr from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [438.9 Kb in 0.16s]
-- Downloading processx from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [329.4 Kb in 0.16s]
-- Downloading ps from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [488.8 Kb in 0.18s]
-- Downloading rstudioapi from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [310.4 Kb in 0.15s]
-- Downloading rvest from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [293.1 Kb in 0.16s]
-- Downloading selectr from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [491.3 Kb in 0.16s]
-- Downloading xml2 from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [275.2 Kb in 0.14s]
-Successfully downloaded 43 packages in 17 seconds.
-
-The following package(s) will be installed:
-- askpass       [1.2.1]
-- broom         [1.0.8]
-- callr         [3.7.6]
-- cellranger    [1.1.0]
-- conflicted    [1.2.0]
-- curl          [6.4.0]
-- data.table    [1.17.6]
-- dtplyr        [1.3.1]
-- farver        [2.1.2]
-- forcats       [1.0.0]
-- gargle        [1.5.2]
-- ggplot2       [3.5.2]
-- googledrive   [2.1.1]
-- googlesheets4 [1.1.1]
-- gtable        [0.3.6]
-- haven         [2.5.5]
-- httr          [1.4.7]
-- ids           [1.0.1]
-- isoband       [0.2.7]
-- labeling      [0.4.3]
-- lubridate     [1.9.4]
-- modelr        [0.1.11]
-- openssl       [2.3.3]
-- processx      [3.8.6]
-- ps            [1.9.1]
-- ragg          [1.4.0]
-- RColorBrewer  [1.1-3]
-- readxl        [1.4.5]
-- rematch       [2.0.0]
-- rematch2      [2.1.2]
-- reprex        [2.1.1]
-- rstudioapi    [0.17.1]
-- rvest         [1.0.4]
-- scales        [1.4.0]
-- selectr       [0.4-2]
-- sys           [3.4.3]
-- systemfonts   [1.2.3]
-- textshaping   [1.0.1]
-- tidyverse     [2.0.0]
-- timechange    [0.3.0]
-- uuid          [1.2-1]
-- viridisLite   [0.4.2]
-- xml2          [1.3.8]
-These packages will be installed into "~/work/omop-carpentries/omop-carpentries/renv/profiles/lesson-requirements/renv/library/linux-ubuntu-jammy/R-4.5/x86_64-pc-linux-gnu".
-
-The following required system packages are not installed:
-- pandoc  [required by reprex]
-The R packages depending on these system packages may fail to install.
-
-An administrator can install these packages with:
-- sudo apt install pandoc
-
-# Installing packages --------------------------------------------------------
-- Installing broom ...                          OK [installed binary and cached in 0.53s]
-- Installing conflicted ...                     OK [installed binary and cached in 0.26s]
-- Installing data.table ...                     OK [installed binary and cached in 0.28s]
-- Installing dtplyr ...                         OK [installed binary and cached in 0.55s]
-- Installing forcats ...                        OK [installed binary and cached in 0.29s]
-- Installing gtable ...                         OK [installed binary and cached in 0.41s]
-- Installing isoband ...                        OK [installed binary and cached in 0.2s]
-- Installing farver ...                         OK [installed binary and cached in 0.19s]
-- Installing labeling ...                       OK [installed binary and cached in 0.16s]
-- Installing RColorBrewer ...                   OK [installed binary and cached in 0.16s]
-- Installing viridisLite ...                    OK [installed binary and cached in 0.17s]
-- Installing scales ...                         OK [installed binary and cached in 0.39s]
-- Installing ggplot2 ...                        OK [installed binary and cached in 0.75s]
-- Installing curl ...                           OK [installed binary and cached in 0.19s]
-- Installing sys ...                            OK [installed binary and cached in 0.16s]
-- Installing askpass ...                        OK [installed binary and cached in 0.16s]
-- Installing openssl ...                        OK [installed binary and cached in 0.21s]
-- Installing httr ...                           OK [installed binary and cached in 0.17s]
-- Installing gargle ...                         OK [installed binary and cached in 0.33s]
-- Installing uuid ...                           OK [installed binary and cached in 0.16s]
-- Installing googledrive ...                    OK [installed binary and cached in 0.59s]
-- Installing rematch ...                        OK [installed binary and cached in 0.16s]
-- Installing cellranger ...                     OK [installed binary and cached in 0.16s]
-- Installing ids ...                            OK [installed binary and cached in 0.16s]
-- Installing rematch2 ...                       OK [installed binary and cached in 0.39s]
-- Installing googlesheets4 ...                  OK [installed binary and cached in 0.58s]
-- Installing haven ...                          OK [installed binary and cached in 0.42s]
-- Installing timechange ...                     OK [installed binary and cached in 0.17s]
-- Installing lubridate ...                      OK [installed binary and cached in 0.3s]
-- Installing modelr ...                         OK [installed binary and cached in 0.5s]
-- Installing systemfonts ...                    OK [installed binary and cached in 0.27s]
-- Installing textshaping ...                    OK [installed binary and cached in 0.27s]
-- Installing ragg ...                           OK [installed binary and cached in 0.3s]
-- Installing readxl ...                         OK [installed binary and cached in 0.18s]
-- Installing ps ...                             OK [installed binary and cached in 0.17s]
-- Installing processx ...                       OK [installed binary and cached in 0.18s]
-- Installing callr ...                          OK [installed binary and cached in 0.19s]
-- Installing rstudioapi ...                     OK [installed binary and cached in 0.17s]
-- Installing reprex ...                         OK [installed binary and cached in 0.32s]
-- Installing selectr ...                        OK [installed binary and cached in 0.31s]
-- Installing xml2 ...                           OK [installed binary and cached in 0.26s]
-- Installing rvest ...                          OK [installed binary and cached in 0.31s]
-- Installing tidyverse ...                      OK [installed binary and cached in 0.17s]
-Successfully installed 43 packages in 13 seconds.</code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb3">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">install.packages</span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code># Downloading packages -------------------------------------------------------
-- Downloading remotes from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [425.9 Kb in 0.17s]
-Successfully downloaded 1 package in 0.38 seconds.
-
-The following package(s) will be installed:
-- remotes [2.5.0]
-These packages will be installed into "~/work/omop-carpentries/omop-carpentries/renv/profiles/lesson-requirements/renv/library/linux-ubuntu-jammy/R-4.5/x86_64-pc-linux-gnu".
-
-# Installing packages --------------------------------------------------------
-- Installing remotes ...                        OK [installed binary and cached in 0.18s]
-Successfully installed 1 package in 0.2 seconds.</code></pre>
-</div>
 
 </div>
 </section><section><h2 class="section-heading" id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
@@ -593,8 +430,15 @@ between hospitals, trusts and even countries.</p>
 <div class="section level3">
 <h3 id="omop-cdm-diagram">OMOP CDM Diagram<a class="anchor" aria-label="anchor" href="#omop-cdm-diagram"></a>
 </h3>
-<figure><img src="fig/OMOP-CDM.png" alt="The OMOP Common Data Model" class="figure mx-auto d-block"><div class="figcaption">The OMOP Common Data Model</div>
-</figure><div id="test-yourself" class="callout challenge">
+<figure><img src="fig/OMOP-CDM.png" alt="A diagram showing the tables that occur in the OMOP-CDM , how they relate to each other and standard vocabularies." class="figure mx-auto d-block"><div class="figcaption">The OMOP Common Data Model</div>
+</figure><p>OMOP CDM stands for the Observational Medical Outcomes Partnership
+Common Data Model. You don’t really need to remember what OMOP stands
+for. Remembering that CDM stands for Common Data Model can help you
+remember that it is a data standard that can be applied to different
+data sources to create data in a ‘Common’ (same) format. The table
+diagram will look confusing to start with but you can use data in the
+OMOP CDM without needing to understand (or populate) all 37 tables.</p>
+<div id="test-yourself" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
@@ -615,7 +459,7 @@ hospital?</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <ol style="list-style-type: decimal">
 <li><p>The <strong>Person</strong> table</p></li>
@@ -625,11 +469,43 @@ hospital?</li>
 </div>
 </div>
 </div>
+<p>There are a handful of core tables and columns that contain key
+information about a patient’s journey in the hospital. These are 7
+tables to get you started :</p>
+<ul>
+<li>
+<a href="https://ohdsi.github.io/CommonDataModel/cdm54.html#person" class="external-link">person</a>
+uniquely identifies each person or patient, and some demographic
+information. This is the central table that all other tables relate
+to.</li>
+<li>
+<a href="https://ohdsi.github.io/CommonDataModel/cdm54.html#condition_occurrence" class="external-link">condition_occurrence</a>
+records relating to a Person suggesting the presence of a medical
+condition.</li>
+<li>
+<a href="https://ohdsi.github.io/CommonDataModel/cdm54.html#drug_exposure" class="external-link">drug_exposure</a>
+records about exposure of a patient to a drug.</li>
+<li>
+<a href="https://ohdsi.github.io/CommonDataModel/cdm54.html#procedure_occurrence" class="external-link">procedure_occurrence</a>
+activities carried out by a healthcare provider on the patient with a
+diagnostic or therapeutic purpose.</li>
+<li>
+<a href="https://ohdsi.github.io/CommonDataModel/cdm54.html#measurement" class="external-link">measurement</a>
+numerical or categorical values obtained through standardized
+examination of a Person or Person’s sample.</li>
+<li>
+<a href="https://ohdsi.github.io/CommonDataModel/cdm54.html#observation" class="external-link">observation</a>
+clinical facts about a Person obtained in the context of examination,
+questioning or a procedure.</li>
+<li>
+<a href="https://ohdsi.github.io/CommonDataModel/cdm54.html#visit_occurrence" class="external-link">visit_occurrence</a>
+records of times where Persons engage with the healthcare system.</li>
+</ul>
 </div>
 </section><section><h2 class="section-heading" id="why-use-omop">Why use OMOP?<a class="anchor" aria-label="anchor" href="#why-use-omop"></a>
 </h2>
 <hr class="half-width">
-<figure><img src="fig/Why-CDM.png" alt="Why use the OMOP-CDM" class="figure mx-auto d-block"><div class="figcaption">Why use the OMOP-CDM</div>
+<figure><img src="fig/Why-CDM.png" alt="A diagram showing that different sources of data, transformed to OMOP, can then be used by multiple analysis tools." class="figure mx-auto d-block"><div class="figcaption">Why use the OMOP-CDM</div>
 </figure><p>Once a database has been converted to the OMOP CDM, evidence can be
 generated using standardized analytics tools. This means that different
 tools can also be shared and reused. So using OMOP can help make your
@@ -663,12 +539,12 @@ same name.</p>
 </div>
 </nav><div id="nav-tabContent-2" class="tab-content">
 <div id="nav-tabpanel-2-Experienced" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-2-Experienced">
-<p>Use the function read.csv.</p>
+<p>Use the function read_csv() function from the readr package.</p>
 </div>
 <div id="nav-tabpanel-2-Needareminder" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-Needareminder">
-<p>The expression <code>read.csv(...)</code> is a <a href="reference.html#function-call">function call</a> that asks R to run
-the function <code>read.csv</code>.</p>
-<p><code>read.csv</code> has two <a href="reference.html#argument">arguments</a>: the name of the file we
+<p>The expression <code>read_csv(...)</code> is a <a href="reference.html#function-call">function call</a> that asks R to run
+the function <code>read_csv</code>.</p>
+<p><code>read_csv</code> has two <a href="reference.html#argument">arguments</a>: the name of the file we
 want to read, and whether the first line of the file contains names for
 the columns of data.</p>
 <p>The filename needs to be a character string (or <a href="reference.html#string">string</a> for short), so we put it in
@@ -698,15 +574,16 @@ same name.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
-<div class="codewrapper sourceCode" id="cb5">
+<div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">person</span> <span class="op">&lt;-</span> <span class="fu">read.csv</span><span class="op">(</span>file <span class="op">=</span> <span class="st">"data/person.csv"</span>, header <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="va">condition_occurrence</span> <span class="op">&lt;-</span> <span class="fu">read.csv</span><span class="op">(</span>file <span class="op">=</span> <span class="st">"data/condition_occurrence.csv"</span>, header <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="va">drug_exposure</span> <span class="op">&lt;-</span> <span class="fu">read.csv</span><span class="op">(</span>file <span class="op">=</span> <span class="st">"data/drug_exposure.csv"</span>, header <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre>
+<code class="sourceCode R"><span><span class="kw">library</span><span class="op">(</span><span class="va">readr</span><span class="op">)</span></span>
+<span><span class="va">person</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span>file <span class="op">=</span> <span class="st">"data/person.csv"</span><span class="op">)</span></span>
+<span><span class="va">condition_occurrence</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span>file <span class="op">=</span> <span class="st">"data/condition_occurrence.csv"</span><span class="op">)</span></span>
+<span><span class="va">drug_exposure</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span>file <span class="op">=</span> <span class="st">"data/drug_exposure.csv"</span><span class="op">)</span></span></code></pre>
 </div>
 </div>
 </div>
@@ -747,56 +624,12 @@ they were wheezing?</li>
 </div>
 </div>
 </div>
-<div id="accordionHint1" class="accordion challenge-accordion accordion-flush">
-<div class="accordion-item">
-<button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
-  <h4 class="accordion-header" id="headingHint1"> Give me a hint </h4>
-</button>
-<div id="collapseHint1" class="accordion-collapse collapse" data-bs-parent="#accordionHint1" aria-labelledby="headingHint1">
-<div class="accordion-body">
-<div class="codewrapper sourceCode" id="cb6">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">person_named</span> <span class="op">&lt;-</span> <span class="va">person</span> <span class="op">|&gt;</span> <span class="fu">omop_join_name_all</span><span class="op">(</span><span class="op">)</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="error" tabindex="0"><code>Error in omop_join_name_all(person): could not find function "omop_join_name_all"</code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb8">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">condition_occurrence_named</span> <span class="op">&lt;-</span> <span class="va">condition_occurrence</span> <span class="op">|&gt;</span> <span class="fu">omop_join_name_all</span><span class="op">(</span><span class="op">)</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="error" tabindex="0"><code>Error in omop_join_name_all(condition_occurrence): could not find function "omop_join_name_all"</code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb10">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">drug_exposure_named</span> <span class="op">&lt;-</span> <span class="va">person</span> <span class="op">|&gt;</span> <span class="fu">omop_join_name_all</span><span class="op">(</span><span class="op">)</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="error" tabindex="0"><code>Error in omop_join_name_all(person): could not find function "omop_join_name_all"</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
 <div id="accordionSolution3" class="accordion challenge-accordion accordion-flush">
 <div class="accordion-item">
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <ol style="list-style-type: decimal">
 <li>25 (or 24 if he hasn’t had his birthday this year)</li>
@@ -824,18 +657,19 @@ the different conditions suffered by each person.</p>
 <p>[R documentation - join][join]</p>
 <p>I am going to use a left join because I want a record of every person
 and the conditions they may have.</p>
-<div class="codewrapper sourceCode" id="cb12">
+<div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">person_condition</span> <span class="op">&lt;-</span> </span>
+<code class="sourceCode R"><span><span class="kw">library</span><span class="op">(</span><span class="va">dplyr</span><span class="op">)</span></span>
+<span><span class="va">person_condition</span> <span class="op">&lt;-</span> </span>
 <span>  <span class="va">person_named</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">left_join</span><span class="op">(</span><span class="va">condition_occurrence_named</span>, by <span class="op">=</span> <span class="fu">join_by</span><span class="op">(</span><span class="va">person_id</span><span class="op">)</span> <span class="op">)</span></span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="error" tabindex="0"><code>Error in left_join(person_named, condition_occurrence_named, by = join_by(person_id)): could not find function "left_join"</code></pre>
+<pre class="error" tabindex="0"><code>Error: object 'person_named' not found</code></pre>
 </div>
 <p>This produces a new table with all the column names from both tables
 and six rows.</p>
@@ -884,9 +718,9 @@ count(a, b)</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
 <div class="accordion-body">
-<div class="codewrapper sourceCode" id="cb14">
+<div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -895,36 +729,36 @@ count(a, b)</p>
 <div class="codewrapper">
 <h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="error" tabindex="0"><code>Error in count(person_condition, gender_concept_name, condition_concept_name): could not find function "count"</code></pre>
+<pre class="error" tabindex="0"><code>Error: object 'person_condition' not found</code></pre>
 </div>
 </div>
 </div>
 </div>
 </div>
 <p>This produces a table:</p>
-<figure><img src="fig/condition_count.png" alt="A table of the condition counts" class="figure mx-auto d-block"><div class="figcaption">A table of the condition counts</div>
+<figure><img src="fig/condition_count.png" alt="A table showing the different conditions listed with the n.umber of males and females suffering from them" class="figure mx-auto d-block"><div class="figcaption">A table of the condition counts</div>
 </figure><div class="tabs">
-<nav><div id="nav-tab-4" class="nav nav-tabs" role="tablist">
-<button class="nav-link active" id="nav-tab-4-Happy-ish" name="Happy-ish" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-4-Happy-ish" type="button" role="tab" aria-controls="nav-tabpanel-4-Happy-ish" aria-selected="true">
-  <h3 class="tab-header" id="nav-tab-heading-4-Happy-ish">
+<nav><div id="nav-tab-1" class="nav nav-tabs" role="tablist">
+<button class="nav-link active" id="nav-tab-1-1" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-1-1" type="button" role="tab" aria-controls="nav-tabpanel-1-1" aria-selected="true">
+  <h3 class="tab-header" id="nav-tab-heading-1-1">
   Happy-ish
   </h3>
 </button>
-<button class="nav-link" id="nav-tab-4-Confident" name="Confident" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-4-Confident" type="button" role="tab" aria-controls="nav-tabpanel-4-Confident" aria-selected="false">
-  <h3 class="tab-header" id="nav-tab-heading-4-Confident">
+<button class="nav-link" id="nav-tab-1-2" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-1-2" type="button" role="tab" aria-controls="nav-tabpanel-1-2" aria-selected="false">
+  <h3 class="tab-header" id="nav-tab-heading-1-2">
   Confident
   </h3>
 </button>
 </div>
-</nav><div id="nav-tabContent-4" class="tab-content">
-<div id="nav-tabpanel-4-Experienced" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-4-Experienced">
+</nav><div id="nav-tabContent-1" class="tab-content">
+<div id="nav-tabpanel-1-1" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-1-1">
 <p>Solve the questions in Who’s who programmatically.</p>
 </div>
-<div id="nav-tabpanel-4-Needareminder" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-4-Needareminder">
+<div id="nav-tabpanel-1-2" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-2">
 <p>The CDMConnector package allows connection to an OMOP Common Data
 Model in a database it also contains synthetic example data that can be
 used to demonstrate querying the data</p>
-<div class="codewrapper sourceCode" id="cb16">
+<div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -939,9 +773,26 @@ These packages will be installed into "~/work/omop-carpentries/omop-carpentries/
 
 # Installing packages --------------------------------------------------------
 - Installing CDMConnector ...                   OK [linked from cache]
-Successfully installed 1 package in 5.3 milliseconds.</code></pre>
+Successfully installed 1 package in 4.7 milliseconds.</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb18">
+<div class="codewrapper sourceCode" id="cb9">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">install.packages</span><span class="op">(</span><span class="st">"duckdb"</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>The following package(s) will be installed:
+- duckdb [1.3.2]
+These packages will be installed into "~/work/omop-carpentries/omop-carpentries/renv/profiles/lesson-requirements/renv/library/linux-ubuntu-jammy/R-4.5/x86_64-pc-linux-gnu".
+
+# Installing packages --------------------------------------------------------
+- Installing duckdb ...                         OK [linked from cache]
+Successfully installed 1 package in 5.2 milliseconds.</code></pre>
+</div>
+<div class="codewrapper sourceCode" id="cb11">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -951,7 +802,7 @@ Successfully installed 1 package in 5.3 milliseconds.</code></pre>
 called GiBleed contains 2,600 patients representing a gastrointestinal
 bleeding study</p>
 <p>Download these data</p>
-<div class="codewrapper sourceCode" id="cb19">
+<div class="codewrapper sourceCode" id="cb12">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -961,26 +812,16 @@ bleeding study</p>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>ℹ `EUNOMIA_DATA_FOLDER` set to: '/tmp/Rtmp0TTzPR'.</code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
 <pre class="output" tabindex="0"><code>
 Download completed!</code></pre>
 </div>
 <p>We can use the DBI &amp; duckdb packages to connect to this local
 database</p>
-<div class="codewrapper sourceCode" id="cb22">
+<div class="codewrapper sourceCode" id="cb14">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">db</span> <span class="op">&lt;-</span> <span class="fu">DBI</span><span class="fu">::</span><span class="fu">dbConnect</span><span class="op">(</span><span class="fu">duckdb</span><span class="fu">::</span><span class="fu">duckdb</span><span class="op">(</span><span class="op">)</span>, dbdir <span class="op">=</span> <span class="fu">CDMConnector</span><span class="fu">::</span><span class="fu">eunomiaDir</span><span class="op">(</span>datasetName <span class="op">=</span> <span class="va">dbName</span><span class="op">)</span><span class="op">)</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>Creating CDM database /tmp/Rtmp0TTzPR/GiBleed_5.3.zip</code></pre>
 </div>
 <p>Databases are organised into structures called schemas usually in an
 omop database we would have two schemas 1. cdm schema : containing the
@@ -990,7 +831,7 @@ place where tables can be written</p>
 we can use for both.</p>
 <p>This is how we make a CDM reference from the database connection we
 made above.</p>
-<div class="codewrapper sourceCode" id="cb24">
+<div class="codewrapper sourceCode" id="cb15">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1001,54 +842,18 @@ object. Rather it is a reference that allows us to query the data from
 the database.</p>
 <p>Typing <code>cdm</code> will give a summary of the tables in the
 database</p>
-<div class="codewrapper sourceCode" id="cb25">
+<div class="codewrapper sourceCode" id="cb16">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cdm</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>── # OMOP CDM reference (duckdb) of Synthea ────────────────────────────────────</code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>• omop tables: person, observation_period, visit_occurrence, visit_detail,
-condition_occurrence, drug_exposure, procedure_occurrence, device_exposure,
-measurement, observation, death, note, note_nlp, specimen, fact_relationship,
-location, care_site, provider, payer_plan_period, cost, drug_era, dose_era,
-condition_era, metadata, cdm_source, concept, vocabulary, domain,
-concept_class, concept_relationship, relationship, concept_synonym,
-concept_ancestor, source_to_concept_map, drug_strength</code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>• cohort tables: -</code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>• achilles tables: -</code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>• other tables: -</code></pre>
 </div>
 <p>You may recognise table names from the simple examples. earlier
 e.g. <code>person</code>, <code>condition_occurrence</code> and
 <code>drug_exposure</code></p>
 <p>You can get a glimpse of the data in each table with cdm$table_name
 e.g.</p>
-<div class="codewrapper sourceCode" id="cb32">
+<div class="codewrapper sourceCode" id="cb17">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1058,7 +863,7 @@ e.g.</p>
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code># Source:   table&lt;person&gt; [?? x 18]
-# Database: DuckDB v1.3.1 [unknown@Linux 6.8.0-1029-azure:R 4.5.1//tmp/Rtmp0TTzPR/file2d9dc1cc992.duckdb]
+# Database: DuckDB v1.3.2 [unknown@Linux 6.8.0-1030-azure:R 4.5.1//tmp/RtmphTChxO/file248830b376bf.duckdb]
    person_id gender_concept_id year_of_birth month_of_birth day_of_birth
        &lt;int&gt;             &lt;int&gt;         &lt;int&gt;          &lt;int&gt;        &lt;int&gt;
  1         6              8532          1963             12           31
@@ -1079,7 +884,7 @@ e.g.</p>
 #   race_source_concept_id &lt;int&gt;, ethnicity_source_value &lt;chr&gt;,
 #   ethnicity_source_concept_id &lt;int&gt;</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb34">
+<div class="codewrapper sourceCode" id="cb19">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1089,7 +894,7 @@ e.g.</p>
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code># Source:   table&lt;condition_occurrence&gt; [?? x 16]
-# Database: DuckDB v1.3.1 [unknown@Linux 6.8.0-1029-azure:R 4.5.1//tmp/Rtmp0TTzPR/file2d9dc1cc992.duckdb]
+# Database: DuckDB v1.3.2 [unknown@Linux 6.8.0-1030-azure:R 4.5.1//tmp/RtmphTChxO/file248830b376bf.duckdb]
    condition_occurrence_id person_id condition_concept_id condition_start_date
                      &lt;int&gt;     &lt;int&gt;                &lt;int&gt; &lt;date&gt;
  1                    4483       263              4112343 2015-10-02
@@ -1112,7 +917,7 @@ e.g.</p>
 </div>
 <p>The names of the columns in each table can be seen with
 <code>colnames()</code></p>
-<div class="codewrapper sourceCode" id="cb36">
+<div class="codewrapper sourceCode" id="cb21">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1132,36 +937,16 @@ e.g.</p>
 </div>
 <p>If you are familiar with commands from the dplyr and tidyverse
 packages these can be used on the cdm reference</p>
-<div class="codewrapper sourceCode" id="cb38">
+<div class="codewrapper sourceCode" id="cb23">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">library</span><span class="op">(</span><span class="va">dplyr</span><span class="op">)</span></span></code></pre>
 </div>
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>
-Attaching package: 'dplyr'</code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>The following objects are masked from 'package:stats':
-
-    filter, lag</code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>The following objects are masked from 'package:base':
-
-    intersect, setdiff, setequal, union</code></pre>
-</div>
 <p>For example this code counts the number of records per condition.
 Using collect() at the end performs the final database query and brings
 the data into R.</p>
-<div class="codewrapper sourceCode" id="cb42">
+<div class="codewrapper sourceCode" id="cb24">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1189,12 +974,11 @@ the data into R.</p>
 </div>
 <p>The command above gives us a list of concept ids. To get the names of
 the conditions you can use the omopcept package as before.</p>
-<p>fixme</p>
 <p>Alternatively using CDMConnector also gives us access to a table
 called <code>concept</code> that can be used to join on the concept
 names. NOTE: Because of the way <code>join</code> works, it is easier to
 <code>arrange</code> the table after it is collected.</p>
-<div class="codewrapper sourceCode" id="cb44">
+<div class="codewrapper sourceCode" id="cb26">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1226,15 +1010,15 @@ names. NOTE: Because of the way <code>join</code> works, it is easier to
 </div>
 </div>
 </div>
-<div id="challenge5" class="callout challenge">
+<div id="for-the-confident" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
-<div class="callout-inner">
-<h3 class="callout-title">Challenge</h3>
+<div id="for-the-confident" class="callout-inner">
+<h3 class="callout-title">For the Confident</h3>
 <div class="callout-content">
-<p>For the Confident Using the “GiBleed” database work out the number of
-male and female patients with each condition_concept_id</p>
+<p>Using the “GiBleed” database work out the number of male and female
+patients with each condition_concept_id</p>
 </div>
 </div>
 </div>
@@ -1243,9 +1027,9 @@ male and female patients with each condition_concept_id</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution5" aria-expanded="false" aria-controls="collapseSolution5">
   <h4 class="accordion-header" id="headingSolution5"> Show me the solution </h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
 <div class="accordion-body">
-<p>to be done</p>
+
 </div>
 </div>
 </div>
@@ -1266,7 +1050,7 @@ male and female patients with each condition_concept_id</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution6" aria-expanded="false" aria-controls="collapseSolution6">
   <h4 class="accordion-header" id="headingSolution6"> Show me the solution </h4>
 </button>
-<div id="collapseSolution6" class="accordion-collapse collapse" data-bs-parent="#accordionSolution6" aria-labelledby="headingSolution6">
+<div id="collapseSolution6" class="accordion-collapse collapse" aria-labelledby="headingSolution6" data-bs-parent="#accordionSolution6">
 <div class="accordion-body">
 <p>to be done</p>
 </div>
@@ -1342,8 +1126,8 @@ any links that you are not going to use.
   "url": "https://SAFEHR-data.github.io/omop-carpentries/aio.html",
   "identifier": "https://SAFEHR-data.github.io/omop-carpentries/aio.html",
   "dateCreated": "2025-06-18",
-  "dateModified": "2025-07-08",
-  "datePublished": "2025-07-08"
+  "dateModified": "2025-07-11",
+  "datePublished": "2025-07-11"
 }
 
   </script><script>
