@@ -11,7 +11,7 @@
   "Packages": {
     "CDMConnector": {
       "Package": "CDMConnector",
-      "Version": "2.1.0",
+      "Version": "2.1.1",
       "Source": "Repository",
       "Title": "Connect to an OMOP Common Data Model",
       "Authors@R": "c( person(\"Adam\", \"Black\", , \"black@ohdsi.org\", role = c(\"aut\", \"cre\"), comment = c(ORCID = \"0000-0001-5576-8701\")), person(\"Artem\", \"Gorbachev\", , \"artem.gorbachev@odysseusinc.com\", role = \"aut\"), person(\"Edward\", \"Burn\", , \"edward.burn@ndorms.ox.ac.uk\", role = \"aut\"), person(\"Marti\", \"Catala Sabate\", , \"marti.catalasabate@ndorms.ox.ac.uk\", role = \"aut\"), person(\"Ioanna\", \"Nika\", , \"i.nika@darwin-eu.org\", role = \"aut\") )",
@@ -819,7 +819,7 @@
     },
     "duckdb": {
       "Package": "duckdb",
-      "Version": "1.3.1",
+      "Version": "1.3.2",
       "Source": "Repository",
       "Title": "DBI Package for the DuckDB Database Management System",
       "Authors@R": "c( person(\"Hannes\", \"Mühleisen\", , \"hannes@cwi.nl\", role = \"aut\", comment = c(ORCID = \"0000-0001-8552-0029\")), person(\"Mark\", \"Raasveldt\", , \"mark.raasveldt@cwi.nl\", role = \"aut\", comment = c(ORCID = \"0000-0001-5005-6844\")), person(\"Kirill\", \"Müller\", , \"kirill@cynkra.com\", role = \"cre\", comment = c(ORCID = \"0000-0002-1416-3412\")), person(\"Stichting DuckDB Foundation\", role = \"cph\"), person(\"Apache Software Foundation\", role = \"cph\"), person(\"PostgreSQL Global Development Group\", role = \"cph\"), person(\"The Regents of the University of California\", role = \"cph\"), person(\"Cameron Desrochers\", role = \"cph\"), person(\"Victor Zverovich\", role = \"cph\"), person(\"RAD Game Tools\", role = \"cph\"), person(\"Valve Software\", role = \"cph\"), person(\"Rich Geldreich\", role = \"cph\"), person(\"Tenacious Software LLC\", role = \"cph\"), person(\"The RE2 Authors\", role = \"cph\"), person(\"Google Inc.\", role = \"cph\"), person(\"Facebook Inc.\", role = \"cph\"), person(\"Steven G. Johnson\", role = \"cph\"), person(\"Jiahao Chen\", role = \"cph\"), person(\"Tony Kelman\", role = \"cph\"), person(\"Jonas Fonseca\", role = \"cph\"), person(\"Lukas Fittl\", role = \"cph\"), person(\"Salvatore Sanfilippo\", role = \"cph\"), person(\"Art.sy, Inc.\", role = \"cph\"), person(\"Oran Agra\", role = \"cph\"), person(\"Redis Labs, Inc.\", role = \"cph\"), person(\"Melissa O'Neill\", role = \"cph\"), person(\"PCG Project contributors\", role = \"cph\") )",
@@ -1476,10 +1476,8 @@
       "URL": "https://github.com/SAFEHR-data/omopcept",
       "BugReports": "https://github.com/SAFEHR-data/omopcept/issues",
       "Depends": [
-        "R (>= 3.5.0)"
+        "R (>= 4.1.0)"
       ],
-      "LazyData": "true",
-      "LazyDataCompression": "xz",
       "Imports": [
         "dplyr",
         "rlang",
@@ -1503,14 +1501,15 @@
       ],
       "VignetteBuilder": "knitr",
       "Config/testthat/edition": "3",
-      "Author": "Andy South [aut, cre] (ORCID: <https://orcid.org/0000-0003-4051-6135>)",
-      "Maintainer": "Andy South <southandy@gmail.com>",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
-      "RemoteUsername": "SAFEHR-data",
       "RemoteRepo": "omopcept",
-      "RemoteRef": "master",
-      "RemoteSha": "c484d581fdaa9b74271064e24e22dfb570af515b"
+      "RemoteUsername": "SAFEHR-data",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "c484d581fdaa9b74271064e24e22dfb570af515b",
+      "NeedsCompilation": "no",
+      "Author": "Andy South [aut, cre] (ORCID: <https://orcid.org/0000-0003-4051-6135>)",
+      "Maintainer": "Andy South <southandy@gmail.com>"
     },
     "omopgenerics": {
       "Package": "omopgenerics",
@@ -1705,16 +1704,16 @@
     },
     "purrr": {
       "Package": "purrr",
-      "Version": "1.0.4",
+      "Version": "1.1.0",
       "Source": "Repository",
       "Title": "Functional Programming Tools",
-      "Authors@R": "c( person(\"Hadley\", \"Wickham\", , \"hadley@posit.co\", role = c(\"aut\", \"cre\"), comment = c(ORCID = \"0000-0003-4757-117X\")), person(\"Lionel\", \"Henry\", , \"lionel@posit.co\", role = \"aut\"), person(\"Posit Software, PBC\", role = c(\"cph\", \"fnd\"), comment = c(ROR = \"03wc8by49\")) )",
+      "Authors@R": "c( person(\"Hadley\", \"Wickham\", , \"hadley@posit.co\", role = c(\"aut\", \"cre\"), comment = c(ORCID = \"0000-0003-4757-117X\")), person(\"Lionel\", \"Henry\", , \"lionel@posit.co\", role = \"aut\"), person(\"Posit Software, PBC\", role = c(\"cph\", \"fnd\"), comment = c(ROR = \"https://ror.org/03wc8by49\")) )",
       "Description": "A complete and consistent functional programming toolkit for R.",
       "License": "MIT + file LICENSE",
       "URL": "https://purrr.tidyverse.org/, https://github.com/tidyverse/purrr",
       "BugReports": "https://github.com/tidyverse/purrr/issues",
       "Depends": [
-        "R (>= 4.0)"
+        "R (>= 4.1)"
       ],
       "Imports": [
         "cli (>= 3.6.1)",
@@ -1724,11 +1723,13 @@
         "vctrs (>= 0.6.3)"
       ],
       "Suggests": [
+        "carrier (>= 0.2.0)",
         "covr",
         "dplyr (>= 0.7.8)",
         "httr",
         "knitr",
         "lubridate",
+        "mirai (>= 2.4.0)",
         "rmarkdown",
         "testthat (>= 3.0.0)",
         "tibble",
@@ -1746,7 +1747,7 @@
       "Encoding": "UTF-8",
       "RoxygenNote": "7.3.2",
       "NeedsCompilation": "yes",
-      "Author": "Hadley Wickham [aut, cre] (<https://orcid.org/0000-0003-4757-117X>), Lionel Henry [aut], Posit Software, PBC [cph, fnd] (03wc8by49)",
+      "Author": "Hadley Wickham [aut, cre] (ORCID: <https://orcid.org/0000-0003-4757-117X>), Lionel Henry [aut], Posit Software, PBC [cph, fnd] (ROR: <https://ror.org/03wc8by49>)",
       "Maintainer": "Hadley Wickham <hadley@posit.co>",
       "Repository": "CRAN"
     },
@@ -1833,6 +1834,53 @@
       "NeedsCompilation": "yes",
       "Author": "Hadley Wickham [aut], Jim Hester [aut], Romain Francois [ctb], Jennifer Bryan [aut, cre] (<https://orcid.org/0000-0002-6983-2759>), Shelby Bearrows [ctb], Posit Software, PBC [cph, fnd], https://github.com/mandreyel/ [cph] (mio library), Jukka Jylänki [ctb, cph] (grisu3 implementation), Mikkel Jørgensen [ctb, cph] (grisu3 implementation)",
       "Maintainer": "Jennifer Bryan <jenny@posit.co>",
+      "Repository": "CRAN"
+    },
+    "remotes": {
+      "Package": "remotes",
+      "Version": "2.5.0",
+      "Source": "Repository",
+      "Title": "R Package Installation from Remote Repositories, Including 'GitHub'",
+      "Authors@R": "c( person(\"Gábor\", \"Csárdi\", , \"csardi.gabor@gmail.com\", role = c(\"aut\", \"cre\")), person(\"Jim\", \"Hester\", role = \"aut\"), person(\"Hadley\", \"Wickham\", role = \"aut\"), person(\"Winston\", \"Chang\", role = \"aut\"), person(\"Martin\", \"Morgan\", role = \"aut\"), person(\"Dan\", \"Tenenbaum\", role = \"aut\"), person(\"Posit Software, PBC\", role = c(\"cph\", \"fnd\")), person(\"Ascent Digital Services\", role = \"cph\") )",
+      "Description": "Download and install R packages stored in 'GitHub', 'GitLab', 'Bitbucket', 'Bioconductor', or plain 'subversion' or 'git' repositories.  This package provides the 'install_*' functions in 'devtools'. Indeed most of the code was copied over from 'devtools'.",
+      "License": "MIT + file LICENSE",
+      "URL": "https://remotes.r-lib.org, https://github.com/r-lib/remotes#readme",
+      "BugReports": "https://github.com/r-lib/remotes/issues",
+      "Depends": [
+        "R (>= 3.0.0)"
+      ],
+      "Imports": [
+        "methods",
+        "stats",
+        "tools",
+        "utils"
+      ],
+      "Suggests": [
+        "brew",
+        "callr",
+        "codetools",
+        "covr",
+        "curl",
+        "git2r (>= 0.23.0)",
+        "knitr",
+        "mockery",
+        "pingr",
+        "pkgbuild (>= 1.0.1)",
+        "rmarkdown",
+        "rprojroot",
+        "testthat (>= 3.0.0)",
+        "webfakes",
+        "withr"
+      ],
+      "VignetteBuilder": "knitr",
+      "Config/Needs/website": "tidyverse/tidytemplate",
+      "Config/testthat/edition": "3",
+      "Encoding": "UTF-8",
+      "RoxygenNote": "7.2.3",
+      "SystemRequirements": "Subversion for install_svn, git for install_git",
+      "NeedsCompilation": "no",
+      "Author": "Gábor Csárdi [aut, cre], Jim Hester [aut], Hadley Wickham [aut], Winston Chang [aut], Martin Morgan [aut], Dan Tenenbaum [aut], Posit Software, PBC [cph, fnd], Ascent Digital Services [cph]",
+      "Maintainer": "Gábor Csárdi <csardi.gabor@gmail.com>",
       "Repository": "CRAN"
     },
     "renv": {
