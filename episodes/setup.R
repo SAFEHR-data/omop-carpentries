@@ -1,20 +1,23 @@
-install.packages("dplyr", verbose=FALSE)
+install.packages("dplyr")
 
-install.packages("readr", verbose=FALSE)
+install.packages("readr")
 
-install.packages("purrr", verbose=FALSE)
+install.packages("purrr")
 
-install.packages("CDMConnector", verbose=FALSE)
+install.packages("CDMConnector")
 
-install.packages("duckdb", verbose=FALSE)
+install.packages("duckdb")
 
-install.packages("lubridate", verbose=FALSE)
+install.packages("lubridate")
 
-install.packages("renv", verbose=FALSE)
+install.packages("renv")
 
-install.packages("remotes", verbose=FALSE)
+install.packages("remotes")
 
-remotes::install_github("SAFEHR-data/omopcept", force = TRUE, , verbose=FALSE)
+remotes::install_github("SAFEHR-data/omopcept", force = TRUE)
 
+renv::activate()
+
+renv::restore()
 
 library(omopcept)

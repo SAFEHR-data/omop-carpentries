@@ -3,7 +3,7 @@ name: "Pull Request Preflight Check"
 on:
   pull_request_target:
     branches:
-      ["festival"]
+      ["main"]
     types:
       ["opened", "synchronize", "reopened"]
 
