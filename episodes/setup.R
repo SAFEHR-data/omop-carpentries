@@ -16,8 +16,6 @@ install.packages("remotes")
 
 remotes::install_github("SAFEHR-data/omopcept", force = TRUE)
 
-renv::activate()
 
-renv::restore()
 
 library(omopcept)
