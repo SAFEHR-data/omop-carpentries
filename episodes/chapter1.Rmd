@@ -38,6 +38,7 @@ you, but also remembers its location (allowing you to quickly navigate to it).
 The interface also (optionally) preserves custom settings and open files to
 make it easier to resume work after a break.
 
+
 ### Install the required packages
 
 You will need the `dplyr`, `remotes` and `readr` packages from CRAN (the official package repository).
@@ -148,9 +149,11 @@ The expression `read.csv(...)` is a [function call](../learners/reference.md#fun
 
 The filename needs to be a character string (or [string](../learners/reference.md#string) for short), so we put it in quotes. Assigning the second argument, `header`, to be `FALSE` indicates that the data file does not have column headers.  
 :::::::::::::::::::::::::::::::::::::::::::::::
+
 ::::::::::::::::::::::::::::::::::::: instructor
 I have used `read.csv` because using the more up to date package caused issues with types, which I would have gone into if it hadn't then caused issues with joining and I ran out of time
 :::::::::::::::::::::::::::::::::::::::::::::::
+
 ::::::::::::::::::::::::::::::::::::: challenge 
 ## Read the Data
 
@@ -178,6 +181,10 @@ We have developed a package that makes it very easy to add concept names to the 
 
 You will need the function omopcept::omop_join_name_all(). This will look up the concept_id in the main table of concepts and add a column for the name of the concept associated with that id.
 
+::::::::::::::::::::::::::::::::::::: instructor
+I have not been able to use an r chunk as the github actions refuses to build with any references to `omopcept` even though I have included it in renv_lock that is uploaded into the repo
+:::::::::::::::::::::::::::::::::::::::::::::::
+
 ::::::::::::::::::::::::::::::::::::: challenge 
 
 ## Who's who?
@@ -190,8 +197,11 @@ By creating tables that also have the name of the concepts answer the following 
 4. Give a description of the patient who received Amoxicillin because they were wheezing?
 
 :::::::::::::::::::::::: hint 
-```{r, warning = FALSE, message = FALSE}
-remotes::install_github("SAFEHR-data/omopcept", force = TRUE)
+Use the following r code:
+
+# You should have already done this
+remotes::install_github("SAFEHR-data/omopcept")
+```{r}
 library(omopcept)
 person_named <- person |> omop_join_name_all()
 condition_occurrence_named <- condition_occurrence |> omop_join_name_all()
@@ -217,7 +227,6 @@ We established when looking at the diagram that the person table was the key to 
 
 So we can join two of the tables together to get information about the different conditions suffered by each person.
 
-[R documentation - join][join]
 
 I am going to use a left join because I want a record of every person and the conditions they may have.
 
@@ -333,6 +342,10 @@ cdm$condition_occurrence |>
 
 The command above gives us a list of concept ids. To get the names of the conditions you can use the omopcept package as before.
 
+cdm$condition_occurrence |> 
+  count(condition_concept_id, sort=TRUE) |> 
+  collect() |> 
+  omop_join_name_all()
 
 
 Alternatively using CDMConnector also gives us access to a table called `concept` that can be used to join on the concept names. 
@@ -354,18 +367,126 @@ cdm$condition_occurrence |>
 ## For the Confident
 Using the "GiBleed" database work out the number of male and female patients with each condition_concept_id
 
+:::::::::::::::::::::::: solution
+cdm$person |> 
+  left_join( cdm$condition_occurrence, by = join_by(person_id) ) |> 
+  group_by(condition_concept_id, gender_concept_id) |>
+  summarise(num_persons = n_distinct(person_id)) |>
+  collect() |>
+  ungroup() |> 
+  omopcept::omop_join_name_all() |> 
+  #remove some columns to make display clearer
+  select(-condition_concept_id, -gender_concept_id) |> 
+  arrange(condition_concept_name)  
+
+:::::::::::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::::::::::::::::::::::
+Solutions for working out Who's who programmatically.
+
+::::::::::::::::::::::::::::::::::::: challenge
+# How old is the black gentleman? 
+
 :::::::::::::::::::::::: solution 
 
+```{r}
+library(dplyr)
+
+year_of_birth <- person_named %>%
+  filter(grepl("black", race_concept_name, ignore.case = TRUE)) %>%
+  select(year_of_birth)
+
+age = 2025 - year_of_birth
+
+# To view the results
+print(age)
+```
 :::::::::::::::::::::::::::::::::::::::::::::::
 :::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: challenge 
-Solutions for working out Who's who programmatically.
+# In which month was an unspecified fever prevalent in the hospital?
+::::::::::::::::::::::::::::::::::: hint
+The lubricatY
+e package has a function
+```{r}
+ month = month(ymd("2025-01-30"), label = TRUE)
+```
+which returns month = Jan
+:::::::::::::::::::::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::: hint
+The dyplr  package has a function that will allow you to add columns to a table
+```{r}
+ new_person_table = mutate(person, age = 2025-year_of_birth)
+```
+which as a column called age to the person table
+:::::::::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::: solution 
+```{r}
+library(dplyr)
+library(lubridate)
+
+# Assuming your table is named "condition_table"
+fever_months <- condition_occurrence_named %>%
+  # Filter for rows where the condition name contains "fever"
+  filter(grepl("fever", condition_concept_name, ignore.case = TRUE)) %>%
+  # Extract month from the condition_start_date
+  mutate(month = month(condition_start_date, label = TRUE)) %>%
+  # Select just the month column for the results
+  select(month) %>%
+  # Count occurrences by month
+  group_by(month) %>%
+  summarise(count = n()) %>%
+  # Sort by count (descending)
+  arrange(desc(count))
+
+# View the results
+print(fever_months)
+
+```
+:::::::::::::::::::::::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::: 
+
+::::::::::::::::::::::::::::::::::::: challenge
+# What was the ethnicity of the patient not affected by this fever?
 
 :::::::::::::::::::::::: solution 
-to be done
+
+```{r}
+library(dplyr)
+
+year_of_birth <- person_named %>%
+  filter(grepl("black", race_concept_name, ignore.case = TRUE)) %>%
+  select(year_of_birth)
+
+age = 2025 - year_of_birth
+
+# To view the results
+print(age)
+```
 :::::::::::::::::::::::::::::::::::::::::::::::
-:::::::::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::: challenge
+# Give a description of the patient who received Amoxicillin because they were wheezing?
+
+:::::::::::::::::::::::: solution 
+
+```{r}
+library(dplyr)
+
+year_of_birth <- person_named %>%
+  filter(grepl("black", race_concept_name, ignore.case = TRUE)) %>%
+  select(year_of_birth)
+
+age = 2025 - year_of_birth
+
+# To view the results
+print(age)
+```
+:::::::::::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::::::::::::::::::::::
+
+
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
@@ -374,5 +495,3 @@ to be done
 - R can be used to join and interrogate data
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
-
-[join](https://www.rdocumentation.org/packages/dplyr/versions/0.7.8/topics/join)
