@@ -56,6 +56,7 @@ jobs:
       - name: Install omopcept
         run: |
           Rscript -e "remotes::install_github('SAFEHR-data/omopcept')"
+      - uses: r-lib/actions/check-r-package@v2
 
       - name: "Set up Pandoc"
         uses: r-lib/actions/setup-pandoc@v2
