@@ -21,7 +21,8 @@ knitr::opts_chunk$set(fig.height = 6)
 ::::::::::::::::::::::::::::::::::::: objectives
 
 - Examine the diagram of the OMOP tables and the data specification
-- Interrogate the data in the person table
+- Interrogate the data in the tables
+- Join these tables to find the concept names
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
  
@@ -45,7 +46,9 @@ You will need the `dplyr`, `remotes` and `readr` packages from CRAN (the officia
 You will also need a package we have developed `omopcept`.
 This can be installed with:
 
-remotes::install_github("SAFEHR-data/omopcept")m
+remotes::install_github("SAFEHR-data/omopcept")
+
+
 ### Create a new project
 
 
@@ -74,7 +77,10 @@ Create a new project in your environment.
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: instructor
 
-Make sure everyone has R open
+Make sure everyone 
+- has R open 
+- has a project
+- has managed to download the data
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -181,9 +187,6 @@ We have developed a package that makes it very easy to add concept names to the 
 
 You will need the function omopcept::omop_join_name_all(). This will look up the concept_id in the main table of concepts and add a column for the name of the concept associated with that id.
 
-::::::::::::::::::::::::::::::::::::: instructor
-I have not been able to use an r chunk as the github actions refuses to build with any references to `omopcept` even though I have included it in renv_lock that is uploaded into the repo
-:::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: challenge 
 
@@ -197,15 +200,11 @@ By creating tables that also have the name of the concepts answer the following 
 4. Give a description of the patient who received Amoxicillin because they were wheezing?
 
 :::::::::::::::::::::::: hint 
-Use the following r code:
-
-# You should have already done this
-remotes::install_github("SAFEHR-data/omopcept")
 ```{r}
 library(omopcept)
 person_named <- person |> omop_join_name_all()
 condition_occurrence_named <- condition_occurrence |> omop_join_name_all()
-drug_exposure_named <- person |> omop_join_name_all()
+drug_exposure_named <- drug_exposure |> omop_join_name_all()
 ```
 ::::::::::::::::::::::::::::::::
 :::::::::::::::::::::::: solution 
@@ -248,9 +247,13 @@ You know what count is
 ### Need a reminder
 
 count: Count observations by group
+
 Description
 count() lets you quickly count the unique values of one or more variables: 
+
 df |> count(a, b)
+
+df is a common abbreviation for DataFrame in R.
 
 :::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -342,11 +345,12 @@ cdm$condition_occurrence |>
 
 The command above gives us a list of concept ids. To get the names of the conditions you can use the omopcept package as before.
 
+```{r}
 cdm$condition_occurrence |> 
   count(condition_concept_id, sort=TRUE) |> 
   collect() |> 
   omop_join_name_all()
-
+```
 
 Alternatively using CDMConnector also gives us access to a table called `concept` that can be used to join on the concept names. 
 NOTE: Because of the way `join` works, it is easier to `arrange` the table after it is collected.
@@ -368,6 +372,7 @@ cdm$condition_occurrence |>
 Using the "GiBleed" database work out the number of male and female patients with each condition_concept_id
 
 :::::::::::::::::::::::: solution
+```{r}
 cdm$person |> 
   left_join( cdm$condition_occurrence, by = join_by(person_id) ) |> 
   group_by(condition_concept_id, gender_concept_id) |>
@@ -378,7 +383,7 @@ cdm$person |>
   #remove some columns to make display clearer
   select(-condition_concept_id, -gender_concept_id) |> 
   arrange(condition_concept_name)  
-
+```
 :::::::::::::::::::::::::::::::::::::::::::::::
 :::::::::::::::::::::::::::::::::::::::::::::::
 Solutions for working out Who's who programmatically.
@@ -395,9 +400,9 @@ year_of_birth <- person_named %>%
   filter(grepl("black", race_concept_name, ignore.case = TRUE)) %>%
   select(year_of_birth)
 
-age = 2025 - year_of_birth
+person_age <- year_of_birth$year_of_birth[1]  
+age = 2025 - person_age
 
-# To view the results
 print(age)
 ```
 :::::::::::::::::::::::::::::::::::::::::::::::
@@ -406,10 +411,11 @@ print(age)
 ::::::::::::::::::::::::::::::::::::: challenge 
 # In which month was an unspecified fever prevalent in the hospital?
 ::::::::::::::::::::::::::::::::::: hint
-The lubricatY
-e package has a function
+The lubridate package has a function
 ```{r}
+library(lubridate)
  month = month(ymd("2025-01-30"), label = TRUE)
+ print(month)
 ```
 which returns month = Jan
 :::::::::::::::::::::::::::::::::::::::::::::
@@ -417,15 +423,15 @@ which returns month = Jan
 The dyplr  package has a function that will allow you to add columns to a table
 ```{r}
  new_person_table = mutate(person, age = 2025-year_of_birth)
+ print(new_person_table)
 ```
-which as a column called age to the person table
+which adds a column called age to the person table
 :::::::::::::::::::::::::::::::::::::::::::::
 :::::::::::::::::::::::: solution 
 ```{r}
 library(dplyr)
 library(lubridate)
 
-# Assuming your table is named "condition_table"
 fever_months <- condition_occurrence_named %>%
   # Filter for rows where the condition name contains "fever"
   filter(grepl("fever", condition_concept_name, ignore.case = TRUE)) %>%
@@ -439,8 +445,11 @@ fever_months <- condition_occurrence_named %>%
   # Sort by count (descending)
   arrange(desc(count))
 
+# This gives us a table with the months where people had a fever and how many people had the fever each month. The question tells us that there is only one month so we select that.
+fever <- fever_months$month[1]
+
 # View the results
-print(fever_months)
+print(fever)
 
 ```
 :::::::::::::::::::::::::::::::::::::::::::::::
@@ -454,14 +463,16 @@ print(fever_months)
 ```{r}
 library(dplyr)
 
-year_of_birth <- person_named %>%
-  filter(grepl("black", race_concept_name, ignore.case = TRUE)) %>%
-  select(year_of_birth)
+people_without_condition <- person_named %>%
+  # we want to join with the people who do not meet the condition
+  anti_join(condition_occurrence_named %>%
+    filter(grepl("fever", condition_concept_name, ignore.case = TRUE)),           
+    by = "person_id") 
+  
+  ethnicity <- people_without_condition$race_concept_name 
 
-age = 2025 - year_of_birth
-
-# To view the results
-print(age)
+# View results
+print(ethnicity)
 ```
 :::::::::::::::::::::::::::::::::::::::::::::::
 :::::::::::::::::::::::::::::::::::::::::::::::
@@ -474,14 +485,26 @@ print(age)
 ```{r}
 library(dplyr)
 
-year_of_birth <- person_named %>%
-  filter(grepl("black", race_concept_name, ignore.case = TRUE)) %>%
-  select(year_of_birth)
+# Query to find persons prescribed amoxicillin for wheezing
+amoxicillin_for_wheezing <- person_named %>%
+  # Join with condition_occurrence table 
+  inner_join(condition_occurrence_named, by = "person_id") %>%
+  # Filter for wheezing condition
+  filter(grepl("wheez", condition_concept_name, ignore.case = TRUE)) %>%
+  # Join with drug_exposure table to find medications
+  inner_join(drug_exposure_named, by = "person_id") %>%
+  # Filter for amoxicillin prescriptions
+  filter(grepl("amoxicillin", drug_concept_name, ignore.case = TRUE)) 
+  
+  # again the question implies there is only one person
+  age <- 2025-amoxicillin_for_wheezing$year_of_birth[1]
+  gender <- amoxicillin_for_wheezing$gender_concept_name[1]
+  ethnicity <- amoxicillin_for_wheezing$race_concept_name[1]
 
-age = 2025 - year_of_birth
-
-# To view the results
+# View results
 print(age)
+print(gender)
+print(ethnicity)
 ```
 :::::::::::::::::::::::::::::::::::::::::::::::
 :::::::::::::::::::::::::::::::::::::::::::::::
