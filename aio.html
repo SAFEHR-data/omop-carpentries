@@ -306,7 +306,7 @@
         
 <section id="aio-chapter1"><p>Content from <a href="chapter1.html">What is OMOP?</a></p>
 <hr>
-<p>Last updated on 2025-07-11 |
+<p>Last updated on 2025-07-14 |
 
         <a href="https://github.com/SAFEHR-data/omop-carpentries/edit/main/episodes/chapter1.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -361,25 +361,12 @@ to resume work after a break.</p>
 <div class="section level3">
 <h3 id="install-the-required-packages">Install the required packages<a class="anchor" aria-label="anchor" href="#install-the-required-packages"></a>
 </h3>
-<p>You will need the <code>dplyr</code> and <code>readr</code> packages
-from CRAN (the official package repository). You will also need a
-package we have developed <code>omopcept</code>.</p>
-<p>will need to add the following line:</p>
-<p>remotes::install_github(“SAFEHR-data/omopcept”)</p>
-<div class="codewrapper sourceCode" id="cb1">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">install.packages</span><span class="op">(</span><span class="st">"dplyr"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">install.packages</span><span class="op">(</span><span class="st">"readr"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">install.packages</span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span></span></code></pre>
-</div>
-</div>
-<div class="section level3">
-<h3 id="create-a-new-project">Create a new project<a class="anchor" aria-label="anchor" href="#create-a-new-project"></a>
-</h3>
+<p>You will need the <code>dplyr</code>, <code>remotes</code> and
+<code>readr</code> packages from CRAN (the official package repository).
+You will also need a package we have developed <code>omopcept</code>.
+This can be installed with:</p>
+<p>remotes::install_github(“SAFEHR-data/omopcept”)m ### Create a new
+project</p>
 <div class="tabs">
 <nav><div id="nav-tab-1" class="nav nav-tabs" role="tablist">
 <button class="nav-link active" id="nav-tab-1-Experienced" name="Experienced" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-1-Experienced" type="button" role="tab" aria-controls="nav-tabpanel-1-Experienced" aria-selected="true">
@@ -539,12 +526,12 @@ same name.</p>
 </div>
 </nav><div id="nav-tabContent-2" class="tab-content">
 <div id="nav-tabpanel-2-Experienced" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-2-Experienced">
-<p>Use the function read_csv() function from the readr package.</p>
+<p>Use the function read.csv() function from the readr package.</p>
 </div>
 <div id="nav-tabpanel-2-Needareminder" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-Needareminder">
-<p>The expression <code>read_csv(...)</code> is a <a href="reference.html#function-call">function call</a> that asks R to run
-the function <code>read_csv</code>.</p>
-<p><code>read_csv</code> has two <a href="reference.html#argument">arguments</a>: the name of the file we
+<p>The expression <code>read.csv(...)</code> is a <a href="reference.html#function-call">function call</a> that asks R to run
+the function <code>read.csv</code>.</p>
+<p><code>read.csv</code> has two <a href="reference.html#argument">arguments</a>: the name of the file we
 want to read, and whether the first line of the file contains names for
 the columns of data.</p>
 <p>The filename needs to be a character string (or <a href="reference.html#string">string</a> for short), so we put it in
@@ -554,6 +541,7 @@ headers.</p>
 </div>
 </div>
 </div>
+
 <div id="read-the-data" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
@@ -576,14 +564,13 @@ same name.</p>
 </button>
 <div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
-<div class="codewrapper sourceCode" id="cb2">
+<div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw">library</span><span class="op">(</span><span class="va">readr</span><span class="op">)</span></span>
-<span><span class="va">person</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span>file <span class="op">=</span> <span class="st">"data/person.csv"</span><span class="op">)</span></span>
-<span><span class="va">condition_occurrence</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span>file <span class="op">=</span> <span class="st">"data/condition_occurrence.csv"</span><span class="op">)</span></span>
-<span><span class="va">drug_exposure</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span>file <span class="op">=</span> <span class="st">"data/drug_exposure.csv"</span><span class="op">)</span></span></code></pre>
+<code class="sourceCode R"><span><span class="va">person</span> <span class="op">&lt;-</span> <span class="fu">read.csv</span><span class="op">(</span>file <span class="op">=</span> <span class="st">"data/person.csv"</span><span class="op">)</span></span>
+<span><span class="va">condition_occurrence</span> <span class="op">&lt;-</span> <span class="fu">read.csv</span><span class="op">(</span>file <span class="op">=</span> <span class="st">"data/condition_occurrence.csv"</span><span class="op">)</span></span>
+<span><span class="va">drug_exposure</span> <span class="op">&lt;-</span> <span class="fu">read.csv</span><span class="op">(</span>file <span class="op">=</span> <span class="st">"data/drug_exposure.csv"</span><span class="op">)</span></span></code></pre>
 </div>
 </div>
 </div>
@@ -603,6 +590,7 @@ names to the tables.</p>
 <p>You will need the function omopcept::omop_join_name_all(). This will
 look up the concept_id in the main table of concepts and add a column
 for the name of the concept associated with that id.</p>
+
 <div id="whos-who" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
@@ -621,6 +609,48 @@ fever?</li>
 <li>Give a description of the patient who received Amoxicillin because
 they were wheezing?</li>
 </ol>
+</div>
+</div>
+</div>
+<div id="accordionHint1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
+  <h4 class="accordion-header" id="headingHint1"> Give me a hint </h4>
+</button>
+<div id="collapseHint1" class="accordion-collapse collapse" aria-labelledby="headingHint1" data-bs-parent="#accordionHint1">
+<div class="accordion-body">
+<p>Use the following r code:</p>
+<div class="section level1">
+<h1 id="you-should-have-already-done-this">You should have already done this<a class="anchor" aria-label="anchor" href="#you-should-have-already-done-this"></a>
+</h1>
+<p>remotes::install_github(“SAFEHR-data/omopcept”)</p>
+<div class="codewrapper sourceCode" id="cb2">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw">library</span><span class="op">(</span><span class="va">omopcept</span><span class="op">)</span></span>
+<span><span class="va">person_named</span> <span class="op">&lt;-</span> <span class="va">person</span> <span class="op">|&gt;</span> <span class="fu">omop_join_name_all</span><span class="op">(</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>Warning: downloading a subset of omop vocab files, pre-processed.
+If you want to make sure you have the vocabs you need, download from Athena, save locally &amp; call `omop_vocabs_preprocess()`</code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>downloading concept file, may take a few minutes, this only needs to be repeated if the package is re-installed</code></pre>
+</div>
+<div class="codewrapper sourceCode" id="cb5">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">condition_occurrence_named</span> <span class="op">&lt;-</span> <span class="va">condition_occurrence</span> <span class="op">|&gt;</span> <span class="fu">omop_join_name_all</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">drug_exposure_named</span> <span class="op">&lt;-</span> <span class="va">person</span> <span class="op">|&gt;</span> <span class="fu">omop_join_name_all</span><span class="op">(</span><span class="op">)</span></span></code></pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -654,10 +684,9 @@ column that is the actual key that will allow us to join with other
 tables.</p>
 <p>So we can join two of the tables together to get information about
 the different conditions suffered by each person.</p>
-<p>[R documentation - join][join]</p>
 <p>I am going to use a left join because I want a record of every person
 and the conditions they may have.</p>
-<div class="codewrapper sourceCode" id="cb3">
+<div class="codewrapper sourceCode" id="cb6">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -665,11 +694,6 @@ and the conditions they may have.</p>
 <span><span class="va">person_condition</span> <span class="op">&lt;-</span> </span>
 <span>  <span class="va">person_named</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">left_join</span><span class="op">(</span><span class="va">condition_occurrence_named</span>, by <span class="op">=</span> <span class="fu">join_by</span><span class="op">(</span><span class="va">person_id</span><span class="op">)</span> <span class="op">)</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="error" tabindex="0"><code>Error: object 'person_named' not found</code></pre>
 </div>
 <p>This produces a new table with all the column names from both tables
 and six rows.</p>
@@ -720,16 +744,23 @@ count(a, b)</p>
 </button>
 <div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
 <div class="accordion-body">
-<div class="codewrapper sourceCode" id="cb5">
+<div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">person_condition</span> <span class="op">|&gt;</span> <span class="fu">count</span><span class="op">(</span><span class="va">gender_concept_name</span>, <span class="va">condition_concept_name</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="error" tabindex="0"><code>Error: object 'person_condition' not found</code></pre>
+<pre class="output" tabindex="0"><code># A tibble: 5 × 3
+  gender_concept_name condition_concept_name     n
+  &lt;chr&gt;               &lt;chr&gt;                  &lt;int&gt;
+1 FEMALE              Fever, unspecified         2
+2 FEMALE              Nausea and vomiting        1
+3 FEMALE              Wheezing                   1
+4 MALE                Fever, unspecified         1
+5 MALE                Nausea and vomiting        1</code></pre>
 </div>
 </div>
 </div>
@@ -758,41 +789,7 @@ count(a, b)</p>
 <p>The CDMConnector package allows connection to an OMOP Common Data
 Model in a database it also contains synthetic example data that can be
 used to demonstrate querying the data</p>
-<div class="codewrapper sourceCode" id="cb7">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">install.packages</span><span class="op">(</span><span class="st">"CDMConnector"</span><span class="op">)</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>The following package(s) will be installed:
-- CDMConnector [2.1.0]
-These packages will be installed into "~/work/omop-carpentries/omop-carpentries/renv/profiles/lesson-requirements/renv/library/linux-ubuntu-jammy/R-4.5/x86_64-pc-linux-gnu".
-
-# Installing packages --------------------------------------------------------
-- Installing CDMConnector ...                   OK [linked from cache]
-Successfully installed 1 package in 4.7 milliseconds.</code></pre>
-</div>
 <div class="codewrapper sourceCode" id="cb9">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">install.packages</span><span class="op">(</span><span class="st">"duckdb"</span><span class="op">)</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>The following package(s) will be installed:
-- duckdb [1.3.2]
-These packages will be installed into "~/work/omop-carpentries/omop-carpentries/renv/profiles/lesson-requirements/renv/library/linux-ubuntu-jammy/R-4.5/x86_64-pc-linux-gnu".
-
-# Installing packages --------------------------------------------------------
-- Installing duckdb ...                         OK [linked from cache]
-Successfully installed 1 package in 5.2 milliseconds.</code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb11">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -802,7 +799,7 @@ Successfully installed 1 package in 5.2 milliseconds.</code></pre>
 called GiBleed contains 2,600 patients representing a gastrointestinal
 bleeding study</p>
 <p>Download these data</p>
-<div class="codewrapper sourceCode" id="cb12">
+<div class="codewrapper sourceCode" id="cb10">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -817,7 +814,7 @@ Download completed!</code></pre>
 </div>
 <p>We can use the DBI &amp; duckdb packages to connect to this local
 database</p>
-<div class="codewrapper sourceCode" id="cb14">
+<div class="codewrapper sourceCode" id="cb12">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -831,7 +828,7 @@ place where tables can be written</p>
 we can use for both.</p>
 <p>This is how we make a CDM reference from the database connection we
 made above.</p>
-<div class="codewrapper sourceCode" id="cb15">
+<div class="codewrapper sourceCode" id="cb13">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -842,7 +839,7 @@ object. Rather it is a reference that allows us to query the data from
 the database.</p>
 <p>Typing <code>cdm</code> will give a summary of the tables in the
 database</p>
-<div class="codewrapper sourceCode" id="cb16">
+<div class="codewrapper sourceCode" id="cb14">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -853,7 +850,7 @@ e.g. <code>person</code>, <code>condition_occurrence</code> and
 <code>drug_exposure</code></p>
 <p>You can get a glimpse of the data in each table with cdm$table_name
 e.g.</p>
-<div class="codewrapper sourceCode" id="cb17">
+<div class="codewrapper sourceCode" id="cb15">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -863,7 +860,7 @@ e.g.</p>
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code># Source:   table&lt;person&gt; [?? x 18]
-# Database: DuckDB v1.3.2 [unknown@Linux 6.8.0-1030-azure:R 4.5.1//tmp/RtmphTChxO/file248830b376bf.duckdb]
+# Database: DuckDB v1.3.2 [unknown@Linux 6.8.0-1030-azure:R 4.5.1//tmp/RtmpZySBRH/file16e23740b637.duckdb]
    person_id gender_concept_id year_of_birth month_of_birth day_of_birth
        &lt;int&gt;             &lt;int&gt;         &lt;int&gt;          &lt;int&gt;        &lt;int&gt;
  1         6              8532          1963             12           31
@@ -884,7 +881,7 @@ e.g.</p>
 #   race_source_concept_id &lt;int&gt;, ethnicity_source_value &lt;chr&gt;,
 #   ethnicity_source_concept_id &lt;int&gt;</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb19">
+<div class="codewrapper sourceCode" id="cb17">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -894,7 +891,7 @@ e.g.</p>
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code># Source:   table&lt;condition_occurrence&gt; [?? x 16]
-# Database: DuckDB v1.3.2 [unknown@Linux 6.8.0-1030-azure:R 4.5.1//tmp/RtmphTChxO/file248830b376bf.duckdb]
+# Database: DuckDB v1.3.2 [unknown@Linux 6.8.0-1030-azure:R 4.5.1//tmp/RtmpZySBRH/file16e23740b637.duckdb]
    condition_occurrence_id person_id condition_concept_id condition_start_date
                      &lt;int&gt;     &lt;int&gt;                &lt;int&gt; &lt;date&gt;
  1                    4483       263              4112343 2015-10-02
@@ -917,7 +914,7 @@ e.g.</p>
 </div>
 <p>The names of the columns in each table can be seen with
 <code>colnames()</code></p>
-<div class="codewrapper sourceCode" id="cb21">
+<div class="codewrapper sourceCode" id="cb19">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -937,7 +934,7 @@ e.g.</p>
 </div>
 <p>If you are familiar with commands from the dplyr and tidyverse
 packages these can be used on the cdm reference</p>
-<div class="codewrapper sourceCode" id="cb23">
+<div class="codewrapper sourceCode" id="cb21">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -946,7 +943,7 @@ packages these can be used on the cdm reference</p>
 <p>For example this code counts the number of records per condition.
 Using collect() at the end performs the final database query and brings
 the data into R.</p>
-<div class="codewrapper sourceCode" id="cb24">
+<div class="codewrapper sourceCode" id="cb22">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -974,11 +971,13 @@ the data into R.</p>
 </div>
 <p>The command above gives us a list of concept ids. To get the names of
 the conditions you can use the omopcept package as before.</p>
+<p>cdm$condition_occurrence |&gt; count(condition_concept_id, sort=TRUE)
+|&gt; collect() |&gt; omop_join_name_all()</p>
 <p>Alternatively using CDMConnector also gives us access to a table
 called <code>concept</code> that can be used to join on the concept
 names. NOTE: Because of the way <code>join</code> works, it is easier to
 <code>arrange</code> the table after it is collected.</p>
-<div class="codewrapper sourceCode" id="cb26">
+<div class="codewrapper sourceCode" id="cb24">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1029,19 +1028,26 @@ patients with each condition_concept_id</p>
 </button>
 <div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
 <div class="accordion-body">
-
+<p>cdm<span class="math inline">\(person |&gt;
+  left_join( cdm\)</span>condition_occurrence, by = join_by(person_id) )
+|&gt; group_by(condition_concept_id, gender_concept_id) |&gt;
+summarise(num_persons = n_distinct(person_id)) |&gt; collect() |&gt;
+ungroup() |&gt; omopcept::omop_join_name_all() |&gt; #remove some
+columns to make display clearer select(-condition_concept_id,
+-gender_concept_id) |&gt; arrange(condition_concept_name)</p>
 </div>
 </div>
 </div>
 </div>
-<div id="challenge6" class="callout challenge">
+<p>Solutions for working out Who’s who programmatically.</p>
+<div id="how-old-is-the-black-gentleman" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
-<div class="callout-inner">
-<h3 class="callout-title">Challenge</h3>
+<div id="how-old-is-the-black-gentleman" class="callout-inner">
+<h3 class="callout-title">How old is the black gentleman?</h3>
 <div class="callout-content">
-<p>Solutions for working out Who’s who programmatically.</p>
+
 </div>
 </div>
 </div>
@@ -1052,7 +1058,228 @@ patients with each condition_concept_id</p>
 </button>
 <div id="collapseSolution6" class="accordion-collapse collapse" aria-labelledby="headingSolution6" data-bs-parent="#accordionSolution6">
 <div class="accordion-body">
-<p>to be done</p>
+<div class="codewrapper sourceCode" id="cb26">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw">library</span><span class="op">(</span><span class="va">dplyr</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">year_of_birth</span> <span class="op">&lt;-</span> <span class="va">person_named</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">filter</span><span class="op">(</span><span class="fu">grepl</span><span class="op">(</span><span class="st">"black"</span>, <span class="va">race_concept_name</span>, ignore.case <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="va">year_of_birth</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">age</span> <span class="op">=</span> <span class="fl">2025</span> <span class="op">-</span> <span class="va">year_of_birth</span></span>
+<span></span>
+<span><span class="co"># To view the results</span></span>
+<span><span class="fu">print</span><span class="op">(</span><span class="va">age</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>  year_of_birth
+1            25</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="in-which-month-was-an-unspecified-fever-prevalent-in-the-hospital" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="in-which-month-was-an-unspecified-fever-prevalent-in-the-hospital" class="callout-inner">
+<h3 class="callout-title">In which month was an unspecified fever prevalent in the hospital?</h3>
+<div class="callout-content">
+
+</div>
+</div>
+</div>
+<div id="accordionHint2" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint2" aria-expanded="false" aria-controls="collapseHint2">
+  <h4 class="accordion-header" id="headingHint2"> Give me a hint </h4>
+</button>
+<div id="collapseHint2" class="accordion-collapse collapse" aria-labelledby="headingHint2" data-bs-parent="#accordionHint2">
+<div class="accordion-body">
+<p>The lubricatY e package has a function</p>
+<div class="codewrapper sourceCode" id="cb28">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span> <span class="va">month</span> <span class="op">=</span> <span class="fu">month</span><span class="op">(</span><span class="fu">ymd</span><span class="op">(</span><span class="st">"2025-01-30"</span><span class="op">)</span>, label <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="error" tabindex="0"><code>Error in month(ymd("2025-01-30"), label = TRUE): could not find function "month"</code></pre>
+</div>
+<p>which returns month = Jan</p>
+</div>
+</div>
+</div>
+</div>
+<div id="accordionHint3" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint3" aria-expanded="false" aria-controls="collapseHint3">
+  <h4 class="accordion-header" id="headingHint3"> Give me a hint </h4>
+</button>
+<div id="collapseHint3" class="accordion-collapse collapse" aria-labelledby="headingHint3" data-bs-parent="#accordionHint3">
+<div class="accordion-body">
+<p>The dyplr package has a function that will allow you to add columns
+to a table</p>
+<div class="codewrapper sourceCode" id="cb30">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span> <span class="va">new_person_table</span> <span class="op">=</span> <span class="fu">mutate</span><span class="op">(</span><span class="va">person</span>, age <span class="op">=</span> <span class="fl">2025</span><span class="op">-</span><span class="va">year_of_birth</span><span class="op">)</span></span></code></pre>
+</div>
+<p>which as a column called age to the person table</p>
+</div>
+</div>
+</div>
+</div>
+<div id="accordionSolution7" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution7" aria-expanded="false" aria-controls="collapseSolution7">
+  <h4 class="accordion-header" id="headingSolution7"> Show me the solution </h4>
+</button>
+<div id="collapseSolution7" class="accordion-collapse collapse" aria-labelledby="headingSolution7" data-bs-parent="#accordionSolution7">
+<div class="accordion-body">
+<div class="codewrapper sourceCode" id="cb31">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw">library</span><span class="op">(</span><span class="va">dplyr</span><span class="op">)</span></span>
+<span><span class="kw">library</span><span class="op">(</span><span class="va">lubridate</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>
+Attaching package: 'lubridate'</code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>The following objects are masked from 'package:base':
+
+    date, intersect, setdiff, union</code></pre>
+</div>
+<div class="codewrapper sourceCode" id="cb34">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Assuming your table is named "condition_table"</span></span>
+<span><span class="va">fever_months</span> <span class="op">&lt;-</span> <span class="va">condition_occurrence_named</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="co"># Filter for rows where the condition name contains "fever"</span></span>
+<span>  <span class="fu">filter</span><span class="op">(</span><span class="fu">grepl</span><span class="op">(</span><span class="st">"fever"</span>, <span class="va">condition_concept_name</span>, ignore.case <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="co"># Extract month from the condition_start_date</span></span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>month <span class="op">=</span> <span class="fu">month</span><span class="op">(</span><span class="va">condition_start_date</span>, label <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="co"># Select just the month column for the results</span></span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="va">month</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="co"># Count occurrences by month</span></span>
+<span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">month</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">summarise</span><span class="op">(</span>count <span class="op">=</span> <span class="fu">n</span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="co"># Sort by count (descending)</span></span>
+<span>  <span class="fu">arrange</span><span class="op">(</span><span class="fu">desc</span><span class="op">(</span><span class="va">count</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># View the results</span></span>
+<span><span class="fu">print</span><span class="op">(</span><span class="va">fever_months</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code># A tibble: 1 × 2
+  month count
+  &lt;ord&gt; &lt;int&gt;
+1 Jul       3</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="what-was-the-ethnicity-of-the-patient-not-affected-by-this-fever" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="what-was-the-ethnicity-of-the-patient-not-affected-by-this-fever" class="callout-inner">
+<h3 class="callout-title">What was the ethnicity of the patient not affected by this fever?</h3>
+<div class="callout-content">
+
+</div>
+</div>
+</div>
+<div id="accordionSolution8" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution8" aria-expanded="false" aria-controls="collapseSolution8">
+  <h4 class="accordion-header" id="headingSolution8"> Show me the solution </h4>
+</button>
+<div id="collapseSolution8" class="accordion-collapse collapse" aria-labelledby="headingSolution8" data-bs-parent="#accordionSolution8">
+<div class="accordion-body">
+<div class="codewrapper sourceCode" id="cb36">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw">library</span><span class="op">(</span><span class="va">dplyr</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">year_of_birth</span> <span class="op">&lt;-</span> <span class="va">person_named</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">filter</span><span class="op">(</span><span class="fu">grepl</span><span class="op">(</span><span class="st">"black"</span>, <span class="va">race_concept_name</span>, ignore.case <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="va">year_of_birth</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">age</span> <span class="op">=</span> <span class="fl">2025</span> <span class="op">-</span> <span class="va">year_of_birth</span></span>
+<span></span>
+<span><span class="co"># To view the results</span></span>
+<span><span class="fu">print</span><span class="op">(</span><span class="va">age</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>  year_of_birth
+1            25</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="give-a-description-of-the-patient-who-received-amoxicillin-because-they-were-wheezing" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="give-a-description-of-the-patient-who-received-amoxicillin-because-they-were-wheezing" class="callout-inner">
+<h3 class="callout-title">Give a description of the patient who received Amoxicillin because they were wheezing?</h3>
+<div class="callout-content">
+
+</div>
+</div>
+</div>
+<div id="accordionSolution9" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution9" aria-expanded="false" aria-controls="collapseSolution9">
+  <h4 class="accordion-header" id="headingSolution9"> Show me the solution </h4>
+</button>
+<div id="collapseSolution9" class="accordion-collapse collapse" aria-labelledby="headingSolution9" data-bs-parent="#accordionSolution9">
+<div class="accordion-body">
+<div class="codewrapper sourceCode" id="cb38">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw">library</span><span class="op">(</span><span class="va">dplyr</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">year_of_birth</span> <span class="op">&lt;-</span> <span class="va">person_named</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">filter</span><span class="op">(</span><span class="fu">grepl</span><span class="op">(</span><span class="st">"black"</span>, <span class="va">race_concept_name</span>, ignore.case <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="va">year_of_birth</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">age</span> <span class="op">=</span> <span class="fl">2025</span> <span class="op">-</span> <span class="va">year_of_birth</span></span>
+<span></span>
+<span><span class="co"># To view the results</span></span>
+<span><span class="fu">print</span><span class="op">(</span><span class="va">age</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>  year_of_birth
+1            25</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -1072,7 +1299,6 @@ patients with each condition_concept_id</p>
 </div>
 </div>
 </div>
-<p><a href="https://www.rdocumentation.org/packages/dplyr/versions/0.7.8/topics/join" class="external-link">join</a></p>
 <!--
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
@@ -1126,8 +1352,8 @@ any links that you are not going to use.
   "url": "https://SAFEHR-data.github.io/omop-carpentries/aio.html",
   "identifier": "https://SAFEHR-data.github.io/omop-carpentries/aio.html",
   "dateCreated": "2025-06-18",
-  "dateModified": "2025-07-11",
-  "datePublished": "2025-07-11"
+  "dateModified": "2025-07-14",
+  "datePublished": "2025-07-14"
 }
 
   </script><script>
