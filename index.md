@@ -10,6 +10,16 @@ It is the initial work on a full Carpentries Course that we will begin to roll o
 
 ::: prereq
 
-A laptop running R and RStudio
+A laptop
+
+This lesson assumes you have current versions of the following installed on your computer:
+
+- the [R software](https://cran.r-project.org/mirrors.html) itself, and
+- [RStudio Desktop](https://www.rstudio.com/products/rstudio/download/#download).
+
+You also need to download some files to follow this lesson:
+
+- Download [omop-data.zip](data/omop-data.zip).
+
 
 :::
