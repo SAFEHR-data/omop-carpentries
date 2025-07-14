@@ -18,7 +18,8 @@ exercises: 0
 ::::::::::::::::::::::::::::::::::::: objectives
 
 - Examine the diagram of the OMOP tables and the data specification
-- Interrogate the data in the person table
+- Interrogate the data in the tables
+- Join these tables to find the concept names
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
  
@@ -42,7 +43,9 @@ You will need the `dplyr`, `remotes` and `readr` packages from CRAN (the officia
 You will also need a package we have developed `omopcept`.
 This can be installed with:
 
-remotes::install_github("SAFEHR-data/omopcept")m
+remotes::install_github("SAFEHR-data/omopcept")
+
+
 ### Create a new project
 
 
@@ -71,7 +74,10 @@ Create a new project in your environment.
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: instructor
 
-Make sure everyone has R open
+Make sure everyone 
+- has R open 
+- has a project
+- has managed to download the data
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -179,9 +185,6 @@ We have developed a package that makes it very easy to add concept names to the 
 
 You will need the function omopcept::omop_join_name_all(). This will look up the concept_id in the main table of concepts and add a column for the name of the concept associated with that id.
 
-::::::::::::::::::::::::::::::::::::: instructor
-I have not been able to use an r chunk as the github actions refuses to build with any references to `omopcept` even though I have included it in renv_lock that is uploaded into the repo
-:::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: challenge 
 
@@ -195,10 +198,6 @@ By creating tables that also have the name of the concepts answer the following 
 4. Give a description of the patient who received Amoxicillin because they were wheezing?
 
 :::::::::::::::::::::::: hint 
-Use the following r code:
-
-# You should have already done this
-remotes::install_github("SAFEHR-data/omopcept")
 
 ``` r
 library(omopcept)
@@ -216,7 +215,7 @@ downloading concept file, may take a few minutes, this only needs to be repeated
 
 ``` r
 condition_occurrence_named <- condition_occurrence |> omop_join_name_all()
-drug_exposure_named <- person |> omop_join_name_all()
+drug_exposure_named <- drug_exposure |> omop_join_name_all()
 ```
 ::::::::::::::::::::::::::::::::
 :::::::::::::::::::::::: solution 
@@ -260,9 +259,13 @@ You know what count is
 ### Need a reminder
 
 count: Count observations by group
+
 Description
 count() lets you quickly count the unique values of one or more variables: 
+
 df |> count(a, b)
+
+df is a common abbreviation for DataFrame in R.
 
 :::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -358,7 +361,7 @@ cdm$person
 
 ``` output
 # Source:   table<person> [?? x 18]
-# Database: DuckDB v1.3.2 [unknown@Linux 6.8.0-1030-azure:R 4.5.1//tmp/RtmpZySBRH/file16e23740b637.duckdb]
+# Database: DuckDB v1.3.2 [unknown@Linux 6.8.0-1030-azure:R 4.5.1//tmp/RtmpbHy8D6/file16eba1fe8d8.duckdb]
    person_id gender_concept_id year_of_birth month_of_birth day_of_birth
        <int>             <int>         <int>          <int>        <int>
  1         6              8532          1963             12           31
@@ -386,7 +389,7 @@ cdm$condition_occurrence
 
 ``` output
 # Source:   table<condition_occurrence> [?? x 16]
-# Database: DuckDB v1.3.2 [unknown@Linux 6.8.0-1030-azure:R 4.5.1//tmp/RtmpZySBRH/file16e23740b637.duckdb]
+# Database: DuckDB v1.3.2 [unknown@Linux 6.8.0-1030-azure:R 4.5.1//tmp/RtmpbHy8D6/file16eba1fe8d8.duckdb]
    condition_occurrence_id person_id condition_concept_id condition_start_date
                      <int>     <int>                <int> <date>              
  1                    4483       263              4112343 2015-10-02          
@@ -459,11 +462,30 @@ cdm$condition_occurrence |>
 
 The command above gives us a list of concept ids. To get the names of the conditions you can use the omopcept package as before.
 
+
+``` r
 cdm$condition_occurrence |> 
   count(condition_concept_id, sort=TRUE) |> 
   collect() |> 
   omop_join_name_all()
+```
 
+``` output
+# A tibble: 80 × 3
+   condition_concept_id condition_concept_name                       n
+                  <int> <chr>                                    <dbl>
+ 1             40481087 Viral sinusitis                          17268
+ 2              4112343 Acute viral pharyngitis                  10217
+ 3               260139 Acute bronchitis                          8184
+ 4               372328 Otitis media                              3605
+ 5                80180 Osteoarthritis                            2694
+ 6                28060 Streptococcal sore throat                 2656
+ 7                81151 Sprain of ankle                           1915
+ 8               378001 Concussion with no loss of consciousness  1013
+ 9              4283893 Sinusitis                                 1001
+10              4294548 Acute bacterial sinusitis                  939
+# ℹ 70 more rows
+```
 
 Alternatively using CDMConnector also gives us access to a table called `concept` that can be used to join on the concept names. 
 NOTE: Because of the way `join` works, it is easier to `arrange` the table after it is collected.
@@ -503,6 +525,8 @@ cdm$condition_occurrence |>
 Using the "GiBleed" database work out the number of male and female patients with each condition_concept_id
 
 :::::::::::::::::::::::: solution
+
+``` r
 cdm$person |> 
   left_join( cdm$condition_occurrence, by = join_by(person_id) ) |> 
   group_by(condition_concept_id, gender_concept_id) |>
@@ -513,7 +537,24 @@ cdm$person |>
   #remove some columns to make display clearer
   select(-condition_concept_id, -gender_concept_id) |> 
   arrange(condition_concept_name)  
+```
 
+``` output
+# A tibble: 158 × 3
+   condition_concept_name    gender_concept_name num_persons
+   <chr>                     <chr>                     <dbl>
+ 1 Acute allergic reaction   MALE                         57
+ 2 Acute allergic reaction   FEMALE                       59
+ 3 Acute bacterial sinusitis MALE                        368
+ 4 Acute bacterial sinusitis FEMALE                      418
+ 5 Acute bronchitis          FEMALE                     1300
+ 6 Acute bronchitis          MALE                       1243
+ 7 Acute cholecystitis       MALE                          6
+ 8 Acute cholecystitis       FEMALE                       29
+ 9 Acute viral pharyngitis   FEMALE                     1322
+10 Acute viral pharyngitis   MALE                       1284
+# ℹ 148 more rows
+```
 :::::::::::::::::::::::::::::::::::::::::::::::
 :::::::::::::::::::::::::::::::::::::::::::::::
 Solutions for working out Who's who programmatically.
@@ -531,15 +572,14 @@ year_of_birth <- person_named %>%
   filter(grepl("black", race_concept_name, ignore.case = TRUE)) %>%
   select(year_of_birth)
 
-age = 2025 - year_of_birth
+person_age <- year_of_birth$year_of_birth[1]  
+age = 2025 - person_age
 
-# To view the results
 print(age)
 ```
 
 ``` output
-  year_of_birth
-1            25
+[1] 25
 ```
 :::::::::::::::::::::::::::::::::::::::::::::::
 :::::::::::::::::::::::::::::::::::::::::::::::
@@ -547,30 +587,9 @@ print(age)
 ::::::::::::::::::::::::::::::::::::: challenge 
 # In which month was an unspecified fever prevalent in the hospital?
 ::::::::::::::::::::::::::::::::::: hint
-The lubricatY
-e package has a function
+The lubridate package has a function
 
 ``` r
- month = month(ymd("2025-01-30"), label = TRUE)
-```
-
-``` error
-Error in month(ymd("2025-01-30"), label = TRUE): could not find function "month"
-```
-which returns month = Jan
-:::::::::::::::::::::::::::::::::::::::::::::
-::::::::::::::::::::::::::::::::::: hint
-The dyplr  package has a function that will allow you to add columns to a table
-
-``` r
- new_person_table = mutate(person, age = 2025-year_of_birth)
-```
-which as a column called age to the person table
-:::::::::::::::::::::::::::::::::::::::::::::
-:::::::::::::::::::::::: solution 
-
-``` r
-library(dplyr)
 library(lubridate)
 ```
 
@@ -586,7 +605,39 @@ The following objects are masked from 'package:base':
 ```
 
 ``` r
-# Assuming your table is named "condition_table"
+ month = month(ymd("2025-01-30"), label = TRUE)
+ print(month)
+```
+
+``` output
+[1] Jan
+12 Levels: Jan < Feb < Mar < Apr < May < Jun < Jul < Aug < Sep < ... < Dec
+```
+which returns month = Jan
+:::::::::::::::::::::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::: hint
+The dyplr  package has a function that will allow you to add columns to a table
+
+``` r
+ new_person_table = mutate(person, age = 2025-year_of_birth)
+ print(new_person_table)
+```
+
+``` output
+  person_id year_of_birth gender_concept_id race_concept_id age
+1         1          1980              8532        46285833  45
+2         2          1971              8532        46286810  54
+3         3          2000              8507        46285836  25
+4         4          2010              8507        37394011  15
+```
+which adds a column called age to the person table
+:::::::::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::: solution 
+
+``` r
+library(dplyr)
+library(lubridate)
+
 fever_months <- condition_occurrence_named %>%
   # Filter for rows where the condition name contains "fever"
   filter(grepl("fever", condition_concept_name, ignore.case = TRUE)) %>%
@@ -600,15 +651,16 @@ fever_months <- condition_occurrence_named %>%
   # Sort by count (descending)
   arrange(desc(count))
 
+# This gives us a table with the months where people had a fever and how many people had the fever each month. The question tells us that there is only one month so we select that.
+fever <- fever_months$month[1]
+
 # View the results
-print(fever_months)
+print(fever)
 ```
 
 ``` output
-# A tibble: 1 × 2
-  month count
-  <ord> <int>
-1 Jul       3
+[1] Jul
+12 Levels: Jan < Feb < Mar < Apr < May < Jun < Jul < Aug < Sep < ... < Dec
 ```
 :::::::::::::::::::::::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::: 
@@ -622,19 +674,20 @@ print(fever_months)
 ``` r
 library(dplyr)
 
-year_of_birth <- person_named %>%
-  filter(grepl("black", race_concept_name, ignore.case = TRUE)) %>%
-  select(year_of_birth)
+people_without_condition <- person_named %>%
+  # we want to join with the people who do not meet the condition
+  anti_join(condition_occurrence_named %>%
+    filter(grepl("fever", condition_concept_name, ignore.case = TRUE)),           
+    by = "person_id") 
+  
+  ethnicity <- people_without_condition$race_concept_name 
 
-age = 2025 - year_of_birth
-
-# To view the results
-print(age)
+# View results
+print(ethnicity)
 ```
 
 ``` output
-  year_of_birth
-1            25
+[1] "Ethnicity not stated"
 ```
 :::::::::::::::::::::::::::::::::::::::::::::::
 :::::::::::::::::::::::::::::::::::::::::::::::
@@ -648,19 +701,44 @@ print(age)
 ``` r
 library(dplyr)
 
-year_of_birth <- person_named %>%
-  filter(grepl("black", race_concept_name, ignore.case = TRUE)) %>%
-  select(year_of_birth)
+# Query to find persons prescribed amoxicillin for wheezing
+amoxicillin_for_wheezing <- person_named %>%
+  # Join with condition_occurrence table 
+  inner_join(condition_occurrence_named, by = "person_id") %>%
+  # Filter for wheezing condition
+  filter(grepl("wheez", condition_concept_name, ignore.case = TRUE)) %>%
+  # Join with drug_exposure table to find medications
+  inner_join(drug_exposure_named, by = "person_id") %>%
+  # Filter for amoxicillin prescriptions
+  filter(grepl("amoxicillin", drug_concept_name, ignore.case = TRUE)) 
+  
+  # again the question implies there is only one person
+  age <- 2025-amoxicillin_for_wheezing$year_of_birth[1]
+  gender <- amoxicillin_for_wheezing$gender_concept_name[1]
+  ethnicity <- amoxicillin_for_wheezing$race_concept_name[1]
 
-age = 2025 - year_of_birth
-
-# To view the results
+# View results
 print(age)
 ```
 
 ``` output
-  year_of_birth
-1            25
+[1] 54
+```
+
+``` r
+print(gender)
+```
+
+``` output
+[1] "FEMALE"
+```
+
+``` r
+print(ethnicity)
+```
+
+``` output
+[1] "White: English or Welsh or Scottish or Northern Irish or British - England and Wales ethnic category 2011 census"
 ```
 :::::::::::::::::::::::::::::::::::::::::::::::
 :::::::::::::::::::::::::::::::::::::::::::::::
