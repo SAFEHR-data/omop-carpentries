@@ -7,15 +7,15 @@ on:
       # - master
       - festival
   schedule:
-    - cron: '0 0 * * 2'
+    - cron: "0 0 * * 2"
   workflow_dispatch:
     inputs:
       name:
-        description: 'Who triggered this build?'
+        description: "Who triggered this build?"
         required: true
-        default: 'Maintainer (via GitHub)'
+        default: "Maintainer (via GitHub)"
       reset:
-        description: 'Reset cached markdown files'
+        description: "Reset cached markdown files"
         required: false
         default: false
         type: boolean
@@ -34,7 +34,6 @@ jobs:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       RENV_PATHS_ROOT: ~/.local/share/renv/
     steps:
-
       - name: "Checkout Lesson"
         uses: actions/checkout@v4
 
@@ -51,6 +50,14 @@ jobs:
         uses: carpentries/actions/setup-sandpaper@main
         with:
           cache-version: ${{ secrets.CACHE_VERSION }}
+
+      # Manually install omopcept as sandpaper doesn't know how to handle GitHub packages
+      - name: "Install omopcept"
+        run: |
+          renv::activate(profile = "lesson-requirements")
+          renv::install("SAFEHR-data/omopcept", library = renv::paths$library())
+          renv::deactivate()
+        shell: Rscript {0}
 
       - name: "Setup Package Cache"
         uses: carpentries/actions/setup-lesson-deps@main
