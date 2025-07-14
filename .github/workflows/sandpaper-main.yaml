@@ -56,6 +56,7 @@ jobs:
         run: |
           renv::activate(profile = "lesson-requirements")
           renv::install("SAFEHR-data/omopcept", library = renv::paths$library())
+          renv::deactivate()
         shell: Rscript {0}
 
       - name: "Setup Package Cache"
