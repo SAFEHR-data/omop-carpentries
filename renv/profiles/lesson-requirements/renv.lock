@@ -1484,8 +1484,10 @@
       "URL": "https://github.com/SAFEHR-data/omopcept",
       "BugReports": "https://github.com/SAFEHR-data/omopcept/issues",
       "Depends": [
-        "R (>= 4.1.0)"
+        "R (>= 3.5.0)"
       ],
+      "LazyData": "true",
+      "LazyDataCompression": "xz",
       "Imports": [
         "dplyr",
         "rlang",
@@ -1509,15 +1511,14 @@
       ],
       "VignetteBuilder": "knitr",
       "Config/testthat/edition": "3",
+      "Author": "Andy South [aut, cre] (ORCID: <https://orcid.org/0000-0003-4051-6135>)",
+      "Maintainer": "Andy South <southandy@gmail.com>",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
-      "RemoteRepo": "omopcept",
       "RemoteUsername": "SAFEHR-data",
-      "RemoteRef": "HEAD",
-      "RemoteSha": "c484d581fdaa9b74271064e24e22dfb570af515b",
-      "NeedsCompilation": "no",
-      "Author": "Andy South [aut, cre] (ORCID: <https://orcid.org/0000-0003-4051-6135>)",
-      "Maintainer": "Andy South <southandy@gmail.com>"
+      "RemoteRepo": "omopcept",
+      "RemoteRef": "master",
+      "RemoteSha": "c484d581fdaa9b74271064e24e22dfb570af515b"
     },
     "omopgenerics": {
       "Package": "omopgenerics",
