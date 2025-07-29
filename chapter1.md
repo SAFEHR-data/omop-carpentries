@@ -361,7 +361,7 @@ cdm$person
 
 ``` output
 # Source:   table<person> [?? x 18]
-# Database: DuckDB v1.3.2 [unknown@Linux 6.8.0-1030-azure:R 4.5.1//tmp/RtmpbHy8D6/file16eba1fe8d8.duckdb]
+# Database: DuckDB v1.3.2 [unknown@Linux 6.8.0-1031-azure:R 4.5.1//tmp/Rtmp8FR1nZ/file21d7258c6e46.duckdb]
    person_id gender_concept_id year_of_birth month_of_birth day_of_birth
        <int>             <int>         <int>          <int>        <int>
  1         6              8532          1963             12           31
@@ -389,7 +389,7 @@ cdm$condition_occurrence
 
 ``` output
 # Source:   table<condition_occurrence> [?? x 16]
-# Database: DuckDB v1.3.2 [unknown@Linux 6.8.0-1030-azure:R 4.5.1//tmp/RtmpbHy8D6/file16eba1fe8d8.duckdb]
+# Database: DuckDB v1.3.2 [unknown@Linux 6.8.0-1031-azure:R 4.5.1//tmp/Rtmp8FR1nZ/file21d7258c6e46.duckdb]
    condition_occurrence_id person_id condition_concept_id condition_start_date
                      <int>     <int>                <int> <date>              
  1                    4483       263              4112343 2015-10-02          
