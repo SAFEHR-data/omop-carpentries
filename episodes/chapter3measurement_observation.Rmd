@@ -1,44 +1,49 @@
 ---
-title: "Placeholder Chapter 3"
+title: "Chapter 3 OMOP measurement and observation tables"
 teaching: 0
 exercises: 0
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions 
 
-- What
+- What do the measurement and observation tables contain ?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
 
-- 1
+- Understand that these tables contain attributes and values
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## Introduction
 
-This is a lesson created via The Carpentries Workbench. It is written in
-[Pandoc-flavored Markdown](https://pandoc.org/MANUAL.txt) for static files and
-[R Markdown][r-markdown] for dynamic files that can render code into output. 
-Please refer to the [Introduction to The Carpentries 
-Workbench](https://carpentries.github.io/sandpaper-docs/) for full documentation.
+The OMOP [measurement](https://ohdsi.github.io/CommonDataModel/cdm54.html#measurement) and [observation](https://ohdsi.github.io/CommonDataModel/cdm54.html#observation) tables contain information collected about a person. The difference between them is that measurement contains numerical or categorical values collected by a standardised process, whereas observation contains less standardised clinical facts. Measurements are predominately lab tests with a few exceptions, like blood pressure or function tests. 
 
-What you need to know is that there are three sections required for a valid
-Carpentries lesson template:
+A `person_id` column means that there can be multiple records per person.
 
- 1. `questions` are displayed at the beginning of the episode to prime the
-    learner for the content.
- 2. `objectives` are the learning objectives for an episode displayed with
-    the questions.
- 3. `keypoints` are displayed at the end of the episode to reinforce the
-    objectives.
+Columns are similar between measurement and observation. 
+
+## Concepts and values
+
+`measurement_concept_id` or `observation_concept_id` columns define what has been recorded. 
+
+`value*` columns store the actual value either as :
+
+`value_as_number`       numeric
+`unit_concept_id`       units of the numeric value
+`value_as_concept_id`   categorical
+`operator_concept_id`   potential to have operators e.g. < or >
+
+
+Examples. 
+
+
+
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: instructor
 
-Inline instructor notes can help inform instructors of timing challenges
-associated with the lessons. They appear in the "Instructor View"
-
+Inline instructor notes
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: challenge 
