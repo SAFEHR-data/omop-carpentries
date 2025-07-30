@@ -35,16 +35,51 @@ Columns are similar between measurement and observation.
 `value_as_concept_id`   categorical
 `operator_concept_id`   potential to have operators e.g. < or >
 
-
-Examples. 
-
+Example concept names for measurement and observation. 
 
 
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: instructor
 
-Inline instructor notes
+some first example data we could use from new MeasurementDiagnostics package
+likely replace this with other
+the dplyr code should work on this too
+https://github.com/SAFEHR-data/omopcat/blob/main/data-raw/test_db/dummy/measurement.csv
+
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+```r
+
+install.packages("MeasurementDiagnostics")
+library(dplyr)
+
+cdm <- MeasurementDiagnostics::mockMeasurementDiagnostics()
+
+# first we can see that some concepts have a value_as_number
+freq_numeric <- cdm$measurement |>
+  filter(!is.na(value_as_number)) |> 
+  count(measurement_concept_id, unit_concept_id) |> 
+  left_join(select(cdm$concept, concept_id, concept_name), by=join_by(measurement_concept_id==concept_id)) |>   rename(measurement_concept_name=concept_name) |> 
+  left_join(select(cdm$concept, concept_id, concept_name), by=join_by(unit_concept_id==concept_id)) |> 
+  rename(unit_concept_name=concept_name) |> 
+  collect()
+  
+freq_numeric |> head()
+  
+# other concepts have a value_as_concept_id
+freq_categorical <- cdm$measurement |>
+  filter(!is.na(value_as_concept_id)) |> 
+  count(measurement_concept_id, value_as_concept_id) |> 
+  left_join(select(cdm$concept, concept_id, concept_name), by=join_by(measurement_concept_id==concept_id)) |>   rename(measurement_concept_name=concept_name) |> 
+  left_join(select(cdm$concept, concept_id, concept_name), by=join_by(value_as_concept_id==concept_id)) |> 
+  rename(value_as_concept_name=concept_name) |> 
+  collect()
+  
+freq_categorical |> head()
+
+```
+
+
 
 ::::::::::::::::::::::::::::::::::::: challenge 
 
