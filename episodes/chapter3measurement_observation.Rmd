@@ -7,12 +7,15 @@ exercises: 0
 :::::::::::::::::::::::::::::::::::::: questions 
 
 - What do the measurement and observation tables contain ?
+- How do we access values ?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
 
-- Understand that these tables contain attributes and values
+- Understand that these tables contain concept_ids and values obtained from them
+- Know that values can be numeric with units
+- and/or categorical by specifying a standard concept_id that can be looked up in the concept table 
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -26,17 +29,31 @@ Columns are similar between measurement and observation.
 
 ## Concepts and values
 
-`measurement_concept_id` or `observation_concept_id` columns define what has been recorded. 
+**measurement_concept_id** or **observation_concept_id** columns define what has been recorded e.g. 'Pulse rate'. 
 
-`value*` columns store the actual value either as :
+These **value** columns store values :
 
-`value_as_number`       numeric
-`unit_concept_id`       units of the numeric value
-`value_as_concept_id`   categorical
-`operator_concept_id`   potential to have operators e.g. < or >
+column name           | stored value
+----------------      | ------------
+**value_as_number**   |    numeric value
+**unit_concept_id**   |    units of the numeric value
+**value_as_concept_id** |   categorical value
+**operator_concept_id** |  optional operators e.g. < or >
+
+Where values are a concept_id, the name of that concept can be looked up in the concept table that is part of the OMOP vocabularies and included in most CDM instances. We show this below.
 
 Example concept names for measurement and observation. 
 
+Example Measurement concepts        | Example Observation concepts
+----------------------------        | ----------------------------
+Respiratory rate                    | Respiratory function
+Pulse rate                          | Wound dressing observable
+Hemoglobin saturation with oxygen   | Mandatory breath rate
+Body temperature                    | Body position for blood pressure measurement
+Diastolic blood pressure            | Alcohol intake - finding
+Arterial oxygen saturation          | Tobacco smoking behavior - finding
+Body weight                         | Vomit appearance
+Leukocytes [#/volume] in Blood      | State of consciousness and awareness
 
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: instructor
@@ -47,6 +64,8 @@ the dplyr code should work on this too
 https://github.com/SAFEHR-data/omopcat/blob/main/data-raw/test_db/dummy/measurement.csv
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+## Looking at numeric measurement values
 
 ```r
 
@@ -59,103 +78,91 @@ cdm <- MeasurementDiagnostics::mockMeasurementDiagnostics()
 freq_numeric <- cdm$measurement |>
   filter(!is.na(value_as_number)) |> 
   count(measurement_concept_id, unit_concept_id) |> 
-  left_join(select(cdm$concept, concept_id, concept_name), by=join_by(measurement_concept_id==concept_id)) |>   rename(measurement_concept_name=concept_name) |> 
+  # join concept names
+  left_join(select(cdm$concept, concept_id, concept_name), by=join_by(measurement_concept_id==concept_id)) |> 
+  rename(measurement_concept_name=concept_name) |> 
   left_join(select(cdm$concept, concept_id, concept_name), by=join_by(unit_concept_id==concept_id)) |> 
   rename(unit_concept_name=concept_name) |> 
   collect()
   
-freq_numeric |> head()
+freq_numeric |> head(3)
   
-# other concepts have a value_as_concept_id
-freq_categorical <- cdm$measurement |>
-  filter(!is.na(value_as_concept_id)) |> 
-  count(measurement_concept_id, value_as_concept_id) |> 
-  left_join(select(cdm$concept, concept_id, concept_name), by=join_by(measurement_concept_id==concept_id)) |>   rename(measurement_concept_name=concept_name) |> 
-  left_join(select(cdm$concept, concept_id, concept_name), by=join_by(value_as_concept_id==concept_id)) |> 
-  rename(value_as_concept_name=concept_name) |> 
-  collect()
-  
-freq_categorical |> head()
-
 ```
 
+## Output of numeric values
+
+TODO these data aren't great but they are a start
+
+```output
+
+  measurement_concept_id unit_concept_id     n measurement_concept_name                         unit_concept_name
+                   <int>           <dbl> <dbl> <chr>                                            <chr>            
+1                3002069            9529    50 Alkaline phosphatase.bone/Alkaline phosphatase.… kilogram         
+2                3012056            9529    50 Uroporphyrin 3 isomer [Moles/volume] in Urine    kilogram         
+3                3026074            9529    50 Uroporphyrin 3 isomer [Moles/volume] in Stool    kilogram 
+
+```
 
 
 ::::::::::::::::::::::::::::::::::::: challenge 
 
-## Challenge 1: Can you do it?
+## Challenge 1: Can you adapt the code above to output the frequency of categorical values ?
 
-What is the output of this command?
+:::::::::::::::::::::::: solution 
+
+## Code
 
 ```r
-paste("This", "new", "lesson", "looks", "good")
+# other concepts have a value_as_concept_id
+freq_categorical <- cdm$measurement |>
+  filter(!is.na(value_as_concept_id)) |> 
+  count(measurement_concept_id, value_as_concept_id) |> 
+  # join concept names
+  left_join(select(cdm$concept, concept_id, concept_name), by=join_by(measurement_concept_id==concept_id)) |>  
+  rename(measurement_concept_name=concept_name) |> 
+  left_join(select(cdm$concept, concept_id, concept_name), by=join_by(value_as_concept_id==concept_id)) |> 
+  rename(value_as_concept_name=concept_name) |> 
+  collect()
+  
+freq_categorical |> head(3)
+
 ```
-
-:::::::::::::::::::::::: solution 
-
-## Output
  
 ```output
-[1] "This new lesson looks good"
+  measurement_concept_id value_as_concept_id     n measurement_concept_name                 value_as_concept_name
+                   <int>               <dbl> <dbl> <chr>                                    <chr>                
+1                3001467             4328749    33 Alkaline phosphatase.bone [Enzymatic ac… High                 
+2                3002069             4267416    33 Alkaline phosphatase.bone/Alkaline phos… Low                  
+3                3011539             4267416    33 Uroporphyrin 3 isomer [Moles/volume] in… Low    
+
 ```
 
 :::::::::::::::::::::::::::::::::
 
 
-## Challenge 2: how do you nest solutions within challenge blocks?
+:::::::::::::::::::::::::::::::::::::
 
-:::::::::::::::::::::::: solution 
+## When a measurement or observation was done
 
-You can add a line with at least three colons and a `solution` tag.
+There are date and time columns indicating when a measurement or observation was performed.
 
-:::::::::::::::::::::::::::::::::
-::::::::::::::::::::::::::::::::::::::::::::::::
+A **visit_occurrence_id** specifies the visit that it occurred in.
 
-## Figures
-
-You can also include figures generated from R Markdown:
-
-```{r pyramid, fig.alt = "pie chart illusion of a pyramid", fig.cap = "Sun arise each and every morning"}
-pie(
-  c(Sky = 78, "Sunny side of pyramid" = 17, "Shady side of pyramid" = 5), 
-  init.angle = 315, 
-  col = c("deepskyblue", "yellow", "yellow3"), 
-  border = FALSE
-)
-```
-
-Or you can use standard markdown for static figures with the following syntax:
-
-`![optional caption that appears below the figure](figure url){alt='alt text for
-accessibility purposes'}`
-
-![You belong in The Carpentries!](https://raw.githubusercontent.com/carpentries/logo/master/Badge_Carpentries.svg){alt='Blue Carpentries hex person logo with no text.'}
 
 ::::::::::::::::::::::::::::::::::::: callout
 
 Callout sections can highlight information.
 
-They are sometimes used to emphasise particularly important points
-but are also used in some lessons to present "asides": 
-content that is not central to the narrative of the lesson,
-e.g. by providing the answer to a commonly-asked question.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 
-## Math
-
-One of our episodes contains $\LaTeX$ equations when describing how to create
-dynamic reports with {knitr}, so we now use mathjax to describe this:
-
-`$\alpha = \dfrac{1}{(1 - \beta)^2}$` becomes: $\alpha = \dfrac{1}{(1 - \beta)^2}$
-
-Cool, right?
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
-- Use `.md` files for episodes when you want static content
-- Use `.Rmd` files for episodes when you need to generate output
+- the measurement table contains numeric or categorical results of a standardised process
+- the observation table contains less standardised clinical facts
+
 - Run `sandpaper::check_lesson()` to identify any issues with your lesson
 - Run `sandpaper::build_lesson()` to preview your lesson locally
 
