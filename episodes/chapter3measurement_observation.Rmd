@@ -148,6 +148,17 @@ There are date and time columns indicating when a measurement or observation was
 
 A **visit_occurrence_id** specifies the visit that it occurred in.
 
+TODO do we want to add more here with example data
+
+## Advanced : Linking measurement and observation tables to other tables e.g. specimen
+
+There are **measurement_event_id** and **observation_event_id** columns that can link a record to the primary key in another table e.g. **specimen_id**. If these are used then **meas_event_field_concept_id** or **obs_event_field_concept_id** need to contain the concept_id corresponding to the linked table (in this case specimen).
+
+For microbiology results observation_concept_id can store the genus & species of an organism & measurement_concept_id can store its growth.
+
+TODO question in the above do they need to be linked by fact_relationship to deal with multiple organisms from the same specimen ?
+TODO do we want to add more here with example data
+
 
 ::::::::::::::::::::::::::::::::::::: callout
 
