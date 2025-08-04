@@ -29,9 +29,9 @@ Columns are similar between measurement and observation.
 
 ## Concepts and values
 
-**measurement_concept_id** or **observation_concept_id** columns define what has been recorded e.g. 'Pulse rate'. 
+Data are stored as questions and answers. A question (e.g Pulse rate) is defined by a concept_id and the answer is stored in a value column.
 
-Example concept names for measurement and observation. 
+**measurement_concept_id** or **observation_concept_id** columns define what has been recorded here are some examples : 
 
 Example Measurement concepts        | Example Observation concepts
 ----------------------------        | ----------------------------
@@ -93,6 +93,7 @@ freq_numeric |> head(3)
 ## Output of numeric values
 
 TODO these data from MeasurementDiagnostics aren't great but they are a start
+
 * Good that it is a complete CDM with the concept table for joining names.
 * Bad few values and unrealistic units
 
