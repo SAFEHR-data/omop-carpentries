@@ -31,17 +31,6 @@ Columns are similar between measurement and observation.
 
 **measurement_concept_id** or **observation_concept_id** columns define what has been recorded e.g. 'Pulse rate'. 
 
-These **value** columns store values :
-
-column name           | stored value    | example | concept_name
-----------------      | ------------    | --------- | -------
-**value_as_number**   |    numeric value              | 1.2 | -
-**unit_concept_id**   |    units of the numeric value | 9529 | kilogram
-**value_as_concept_id** |   categorical value         | 4328749 | High
-**operator_concept_id** |  optional operators         | 4172704 | >
-
-Where values are a concept_id, the name of that concept can be looked up in the concept table that is part of the OMOP vocabularies and included in most CDM instances. We show this below.
-
 Example concept names for measurement and observation. 
 
 Example Measurement concepts        | Example Observation concepts
@@ -54,6 +43,18 @@ Diastolic blood pressure            | Alcohol intake - finding
 Arterial oxygen saturation          | Tobacco smoking behavior - finding
 Body weight                         | Vomit appearance
 Leukocytes [#/volume] in Blood      | State of consciousness and awareness
+
+
+These **value** columns store values :
+
+column name           | stored value    | example | concept_name
+----------------      | ------------    | --------- | -------
+**value_as_number**   |    numeric value              | 1.2 | -
+**unit_concept_id**   |    units of the numeric value | 9529 | kilogram
+**value_as_concept_id** |   categorical value         | 4328749 | High
+**operator_concept_id** |  optional operators         | 4172704 | >
+
+Where values are a concept_id, the name of that concept can be looked up in the concept table that is part of the OMOP vocabularies and included in most CDM instances. We show this below.
 
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: instructor
