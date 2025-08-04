@@ -162,12 +162,6 @@ TODO question in the above do they need to be linked by fact_relationship to dea
 TODO do we want to add more here with example data
 
 
-::::::::::::::::::::::::::::::::::::: callout
-
-Callout sections can highlight information.
-
-
-::::::::::::::::::::::::::::::::::::::::::::::::
 
 
 
