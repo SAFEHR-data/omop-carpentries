@@ -33,12 +33,12 @@ Columns are similar between measurement and observation.
 
 These **value** columns store values :
 
-column name           | stored value
-----------------      | ------------
-**value_as_number**   |    numeric value
-**unit_concept_id**   |    units of the numeric value
-**value_as_concept_id** |   categorical value
-**operator_concept_id** |  optional operators e.g. < or >
+column name           | stored value    | example | concept_name
+----------------      | ------------    | --------- | -------
+**value_as_number**   |    numeric value              | 1.2 | -
+**unit_concept_id**   |    units of the numeric value | 9529 | kilogram
+**value_as_concept_id** |   categorical value         | 4328749 | High
+**operator_concept_id** |  optional operators         | 4172704 | >
 
 Where values are a concept_id, the name of that concept can be looked up in the concept table that is part of the OMOP vocabularies and included in most CDM instances. We show this below.
 
@@ -91,7 +91,9 @@ freq_numeric |> head(3)
 
 ## Output of numeric values
 
-TODO these data aren't great but they are a start
+TODO these data from MeasurementDiagnostics aren't great but they are a start
+* Good that it is a complete CDM with the concept table for joining names.
+* Bad few values and unrealistic units
 
 ```output
 
