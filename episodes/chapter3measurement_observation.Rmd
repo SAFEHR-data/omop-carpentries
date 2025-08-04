@@ -21,7 +21,9 @@ exercises: 0
 
 ## Introduction
 
-The OMOP [measurement](https://ohdsi.github.io/CommonDataModel/cdm54.html#measurement) and [observation](https://ohdsi.github.io/CommonDataModel/cdm54.html#observation) tables contain information collected about a person. The difference between them is that measurement contains numerical or categorical values collected by a standardised process, whereas observation contains less standardised clinical facts. Measurements are predominately lab tests with a few exceptions, like blood pressure or function tests. 
+The OMOP [measurement](https://ohdsi.github.io/CommonDataModel/cdm54.html#measurement) and [observation](https://ohdsi.github.io/CommonDataModel/cdm54.html#observation) tables contain information collected about a person. 
+The difference between them is that measurement contains numerical or categorical values collected by a standardised process, whereas observation contains less standardised clinical facts. 
+Measurements are predominately lab tests with a few exceptions, like blood pressure or function tests. 
 
 A `person_id` column means that there can be multiple records per person.
 
