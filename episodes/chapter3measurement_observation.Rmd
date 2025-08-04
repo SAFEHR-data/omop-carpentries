@@ -31,7 +31,7 @@ Columns are similar between measurement and observation.
 
 ## Concepts and values
 
-Data are stored as questions and answers. A question (e.g Pulse rate) is defined by a concept_id and the answer is stored in a value column.
+Data are stored as questions and answers. A question (e.g. `Pulse rate`) is defined by a concept_id and the answer is stored in a value column.
 
 **measurement_concept_id** or **observation_concept_id** columns define what has been recorded here are some examples : 
 
@@ -49,7 +49,7 @@ Leukocytes [#/volume] in Blood      | State of consciousness and awareness
 
 These **value** columns store values :
 
-column name           | stored value    | example | concept_name
+column name           | data type    | example | concept_name
 ----------------      | ------------    | --------- | -------
 **value_as_number**   |    numeric value              | 1.2 | -
 **unit_concept_id**   |    units of the numeric value | 9529 | kilogram
@@ -185,8 +185,6 @@ TODO do we want to add more here with example data
 - the measurement table contains numeric or categorical results of a standardised process
 - the observation table contains less standardised clinical facts
 
-- Run `sandpaper::check_lesson()` to identify any issues with your lesson
-- Run `sandpaper::build_lesson()` to preview your lesson locally
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
