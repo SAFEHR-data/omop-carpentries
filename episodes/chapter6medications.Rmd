@@ -6,17 +6,45 @@ exercises: 0
     
 :::::::::::::::::::::::::::::::::::::: questions 
 
-- What
+- Where are medications stored ?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
 
-- 1
+- Know that exposure of a patient to medications is mainly stored in the drug_exposure table
+- Understand that drug concepts can be at different levels of granularity
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## Introduction
+
+The OMOP [drug_exposure](https://ohdsi.github.io/CommonDataModel/cdm54.html#drug_exposure) table stores exposure of a patient to medications.
+
+The main columns are :
+
+column name           | content
+----------------      | ------------
+**drug_exposure_id**   | unique identifier given that person can get multiple exposures per visit
+**person_id**   |    the patient
+**drug_concept_id** |   standard drug identifier, can be at different levels of granularity
+**drug_exposure_start_date** |  may also be an optional start_datetime
+**drug_exposure_end_date** | may also be an optional end_datetime
+**drug_type_concept_id**  | where the record came from e.g. EHR administration record
+
+Drug data can be very complicated, as can the process of converting from the source data to OMOP. You may not find what you expect depending on this and the quality of the source data. 
+
+## Drug concepts
+
+The standard drug vocabularies are called `RxNorm` and `RxNormExtension`. `RxNorm` contains all drugs currently on the US market. `RxNormExtension` is maintained by the OHDSI community and contains all other drugs.
+
+There are drug hierarchies and a particular concept_id can be at different levels in this hierarchy these are the main ones.
+
+| RxNorm Term Type                | Description |
+|--------------------------------|-------------|
+| **Ingredient**                 | A base active drug ingredient, without strength or dose form (e.g., *Ibuprofen*). |
+| **Clinical Drug Component**    | A drug component with strength but no form (e.g., *Ibuprofen 200 mg*). |
+| **Clinical Drug**              | A combination of an ingredient, strength, and dose form (e.g., *Ibuprofen 200 mg Oral Tablet*). |
 
 
 
