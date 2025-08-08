@@ -59,7 +59,7 @@ column name           | content
 **drug_source_concept_id**  | OMOP concept ID for the source value
 
 
-
+TODO do we want to include about classifying medications by type ? It is not straightforward. I did something in omopcept but probably too tricky to include here.
 
 
 ```r
