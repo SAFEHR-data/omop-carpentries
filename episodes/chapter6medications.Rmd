@@ -14,6 +14,7 @@ exercises: 0
 
 - Know that exposure of a patient to medications is mainly stored in the drug_exposure table
 - Understand that drug concepts can be at different levels of granularity
+- Understand that source values are mapped to a standard vocabulary
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -31,12 +32,14 @@ column name           | content
 **drug_exposure_start_date** |  may also be an optional start_datetime
 **drug_exposure_end_date** | may also be an optional end_datetime
 **drug_type_concept_id**  | where the record came from e.g. EHR administration record
+**drug_source_value**  | in UCLH the NHS dm+d Dictionary of Medicines and Devices ID
+**drug_source_concept_id**  | OMOP concept ID for the source value
 
 Drug data can be very complicated, as can the process of converting from the source data to OMOP. You may not find what you expect depending on this and the quality of the source data. 
 
 ## Drug concepts
 
-The standard drug vocabularies are called `RxNorm` and `RxNormExtension`. `RxNorm` contains all drugs currently on the US market. `RxNormExtension` is maintained by the OHDSI community and contains all other drugs.
+The standard OHDSI drug vocabularies are called `RxNorm` and `RxNormExtension`. `RxNorm` contains all drugs currently on the US market. `RxNormExtension` is maintained by the OHDSI community and contains all other drugs.
 
 A particular concept_id can be at one of a number of different levels in a drug hierarchy. These are the main levels in RxNorm which are stored in concept_class_id in the concept table.
 
@@ -46,8 +49,22 @@ A particular concept_id can be at one of a number of different levels in a drug 
 | **Clinical Drug Component**    | A drug component with strength but no form (e.g., *Ibuprofen 200 mg*). |
 | **Clinical Drug**              | A combination of an ingredient, strength, and dose form (e.g., *Ibuprofen 200 mg Oral Tablet*). |
 
+## Drug mapping in the NHS
+
+Drugs in the NHS are standardised to the NHS Dictionary of Medicines and Devices (dm+d). dm+d is included in OMOP so there are values of OMOP concept_id for each dm+d. However because dm+d is not a standard vocabulary in OMOP it is translate once more to get to a standard OMOP concept id in `RxNorm` or `RxNormExtension` that can be used in collaborative studies. If there is a drug_concept_id value of 0 and there are source codes this can be because that drug doesn't map to a standard ID. Reminder that the source values are stored in these columns.
+
+column name           | content
+----------------      | ------------
+**drug_source_value**  | in UCLH the NHS dm+d Dictionary of Medicines and Devices ID
+**drug_source_concept_id**  | OMOP concept ID for the source value
+
+
+
+
+
 ```r
 # TODO later use the examples below or similar to create exercises
+# OR do we want to make our own example data, e.g. including dm+d
 # explore some drug_exposure data
 
 library(CDMConnector)
