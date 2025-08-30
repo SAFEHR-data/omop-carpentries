@@ -2,27 +2,24 @@
 site: sandpaper::sandpaper_site
 ---
 
-This is a new lesson built with [The Carpentries Workbench][workbench]. 
+[//]: #(this content will be displayed on the summary and set up page)
+
+This is the format of the workshop on OMOP and R that will take place at the UCL Festival of Digital Innovation on July 15th 2025.
+
+It is the initial work on a full Carpentries Course that we will begin to roll out from September.
+
+::: prereq
+
+A laptop
+
+This lesson assumes you have current versions of the following installed on your computer:
+
+- the [R software](https://cran.r-project.org/mirrors.html) itself, and
+- [RStudio Desktop](https://www.rstudio.com/products/rstudio/download/#download).
+
+You also need to download some files to follow this lesson:
+
+- Download [omop-data.zip](episodes/data/omop-data.zip).
 
 
-[workbench]: https://carpentries.github.io/sandpaper-docs
-
-Learning objectives
-
-* Understand
-  * Examine the diagram of the OMOP tables and the data specification
-  * Familiarise with the vocab schema
-  * Describe the pros and cons on using OMOP vs raw data, why this is the way forward
-  * Use Athena and other OHDSI tools for reference
-  * Describe the full landscape of OMOP tools and the community
-* Interrogate
-  * Open parquet datasets and read in to analytics environment
-  * Join to concept table and observe data in human-readable format
-  * Make an analytical view
-  * Create a statistical summary
-
-:::::: prereq
-
-- basic R
-
-::::::::::
+:::
