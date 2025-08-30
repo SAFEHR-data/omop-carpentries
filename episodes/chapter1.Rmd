@@ -92,7 +92,7 @@ OMOP is a format for recording Electronic Healthcare Records. It allows you to f
 
 ![The OMOP Common Data Model ](fig/OMOP-CDM.png){alt='A diagram showing the tables that occur in the OMOP-CDM , how they relate to each other and standard vocabularies.'}
 
-OMOP CDM stands for the Observational Medical Outcomes Partnership Common Data Model. You don�t really need to remember what OMOP stands for. Remembering that CDM stands for Common Data Model can help you remember that it is a data standard that can be applied to different data sources to create data in a �Common� (same) format.
+OMOP CDM stands for the Observational Medical Outcomes Partnership Common Data Model. You don't really need to remember what OMOP stands for. Remembering that CDM stands for Common Data Model can help you remember that it is a data standard that can be applied to different data sources to create data in a 'Common' (same) format.
 The table diagram will look confusing to start with but you can use data in the OMOP CDM without needing to understand (or populate) all 37 tables.
 
 ::::::::::::::::::::::::::::::::::::: challenge 
@@ -117,7 +117,7 @@ There are a handful of core tables and columns that contain key information abou
 - [condition_occurrence](https://ohdsi.github.io/CommonDataModel/cdm54.html#condition_occurrence) records relating to a Person suggesting the presence of a medical condition.
 - [drug_exposure](https://ohdsi.github.io/CommonDataModel/cdm54.html#drug_exposure) records about exposure of a patient to a drug.
 - [procedure_occurrence](https://ohdsi.github.io/CommonDataModel/cdm54.html#procedure_occurrence) activities carried out by a healthcare provider on the patient with a diagnostic or therapeutic purpose.
-- [measurement](https://ohdsi.github.io/CommonDataModel/cdm54.html#measurement) numerical or categorical values obtained through standardized examination of a Person or Person�s sample.
+- [measurement](https://ohdsi.github.io/CommonDataModel/cdm54.html#measurement) numerical or categorical values obtained through standardized examination of a Person or Person's sample.
 - [observation](https://ohdsi.github.io/CommonDataModel/cdm54.html#observation) clinical facts about a Person obtained in the context of examination, questioning or a procedure.
 - [visit_occurrence](https://ohdsi.github.io/CommonDataModel/cdm54.html#visit_occurrence) records of times where Persons engage with the healthcare system.
 
