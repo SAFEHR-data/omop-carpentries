@@ -92,7 +92,8 @@ OMOP is a format for recording Electronic Healthcare Records. It allows you to f
 
 ![The OMOP Common Data Model ](fig/OMOP-CDM.png){alt='A diagram showing the tables that occur in the OMOP-CDM , how they relate to each other and standard vocabularies.'}
 
-OMOP CDM stands for the Observational Medical Outcomes Partnership Common Data Model. You don't really need to remember what OMOP stands for. Remembering that CDM stands for Common Data Model can help you remember that it is a data standard that can be applied to different data sources to create data in a 'Common' (same) format.
+OMOP CDM stands for the Observational Medical Outcomes Partnership Common Data Model. You do not really need to remember what OMOP stands for. Remembering that CDM stands for Common Data Model can help you remember that it is a data standard that can be applied to different data sources to create data in a 'Common' (same) format.
+
 The table diagram will look confusing to start with but you can use data in the OMOP CDM without needing to understand (or populate) all 37 tables.
 
 ::::::::::::::::::::::::::::::::::::: challenge 
