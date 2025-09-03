@@ -29,12 +29,13 @@ The `visit_occurrence` table contains [events where Persons engage with the heal
 The main clinical tables `condition_occurrence`, `measurement`, `observation` and `drug_exposure` contain a `visit_occurrence_id` that links to this table.
 
 
-`visit_concept_id` sepcifies the kind of visit that took place using standardised OMOP concepts. These include `Inpatient visit`, `Emergency Room Visit` and `Outpatient Visit`. Inpatient visits can last for longer than one day.    
+`visit_concept_id` specifies the kind of visit that took place using standardised OMOP concepts. These include `Inpatient visit`, `Emergency Room Visit` and `Outpatient Visit`. Inpatient visits can last for longer than one day.    
 
 The `visit_detail` table can contain information about time periods shorter than the visit (for example transfer between wards) but we will not cover that further here.
 
 Firstly here is some code (from ChatGPT) to create some interesting example data.
 TODO this code is lengthy, we may later want to hide it or save the output as .Rdata in the repo
+TODO also the example data aren't actually that great to illustrate visits. We probably want multiple measurements per visit.
 
 ```r
 
