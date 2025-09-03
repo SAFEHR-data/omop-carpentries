@@ -246,7 +246,9 @@ patient_visits
 Note, that we wouldn't usually expect Outpatient or Emergency Room Visits to last for longer than a day. They do in this case because the example data were generated randomly.
 
 
-Here is how we can plot blood pressure over time for selected patients using just the measurement table.
+Here is how we can plot blood pressure over time for selected patients using the measurement table and include the type of visit.
+
+TODO Andy realised that the example data are not very instructive because just one measurement per visit, not sure what to do about ? 
 
 ```r
 # Define concept IDs
@@ -255,28 +257,23 @@ diastolic_id <- 3012888
 
 selected_patients <- c(1:4)
 
-bp <- cdm$measurement %>%
+bp <- cdm$measurement |> 
   filter(person_id %in% selected_patients) |> 
-  filter(measurement_concept_id %in% c(systolic_id, diastolic_id)) |> 
-  mutate(
-    bp_type = case_when(
-      measurement_concept_id == systolic_id ~ "Systolic",
-      measurement_concept_id == diastolic_id ~ "Diastolic"
-    )
-  )
+  filter(measurement_concept_id %in% c(systolic_id)) |> 
+  left_join(cdm$visit_occurrence,by = c("visit_occurrence_id", "person_id")) |> 
+  left_join(cdm$concept, by = join_by(visit_concept_id == concept_id)) |> 
+  rename(visit_concept_name = concept_name)
 
-ggplot(bp, aes(x = measurement_date, y = value_as_number, color = bp_type)) +
-  geom_line() +
+ggplot(bp, aes(x = measurement_date, y = value_as_number, shape = visit_concept_name)) +
+  #geom_line() +
   geom_point() +
   facet_wrap(~ person_id, scales = "free_y") +
   labs(
     title = "Blood Pressure Over Time for Selected Patients",
     x = "Date",
-    y = "Blood Pressure (mmHg)",
-    color = "Measurement Type"
+    y = "Blood Pressure (mmHg)"
   ) +
   theme_minimal()
-
 
 
 ```
