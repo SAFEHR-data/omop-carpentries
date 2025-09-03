@@ -41,7 +41,7 @@ TODO this code is lengthy, we may later want to hide it or save the output as .R
 #person, visit_occurrence, measurement, drug_exposure, condition_occurrence, and concept tables
 #realistic blood pressure trends over time
 #conditions and drugs co-occurring within visits
-#unified concept table for joining concept names
+#concept table for joining concept names
 
 # Install and load required packages
 #install.packages(c("dplyr", "tibble", "lubridate", "uuid"), dependencies = TRUE)
@@ -182,7 +182,7 @@ cdm <- list(
 ```
 
 
-See what kinds of visits there are in the data.
+We can query the `visit_occurrence` table to see what kinds of visits there are in the data.
 
 ```r
 cdm$visit_occurrence |> 
@@ -190,9 +190,14 @@ cdm$visit_occurrence |>
   left_join(cdm$concept, by = c("visit_concept_id" = "concept_id"))
 ```
 
+```output
+  visit_concept_id     n concept_name        
+1             9201   103 Inpatient Visit     
+2             9202   112 Emergency Room Visit
+3             9203   120 Outpatient Visit    
+```
 
-
-Look for patients with more than one visit.
+Can you use `person_id` in the `visit_occurrence` table to find patients with more than one visit ?
 
 ```r
 visit_counts <- cdm$visit_occurrence |>
@@ -202,11 +207,18 @@ visit_counts <- cdm$visit_occurrence |>
   collect() |>   
   arrange(desc(n_visits))
 
-visit_counts |> head()
-
+visit_counts |> head(4)
 ```
 
-Look at visits for a single patient.
+```output
+  person_id n_visits
+1         1        5
+2         2        5
+3         5        5
+4         6        5
+```
+
+Now we can choose one of the patients from the previous table and look at all of their visits.
 
 ```r
 example_person_id <- visit_counts$person_id[1]
@@ -221,16 +233,22 @@ patient_visits <- cdm$visit_occurrence |>
   collect()
 
 patient_visits
-
 ```
 
 ```output
   visit_occurrence_id visit_start_date visit_end_date concept_name        
-1              192596 1998-03-24       1998-03-25     Inpatient Visit
-2              192623 1997-02-20       1997-02-21     Inpatient Visit
-3              192594 1932-08-06       1932-08-07     Inpatient Visit
-4              192595 1923-01-14       1923-01-15     Inpatient Visit
+1                   3 2020-01-26       2020-01-29     Emergency Room Visit
+2                   1 2020-12-02       2020-12-02     Emergency Room Visit
+3                   4 2021-06-22       2021-06-24     Inpatient Visit     
+4                   2 2022-03-07       2022-03-09     Outpatient Visit    
+5                   5 2022-09-07       2022-09-10     Outpatient Visit 
 ```
+Note, that we wouldn't usually expect Outpatient or Emergency Room Visits to last for longer than a day. They do in this case because the example data were generated randomly.
+
+
+
+
+
 
 Here is an example where the visit can make a difference to an analysis.
 Imagine we want to look at which drugs are associated with which conditions for patients.
@@ -272,6 +290,8 @@ co_occurrence_by_visit <- cdm$condition_occurrence |>
   arrange(desc(n_visits))
 
 ```
+
+
 
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
