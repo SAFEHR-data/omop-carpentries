@@ -120,7 +120,9 @@ condition_drug_map <- tribble(
 condition_occurrence <- visit_occurrence |>
   rowwise() |>
   do({
-    n_conditions <- sample(1:2, 1)
+    #n_conditions <- sample(1:2, 1)
+    #change n_conditions to 1 so that co-occurrence example works
+    n_conditions <- 1
     selected_conditions <- condition_drug_map |>
       slice_sample(n = n_conditions)
 
@@ -283,7 +285,6 @@ Here is an example where the visit can make a difference to an analysis.
 Imagine we want to look at which drugs are associated with which conditions for patients.
 
 If we were to join tables by `person_id` as we have seen in previous exercises we could get conditions and drugs that were separated by many years. Instead we can include `visit_occurrence_id` in the join to get co-occurrence of conditions and drugs by visit.
-TODO in this example the co-occurrences are meaningless, need better example data.
 
 ```r
 
@@ -313,13 +314,22 @@ co_occurrence_by_visit <- cdm$condition_occurrence |>
     by = c("drug_concept_id" = "concept_id")
   ) |>
   rename(drug_name = concept_name) |>
-  collect() |> 
+  select(n_visits, condition_name, drug_name) |> 
+  collect()
   
-  # Arrange for easier viewing
-  arrange(desc(n_visits))
 
 ```
 
+Here we see a perfect co-occurrence between conditions & expected drugs (because we generated the example data that way). If instead you didn't use the visit_occurrence_id you would see more unexpected associations occurring across widely separated visits for the same patient.
+
+TODO this example could be improved.
+
+```output
+  n_visits condition_name           drug_name   
+1      109 Type 2 diabetes mellitus Metformin   
+2      106 Hyperlipidemia           Atorvastatin
+3      120 Essential hypertension   Lisinopril  
+```
 
 
 
