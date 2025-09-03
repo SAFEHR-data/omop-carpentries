@@ -31,27 +31,166 @@ The main clinical tables `condition_occurrence`, `measurement`, `observation` an
 
 `visit_concept_id` sepcifies the kind of visit that took place using standardised OMOP concepts. These include `Inpatient visit`, `Emergency Room Visit` and `Outpatient Visit`. Inpatient visits can last for longer than one day.    
 
-The `visit_detail` table can contain information about time periods shorter than the visit (for example transfer between wards).
+The `visit_detail` table can contain information about time periods shorter than the visit (for example transfer between wards) but we will not cover that further here.
 
-Here we will use some mock data from the OMOPSketch package to illustrate.
-
-Load data.
+Firstly here is some code (from ChatGPT) to create some interesting example data.
+TODO this code is lengthy, we may later want to hide it or save the output as .Rdata in the repo
 
 ```r
-install.packages("OmopSketch")
-library(OmopSketch)
+
+#person, visit_occurrence, measurement, drug_exposure, condition_occurrence, and concept tables
+#realistic blood pressure trends over time
+#conditions and drugs co-occurring within visits
+#unified concept table for joining concept names
+
+# Install and load required packages
+#install.packages(c("dplyr", "tibble", "lubridate", "uuid"), dependencies = TRUE)
+
 library(dplyr)
-cdm <- mockOmopSketch()
+library(tibble)
+library(lubridate)
+library(uuid)
+
+set.seed(123)
+
+# 1. Create 100 synthetic patients
+n_patients <- 100
+
+person <- tibble(
+  person_id = 1:n_patients,
+  gender_concept_id = sample(c(8507, 8532), n_patients, replace = TRUE),  # Male / Female
+  year_of_birth = sample(1940:2000, n_patients, replace = TRUE)
+)
+
+# 2. Create multiple visits per patient
+visits_per_person <- sample(2:5, n_patients, replace = TRUE)
+
+visit_occurrence <- tibble(
+  person_id = rep(person$person_id, times = visits_per_person)
+) |>
+  mutate(
+    visit_occurrence_id = row_number(),
+    visit_start_date = as_date("2020-01-01") + sample(0:1000, n(), replace = TRUE),
+    visit_end_date = visit_start_date + sample(0:3, n(), replace = TRUE),
+    visit_concept_id = sample(c(9201, 9202, 9203), n(), replace = TRUE)  # Inpatient, ER, Outpatient
+  )
+
+# 3. Define blood pressure trend per patient
+bp_trends <- tibble(
+  person_id = 1:n_patients,
+  bp_slope = rnorm(n_patients, mean = 0, sd = 0.3)  # mmHg per visit
+)
+
+# 4. Generate blood pressure measurements (with trends)
+measurement <- visit_occurrence |>
+  left_join(bp_trends, by = "person_id") |>
+  group_by(person_id) |>
+  mutate(visit_index = row_number()) |>
+  ungroup() |>
+  rowwise() |>
+  do({
+    systolic_base <- rnorm(1, 120, 10)
+    diastolic_base <- rnorm(1, 75, 7)
+
+    systolic <- systolic_base + .$visit_index * .$bp_slope
+    diastolic <- diastolic_base + .$visit_index * .$bp_slope / 2
+
+    tibble(
+      measurement_id = c(UUIDgenerate(), UUIDgenerate()),
+      person_id = .$person_id,
+      visit_occurrence_id = .$visit_occurrence_id,
+      measurement_date = .$visit_start_date,
+      measurement_concept_id = c(3004249, 3012888),
+      value_as_number = c(round(systolic), round(diastolic)),
+      unit_concept_id = c(8510, 8510)
+    )
+  }) |>
+  bind_rows()
+
+
+# 6. Define condition-drug co-occurrence map
+condition_drug_map <- tribble(
+  ~condition_concept_id, ~condition_name,            ~drug_concept_id, ~drug_name,
+  201826,                "Type 2 diabetes mellitus",  1124300,          "Metformin",
+  320128,                "Essential hypertension",    1112807,          "Lisinopril",
+  319835,                "Hyperlipidemia",            19019073,         "Atorvastatin"
+)
+
+# 7. Generate conditions per visit
+condition_occurrence <- visit_occurrence |>
+  rowwise() |>
+  do({
+    n_conditions <- sample(1:2, 1)
+    selected_conditions <- condition_drug_map |>
+      slice_sample(n = n_conditions)
+
+    tibble(
+      condition_occurrence_id = UUIDgenerate(n_conditions),
+      person_id = .$person_id,
+      visit_occurrence_id = .$visit_occurrence_id,
+      condition_concept_id = selected_conditions$condition_concept_id,
+      condition_start_date = .$visit_start_date
+    )
+  }) |>
+  bind_rows()
+
+# 8. Generate drug exposures that match conditions
+drug_exposure <- condition_occurrence |>
+  left_join(condition_drug_map, by = "condition_concept_id") |>
+  group_by(person_id, visit_occurrence_id, drug_concept_id) |>
+  summarise(
+    drug_exposure_id = UUIDgenerate(1),
+    drug_exposure_start_date = min(condition_start_date),
+    .groups = "drop"
+  ) |>
+  mutate(days_supply = sample(30:90, n(), replace = TRUE))
+
+# 9. Build concept table (with all used concepts)
+concept <- tribble(
+  ~concept_id, ~concept_name,
+  3004249, "Systolic Blood Pressure",
+  3012888, "Diastolic Blood Pressure",
+  3027114, "Glucose",
+  3016502, "Creatinine",
+  1124300, "Metformin",
+  1112807, "Lisinopril",
+  19019073, "Atorvastatin",
+  201826, "Type 2 diabetes mellitus",
+  320128, "Essential hypertension",
+  319835, "Hyperlipidemia",
+  8510, "mm[Hg]",
+  8713, "mg/dL",
+  8840, "mmol/L",
+  9201, "Inpatient Visit",
+  9202, "Emergency Room Visit",
+  9203, "Outpatient Visit",
+  8507, "Male",
+  8532, "Female"
+)
+
+# 10. Combine into synthetic CDM object
+cdm <- list(
+  person = person,
+  visit_occurrence = visit_occurrence,
+  measurement = measurement,
+  condition_occurrence = condition_occurrence,
+  drug_exposure = drug_exposure,
+  concept = concept
+)
+
+
 ```
 
-See what kinds of visits there are in the data, for this example it is only Inpatient.
+
+See what kinds of visits there are in the data.
 
 ```r
 cdm$visit_occurrence |> 
   count(visit_concept_id) |> 
   left_join(cdm$concept, by = c("visit_concept_id" = "concept_id"))
-
 ```
+
+
 
 Look for patients with more than one visit.
 
