@@ -12,6 +12,9 @@ exercises: 0
 
 ::::::::::::::::::::::::::::::::::::: objectives
 
+- Know that a visit is a period of time and patients can have multiple visits
+- Understand that multiple measurements, conditions etc. can occur within and between visits
+- Understand that for some analyses you will want to look within visits and for other analyses to sum across visits 
 - Know that visits are recorded in the visit_occurrence table
 - Know each visit is unique to a person
 - Understand that other tables link to visits
