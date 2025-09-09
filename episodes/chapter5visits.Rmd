@@ -38,7 +38,6 @@ The `visit_detail` table can contain information about time periods shorter than
 
 Firstly here is some code (from ChatGPT) to create some interesting example data.
 TODO this code is lengthy, we may later want to hide it or save the output as .Rdata in the repo
-TODO also the example data aren't actually that great to illustrate visits. We probably want multiple measurements per visit.
 
 ```r
 
