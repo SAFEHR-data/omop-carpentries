@@ -214,8 +214,7 @@ visit_counts <- cdm$visit_occurrence |>
   group_by(person_id) |>
   summarise(n_visits = n()) |>
   filter(n_visits > 1) |>
-  collect() |>   
-  arrange(desc(n_visits))
+  collect()
 
 visit_counts |> head(4)
 ```
@@ -224,8 +223,8 @@ visit_counts |> head(4)
   person_id n_visits
 1         1        5
 2         2        5
-3         5        5
-4         6        5
+3         3        3
+4         4        4
 ```
 
 Now we can choose one of the patients from the previous table and look at all of their visits.
