@@ -246,13 +246,13 @@ patient_visits
 
 ```output
   visit_occurrence_id visit_start_date visit_end_date concept_name        
-1                   3 2020-01-26       2020-01-29     Emergency Room Visit
-2                   1 2020-12-02       2020-12-02     Emergency Room Visit
-3                   4 2021-06-22       2021-06-24     Inpatient Visit     
-4                   2 2022-03-07       2022-03-09     Outpatient Visit    
-5                   5 2022-09-07       2022-09-10     Outpatient Visit 
+1                   5 2020-06-27       2020-06-27     Outpatient Visit
+2                   1 2021-03-24       2021-03-24     Inpatient Visit 
+3                   3 2021-10-12       2021-10-15     Inpatient Visit 
+4                   2 2022-06-23       2022-06-25     Inpatient Visit 
+5                   4 2022-09-14       2022-09-14     Outpatient Visit
 ```
-Note, that we wouldn't usually expect Outpatient or Emergency Room Visits to last for longer than a day. They do in this case because the example data were generated randomly.
+Outpatient and Emergency Room Visits usually end on the same day, where Inpatient visits can last longer.
 
 
 Here is how we can plot blood pressure over time for selected patients using the measurement table and include the type of visit.
