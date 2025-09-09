@@ -82,37 +82,38 @@ visit_occurrence <- tibble(
                               visit_start_date),
   )
 
-# 3. Define blood pressure trend per patient
-bp_trends <- tibble(
+# Baseline + slope per patient in one tibble
+bp_params <- tibble(
   person_id = 1:n_patients,
-  bp_slope = rnorm(n_patients, mean = 0, sd = 0.3)  # mmHg per visit
+  bp_slope = rnorm(n_patients, mean = 0, sd = 0.3),   # mmHg per hour
+  systolic_base = rnorm(n_patients, mean = 120, sd = 10)
 )
 
-# 4. Generate blood pressure measurements (with trends)
 measurement <- visit_occurrence |>
-  left_join(bp_trends, by = "person_id") |>
-  group_by(person_id) |>
-  mutate(visit_index = row_number()) |>
-  ungroup() |>
+  left_join(bp_params, by = "person_id") |>
   rowwise() |>
-  do({
-    systolic_base <- rnorm(1, 120, 10)
-    diastolic_base <- rnorm(1, 75, 7)
-
-    systolic <- systolic_base + .$visit_index * .$bp_slope
-    diastolic <- diastolic_base + .$visit_index * .$bp_slope / 2
-
-    tibble(
-      measurement_id = c(UUIDgenerate(), UUIDgenerate()),
-      person_id = .$person_id,
-      visit_occurrence_id = .$visit_occurrence_id,
-      measurement_date = .$visit_start_date,
-      measurement_concept_id = c(3004249, 3012888),
-      value_as_number = c(round(systolic), round(diastolic)),
-      unit_concept_id = c(8510, 8510)
-    )
-  }) |>
-  bind_rows()
+  mutate(
+    n_hours = as.numeric(interval(visit_start_date, visit_end_date) / hours(1)),
+    hours_seq = list(visit_start_date + hours(0:n_hours))
+  ) |>
+  ungroup() |>
+  select(person_id, visit_occurrence_id, bp_slope,
+         systolic_base, visit_start_date, hours_seq) |>
+  unnest(hours_seq) |>
+  mutate(
+    hours_since_start = as.numeric(difftime(hours_seq, visit_start_date, units = "hours")),
+    systolic = systolic_base +
+               (hours_since_start * bp_slope) +   # per-hour slope
+               rnorm(n(), 0, 5),                 # noise
+    measurement_id = UUIDgenerate(n = n()),
+    measurement_concept_id = 3004249,  # systolic
+    unit_concept_id = 8510,            # mmHg
+    measurement_date = hours_seq
+  ) |>
+  select(measurement_id, person_id, visit_occurrence_id,
+         measurement_date, measurement_concept_id,
+         systolic, unit_concept_id) |>
+  rename(value_as_number = systolic)
 
 
 # 6. Define condition-drug co-occurrence map
