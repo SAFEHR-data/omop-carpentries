@@ -18,6 +18,22 @@ exercises: 0
 
 ## Introduction
 
+There are a range of community provided R tools that can help you work with instances of OMOP data.
+
+We are going to show you a brief summary of some that are likely to be of use to new users.
+
+With each you may need to balance the need to learn some new syntax with the benefits of the extra functionality that the package provides.
+
+[OmopSketch](https://ohdsi.github.io/OmopSketch/index.html)
+
+Aims to summarise key information about an OMOP database.
+Both to provide a broad characterisation and to allow users to evaluate whether the data are suitable for particular research.
+
+It has summarise functions that generates results objects.
+and Table functions that convert these to tables for display.
+
+
+
 
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
