@@ -75,8 +75,11 @@ visit_occurrence <- tibble(
   mutate(
     visit_occurrence_id = row_number(),
     visit_start_date = as_date("2020-01-01") + sample(0:1000, n(), replace = TRUE),
-    visit_end_date = visit_start_date + sample(0:3, n(), replace = TRUE),
-    visit_concept_id = sample(c(9201, 9202, 9203), n(), replace = TRUE)  # Inpatient, ER, Outpatient
+    visit_concept_id = sample(c(9201, 9202, 9203), n(), replace = TRUE),  # Inpatient, ER, Outpatient
+    #ER & outpatient just a day
+    visit_end_date = if_else( visit_concept_id == 9201,
+                              visit_start_date + sample(0:3, n(), replace = TRUE),
+                              visit_start_date),
   )
 
 # 3. Define blood pressure trend per patient
