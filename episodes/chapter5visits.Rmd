@@ -199,15 +199,12 @@ library(dplyr)
 
 cdm$visit_occurrence |> 
   count(visit_concept_id) |> 
-  left_join(cdm$concept, by = c("visit_concept_id" = "concept_id"))
+  left_join(cdm$concept |> select(concept_id, concept_name), 
+            by = c("visit_concept_id" = "concept_id"))
+
+cdm$visit_occurrence
 ```
 
-```output
-  visit_concept_id     n concept_name        
-1             9201   103 Inpatient Visit     
-2             9202   112 Emergency Room Visit
-3             9203   120 Outpatient Visit    
-```
 
 Can you use `person_id` in the `visit_occurrence` table to find patients with more than one visit ?
 
@@ -219,14 +216,6 @@ visit_counts <- cdm$visit_occurrence |>
   collect()
 
 visit_counts |> head(4)
-```
-
-```output
-  person_id n_visits
-1         1        5
-2         2        5
-3         3        3
-4         4        4
 ```
 
 Now we can choose one of the patients from the previous table and look at all of their visits.
@@ -246,14 +235,6 @@ patient_visits <- cdm$visit_occurrence |>
 patient_visits
 ```
 
-```output
-  visit_occurrence_id visit_start_date visit_end_date concept_name        
-1                   4 2020-06-26       2020-06-26     Emergency Room Visit
-2                   1 2020-11-30       2020-12-01     Inpatient Visit     
-3                   2 2021-04-03       2021-04-04     Inpatient Visit     
-4                   5 2021-05-15       2021-05-15     Outpatient Visit    
-5                   3 2021-07-12       2021-07-12     Emergency Room Visit
-```
 Outpatient and Emergency Room Visits usually end on the same day, where Inpatient visits can last longer.
 
 Here is how we can plot a measurement (in this case blood pressure) over time for a patient. You may remember from a previous lesson that numeric measurements are stored in the column `value_as_number`.
@@ -382,17 +363,11 @@ co_occurrence_by_visit <- cdm$condition_occurrence |>
   rename(drug_name = concept_name) |>
   select(condition_name, drug_name, co_occurrences)
   
+  co_occurrence_by_visit
 ```
 
 Here we see a perfect co-occurrence between conditions & expected drugs for treating that condition (because we generated the example data that way). If instead you didn't use the visit_occurrence_id you would see more unexpected associations occurring across widely separated visits for the same patient.
 
-
-```output
-  condition_name           drug_name    co_occurrences
-1 Type 2 diabetes mellitus Metformin               121
-2 Hyperlipidemia           Atorvastatin            108
-3 Essential hypertension   Lisinopril              106
-```
 
 ::::::::::::::::::::::::::::::::::::: challenge 
 
@@ -428,18 +403,7 @@ co_occurrence
 
 Now we see that conditions co-occur with drugs unlikely to be used in their treatment because they came from visits further apart in time.
 
-```output
-  condition_name           drug_name    co_occurrences
-1 Type 2 diabetes mellitus Lisinopril               99
-2 Type 2 diabetes mellitus Metformin               251
-3 Type 2 diabetes mellitus Atorvastatin            112
-4 Hyperlipidemia           Lisinopril               86
-5 Hyperlipidemia           Metformin               112
-6 Hyperlipidemia           Atorvastatin            222
-7 Essential hypertension   Lisinopril              190
-8 Essential hypertension   Metformin                99
-9 Essential hypertension   Atorvastatin             86
-```
+
 :::::::::::::::::::::::::::::::::
 
 :::::::::::::::::::::::::::::::::::::::::::::::
