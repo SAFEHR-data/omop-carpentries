@@ -36,6 +36,8 @@ The main clinical tables `condition_occurrence`, `measurement`, `observation` an
 
 The `visit_detail` table can contain information about time periods shorter than the visit (for example transfer between wards) but we will not cover that further here.
 
+## Generating some example data
+
 Firstly here is some code (from ChatGPT) to create some interesting example data.
 TODO this code is lengthy, we may later want to hide it or save the output as .Rdata in the repo
 
@@ -191,6 +193,15 @@ cdm <- list(
 
 ```
 
+## When do we need to consider visits ?
+
+As we have seen we don't need to consider visits to answer all questions. For example if we can count the number of patients with a particular condition without considering visits.
+
+Using visits can help us with :
+
+1. different types of visits
+1. selecting data from an indivual or selected visits
+1. finding co-occurrence of events within a visit
 
 We can query the `visit_occurrence` table to see what kinds of visits there are in the data.
 
