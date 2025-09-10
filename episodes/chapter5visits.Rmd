@@ -39,7 +39,7 @@ The `visit_detail` table can contain information about time periods shorter than
 Firstly here is some code (from ChatGPT) to create some interesting example data.
 TODO this code is lengthy, we may later want to hide it or save the output as .Rdata in the repo
 
-```r
+```{r}
 
 #person, visit_occurrence, measurement, drug_exposure, condition_occurrence, and concept tables
 #realistic blood pressure trends over time
@@ -193,7 +193,9 @@ cdm <- list(
 
 We can query the `visit_occurrence` table to see what kinds of visits there are in the data.
 
-```r
+```{r}
+library(dplyr)
+
 cdm$visit_occurrence |> 
   count(visit_concept_id) |> 
   left_join(cdm$concept, by = c("visit_concept_id" = "concept_id"))
@@ -208,7 +210,7 @@ cdm$visit_occurrence |>
 
 Can you use `person_id` in the `visit_occurrence` table to find patients with more than one visit ?
 
-```r
+```{r}
 visit_counts <- cdm$visit_occurrence |>
   group_by(person_id) |>
   summarise(n_visits = n()) |>
@@ -228,7 +230,7 @@ visit_counts |> head(4)
 
 Now we can choose one of the patients from the previous table and look at all of their visits.
 
-```r
+```{r}
 example_person_id <- visit_counts$person_id[1]
 
 patient_visits <- cdm$visit_occurrence |>
@@ -255,7 +257,8 @@ Outpatient and Emergency Room Visits usually end on the same day, where Inpatien
 
 Here is how we can plot a measurement (in this case blood pressure) over time for a patient. The numeric measurement is stored in value_as_number. 
 
-```r
+```{r bp-all-visit, fig.alt = "plot of blood pressure measurements for all visits", fig.cap = "plot of blood pressure measurements for all visits"}
+
 # Define concept IDs
 systolic_id <- 3004249
 selected_patient <- 1
@@ -263,6 +266,9 @@ selected_patient <- 1
 bp <- cdm$measurement |> 
   filter(person_id == selected_patient) |> 
   filter(measurement_concept_id %in% c(systolic_id))
+
+
+#TODO show the data before plotting
 
 ggplot(bp, aes(x = measurement_date, 
                y = value_as_number)) +
@@ -283,7 +289,9 @@ You can join to visit_occurrence to get visit_concept_id, and from that join to 
 ::::::::::::::::::::::::::::
 
 :::::::::::::::::::::::: solution
-```r
+
+```{r bp-type-visit, fig.alt = "plot of blood pressure measurements for all visits", fig.cap = "plot of blood pressure measurements for all visits"}
+
 # Define concept IDs
 systolic_id <- 3004249
 selected_patient <- 1
@@ -318,15 +326,19 @@ You can filter bp created in the previous challenge by one of the visit_occurren
 
 :::::::::::::::::::::::: solution
 
+```{r bp-one-visit, fig.alt = "plot of blood pressure measurements for one visit", fig.cap = "plot of blood pressure measurements for one visit"}
+
 bp3 <- bp2 |> filter( visit_occurrence_id == 1 )
 
 ggplot(bp3, aes(x = measurement_date, y = value_as_number, shape = visit_concept_name)) +
   geom_point() +
   theme_minimal()
+```
+
+You should be able to see hourly blood pressure measurements within a visit.
 
 :::::::::::::::::::::::::::::::::
 
-You should be able to see hourly blood pressure measurements within a visit.
 
 :::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -337,7 +349,7 @@ Imagine we want to look at which drugs are associated with which conditions for 
 
 If we were to join tables by `person_id` as we have seen in previous exercises we could get conditions and drugs that were separated by many years. Instead we can include `visit_occurrence_id` in the join to get co-occurrence of conditions and drugs in the same visit.
 
-```r
+```{r}
 
 co_occurrence_by_visit <- cdm$condition_occurrence |>
   # Join with drug_exposure on person and visit
@@ -378,7 +390,7 @@ Here we see a perfect co-occurrence between conditions & expected drugs for trea
 Can you repeat the query without using `visit_occurrence_id` to see what results you get ?
 
 
-```r
+```{r}
 co_occurrence <- cdm$condition_occurrence |>
   # Join with drug_exposure on person
   inner_join(cdm$drug_exposure, by = c("person_id")) |>
