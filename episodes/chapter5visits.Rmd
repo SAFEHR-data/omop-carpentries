@@ -417,7 +417,6 @@ Now we see that conditions co-occur with drugs unlikely to be used in their trea
 9 Essential hypertension   Atorvastatin             86
 ```
 
-:::::::::::::::::::::::::::::::::
 :::::::::::::::::::::::::::::::::::::::::::::::
 
 
