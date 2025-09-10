@@ -256,9 +256,11 @@ patient_visits
 ```
 Outpatient and Emergency Room Visits usually end on the same day, where Inpatient visits can last longer.
 
-Here is how we can plot a measurement (in this case blood pressure) over time for a patient. The numeric measurement is stored in value_as_number. 
+Here is how we can plot a measurement (in this case blood pressure) over time for a patient. You may remember from a previous lesson that numeric measurements are stored in the column `value_as_number`.
 
-```{r bp-all-visit, warning = FALSE, message = FALSE, fig.alt = "plot of blood pressure measurements for all visits", fig.cap = "plot of blood pressure measurements for all visits"}
+First we filter the data.
+
+```{r, warning = FALSE, message = FALSE}
 
 # Define concept IDs
 systolic_id <- 3004249
@@ -268,8 +270,14 @@ bp <- cdm$measurement |>
   filter(person_id == selected_patient) |> 
   filter(measurement_concept_id %in% c(systolic_id))
 
+head(bp,3)
+```
 
-#TODO show the data before plotting
+Then we can plot using ggplot2.
+
+```{r bp-all-visit, warning = FALSE, message = FALSE, fig.alt = "plot of blood pressure measurements for all visits", fig.cap = "plot of blood pressure measurements for all visits"}
+
+library(ggplot2)
 
 ggplot(bp, aes(x = measurement_date, 
                y = value_as_number)) +
@@ -390,6 +398,7 @@ Here we see a perfect co-occurrence between conditions & expected drugs for trea
 
 Can you repeat the query without using `visit_occurrence_id` to see what results you get ?
 
+:::::::::::::::::::::::: solution
 
 ```{r, warning = FALSE, message = FALSE}
 co_occurrence <- cdm$condition_occurrence |>
@@ -413,6 +422,8 @@ co_occurrence <- cdm$condition_occurrence |>
   ) |>
   rename(drug_name = concept_name) |>
   select(condition_name, drug_name, co_occurrences)
+
+co_occurrence
 ```
 
 Now we see that conditions co-occur with drugs unlikely to be used in their treatment because they came from visits further apart in time.
@@ -429,6 +440,7 @@ Now we see that conditions co-occur with drugs unlikely to be used in their trea
 8 Essential hypertension   Metformin                99
 9 Essential hypertension   Atorvastatin             86
 ```
+:::::::::::::::::::::::::::::::::
 
 :::::::::::::::::::::::::::::::::::::::::::::::
 
