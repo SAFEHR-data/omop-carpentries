@@ -300,8 +300,13 @@ ggplot(bp2, aes(x = measurement_date, y = value_as_number, shape = visit_concept
 ```
 To indicate the type of visit we need to join to visit_occurrence to get the visit_concept_id and then join to the concept table to get a name for that concept.
 
-Note that we join the visit_occurrence table to the measurement table using both `("visit_occurrence_id", "person_id")`. If we didn't include both one of the columns would get duplicated and renamed.  
+Note that we join the visit_occurrence table to the measurement table using both `("visit_occurrence_id", "person_id")`. If we didn't include both, one of the columns would get duplicated and renamed making it difficult to select later. Se with `person_id` below. 
 
+```{r, warning = FALSE, message = FALSE}
+  cdm$measurement |> 
+     left_join(cdm$visit_occurrence, by = c("visit_occurrence_id")) |> 
+     names()
+```
 :::::::::::::::::::::::::::::::::
 :::::::::::::::::::::::::::::::::::::::::::::::
 
