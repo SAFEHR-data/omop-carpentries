@@ -89,7 +89,7 @@ OMOP is a format for recording Electronic Healthcare Records. It allows you to f
 
 ![The OMOP Common Data Model ](fig/OMOP-CDM.png){alt='A diagram showing the tables that occur in the OMOP-CDM , how they relate to each other and standard vocabularies.'}
 
-OMOP CDM stands for the Observational Medical Outcomes Partnership Common Data Model. You don’t really need to remember what OMOP stands for. Remembering that CDM stands for Common Data Model can help you remember that it is a data standard that can be applied to different data sources to create data in a ‘Common’ (same) format.
+OMOP CDM stands for the Observational Medical Outcomes Partnership Common Data Model. You don't really need to remember what OMOP stands for. Remembering that CDM stands for Common Data Model can help you remember that it is a data standard that can be applied to different data sources to create data in a Common (same) format.
 The table diagram will look confusing to start with but you can use data in the OMOP CDM without needing to understand (or populate) all 37 tables.
 
 ::::::::::::::::::::::::::::::::::::: challenge 
@@ -114,7 +114,7 @@ There are a handful of core tables and columns that contain key information abou
 - [condition_occurrence](https://ohdsi.github.io/CommonDataModel/cdm54.html#condition_occurrence) records relating to a Person suggesting the presence of a medical condition.
 - [drug_exposure](https://ohdsi.github.io/CommonDataModel/cdm54.html#drug_exposure) records about exposure of a patient to a drug.
 - [procedure_occurrence](https://ohdsi.github.io/CommonDataModel/cdm54.html#procedure_occurrence) activities carried out by a healthcare provider on the patient with a diagnostic or therapeutic purpose.
-- [measurement](https://ohdsi.github.io/CommonDataModel/cdm54.html#measurement) numerical or categorical values obtained through standardized examination of a Person or Person’s sample.
+- [measurement](https://ohdsi.github.io/CommonDataModel/cdm54.html#measurement) numerical or categorical values obtained through standardized examination of a Person or Person's sample.
 - [observation](https://ohdsi.github.io/CommonDataModel/cdm54.html#observation) clinical facts about a Person obtained in the context of examination, questioning or a procedure.
 - [visit_occurrence](https://ohdsi.github.io/CommonDataModel/cdm54.html#visit_occurrence) records of times where Persons engage with the healthcare system.
 
@@ -361,7 +361,7 @@ cdm$person
 
 ``` output
 # Source:   table<person> [?? x 18]
-# Database: DuckDB v1.3.2 [unknown@Linux 6.8.0-1031-azure:R 4.5.1//tmp/Rtmp8FR1nZ/file21d7258c6e46.duckdb]
+# Database: DuckDB v1.3.2 [unknown@Linux 6.8.0-1031-azure:R 4.5.1//tmp/RtmpOXw0Mi/file4b67158f8b4e.duckdb]
    person_id gender_concept_id year_of_birth month_of_birth day_of_birth
        <int>             <int>         <int>          <int>        <int>
  1         6              8532          1963             12           31
@@ -389,7 +389,7 @@ cdm$condition_occurrence
 
 ``` output
 # Source:   table<condition_occurrence> [?? x 16]
-# Database: DuckDB v1.3.2 [unknown@Linux 6.8.0-1031-azure:R 4.5.1//tmp/Rtmp8FR1nZ/file21d7258c6e46.duckdb]
+# Database: DuckDB v1.3.2 [unknown@Linux 6.8.0-1031-azure:R 4.5.1//tmp/RtmpOXw0Mi/file4b67158f8b4e.duckdb]
    condition_occurrence_id person_id condition_concept_id condition_start_date
                      <int>     <int>                <int> <date>              
  1                    4483       263              4112343 2015-10-02          
@@ -545,14 +545,14 @@ cdm$person |>
    <chr>                     <chr>                     <dbl>
  1 Acute allergic reaction   MALE                         57
  2 Acute allergic reaction   FEMALE                       59
- 3 Acute bacterial sinusitis MALE                        368
- 4 Acute bacterial sinusitis FEMALE                      418
+ 3 Acute bacterial sinusitis FEMALE                      418
+ 4 Acute bacterial sinusitis MALE                        368
  5 Acute bronchitis          FEMALE                     1300
  6 Acute bronchitis          MALE                       1243
- 7 Acute cholecystitis       MALE                          6
- 8 Acute cholecystitis       FEMALE                       29
- 9 Acute viral pharyngitis   FEMALE                     1322
-10 Acute viral pharyngitis   MALE                       1284
+ 7 Acute cholecystitis       FEMALE                       29
+ 8 Acute cholecystitis       MALE                          6
+ 9 Acute viral pharyngitis   MALE                       1284
+10 Acute viral pharyngitis   FEMALE                     1322
 # ℹ 148 more rows
 ```
 :::::::::::::::::::::::::::::::::::::::::::::::

@@ -19,7 +19,7 @@ This lesson assumes you have current versions of the following installed on your
 
 You also need to download some files to follow this lesson:
 
-- Download [omop-data.zip](data/omop-data.zip).
+- Download [omop-data.zip](episodes/data/omop-data.zip).
 
 
 :::
