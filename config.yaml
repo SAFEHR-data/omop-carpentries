@@ -66,9 +66,9 @@ contact: 'team@carpentries.org' # FIXME
 
 # Order of episodes in your lesson
 episodes:
-- chapter1.Rmd
-- chapter2.Rmd
-- chapter3measurement_observation.Rmd
+- 1_what_is_omop.Rmd
+- 2_why_omop.Rmd
+- 3_measurement_observation.Rmd
 - chapter4.Rmd
 - chapter5.Rmd
 - chapter6.Rmd
