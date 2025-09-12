@@ -66,14 +66,13 @@ contact: 'team@carpentries.org' # FIXME
 
 # Order of episodes in your lesson
 episodes:
-- introduction.Rmd
-- chapter1.Rmd
-- chapter2.Rmd
-- chapter3measurement_observation.Rmd
-- chapter4.Rmd
-- chapter5.Rmd
-- chapter6.Rmd
-- chapter7.Rmd
+- 1_what_is_omop.Rmd
+- 2_why_omop.Rmd
+- 3_measurement_observation.Rmd
+- 4_concepts.Rmd
+- 5_visits.Rmd
+- 6_medications.Rmd
+- 7_tools.Rmd
 - chapter8.Rmd
 
 # Information for Learners

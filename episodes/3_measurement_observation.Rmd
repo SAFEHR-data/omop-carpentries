@@ -1,5 +1,5 @@
 ---
-title: "Chapter 3 OMOP measurement and observation tables"
+title: "3 OMOP measurement and observation tables"
 teaching: 0
 exercises: 0
 ---
