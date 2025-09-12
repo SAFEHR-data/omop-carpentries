@@ -361,7 +361,7 @@ cdm$person
 
 ``` output
 # Source:   table<person> [?? x 18]
-# Database: DuckDB v1.3.2 [unknown@Linux 6.8.0-1031-azure:R 4.5.1//tmp/RtmpOXw0Mi/file4b67158f8b4e.duckdb]
+# Database: DuckDB 1.3.3-dev231 [unknown@Linux 6.8.0-1031-azure:R 4.5.1//tmp/RtmpVwVowP/file242c294ae4c5.duckdb]
    person_id gender_concept_id year_of_birth month_of_birth day_of_birth
        <int>             <int>         <int>          <int>        <int>
  1         6              8532          1963             12           31
@@ -389,7 +389,7 @@ cdm$condition_occurrence
 
 ``` output
 # Source:   table<condition_occurrence> [?? x 16]
-# Database: DuckDB v1.3.2 [unknown@Linux 6.8.0-1031-azure:R 4.5.1//tmp/RtmpOXw0Mi/file4b67158f8b4e.duckdb]
+# Database: DuckDB 1.3.3-dev231 [unknown@Linux 6.8.0-1031-azure:R 4.5.1//tmp/RtmpVwVowP/file242c294ae4c5.duckdb]
    condition_occurrence_id person_id condition_concept_id condition_start_date
                      <int>     <int>                <int> <date>              
  1                    4483       263              4112343 2015-10-02          
@@ -543,12 +543,12 @@ cdm$person |>
 # A tibble: 158 × 3
    condition_concept_name    gender_concept_name num_persons
    <chr>                     <chr>                     <dbl>
- 1 Acute allergic reaction   MALE                         57
- 2 Acute allergic reaction   FEMALE                       59
+ 1 Acute allergic reaction   FEMALE                       59
+ 2 Acute allergic reaction   MALE                         57
  3 Acute bacterial sinusitis FEMALE                      418
  4 Acute bacterial sinusitis MALE                        368
- 5 Acute bronchitis          FEMALE                     1300
- 6 Acute bronchitis          MALE                       1243
+ 5 Acute bronchitis          MALE                       1243
+ 6 Acute bronchitis          FEMALE                     1300
  7 Acute cholecystitis       FEMALE                       29
  8 Acute cholecystitis       MALE                          6
  9 Acute viral pharyngitis   MALE                       1284

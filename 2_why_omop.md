@@ -145,7 +145,7 @@ pie(
 ```
 
 <div class="figure" style="text-align: center">
-<img src="fig/chapter2-rendered-pyramid-1.png" alt="pie chart illusion of a pyramid"  />
+<img src="fig/2_why_omop-rendered-pyramid-1.png" alt="pie chart illusion of a pyramid"  />
 <p class="caption">Sun arise each and every morning</p>
 </div>
 
