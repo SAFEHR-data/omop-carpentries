@@ -70,7 +70,7 @@ episodes:
 - 2_why_omop.Rmd
 - 3_measurement_observation.Rmd
 - 4_concepts.Rmd
-- chapter5.Rmd
+- 5_visits.Rmd
 - chapter6.Rmd
 - chapter7.Rmd
 - chapter8.Rmd
