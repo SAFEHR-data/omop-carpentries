@@ -4,7 +4,28 @@
     <loc>https://SAFEHR-data.github.io/omop-carpentries/01-introduction.html</loc>
   </url>
   <url>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/1_what_is_omop.html</loc>
+  </url>
+  <url>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/2_why_omop.html</loc>
+  </url>
+  <url>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/3_measurement_observation.html</loc>
+  </url>
+  <url>
     <loc>https://SAFEHR-data.github.io/omop-carpentries/404.html</loc>
+  </url>
+  <url>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/4_concepts.html</loc>
+  </url>
+  <url>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/5_visits.html</loc>
+  </url>
+  <url>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/6_medications.html</loc>
+  </url>
+  <url>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/7_tools.html</loc>
   </url>
   <url>
     <loc>https://SAFEHR-data.github.io/omop-carpentries/CODE_OF_CONDUCT.html</loc>
@@ -52,7 +73,28 @@
     <loc>https://SAFEHR-data.github.io/omop-carpentries/instructor/01-introduction.html</loc>
   </url>
   <url>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/instructor/1_what_is_omop.html</loc>
+  </url>
+  <url>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/instructor/2_why_omop.html</loc>
+  </url>
+  <url>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/instructor/3_measurement_observation.html</loc>
+  </url>
+  <url>
     <loc>https://SAFEHR-data.github.io/omop-carpentries/instructor/404.html</loc>
+  </url>
+  <url>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/instructor/4_concepts.html</loc>
+  </url>
+  <url>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/instructor/5_visits.html</loc>
+  </url>
+  <url>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/instructor/6_medications.html</loc>
+  </url>
+  <url>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/instructor/7_tools.html</loc>
   </url>
   <url>
     <loc>https://SAFEHR-data.github.io/omop-carpentries/instructor/CODE_OF_CONDUCT.html</loc>
