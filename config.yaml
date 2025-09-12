@@ -69,7 +69,7 @@ episodes:
 - 1_what_is_omop.Rmd
 - 2_why_omop.Rmd
 - 3_measurement_observation.Rmd
-- chapter4.Rmd
+- 4_concepts.Rmd
 - chapter5.Rmd
 - chapter6.Rmd
 - chapter7.Rmd

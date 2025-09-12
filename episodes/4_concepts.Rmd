@@ -1,5 +1,5 @@
 ---
-title: "Chapter 4 OMOP concepts (probably to go before measurement)"
+title: "OMOP concepts (probably to go before measurement)"
 teaching: 0
 exercises: 0
 ---
