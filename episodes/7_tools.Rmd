@@ -48,7 +48,7 @@ First we can install the package and its dependencies and connect to some mock d
 
 #without dependencies=TRUE it failed needing omock & VisOmopResults
 #with dependencies it installed 91 packages in 1.8 minutes
-install.packages("OmopSketch", dependencies=TRUE)
+install.packages("OmopSketch", dependencies=TRUE, quiet=TRUE)
 
 library(dplyr)
 library(OmopSketch)
