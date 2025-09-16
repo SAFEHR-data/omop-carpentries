@@ -4,6 +4,8 @@ teaching: 0
 exercises: 0
 ---
 
+TODO not sure we need this episode, maybe some objectives could be copied to others
+
 :::::::::::::::::::::::::::::::::::::: questions 
 
 - Why use OMOP?
