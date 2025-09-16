@@ -146,6 +146,7 @@ tableConceptIdCounts(head(result,5), display = "standard", type = "datatable")
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
+- Brief outline of some R tools that will be useful for new OMOP users.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 

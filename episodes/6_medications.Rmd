@@ -158,7 +158,9 @@ cdm$drug_strength |>  filter(drug_concept_id==1127433L) |>
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
-
+- Know that exposure of a patient to medications is mainly stored in the drug_exposure table
+- Understand that drug concepts can be at different levels of granularity
+- Understand that source values are mapped to a standard vocabulary
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
