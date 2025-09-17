@@ -1,5 +1,5 @@
 ---
-title: "Chapter 5 Visits and how we can use them"
+title: "Visits"
 teaching: 0
 exercises: 0
 ---
@@ -427,7 +427,13 @@ Now we see that conditions co-occur with drugs unlikely to be used in their trea
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
-
+- Know that a visit is a period of time and patients can have multiple visits
+- Understand that multiple measurements, conditions etc. can occur within and between visits
+- Understand that for some analyses you will want to look within visits and for other analyses to sum across visits 
+- Know that visits are recorded in the visit_occurrence table
+- Know each visit is unique to a person
+- Understand that other tables link to visits
+- Understand how visits can be used to find co-occurrence of other events
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 

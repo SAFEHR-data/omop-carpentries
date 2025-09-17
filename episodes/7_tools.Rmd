@@ -33,9 +33,14 @@ With each you may need to balance the need to learn some new syntax with the ben
 
 TODO maybe add a table with links to packages & brief descriptions.
 
+* [OmopSketch](https://ohdsi.github.io/OmopSketch/index.html)
+To summarise an OMOP database.
+
+* [CodelistGenerator](https://darwin-eu.github.io/CodelistGenerator/)
+To generate lists of OMOP concepts.
+
 
 [OmopSketch](https://ohdsi.github.io/OmopSketch/index.html)
-
 To summarise key information about an OMOP database.
 To provide a broad characterisation of the data and to allow users to evaluate whether they are suitable for particular research.
 
@@ -48,7 +53,7 @@ First we can install the package and its dependencies and connect to some mock d
 
 #without dependencies=TRUE it failed needing omock & VisOmopResults
 #with dependencies it installed 91 packages in 1.8 minutes
-install.packages("OmopSketch", dependencies=TRUE)
+install.packages("OmopSketch", dependencies=TRUE, quiet=TRUE)
 
 library(dplyr)
 library(OmopSketch)
@@ -146,6 +151,7 @@ tableConceptIdCounts(head(result,5), display = "standard", type = "datatable")
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
+- Brief outline of some R tools that will be useful for new OMOP users.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
