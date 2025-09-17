@@ -10,6 +10,9 @@
     <loc>https://SAFEHR-data.github.io/omop-carpentries/2_why_omop.html</loc>
   </url>
   <url>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/3_concepts.html</loc>
+  </url>
+  <url>
     <loc>https://SAFEHR-data.github.io/omop-carpentries/3_measurement_observation.html</loc>
   </url>
   <url>
@@ -17,6 +20,9 @@
   </url>
   <url>
     <loc>https://SAFEHR-data.github.io/omop-carpentries/4_concepts.html</loc>
+  </url>
+  <url>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/4_measurement_observation.html</loc>
   </url>
   <url>
     <loc>https://SAFEHR-data.github.io/omop-carpentries/5_visits.html</loc>
@@ -79,6 +85,9 @@
     <loc>https://SAFEHR-data.github.io/omop-carpentries/instructor/2_why_omop.html</loc>
   </url>
   <url>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/instructor/3_concepts.html</loc>
+  </url>
+  <url>
     <loc>https://SAFEHR-data.github.io/omop-carpentries/instructor/3_measurement_observation.html</loc>
   </url>
   <url>
@@ -86,6 +95,9 @@
   </url>
   <url>
     <loc>https://SAFEHR-data.github.io/omop-carpentries/instructor/4_concepts.html</loc>
+  </url>
+  <url>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/instructor/4_measurement_observation.html</loc>
   </url>
   <url>
     <loc>https://SAFEHR-data.github.io/omop-carpentries/instructor/5_visits.html</loc>

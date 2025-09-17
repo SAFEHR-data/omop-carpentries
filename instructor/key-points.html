@@ -265,7 +265,7 @@
 <div class="accordion accordion-flush" id="accordionFlush4">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading4">
-        <a href="3_measurement_observation.html">3. 3 OMOP measurement and observation tables</a>
+        <a href="3_concepts.html">3. concepts and conditions</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -277,7 +277,7 @@
 <div class="accordion accordion-flush" id="accordionFlush5">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading5">
-        <a href="4_concepts.html">4. OMOP concepts (probably to go before measurement)</a>
+        <a href="4_measurement_observation.html">4. measurements and observations</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -289,7 +289,7 @@
 <div class="accordion accordion-flush" id="accordionFlush6">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading6">
-        <a href="5_visits.html">5. Chapter 5 Visits and how we can use them</a>
+        <a href="5_visits.html">5. Visits</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -395,27 +395,58 @@
 <li>OMOP uses concepts to link dated to standard vocabularies</li>
 <li>R can be used to join and interrogate data</li>
 </ul></section><section id="2_why_omop"><h2 class="section-heading"><a href="2_why_omop.html">Why OMOP?</a></h2>
+<hr class="half-width"></section><section id="3_concepts"><h2 class="section-heading"><a href="3_concepts.html">concepts and conditions</a></h2>
 <hr class="half-width">
 <ul>
-<li>Use <code>.md</code> files for episodes when you want static
-content</li>
-<li>Use <code>.Rmd</code> files for episodes when you need to generate
-output</li>
-<li>Run <code>sandpaper::check_lesson()</code> to identify any issues
-with your lesson</li>
-<li>Run <code>sandpaper::build_lesson()</code> to preview your lesson
-locally</li>
-</ul></section><section id="3_measurement_observation"><h2 class="section-heading"><a href="3_measurement_observation.html">3 OMOP measurement and observation tables</a></h2>
+<li>Understand that nearly everything in a hospital can be represented
+by an OMOP concept_id.</li>
+<li>Know that OMOP data usually includes the OMOP concept table and
+other data from the vocabularies</li>
+<li>Be able to look up concepts by their name</li>
+<li>Know that patient conditions are stored in the condition_occurrence
+table</li>
+</ul></section><section id="4_measurement_observation"><h2 class="section-heading"><a href="4_measurement_observation.html">measurements and observations</a></h2>
 <hr class="half-width">
 <ul>
-<li>the measurement table contains numeric or categorical results of a
-standardised process</li>
-<li>the observation table contains less standardised clinical facts</li>
-</ul></section><section id="4_concepts"><h2 class="section-heading"><a href="4_concepts.html">OMOP concepts (probably to go before measurement)</a></h2>
-<hr class="half-width"></section><section id="5_visits"><h2 class="section-heading"><a href="5_visits.html">Chapter 5 Visits and how we can use them</a></h2>
-<hr class="half-width"></section><section id="6_medications"><h2 class="section-heading"><a href="6_medications.html">Medications</a></h2>
-<hr class="half-width"></section><section id="7_tools"><h2 class="section-heading"><a href="7_tools.html">Community provided software for working with OMOP data</a></h2>
-<hr class="half-width"></section><section id="chapter8"><h2 class="section-heading"><a href="chapter8.html">Placeholder Chapter 8</a></h2>
+<li>know that measurements are mainly lab results and other records like
+pulse rate</li>
+<li>know observations are other facts obtained through questioning or
+direct observation</li>
+<li>understand concept ids identify the measure or observation, values
+are stored in value_as_number or value_as_concept_id</li>
+<li>be able to join to the concept table to find a particular
+measurement or observation concept by name</li>
+<li>understand that different clinical questions can be answered by
+querying by patient and/or visit, or summing across all records</li>
+</ul></section><section id="5_visits"><h2 class="section-heading"><a href="5_visits.html">Visits</a></h2>
+<hr class="half-width">
+<ul>
+<li>Know that a visit is a period of time and patients can have multiple
+visits</li>
+<li>Understand that multiple measurements, conditions etc. can occur
+within and between visits</li>
+<li>Understand that for some analyses you will want to look within
+visits and for other analyses to sum across visits</li>
+<li>Know that visits are recorded in the visit_occurrence table</li>
+<li>Know each visit is unique to a person</li>
+<li>Understand that other tables link to visits</li>
+<li>Understand how visits can be used to find co-occurrence of other
+events</li>
+</ul></section><section id="6_medications"><h2 class="section-heading"><a href="6_medications.html">Medications</a></h2>
+<hr class="half-width">
+<ul>
+<li>Know that exposure of a patient to medications is mainly stored in
+the drug_exposure table</li>
+<li>Understand that drug concepts can be at different levels of
+granularity</li>
+<li>Understand that source values are mapped to a standard
+vocabulary</li>
+</ul></section><section id="7_tools"><h2 class="section-heading"><a href="7_tools.html">Community provided software for working with OMOP data</a></h2>
+<hr class="half-width">
+<ul>
+<li>Brief outline of some R tools that will be useful for new OMOP
+users.</li>
+</ul></section><section id="chapter8"><h2 class="section-heading"><a href="chapter8.html">Placeholder Chapter 8</a></h2>
 <hr class="half-width">
 <ul>
 <li>Use <code>.md</code> files for episodes when you want static
@@ -474,8 +505,8 @@ locally</li>
   "url": "https://SAFEHR-data.github.io/omop-carpentries/instructor/key-points.html",
   "identifier": "https://SAFEHR-data.github.io/omop-carpentries/instructor/key-points.html",
   "dateCreated": "2025-06-18",
-  "dateModified": "2025-09-16",
-  "datePublished": "2025-09-16"
+  "dateModified": "2025-09-17",
+  "datePublished": "2025-09-17"
 }
 
   </script><script>

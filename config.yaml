@@ -68,8 +68,8 @@ contact: 'team@carpentries.org' # FIXME
 episodes:
 - 1_what_is_omop.Rmd
 - 2_why_omop.Rmd
-- 3_measurement_observation.Rmd
-- 4_concepts.Rmd
+- 3_concepts.Rmd
+- 4_measurement_observation.Rmd
 - 5_visits.Rmd
 - 6_medications.Rmd
 - 7_tools.Rmd
