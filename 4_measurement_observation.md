@@ -1,21 +1,22 @@
 ---
-title: "3 OMOP measurement and observation tables"
+title: "measurements and observations"
 teaching: 0
 exercises: 0
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions 
 
-- What do the measurement and observation tables contain ?
-- How do we access values ?
+- How to access measurements and observations ?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
 
-- Understand that these tables contain concept_ids and values obtained from them
-- Know that values can be numeric with units
-- and/or categorical by specifying a standard concept_id that can be looked up in the concept table 
+- know that measurements are mainly lab results and other records like pulse rate 
+- know observations are other facts obtained through questioning or direct observation
+- understand concept ids identify the measure or observation, values are stored in value_as_number or value_as_concept_id
+- be able to join to the concept table to find a particular measurement or observation concept by name
+- understand that different clinical questions can be answered by querying by patient and/or visit, or summing across all records 
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -182,8 +183,11 @@ TODO do we want to add more here with example data
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
-- the measurement table contains numeric or categorical results of a standardised process
-- the observation table contains less standardised clinical facts
+- know that measurements are mainly lab results and other records like pulse rate 
+- know observations are other facts obtained through questioning or direct observation
+- understand concept ids identify the measure or observation, values are stored in value_as_number or value_as_concept_id
+- be able to join to the concept table to find a particular measurement or observation concept by name
+- understand that different clinical questions can be answered by querying by patient and/or visit, or summing across all records 
 
 
 ::::::::::::::::::::::::::::::::::::::::::::::::

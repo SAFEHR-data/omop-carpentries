@@ -1,5 +1,5 @@
 ---
-title: "Chapter 5 Visits and how we can use them"
+title: "Visits"
 teaching: 0
 exercises: 0
 ---
@@ -320,9 +320,9 @@ head(bp,3)
 # A tibble: 3 × 7
   measurement_id               person_id visit_occurrence_id measurement_date   
   <chr>                            <int>               <int> <dttm>             
-1 0a7d56fd-fb23-4cb6-971c-a08…         1                   1 2020-12-02 00:00:00
-2 d8997539-99a7-4e13-ac88-f86…         1                   1 2020-12-02 01:00:00
-3 2c2f8624-7ed1-4893-9533-b05…         1                   1 2020-12-02 02:00:00
+1 729e5403-5326-44a1-a538-1a0…         1                   1 2020-12-02 00:00:00
+2 80633537-2883-49d6-9d22-94a…         1                   1 2020-12-02 01:00:00
+3 7fd089fc-a1f1-44b1-adb0-09e…         1                   1 2020-12-02 02:00:00
 # ℹ 3 more variables: measurement_concept_id <dbl>, value_as_number <dbl>,
 #   unit_concept_id <dbl>
 ```
@@ -535,7 +535,13 @@ Now we see that conditions co-occur with drugs unlikely to be used in their trea
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
-
+- Know that a visit is a period of time and patients can have multiple visits
+- Understand that multiple measurements, conditions etc. can occur within and between visits
+- Understand that for some analyses you will want to look within visits and for other analyses to sum across visits 
+- Know that visits are recorded in the visit_occurrence table
+- Know each visit is unique to a person
+- Understand that other tables link to visits
+- Understand how visits can be used to find co-occurrence of other events
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 

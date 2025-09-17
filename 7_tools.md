@@ -29,9 +29,14 @@ With each you may need to balance the need to learn some new syntax with the ben
 
 TODO maybe add a table with links to packages & brief descriptions.
 
+* [OmopSketch](https://ohdsi.github.io/OmopSketch/index.html)
+To summarise an OMOP database.
+
+* [CodelistGenerator](https://darwin-eu.github.io/CodelistGenerator/)
+To generate lists of OMOP concepts.
+
 
 [OmopSketch](https://ohdsi.github.io/OmopSketch/index.html)
-
 To summarise key information about an OMOP database.
 To provide a broad characterisation of the data and to allow users to evaluate whether they are suitable for particular research.
 
@@ -44,308 +49,8 @@ First we can install the package and its dependencies and connect to some mock d
 ``` r
 #without dependencies=TRUE it failed needing omock & VisOmopResults
 #with dependencies it installed 91 packages in 1.8 minutes
-install.packages("OmopSketch", dependencies=TRUE)
-```
+install.packages("OmopSketch", dependencies=TRUE, quiet=TRUE)
 
-``` output
-# Downloading packages -------------------------------------------------------
-- Downloading CodelistGenerator from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [1.9 Mb in 0.69s]
-- Downloading CohortCharacteristics from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [3.1 Mb in 0.64s]
-- Downloading DT from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [1.7 Mb in 0.45s]
-- Downloading crosstalk from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [402.3 Kb in 0.39s]
-- Downloading lazyeval from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [153.5 Kb in 0.49s]
-- Downloading htmlwidgets from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [796.3 Kb in 0.3s]
-- Downloading promises from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [1.6 Mb in 0.31s]
-- Downloading later from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [149 Kb in 0.33s]
-- Downloading Rcpp from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [2.1 Mb in 0.46s]
-- Downloading flextable from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [2.2 Mb in 0.65s]
-- Downloading data.table from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [2.5 Mb in 0.36s]
-- Downloading gdtools from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [205.2 Kb in 0.4s]
-- Downloading fontquiver from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [2.2 Mb in 0.3s]
-- Downloading fontBitstreamVera from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [683.1 Kb in 0.33s]
-- Downloading fontLiberation from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [4.3 Mb in 0.34s]
-- Downloading systemfonts from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [334.9 Kb in 0.34s]
-- Downloading officer from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [1.9 Mb in 0.47s]
-- Downloading openssl from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [1.3 Mb in 0.3s]
-- Downloading askpass from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [21.5 Kb in 0.3s]
-- Downloading sys from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [39.9 Kb in 0.28s]
-- Downloading ragg from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [702.9 Kb in 0.28s]
-- Downloading textshaping from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [179.8 Kb in 0.23s]
-- Downloading xml2 from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [276.2 Kb in 0.39s]
-- Downloading zip from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [646.6 Kb in 0.34s]
-- Downloading gt from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [5.8 Mb in 0.35s]
-- Downloading bigD from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [1.1 Mb in 0.46s]
-- Downloading bitops from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [25.4 Kb in 0.33s]
-- Downloading commonmark from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [144.1 Kb in 0.44s]
-- Downloading juicyjuice from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [1.1 Mb in 0.32s]
-- Downloading V8 from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [11.6 Mb in 0.62s]
-- Downloading curl from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [770.1 Kb in 0.36s]
-- Downloading markdown from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [62.8 Kb in 0.3s]
-- Downloading litedown from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [362.6 Kb in 0.31s]
-- Downloading reactable from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [1 Mb in 0.34s]
-- Downloading reactR from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [597.1 Kb in 0.27s]
-- Downloading here from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [52.2 Kb in 0.28s]
-- Downloading rprojroot from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [110.6 Kb in 0.25s]
-- Downloading odbc from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [836.3 Kb in 0.3s]
-- Downloading OmopViewer from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [518.3 Kb in 0.42s]
-- Downloading shiny from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [4.2 Mb in 0.37s]
-- Downloading httpuv from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [613.8 Kb in 0.42s]
-- Downloading xtable from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [690.6 Kb in 0.3s]
-- Downloading sourcetools from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [45.1 Kb in 0.31s]
-- Downloading styler from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [809.2 Kb in 0.32s]
-- Downloading R.cache from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [110.2 Kb in 0.29s]
-- Downloading R.methodsS3 from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [80.6 Kb in 0.28s]
-- Downloading R.oo from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [971.2 Kb in 0.45s]
-- Downloading R.utils from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [1.4 Mb in 0.31s]
-- Downloading usethis from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [907.8 Kb in 0.26s]
-- Downloading desc from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [326.6 Kb in 0.3s]
-- Downloading gert from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [2.7 Mb in 0.27s]
-- Downloading credentials from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [216.1 Kb in 0.26s]
-- Downloading rstudioapi from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [310.4 Kb in 0.3s]
-- Downloading gh from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [119.6 Kb in 0.28s]
-- Downloading gitcreds from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [95 Kb in 0.25s]
-- Downloading httr2 from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [765.1 Kb in 0.3s]
-- Downloading ini from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [13.1 Kb in 0.25s]
-- Downloading whisker from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [65.6 Kb in 0.28s]
-- Downloading visOmopResults from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [1.1 Mb in 0.5s]
-- Downloading sortable from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [456.3 Kb in 0.44s]
-- Downloading learnr from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [1.6 Mb in 0.3s]
-- Downloading ellipsis from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [33.6 Kb in 0.31s]
-- Downloading RPostgres from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [440 Kb in 0.29s]
-- Downloading plogr from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [12.8 Kb in 0.26s]
-- Downloading shinyWidgets from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [1.3 Mb in 0.31s]
-- Downloading testthat from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [1.8 Mb in 0.3s]
-- Downloading brio from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [34.4 Kb in 0.32s]
-- Downloading callr from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [438.9 Kb in 0.51s]
-- Downloading processx from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [329.4 Kb in 0.24s]
-- Downloading ps from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [488.8 Kb in 0.26s]
-- Downloading pkgload from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [212 Kb in 0.28s]
-- Downloading pkgbuild from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [203.8 Kb in 0.27s]
-- Downloading praise from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [16.1 Kb in 0.26s]
-- Downloading waldo from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [132.1 Kb in 0.29s]
-- Downloading diffobj from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [979.2 Kb in 0.29s]
-- Downloading omock from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [930.3 Kb in 0.5s]
-- Downloading covr from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [320.9 Kb in 0.34s]
-- Downloading rex from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [123.8 Kb in 0.29s]
-- Downloading httr from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [475.7 Kb in 0.29s]
-- Downloading devtools from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [426.2 Kb in 0.25s]
-- Downloading miniUI from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [34.4 Kb in 0.26s]
-- Downloading pkgdown from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [891.7 Kb in 0.42s]
-- Downloading downlit from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [110 Kb in 0.21s]
-- Downloading fansi from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [309.9 Kb in 0.28s]
-- Downloading profvis from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [340.4 Kb in 0.27s]
-- Downloading rcmdcheck from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [166.7 Kb in 0.26s]
-- Downloading sessioninfo from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [191.3 Kb in 0.36s]
-- Downloading xopen from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [24.7 Kb in 0.2s]
-- Downloading roxygen2 from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [712.3 Kb in 0.29s]
-- Downloading brew from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [74.8 Kb in 0.27s]
-- Downloading rversions from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [63.7 Kb in 0.26s]
-- Downloading urlchecker from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [33.3 Kb in 0.26s]
-Successfully downloaded 92 packages in 48 seconds.
-
-The following package(s) will be installed:
-- askpass               [1.2.1]
-- bigD                  [0.3.1]
-- bitops                [1.0-9]
-- brew                  [1.0-10]
-- brio                  [1.1.5]
-- callr                 [3.7.6]
-- CodelistGenerator     [3.5.0]
-- CohortCharacteristics [1.0.0]
-- commonmark            [2.0.0]
-- covr                  [3.6.4]
-- credentials           [2.0.2]
-- crosstalk             [1.2.2]
-- curl                  [7.0.0]
-- data.table            [1.17.8]
-- desc                  [1.4.3]
-- devtools              [2.4.5]
-- diffobj               [0.3.6]
-- downlit               [0.4.4]
-- DT                    [0.34.0]
-- ellipsis              [0.3.2]
-- fansi                 [1.0.6]
-- flextable             [0.9.10]
-- fontBitstreamVera     [0.1.1]
-- fontLiberation        [0.1.0]
-- fontquiver            [0.2.1]
-- gdtools               [0.4.3]
-- gert                  [2.1.5]
-- gh                    [1.5.0]
-- gitcreds              [0.1.2]
-- gt                    [1.0.0]
-- here                  [1.0.1]
-- htmlwidgets           [1.6.4]
-- httpuv                [1.6.16]
-- httr                  [1.4.7]
-- httr2                 [1.2.1]
-- ini                   [0.3.1]
-- juicyjuice            [0.1.0]
-- later                 [1.4.4]
-- lazyeval              [0.2.2]
-- learnr                [0.11.5]
-- litedown              [0.7]
-- markdown              [2.0]
-- miniUI                [0.1.2]
-- odbc                  [1.6.3]
-- officer               [0.7.0]
-- omock                 [0.5.0]
-- OmopSketch            [0.5.1]
-- OmopViewer            [0.4.0]
-- openssl               [2.3.3]
-- pkgbuild              [1.4.8]
-- pkgdown               [2.1.3]
-- pkgload               [1.4.0]
-- plogr                 [0.2.0]
-- praise                [1.0.0]
-- processx              [3.8.6]
-- profvis               [0.4.0]
-- promises              [1.3.3]
-- ps                    [1.9.1]
-- R.cache               [0.17.0]
-- R.methodsS3           [1.8.2]
-- R.oo                  [1.27.1]
-- R.utils               [2.13.0]
-- ragg                  [1.5.0]
-- rcmdcheck             [1.4.0]
-- Rcpp                  [1.1.0]
-- reactable             [0.4.4]
-- reactR                [0.6.1]
-- rex                   [1.2.1]
-- roxygen2              [7.3.3]
-- RPostgres             [1.4.8]
-- rprojroot             [2.1.1]
-- rstudioapi            [0.17.1]
-- rversions             [2.1.2]
-- sessioninfo           [1.2.3]
-- shiny                 [1.11.1]
-- shinyWidgets          [0.9.0]
-- sortable              [0.5.0]
-- sourcetools           [0.1.7-1]
-- styler                [1.10.3]
-- sys                   [3.4.3]
-- systemfonts           [1.2.3]
-- testthat              [3.2.3]
-- textshaping           [1.0.3]
-- urlchecker            [1.0.1]
-- usethis               [3.2.1]
-- V8                    [7.0.0]
-- visOmopResults        [1.2.0]
-- waldo                 [0.6.2]
-- whisker               [0.4.1]
-- xml2                  [1.4.0]
-- xopen                 [1.0.1]
-- xtable                [1.8-4]
-- zip                   [2.3.3]
-These packages will be installed into "~/work/omop-carpentries/omop-carpentries/renv/profiles/lesson-requirements/renv/library/linux-ubuntu-jammy/R-4.5/x86_64-pc-linux-gnu".
-
-The following required system packages are not installed:
-- libgit2-dev  [required by gert]
-- libnode-dev  [required by V8]
-- pandoc       [required by learnr, pkgdown]
-The R packages depending on these system packages may fail to install.
-
-An administrator can install these packages with:
-- sudo apt install libgit2-dev libnode-dev pandoc
-
-# Installing packages --------------------------------------------------------
-- Installing OmopSketch ...                     OK [linked from cache]
-- Installing CodelistGenerator ...              OK [installed binary and cached in 0.53s]
-- Installing CohortCharacteristics ...          OK [installed binary and cached in 0.56s]
-- Installing lazyeval ...                       OK [installed binary and cached in 0.16s]
-- Installing crosstalk ...                      OK [installed binary and cached in 0.28s]
-- Installing htmlwidgets ...                    OK [installed binary and cached in 0.29s]
-- Installing Rcpp ...                           OK [installed binary and cached in 0.32s]
-- Installing later ...                          OK [installed binary and cached in 0.23s]
-- Installing promises ...                       OK [installed binary and cached in 0.27s]
-- Installing DT ...                             OK [installed binary and cached in 0.37s]
-- Installing data.table ...                     OK [installed binary and cached in 0.28s]
-- Installing fontBitstreamVera ...              OK [installed binary and cached in 0.17s]
-- Installing fontLiberation ...                 OK [installed binary and cached in 0.24s]
-- Installing fontquiver ...                     OK [installed binary and cached in 0.2s]
-- Installing systemfonts ...                    OK [installed binary and cached in 0.26s]
-- Installing gdtools ...                        OK [installed binary and cached in 0.34s]
-- Installing sys ...                            OK [installed binary and cached in 0.16s]
-- Installing askpass ...                        OK [installed binary and cached in 0.15s]
-- Installing openssl ...                        OK [installed binary and cached in 0.21s]
-- Installing textshaping ...                    OK [installed binary and cached in 0.27s]
-- Installing ragg ...                           OK [installed binary and cached in 0.3s]
-- Installing xml2 ...                           OK [installed binary and cached in 0.26s]
-- Installing zip ...                            OK [installed binary and cached in 0.18s]
-- Installing officer ...                        OK [installed binary and cached in 0.33s]
-- Installing flextable ...                      OK [installed binary and cached in 0.55s]
-- Installing bigD ...                           OK [installed binary and cached in 0.17s]
-- Installing bitops ...                         OK [installed binary and cached in 0.16s]
-- Installing commonmark ...                     OK [installed binary and cached in 0.16s]
-- Installing curl ...                           OK [installed binary and cached in 0.19s]
-- Installing V8 ...                             OK [installed binary and cached in 0.75s]
-- Installing juicyjuice ...                     OK [installed binary and cached in 0.18s]
-- Installing litedown ...                       OK [installed binary and cached in 0.19s]
-- Installing markdown ...                       OK [installed binary and cached in 0.16s]
-- Installing reactR ...                         OK [installed binary and cached in 0.29s]
-- Installing reactable ...                      OK [installed binary and cached in 0.31s]
-- Installing gt ...                             OK [installed binary and cached in 0.55s]
-- Installing rprojroot ...                      OK [installed binary and cached in 0.16s]
-- Installing here ...                           OK [installed binary and cached in 0.17s]
-- Installing odbc ...                           OK [installed binary and cached in 0.62s]
-- Installing httpuv ...                         OK [installed binary and cached in 0.26s]
-- Installing xtable ...                         OK [installed binary and cached in 0.17s]
-- Installing sourcetools ...                    OK [installed binary and cached in 0.16s]
-- Installing shiny ...                          OK [installed binary and cached in 0.53s]
-- Installing R.methodsS3 ...                    OK [installed binary and cached in 0.17s]
-- Installing R.oo ...                           OK [installed binary and cached in 0.18s]
-- Installing R.utils ...                        OK [installed binary and cached in 0.21s]
-- Installing R.cache ...                        OK [installed binary and cached in 0.23s]
-- Installing styler ...                         OK [installed binary and cached in 0.37s]
-- Installing desc ...                           OK [installed binary and cached in 0.17s]
-- Installing credentials ...                    OK [installed binary and cached in 0.19s]
-- Installing rstudioapi ...                     OK [installed binary and cached in 0.17s]
-- Installing gert ...                           OK [installed binary and cached in 0.3s]
-- Installing gitcreds ...                       OK [installed binary and cached in 0.16s]
-- Installing httr2 ...                          OK [installed binary and cached in 0.3s]
-- Installing ini ...                            OK [installed binary and cached in 0.16s]
-- Installing gh ...                             OK [installed binary and cached in 0.32s]
-- Installing whisker ...                        OK [installed binary and cached in 0.17s]
-- Installing usethis ...                        OK [installed binary and cached in 0.37s]
-- Installing visOmopResults ...                 OK [installed binary and cached in 0.52s]
-- Installing OmopViewer ...                     OK [installed binary and cached in 0.27s]
-- Installing ellipsis ...                       OK [installed binary and cached in 0.26s]
-- Installing learnr ...                         OK [installed binary and cached in 0.58s]
-- Installing sortable ...                       OK [installed binary and cached in 0.56s]
-- Installing plogr ...                          OK [installed binary and cached in 0.16s]
-- Installing RPostgres ...                      OK [installed binary and cached in 0.46s]
-- Installing shinyWidgets ...                   OK [installed binary and cached in 0.53s]
-- Installing brio ...                           OK [installed binary and cached in 0.16s]
-- Installing ps ...                             OK [installed binary and cached in 0.17s]
-- Installing processx ...                       OK [installed binary and cached in 0.17s]
-- Installing callr ...                          OK [installed binary and cached in 0.18s]
-- Installing pkgbuild ...                       OK [installed binary and cached in 0.16s]
-- Installing pkgload ...                        OK [installed binary and cached in 0.44s]
-- Installing praise ...                         OK [installed binary and cached in 0.16s]
-- Installing diffobj ...                        OK [installed binary and cached in 0.27s]
-- Installing waldo ...                          OK [installed binary and cached in 0.26s]
-- Installing testthat ...                       OK [installed binary and cached in 0.31s]
-- Installing omock ...                          OK [installed binary and cached in 0.49s]
-- Installing rex ...                            OK [installed binary and cached in 0.16s]
-- Installing httr ...                           OK [installed binary and cached in 0.17s]
-- Installing covr ...                           OK [installed binary and cached in 0.18s]
-- Installing miniUI ...                         OK [installed binary and cached in 0.39s]
-- Installing fansi ...                          OK [installed binary and cached in 0.17s]
-- Installing downlit ...                        OK [installed binary and cached in 0.27s]
-- Installing pkgdown ...                        OK [installed binary and cached in 0.31s]
-- Installing profvis ...                        OK [installed binary and cached in 0.29s]
-- Installing sessioninfo ...                    OK [installed binary and cached in 0.21s]
-- Installing xopen ...                          OK [installed binary and cached in 0.16s]
-- Installing rcmdcheck ...                      OK [installed binary and cached in 0.25s]
-- Installing brew ...                           OK [installed binary and cached in 0.16s]
-- Installing roxygen2 ...                       OK [installed binary and cached in 0.4s]
-- Installing rversions ...                      OK [installed binary and cached in 0.27s]
-- Installing urlchecker ...                     OK [installed binary and cached in 0.17s]
-- Installing devtools ...                       OK [installed binary and cached in 0.82s]
-Successfully installed 93 packages in 29 seconds.
-```
-
-``` r
 library(dplyr)
 library(OmopSketch)
 
@@ -372,23 +77,23 @@ summariseOmopSnapshot(cdm) |>
   tableOmopSnapshot(type = "gt")
 ```
 
-<!--html_preserve--><div id="jmliqcnwmc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#jmliqcnwmc table {
+<!--html_preserve--><div id="kjcvjrdgvp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#kjcvjrdgvp table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#jmliqcnwmc thead, #jmliqcnwmc tbody, #jmliqcnwmc tfoot, #jmliqcnwmc tr, #jmliqcnwmc td, #jmliqcnwmc th {
+#kjcvjrdgvp thead, #kjcvjrdgvp tbody, #kjcvjrdgvp tfoot, #kjcvjrdgvp tr, #kjcvjrdgvp td, #kjcvjrdgvp th {
   border-style: none;
 }
 
-#jmliqcnwmc p {
+#kjcvjrdgvp p {
   margin: 0;
   padding: 0;
 }
 
-#jmliqcnwmc .gt_table {
+#kjcvjrdgvp .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -414,12 +119,12 @@ summariseOmopSnapshot(cdm) |>
   border-left-color: #D9D9D9;
 }
 
-#jmliqcnwmc .gt_caption {
+#kjcvjrdgvp .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#jmliqcnwmc .gt_title {
+#kjcvjrdgvp .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -431,7 +136,7 @@ summariseOmopSnapshot(cdm) |>
   border-bottom-width: 0;
 }
 
-#jmliqcnwmc .gt_subtitle {
+#kjcvjrdgvp .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -443,7 +148,7 @@ summariseOmopSnapshot(cdm) |>
   border-top-width: 0;
 }
 
-#jmliqcnwmc .gt_heading {
+#kjcvjrdgvp .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -455,13 +160,13 @@ summariseOmopSnapshot(cdm) |>
   border-right-color: #D3D3D3;
 }
 
-#jmliqcnwmc .gt_bottom_border {
+#kjcvjrdgvp .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#jmliqcnwmc .gt_col_headings {
+#kjcvjrdgvp .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -476,7 +181,7 @@ summariseOmopSnapshot(cdm) |>
   border-right-color: #D3D3D3;
 }
 
-#jmliqcnwmc .gt_col_heading {
+#kjcvjrdgvp .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -496,7 +201,7 @@ summariseOmopSnapshot(cdm) |>
   overflow-x: hidden;
 }
 
-#jmliqcnwmc .gt_column_spanner_outer {
+#kjcvjrdgvp .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -508,15 +213,15 @@ summariseOmopSnapshot(cdm) |>
   padding-right: 4px;
 }
 
-#jmliqcnwmc .gt_column_spanner_outer:first-child {
+#kjcvjrdgvp .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#jmliqcnwmc .gt_column_spanner_outer:last-child {
+#kjcvjrdgvp .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#jmliqcnwmc .gt_column_spanner {
+#kjcvjrdgvp .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -528,11 +233,11 @@ summariseOmopSnapshot(cdm) |>
   width: 100%;
 }
 
-#jmliqcnwmc .gt_spanner_row {
+#kjcvjrdgvp .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#jmliqcnwmc .gt_group_heading {
+#kjcvjrdgvp .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -558,7 +263,7 @@ summariseOmopSnapshot(cdm) |>
   text-align: left;
 }
 
-#jmliqcnwmc .gt_empty_group_heading {
+#kjcvjrdgvp .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -573,15 +278,15 @@ summariseOmopSnapshot(cdm) |>
   vertical-align: middle;
 }
 
-#jmliqcnwmc .gt_from_md > :first-child {
+#kjcvjrdgvp .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#jmliqcnwmc .gt_from_md > :last-child {
+#kjcvjrdgvp .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#jmliqcnwmc .gt_row {
+#kjcvjrdgvp .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -600,7 +305,7 @@ summariseOmopSnapshot(cdm) |>
   overflow-x: hidden;
 }
 
-#jmliqcnwmc .gt_stub {
+#kjcvjrdgvp .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -613,7 +318,7 @@ summariseOmopSnapshot(cdm) |>
   padding-right: 5px;
 }
 
-#jmliqcnwmc .gt_stub_row_group {
+#kjcvjrdgvp .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -627,15 +332,15 @@ summariseOmopSnapshot(cdm) |>
   vertical-align: top;
 }
 
-#jmliqcnwmc .gt_row_group_first td {
+#kjcvjrdgvp .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#jmliqcnwmc .gt_row_group_first th {
+#kjcvjrdgvp .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#jmliqcnwmc .gt_summary_row {
+#kjcvjrdgvp .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -645,16 +350,16 @@ summariseOmopSnapshot(cdm) |>
   padding-right: 5px;
 }
 
-#jmliqcnwmc .gt_first_summary_row {
+#kjcvjrdgvp .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#jmliqcnwmc .gt_first_summary_row.thick {
+#kjcvjrdgvp .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#jmliqcnwmc .gt_last_summary_row {
+#kjcvjrdgvp .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -664,7 +369,7 @@ summariseOmopSnapshot(cdm) |>
   border-bottom-color: #D3D3D3;
 }
 
-#jmliqcnwmc .gt_grand_summary_row {
+#kjcvjrdgvp .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -674,7 +379,7 @@ summariseOmopSnapshot(cdm) |>
   padding-right: 5px;
 }
 
-#jmliqcnwmc .gt_first_grand_summary_row {
+#kjcvjrdgvp .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -684,7 +389,7 @@ summariseOmopSnapshot(cdm) |>
   border-top-color: #D3D3D3;
 }
 
-#jmliqcnwmc .gt_last_grand_summary_row_top {
+#kjcvjrdgvp .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -694,11 +399,11 @@ summariseOmopSnapshot(cdm) |>
   border-bottom-color: #D3D3D3;
 }
 
-#jmliqcnwmc .gt_striped {
+#kjcvjrdgvp .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#jmliqcnwmc .gt_table_body {
+#kjcvjrdgvp .gt_table_body {
   border-top-style: solid;
   border-top-width: 3px;
   border-top-color: #D9D9D9;
@@ -707,7 +412,7 @@ summariseOmopSnapshot(cdm) |>
   border-bottom-color: #D3D3D3;
 }
 
-#jmliqcnwmc .gt_footnotes {
+#kjcvjrdgvp .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -721,7 +426,7 @@ summariseOmopSnapshot(cdm) |>
   border-right-color: #D3D3D3;
 }
 
-#jmliqcnwmc .gt_footnote {
+#kjcvjrdgvp .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -730,7 +435,7 @@ summariseOmopSnapshot(cdm) |>
   padding-right: 5px;
 }
 
-#jmliqcnwmc .gt_sourcenotes {
+#kjcvjrdgvp .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -744,7 +449,7 @@ summariseOmopSnapshot(cdm) |>
   border-right-color: #D3D3D3;
 }
 
-#jmliqcnwmc .gt_sourcenote {
+#kjcvjrdgvp .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -752,72 +457,72 @@ summariseOmopSnapshot(cdm) |>
   padding-right: 5px;
 }
 
-#jmliqcnwmc .gt_left {
+#kjcvjrdgvp .gt_left {
   text-align: left;
 }
 
-#jmliqcnwmc .gt_center {
+#kjcvjrdgvp .gt_center {
   text-align: center;
 }
 
-#jmliqcnwmc .gt_right {
+#kjcvjrdgvp .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#jmliqcnwmc .gt_font_normal {
+#kjcvjrdgvp .gt_font_normal {
   font-weight: normal;
 }
 
-#jmliqcnwmc .gt_font_bold {
+#kjcvjrdgvp .gt_font_bold {
   font-weight: bold;
 }
 
-#jmliqcnwmc .gt_font_italic {
+#kjcvjrdgvp .gt_font_italic {
   font-style: italic;
 }
 
-#jmliqcnwmc .gt_super {
+#kjcvjrdgvp .gt_super {
   font-size: 65%;
 }
 
-#jmliqcnwmc .gt_footnote_marks {
+#kjcvjrdgvp .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#jmliqcnwmc .gt_asterisk {
+#kjcvjrdgvp .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#jmliqcnwmc .gt_indent_1 {
+#kjcvjrdgvp .gt_indent_1 {
   text-indent: 5px;
 }
 
-#jmliqcnwmc .gt_indent_2 {
+#kjcvjrdgvp .gt_indent_2 {
   text-indent: 10px;
 }
 
-#jmliqcnwmc .gt_indent_3 {
+#kjcvjrdgvp .gt_indent_3 {
   text-indent: 15px;
 }
 
-#jmliqcnwmc .gt_indent_4 {
+#kjcvjrdgvp .gt_indent_4 {
   text-indent: 20px;
 }
 
-#jmliqcnwmc .gt_indent_5 {
+#kjcvjrdgvp .gt_indent_5 {
   text-indent: 25px;
 }
 
-#jmliqcnwmc .katex-display {
+#kjcvjrdgvp .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#jmliqcnwmc div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#kjcvjrdgvp div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -839,7 +544,7 @@ summariseOmopSnapshot(cdm) |>
     </tr>
     <tr class="gt_row_group_first"><td headers="General  Estimate" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">Snapshot date</td>
 <td headers="General  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_left" style="text-align: right;">2025-09-12</td></tr>
+[header_level]mockOmopSketch" class="gt_row gt_left" style="text-align: right;">2025-09-17</td></tr>
     <tr><td headers="General  Estimate" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">Person count</td>
 <td headers="General  [header_name]Database name
 [header_level]mockOmopSketch" class="gt_row gt_left" style="text-align: right;">100</td></tr>
@@ -854,10 +559,10 @@ summariseOmopSnapshot(cdm) |>
 [header_level]mockOmopSketch" class="gt_row gt_left" style="text-align: right;">100</td></tr>
     <tr><td headers="Observation period  Estimate" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">Start date</td>
 <td headers="Observation period  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_left" style="text-align: right;">1957-06-06</td></tr>
+[header_level]mockOmopSketch" class="gt_row gt_left" style="text-align: right;">1958-01-22</td></tr>
     <tr><td headers="Observation period  Estimate" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">End date</td>
 <td headers="Observation period  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_left" style="text-align: right;">2019-12-17</td></tr>
+[header_level]mockOmopSketch" class="gt_row gt_left" style="text-align: right;">2019-12-24</td></tr>
     <tr class="gt_group_heading_row">
       <th colspan="2" class="gt_group_heading" style="background-color: #E9E9E9; font-weight: bold;" scope="colgroup" id="Cdm">Cdm</th>
     </tr>
@@ -898,23 +603,23 @@ missingData <- summariseMissingData(cdm, c("drug_exposure"))
 tableMissingData(missingData)
 ```
 
-<!--html_preserve--><div id="dtpaxjmayt" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#dtpaxjmayt table {
+<!--html_preserve--><div id="wrbefpseml" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#wrbefpseml table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#dtpaxjmayt thead, #dtpaxjmayt tbody, #dtpaxjmayt tfoot, #dtpaxjmayt tr, #dtpaxjmayt td, #dtpaxjmayt th {
+#wrbefpseml thead, #wrbefpseml tbody, #wrbefpseml tfoot, #wrbefpseml tr, #wrbefpseml td, #wrbefpseml th {
   border-style: none;
 }
 
-#dtpaxjmayt p {
+#wrbefpseml p {
   margin: 0;
   padding: 0;
 }
 
-#dtpaxjmayt .gt_table {
+#wrbefpseml .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -940,12 +645,12 @@ tableMissingData(missingData)
   border-left-color: #D9D9D9;
 }
 
-#dtpaxjmayt .gt_caption {
+#wrbefpseml .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#dtpaxjmayt .gt_title {
+#wrbefpseml .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -957,7 +662,7 @@ tableMissingData(missingData)
   border-bottom-width: 0;
 }
 
-#dtpaxjmayt .gt_subtitle {
+#wrbefpseml .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -969,7 +674,7 @@ tableMissingData(missingData)
   border-top-width: 0;
 }
 
-#dtpaxjmayt .gt_heading {
+#wrbefpseml .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -981,13 +686,13 @@ tableMissingData(missingData)
   border-right-color: #D3D3D3;
 }
 
-#dtpaxjmayt .gt_bottom_border {
+#wrbefpseml .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#dtpaxjmayt .gt_col_headings {
+#wrbefpseml .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1002,7 +707,7 @@ tableMissingData(missingData)
   border-right-color: #D3D3D3;
 }
 
-#dtpaxjmayt .gt_col_heading {
+#wrbefpseml .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1022,7 +727,7 @@ tableMissingData(missingData)
   overflow-x: hidden;
 }
 
-#dtpaxjmayt .gt_column_spanner_outer {
+#wrbefpseml .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1034,15 +739,15 @@ tableMissingData(missingData)
   padding-right: 4px;
 }
 
-#dtpaxjmayt .gt_column_spanner_outer:first-child {
+#wrbefpseml .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#dtpaxjmayt .gt_column_spanner_outer:last-child {
+#wrbefpseml .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#dtpaxjmayt .gt_column_spanner {
+#wrbefpseml .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1054,11 +759,11 @@ tableMissingData(missingData)
   width: 100%;
 }
 
-#dtpaxjmayt .gt_spanner_row {
+#wrbefpseml .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#dtpaxjmayt .gt_group_heading {
+#wrbefpseml .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1084,7 +789,7 @@ tableMissingData(missingData)
   text-align: left;
 }
 
-#dtpaxjmayt .gt_empty_group_heading {
+#wrbefpseml .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1099,15 +804,15 @@ tableMissingData(missingData)
   vertical-align: middle;
 }
 
-#dtpaxjmayt .gt_from_md > :first-child {
+#wrbefpseml .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#dtpaxjmayt .gt_from_md > :last-child {
+#wrbefpseml .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#dtpaxjmayt .gt_row {
+#wrbefpseml .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1126,7 +831,7 @@ tableMissingData(missingData)
   overflow-x: hidden;
 }
 
-#dtpaxjmayt .gt_stub {
+#wrbefpseml .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1139,7 +844,7 @@ tableMissingData(missingData)
   padding-right: 5px;
 }
 
-#dtpaxjmayt .gt_stub_row_group {
+#wrbefpseml .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1153,15 +858,15 @@ tableMissingData(missingData)
   vertical-align: top;
 }
 
-#dtpaxjmayt .gt_row_group_first td {
+#wrbefpseml .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#dtpaxjmayt .gt_row_group_first th {
+#wrbefpseml .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#dtpaxjmayt .gt_summary_row {
+#wrbefpseml .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1171,16 +876,16 @@ tableMissingData(missingData)
   padding-right: 5px;
 }
 
-#dtpaxjmayt .gt_first_summary_row {
+#wrbefpseml .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#dtpaxjmayt .gt_first_summary_row.thick {
+#wrbefpseml .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#dtpaxjmayt .gt_last_summary_row {
+#wrbefpseml .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1190,7 +895,7 @@ tableMissingData(missingData)
   border-bottom-color: #D3D3D3;
 }
 
-#dtpaxjmayt .gt_grand_summary_row {
+#wrbefpseml .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1200,7 +905,7 @@ tableMissingData(missingData)
   padding-right: 5px;
 }
 
-#dtpaxjmayt .gt_first_grand_summary_row {
+#wrbefpseml .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1210,7 +915,7 @@ tableMissingData(missingData)
   border-top-color: #D3D3D3;
 }
 
-#dtpaxjmayt .gt_last_grand_summary_row_top {
+#wrbefpseml .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1220,11 +925,11 @@ tableMissingData(missingData)
   border-bottom-color: #D3D3D3;
 }
 
-#dtpaxjmayt .gt_striped {
+#wrbefpseml .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#dtpaxjmayt .gt_table_body {
+#wrbefpseml .gt_table_body {
   border-top-style: solid;
   border-top-width: 3px;
   border-top-color: #D9D9D9;
@@ -1233,7 +938,7 @@ tableMissingData(missingData)
   border-bottom-color: #D3D3D3;
 }
 
-#dtpaxjmayt .gt_footnotes {
+#wrbefpseml .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1247,7 +952,7 @@ tableMissingData(missingData)
   border-right-color: #D3D3D3;
 }
 
-#dtpaxjmayt .gt_footnote {
+#wrbefpseml .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1256,7 +961,7 @@ tableMissingData(missingData)
   padding-right: 5px;
 }
 
-#dtpaxjmayt .gt_sourcenotes {
+#wrbefpseml .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1270,7 +975,7 @@ tableMissingData(missingData)
   border-right-color: #D3D3D3;
 }
 
-#dtpaxjmayt .gt_sourcenote {
+#wrbefpseml .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1278,72 +983,72 @@ tableMissingData(missingData)
   padding-right: 5px;
 }
 
-#dtpaxjmayt .gt_left {
+#wrbefpseml .gt_left {
   text-align: left;
 }
 
-#dtpaxjmayt .gt_center {
+#wrbefpseml .gt_center {
   text-align: center;
 }
 
-#dtpaxjmayt .gt_right {
+#wrbefpseml .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#dtpaxjmayt .gt_font_normal {
+#wrbefpseml .gt_font_normal {
   font-weight: normal;
 }
 
-#dtpaxjmayt .gt_font_bold {
+#wrbefpseml .gt_font_bold {
   font-weight: bold;
 }
 
-#dtpaxjmayt .gt_font_italic {
+#wrbefpseml .gt_font_italic {
   font-style: italic;
 }
 
-#dtpaxjmayt .gt_super {
+#wrbefpseml .gt_super {
   font-size: 65%;
 }
 
-#dtpaxjmayt .gt_footnote_marks {
+#wrbefpseml .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#dtpaxjmayt .gt_asterisk {
+#wrbefpseml .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#dtpaxjmayt .gt_indent_1 {
+#wrbefpseml .gt_indent_1 {
   text-indent: 5px;
 }
 
-#dtpaxjmayt .gt_indent_2 {
+#wrbefpseml .gt_indent_2 {
   text-indent: 10px;
 }
 
-#dtpaxjmayt .gt_indent_3 {
+#wrbefpseml .gt_indent_3 {
   text-indent: 15px;
 }
 
-#dtpaxjmayt .gt_indent_4 {
+#wrbefpseml .gt_indent_4 {
   text-indent: 20px;
 }
 
-#dtpaxjmayt .gt_indent_5 {
+#wrbefpseml .gt_indent_5 {
   text-indent: 25px;
 }
 
-#dtpaxjmayt .katex-display {
+#wrbefpseml .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#dtpaxjmayt div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#wrbefpseml div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1508,23 +1213,23 @@ summariseClinicalRecords(cdm, "condition_occurrence") |>
   tableClinicalRecords(type = "gt")
 ```
 
-<!--html_preserve--><div id="omyewvdldm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#omyewvdldm table {
+<!--html_preserve--><div id="bcxerkuhut" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#bcxerkuhut table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#omyewvdldm thead, #omyewvdldm tbody, #omyewvdldm tfoot, #omyewvdldm tr, #omyewvdldm td, #omyewvdldm th {
+#bcxerkuhut thead, #bcxerkuhut tbody, #bcxerkuhut tfoot, #bcxerkuhut tr, #bcxerkuhut td, #bcxerkuhut th {
   border-style: none;
 }
 
-#omyewvdldm p {
+#bcxerkuhut p {
   margin: 0;
   padding: 0;
 }
 
-#omyewvdldm .gt_table {
+#bcxerkuhut .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1550,12 +1255,12 @@ summariseClinicalRecords(cdm, "condition_occurrence") |>
   border-left-color: #D9D9D9;
 }
 
-#omyewvdldm .gt_caption {
+#bcxerkuhut .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#omyewvdldm .gt_title {
+#bcxerkuhut .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1567,7 +1272,7 @@ summariseClinicalRecords(cdm, "condition_occurrence") |>
   border-bottom-width: 0;
 }
 
-#omyewvdldm .gt_subtitle {
+#bcxerkuhut .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1579,7 +1284,7 @@ summariseClinicalRecords(cdm, "condition_occurrence") |>
   border-top-width: 0;
 }
 
-#omyewvdldm .gt_heading {
+#bcxerkuhut .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1591,13 +1296,13 @@ summariseClinicalRecords(cdm, "condition_occurrence") |>
   border-right-color: #D3D3D3;
 }
 
-#omyewvdldm .gt_bottom_border {
+#bcxerkuhut .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#omyewvdldm .gt_col_headings {
+#bcxerkuhut .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1612,7 +1317,7 @@ summariseClinicalRecords(cdm, "condition_occurrence") |>
   border-right-color: #D3D3D3;
 }
 
-#omyewvdldm .gt_col_heading {
+#bcxerkuhut .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1632,7 +1337,7 @@ summariseClinicalRecords(cdm, "condition_occurrence") |>
   overflow-x: hidden;
 }
 
-#omyewvdldm .gt_column_spanner_outer {
+#bcxerkuhut .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1644,15 +1349,15 @@ summariseClinicalRecords(cdm, "condition_occurrence") |>
   padding-right: 4px;
 }
 
-#omyewvdldm .gt_column_spanner_outer:first-child {
+#bcxerkuhut .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#omyewvdldm .gt_column_spanner_outer:last-child {
+#bcxerkuhut .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#omyewvdldm .gt_column_spanner {
+#bcxerkuhut .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1664,11 +1369,11 @@ summariseClinicalRecords(cdm, "condition_occurrence") |>
   width: 100%;
 }
 
-#omyewvdldm .gt_spanner_row {
+#bcxerkuhut .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#omyewvdldm .gt_group_heading {
+#bcxerkuhut .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1694,7 +1399,7 @@ summariseClinicalRecords(cdm, "condition_occurrence") |>
   text-align: left;
 }
 
-#omyewvdldm .gt_empty_group_heading {
+#bcxerkuhut .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1709,15 +1414,15 @@ summariseClinicalRecords(cdm, "condition_occurrence") |>
   vertical-align: middle;
 }
 
-#omyewvdldm .gt_from_md > :first-child {
+#bcxerkuhut .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#omyewvdldm .gt_from_md > :last-child {
+#bcxerkuhut .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#omyewvdldm .gt_row {
+#bcxerkuhut .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1736,7 +1441,7 @@ summariseClinicalRecords(cdm, "condition_occurrence") |>
   overflow-x: hidden;
 }
 
-#omyewvdldm .gt_stub {
+#bcxerkuhut .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1749,7 +1454,7 @@ summariseClinicalRecords(cdm, "condition_occurrence") |>
   padding-right: 5px;
 }
 
-#omyewvdldm .gt_stub_row_group {
+#bcxerkuhut .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1763,15 +1468,15 @@ summariseClinicalRecords(cdm, "condition_occurrence") |>
   vertical-align: top;
 }
 
-#omyewvdldm .gt_row_group_first td {
+#bcxerkuhut .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#omyewvdldm .gt_row_group_first th {
+#bcxerkuhut .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#omyewvdldm .gt_summary_row {
+#bcxerkuhut .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1781,16 +1486,16 @@ summariseClinicalRecords(cdm, "condition_occurrence") |>
   padding-right: 5px;
 }
 
-#omyewvdldm .gt_first_summary_row {
+#bcxerkuhut .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#omyewvdldm .gt_first_summary_row.thick {
+#bcxerkuhut .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#omyewvdldm .gt_last_summary_row {
+#bcxerkuhut .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1800,7 +1505,7 @@ summariseClinicalRecords(cdm, "condition_occurrence") |>
   border-bottom-color: #D3D3D3;
 }
 
-#omyewvdldm .gt_grand_summary_row {
+#bcxerkuhut .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1810,7 +1515,7 @@ summariseClinicalRecords(cdm, "condition_occurrence") |>
   padding-right: 5px;
 }
 
-#omyewvdldm .gt_first_grand_summary_row {
+#bcxerkuhut .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1820,7 +1525,7 @@ summariseClinicalRecords(cdm, "condition_occurrence") |>
   border-top-color: #D3D3D3;
 }
 
-#omyewvdldm .gt_last_grand_summary_row_top {
+#bcxerkuhut .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1830,11 +1535,11 @@ summariseClinicalRecords(cdm, "condition_occurrence") |>
   border-bottom-color: #D3D3D3;
 }
 
-#omyewvdldm .gt_striped {
+#bcxerkuhut .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#omyewvdldm .gt_table_body {
+#bcxerkuhut .gt_table_body {
   border-top-style: solid;
   border-top-width: 3px;
   border-top-color: #D9D9D9;
@@ -1843,7 +1548,7 @@ summariseClinicalRecords(cdm, "condition_occurrence") |>
   border-bottom-color: #D3D3D3;
 }
 
-#omyewvdldm .gt_footnotes {
+#bcxerkuhut .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1857,7 +1562,7 @@ summariseClinicalRecords(cdm, "condition_occurrence") |>
   border-right-color: #D3D3D3;
 }
 
-#omyewvdldm .gt_footnote {
+#bcxerkuhut .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1866,7 +1571,7 @@ summariseClinicalRecords(cdm, "condition_occurrence") |>
   padding-right: 5px;
 }
 
-#omyewvdldm .gt_sourcenotes {
+#bcxerkuhut .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1880,7 +1585,7 @@ summariseClinicalRecords(cdm, "condition_occurrence") |>
   border-right-color: #D3D3D3;
 }
 
-#omyewvdldm .gt_sourcenote {
+#bcxerkuhut .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1888,72 +1593,72 @@ summariseClinicalRecords(cdm, "condition_occurrence") |>
   padding-right: 5px;
 }
 
-#omyewvdldm .gt_left {
+#bcxerkuhut .gt_left {
   text-align: left;
 }
 
-#omyewvdldm .gt_center {
+#bcxerkuhut .gt_center {
   text-align: center;
 }
 
-#omyewvdldm .gt_right {
+#bcxerkuhut .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#omyewvdldm .gt_font_normal {
+#bcxerkuhut .gt_font_normal {
   font-weight: normal;
 }
 
-#omyewvdldm .gt_font_bold {
+#bcxerkuhut .gt_font_bold {
   font-weight: bold;
 }
 
-#omyewvdldm .gt_font_italic {
+#bcxerkuhut .gt_font_italic {
   font-style: italic;
 }
 
-#omyewvdldm .gt_super {
+#bcxerkuhut .gt_super {
   font-size: 65%;
 }
 
-#omyewvdldm .gt_footnote_marks {
+#bcxerkuhut .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#omyewvdldm .gt_asterisk {
+#bcxerkuhut .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#omyewvdldm .gt_indent_1 {
+#bcxerkuhut .gt_indent_1 {
   text-indent: 5px;
 }
 
-#omyewvdldm .gt_indent_2 {
+#bcxerkuhut .gt_indent_2 {
   text-indent: 10px;
 }
 
-#omyewvdldm .gt_indent_3 {
+#bcxerkuhut .gt_indent_3 {
   text-indent: 15px;
 }
 
-#omyewvdldm .gt_indent_4 {
+#bcxerkuhut .gt_indent_4 {
   text-indent: 20px;
 }
 
-#omyewvdldm .gt_indent_5 {
+#bcxerkuhut .gt_indent_5 {
   text-indent: 25px;
 }
 
-#omyewvdldm .katex-display {
+#bcxerkuhut .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#omyewvdldm div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#bcxerkuhut div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1989,17 +1694,17 @@ summariseClinicalRecords(cdm, "condition_occurrence") |>
 <td headers="condition_occurrence  Variable level" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">-</td>
 <td headers="condition_occurrence  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">Mean (SD)</td>
 <td headers="condition_occurrence  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_left" style="text-align: right;">84.00 (9.63)</td></tr>
+[header_level]mockOmopSketch" class="gt_row gt_left" style="text-align: right;">84.00 (9.83)</td></tr>
     <tr><td headers="condition_occurrence  Variable name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;"></td>
 <td headers="condition_occurrence  Variable level" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;"></td>
 <td headers="condition_occurrence  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">Median [Q25 - Q75]</td>
 <td headers="condition_occurrence  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_left" style="text-align: right;">85 [77 - 91]</td></tr>
+[header_level]mockOmopSketch" class="gt_row gt_left" style="text-align: right;">84 [77 - 91]</td></tr>
     <tr><td headers="condition_occurrence  Variable name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;"></td>
 <td headers="condition_occurrence  Variable level" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;"></td>
 <td headers="condition_occurrence  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">Range [min to max]</td>
 <td headers="condition_occurrence  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_left" style="text-align: right;">[53 to 108]</td></tr>
+[header_level]mockOmopSketch" class="gt_row gt_left" style="text-align: right;">[65 to 107]</td></tr>
     <tr><td headers="condition_occurrence  Variable name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">In observation</td>
 <td headers="condition_occurrence  Variable level" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">Yes</td>
 <td headers="condition_occurrence  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">N (%)</td>
@@ -2053,23 +1758,23 @@ summariseClinicalRecords(cdm, c("drug_exposure","measurement"),
                      tableClinicalRecords(type = "gt")
 ```
 
-<!--html_preserve--><div id="gpaxdozwma" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#gpaxdozwma table {
+<!--html_preserve--><div id="ymmjpieldi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ymmjpieldi table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#gpaxdozwma thead, #gpaxdozwma tbody, #gpaxdozwma tfoot, #gpaxdozwma tr, #gpaxdozwma td, #gpaxdozwma th {
+#ymmjpieldi thead, #ymmjpieldi tbody, #ymmjpieldi tfoot, #ymmjpieldi tr, #ymmjpieldi td, #ymmjpieldi th {
   border-style: none;
 }
 
-#gpaxdozwma p {
+#ymmjpieldi p {
   margin: 0;
   padding: 0;
 }
 
-#gpaxdozwma .gt_table {
+#ymmjpieldi .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2095,12 +1800,12 @@ summariseClinicalRecords(cdm, c("drug_exposure","measurement"),
   border-left-color: #D9D9D9;
 }
 
-#gpaxdozwma .gt_caption {
+#ymmjpieldi .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#gpaxdozwma .gt_title {
+#ymmjpieldi .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2112,7 +1817,7 @@ summariseClinicalRecords(cdm, c("drug_exposure","measurement"),
   border-bottom-width: 0;
 }
 
-#gpaxdozwma .gt_subtitle {
+#ymmjpieldi .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2124,7 +1829,7 @@ summariseClinicalRecords(cdm, c("drug_exposure","measurement"),
   border-top-width: 0;
 }
 
-#gpaxdozwma .gt_heading {
+#ymmjpieldi .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2136,13 +1841,13 @@ summariseClinicalRecords(cdm, c("drug_exposure","measurement"),
   border-right-color: #D3D3D3;
 }
 
-#gpaxdozwma .gt_bottom_border {
+#ymmjpieldi .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#gpaxdozwma .gt_col_headings {
+#ymmjpieldi .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2157,7 +1862,7 @@ summariseClinicalRecords(cdm, c("drug_exposure","measurement"),
   border-right-color: #D3D3D3;
 }
 
-#gpaxdozwma .gt_col_heading {
+#ymmjpieldi .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2177,7 +1882,7 @@ summariseClinicalRecords(cdm, c("drug_exposure","measurement"),
   overflow-x: hidden;
 }
 
-#gpaxdozwma .gt_column_spanner_outer {
+#ymmjpieldi .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2189,15 +1894,15 @@ summariseClinicalRecords(cdm, c("drug_exposure","measurement"),
   padding-right: 4px;
 }
 
-#gpaxdozwma .gt_column_spanner_outer:first-child {
+#ymmjpieldi .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#gpaxdozwma .gt_column_spanner_outer:last-child {
+#ymmjpieldi .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#gpaxdozwma .gt_column_spanner {
+#ymmjpieldi .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2209,11 +1914,11 @@ summariseClinicalRecords(cdm, c("drug_exposure","measurement"),
   width: 100%;
 }
 
-#gpaxdozwma .gt_spanner_row {
+#ymmjpieldi .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#gpaxdozwma .gt_group_heading {
+#ymmjpieldi .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2239,7 +1944,7 @@ summariseClinicalRecords(cdm, c("drug_exposure","measurement"),
   text-align: left;
 }
 
-#gpaxdozwma .gt_empty_group_heading {
+#ymmjpieldi .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2254,15 +1959,15 @@ summariseClinicalRecords(cdm, c("drug_exposure","measurement"),
   vertical-align: middle;
 }
 
-#gpaxdozwma .gt_from_md > :first-child {
+#ymmjpieldi .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#gpaxdozwma .gt_from_md > :last-child {
+#ymmjpieldi .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#gpaxdozwma .gt_row {
+#ymmjpieldi .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2281,7 +1986,7 @@ summariseClinicalRecords(cdm, c("drug_exposure","measurement"),
   overflow-x: hidden;
 }
 
-#gpaxdozwma .gt_stub {
+#ymmjpieldi .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2294,7 +1999,7 @@ summariseClinicalRecords(cdm, c("drug_exposure","measurement"),
   padding-right: 5px;
 }
 
-#gpaxdozwma .gt_stub_row_group {
+#ymmjpieldi .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2308,15 +2013,15 @@ summariseClinicalRecords(cdm, c("drug_exposure","measurement"),
   vertical-align: top;
 }
 
-#gpaxdozwma .gt_row_group_first td {
+#ymmjpieldi .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#gpaxdozwma .gt_row_group_first th {
+#ymmjpieldi .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#gpaxdozwma .gt_summary_row {
+#ymmjpieldi .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2326,16 +2031,16 @@ summariseClinicalRecords(cdm, c("drug_exposure","measurement"),
   padding-right: 5px;
 }
 
-#gpaxdozwma .gt_first_summary_row {
+#ymmjpieldi .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#gpaxdozwma .gt_first_summary_row.thick {
+#ymmjpieldi .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#gpaxdozwma .gt_last_summary_row {
+#ymmjpieldi .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2345,7 +2050,7 @@ summariseClinicalRecords(cdm, c("drug_exposure","measurement"),
   border-bottom-color: #D3D3D3;
 }
 
-#gpaxdozwma .gt_grand_summary_row {
+#ymmjpieldi .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2355,7 +2060,7 @@ summariseClinicalRecords(cdm, c("drug_exposure","measurement"),
   padding-right: 5px;
 }
 
-#gpaxdozwma .gt_first_grand_summary_row {
+#ymmjpieldi .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2365,7 +2070,7 @@ summariseClinicalRecords(cdm, c("drug_exposure","measurement"),
   border-top-color: #D3D3D3;
 }
 
-#gpaxdozwma .gt_last_grand_summary_row_top {
+#ymmjpieldi .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2375,11 +2080,11 @@ summariseClinicalRecords(cdm, c("drug_exposure","measurement"),
   border-bottom-color: #D3D3D3;
 }
 
-#gpaxdozwma .gt_striped {
+#ymmjpieldi .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#gpaxdozwma .gt_table_body {
+#ymmjpieldi .gt_table_body {
   border-top-style: solid;
   border-top-width: 3px;
   border-top-color: #D9D9D9;
@@ -2388,7 +2093,7 @@ summariseClinicalRecords(cdm, c("drug_exposure","measurement"),
   border-bottom-color: #D3D3D3;
 }
 
-#gpaxdozwma .gt_footnotes {
+#ymmjpieldi .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2402,7 +2107,7 @@ summariseClinicalRecords(cdm, c("drug_exposure","measurement"),
   border-right-color: #D3D3D3;
 }
 
-#gpaxdozwma .gt_footnote {
+#ymmjpieldi .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2411,7 +2116,7 @@ summariseClinicalRecords(cdm, c("drug_exposure","measurement"),
   padding-right: 5px;
 }
 
-#gpaxdozwma .gt_sourcenotes {
+#ymmjpieldi .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2425,7 +2130,7 @@ summariseClinicalRecords(cdm, c("drug_exposure","measurement"),
   border-right-color: #D3D3D3;
 }
 
-#gpaxdozwma .gt_sourcenote {
+#ymmjpieldi .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2433,72 +2138,72 @@ summariseClinicalRecords(cdm, c("drug_exposure","measurement"),
   padding-right: 5px;
 }
 
-#gpaxdozwma .gt_left {
+#ymmjpieldi .gt_left {
   text-align: left;
 }
 
-#gpaxdozwma .gt_center {
+#ymmjpieldi .gt_center {
   text-align: center;
 }
 
-#gpaxdozwma .gt_right {
+#ymmjpieldi .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#gpaxdozwma .gt_font_normal {
+#ymmjpieldi .gt_font_normal {
   font-weight: normal;
 }
 
-#gpaxdozwma .gt_font_bold {
+#ymmjpieldi .gt_font_bold {
   font-weight: bold;
 }
 
-#gpaxdozwma .gt_font_italic {
+#ymmjpieldi .gt_font_italic {
   font-style: italic;
 }
 
-#gpaxdozwma .gt_super {
+#ymmjpieldi .gt_super {
   font-size: 65%;
 }
 
-#gpaxdozwma .gt_footnote_marks {
+#ymmjpieldi .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#gpaxdozwma .gt_asterisk {
+#ymmjpieldi .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#gpaxdozwma .gt_indent_1 {
+#ymmjpieldi .gt_indent_1 {
   text-indent: 5px;
 }
 
-#gpaxdozwma .gt_indent_2 {
+#ymmjpieldi .gt_indent_2 {
   text-indent: 10px;
 }
 
-#gpaxdozwma .gt_indent_3 {
+#ymmjpieldi .gt_indent_3 {
   text-indent: 15px;
 }
 
-#gpaxdozwma .gt_indent_4 {
+#ymmjpieldi .gt_indent_4 {
   text-indent: 20px;
 }
 
-#gpaxdozwma .gt_indent_5 {
+#ymmjpieldi .gt_indent_5 {
   text-indent: 25px;
 }
 
-#gpaxdozwma .katex-display {
+#ymmjpieldi .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#gpaxdozwma div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ymmjpieldi div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2534,7 +2239,7 @@ summariseClinicalRecords(cdm, c("drug_exposure","measurement"),
 <td headers="drug_exposure; overall  Variable level" class="gt_row gt_right" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">-</td>
 <td headers="drug_exposure; overall  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">Mean (SD)</td>
 <td headers="drug_exposure; overall  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">216.00 (16.51)</td></tr>
+[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">216.00 (14.47)</td></tr>
     <tr class="gt_group_heading_row">
       <th colspan="4" class="gt_group_heading" style="background-color: #E9E9E9; font-weight: bold;" scope="colgroup" id="drug_exposure; Female">drug_exposure; Female</th>
     </tr>
@@ -2542,17 +2247,17 @@ summariseClinicalRecords(cdm, c("drug_exposure","measurement"),
 <td headers="drug_exposure; Female  Variable level" class="gt_row gt_right" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">-</td>
 <td headers="drug_exposure; Female  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">N</td>
 <td headers="drug_exposure; Female  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">12,007.00</td></tr>
+[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">13,526.00</td></tr>
     <tr><td headers="drug_exposure; Female  Variable name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">Number subjects</td>
 <td headers="drug_exposure; Female  Variable level" class="gt_row gt_right" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">-</td>
 <td headers="drug_exposure; Female  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">N (%)</td>
 <td headers="drug_exposure; Female  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">55 (100.00%)</td></tr>
+[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">63 (100.00%)</td></tr>
     <tr><td headers="drug_exposure; Female  Variable name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">Records per person</td>
 <td headers="drug_exposure; Female  Variable level" class="gt_row gt_right" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">-</td>
 <td headers="drug_exposure; Female  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">Mean (SD)</td>
 <td headers="drug_exposure; Female  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">218.31 (16.54)</td></tr>
+[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">214.70 (15.68)</td></tr>
     <tr class="gt_group_heading_row">
       <th colspan="4" class="gt_group_heading" style="background-color: #E9E9E9; font-weight: bold;" scope="colgroup" id="drug_exposure; Male">drug_exposure; Male</th>
     </tr>
@@ -2560,17 +2265,17 @@ summariseClinicalRecords(cdm, c("drug_exposure","measurement"),
 <td headers="drug_exposure; Male  Variable level" class="gt_row gt_right" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">-</td>
 <td headers="drug_exposure; Male  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">N</td>
 <td headers="drug_exposure; Male  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">9,593.00</td></tr>
+[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">8,074.00</td></tr>
     <tr><td headers="drug_exposure; Male  Variable name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">Number subjects</td>
 <td headers="drug_exposure; Male  Variable level" class="gt_row gt_right" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">-</td>
 <td headers="drug_exposure; Male  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">N (%)</td>
 <td headers="drug_exposure; Male  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">45 (100.00%)</td></tr>
+[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">37 (100.00%)</td></tr>
     <tr><td headers="drug_exposure; Male  Variable name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">Records per person</td>
 <td headers="drug_exposure; Male  Variable level" class="gt_row gt_right" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">-</td>
 <td headers="drug_exposure; Male  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">Mean (SD)</td>
 <td headers="drug_exposure; Male  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">213.18 (16.21)</td></tr>
+[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">218.22 (12.01)</td></tr>
     <tr class="gt_group_heading_row">
       <th colspan="4" class="gt_group_heading" style="background-color: #E9E9E9; font-weight: bold;" scope="colgroup" id="measurement; overall">measurement; overall</th>
     </tr>
@@ -2588,7 +2293,7 @@ summariseClinicalRecords(cdm, c("drug_exposure","measurement"),
 <td headers="measurement; overall  Variable level" class="gt_row gt_right" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">-</td>
 <td headers="measurement; overall  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">Mean (SD)</td>
 <td headers="measurement; overall  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">59.00 (7.45)</td></tr>
+[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">59.00 (7.85)</td></tr>
     <tr class="gt_group_heading_row">
       <th colspan="4" class="gt_group_heading" style="background-color: #E9E9E9; font-weight: bold;" scope="colgroup" id="measurement; Female">measurement; Female</th>
     </tr>
@@ -2596,17 +2301,17 @@ summariseClinicalRecords(cdm, c("drug_exposure","measurement"),
 <td headers="measurement; Female  Variable level" class="gt_row gt_right" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">-</td>
 <td headers="measurement; Female  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">N</td>
 <td headers="measurement; Female  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">3,226.00</td></tr>
+[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">3,742.00</td></tr>
     <tr><td headers="measurement; Female  Variable name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">Number subjects</td>
 <td headers="measurement; Female  Variable level" class="gt_row gt_right" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">-</td>
 <td headers="measurement; Female  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">N (%)</td>
 <td headers="measurement; Female  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">55 (100.00%)</td></tr>
+[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">63 (100.00%)</td></tr>
     <tr><td headers="measurement; Female  Variable name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">Records per person</td>
 <td headers="measurement; Female  Variable level" class="gt_row gt_right" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">-</td>
 <td headers="measurement; Female  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">Mean (SD)</td>
 <td headers="measurement; Female  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">58.65 (7.20)</td></tr>
+[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">59.40 (8.37)</td></tr>
     <tr class="gt_group_heading_row">
       <th colspan="4" class="gt_group_heading" style="background-color: #E9E9E9; font-weight: bold;" scope="colgroup" id="measurement; Male">measurement; Male</th>
     </tr>
@@ -2614,17 +2319,17 @@ summariseClinicalRecords(cdm, c("drug_exposure","measurement"),
 <td headers="measurement; Male  Variable level" class="gt_row gt_right" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">-</td>
 <td headers="measurement; Male  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">N</td>
 <td headers="measurement; Male  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">2,674.00</td></tr>
+[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">2,158.00</td></tr>
     <tr><td headers="measurement; Male  Variable name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">Number subjects</td>
 <td headers="measurement; Male  Variable level" class="gt_row gt_right" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">-</td>
 <td headers="measurement; Male  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">N (%)</td>
 <td headers="measurement; Male  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">45 (100.00%)</td></tr>
+[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">37 (100.00%)</td></tr>
     <tr><td headers="measurement; Male  Variable name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">Records per person</td>
 <td headers="measurement; Male  Variable level" class="gt_row gt_right" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">-</td>
 <td headers="measurement; Male  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">Mean (SD)</td>
 <td headers="measurement; Male  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">59.42 (7.80)</td></tr>
+[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">58.32 (6.93)</td></tr>
   </tbody>
   
   
@@ -2659,14 +2364,15 @@ result <- summariseConceptIdCounts(cdm = cdm, omopTableName = "condition_occurre
 tableConceptIdCounts(head(result,5), display = "standard", type = "datatable")
 ```
 
-<!--html_preserve--><div class="datatables html-widget html-fill-item" id="htmlwidget-1c5fe9a9bbd2c208426d" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-1c5fe9a9bbd2c208426d">{"x":{"filter":"bottom","vertical":false,"filterHTML":"<tr>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\" disabled=\"\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\" disabled=\"\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0\" data-max=\"1\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","class":"display","extensions":["FixedColumns","FixedHeader","Responsive","RowGroup","Scroller"],"data":[["condition_occurrence","condition_occurrence","condition_occurrence","condition_occurrence","condition_occurrence"],["Acute bacterial sinusitis","Angiodysplasia of stomach","Childhood asthma","Escherichia coli urinary tract infection","Sinusitis"],["4294548","4310024","4051466","4116491","4283893"],[100,100,100,100,100]],"container":"<table class='display'>\n<thead>\n<tr><th rowspan='2' style='text-align:center;'> <\/th><th rowspan='2' style='text-align:center;'>Standard concept name<\/th><th rowspan='2' style='text-align:center;'>Standard concept id<\/th><th style='text-align:center;'>mockOmopSketch<\/th><\/tr>\n<tr><th style='text-align:center;'>N records<\/th><\/tr>\n<\/thead>\n<\/table>","options":{"scrollX":true,"scrollY":400,"scrollCollapse":true,"pageLength":10,"lengthMenu":[5,10,20,50,100],"searchHighlight":true,"scroller":true,"deferRender":true,"fixedColumns":{"leftColumns":0,"rightColumns":0},"fixedHeader":true,"rowGroup":{"dataSrc":0},"columnDefs":[{"className":"dt-right","targets":3},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"Standard concept name","targets":1},{"name":"Standard concept id","targets":2},{"name":"mockOmopSketch\nN records","targets":3}],"order":[],"autoWidth":false,"orderClasses":false,"responsive":true}},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
+<!--html_preserve--><div class="datatables html-widget html-fill-item" id="htmlwidget-3ce62cc614967c041078" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-3ce62cc614967c041078">{"x":{"filter":"bottom","vertical":false,"filterHTML":"<tr>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\" disabled=\"\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\" disabled=\"\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0\" data-max=\"1\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","class":"display","extensions":["FixedColumns","FixedHeader","Responsive","RowGroup","Scroller"],"data":[["condition_occurrence","condition_occurrence","condition_occurrence","condition_occurrence","condition_occurrence"],["Diabetes mellitus due to cystic fibrosis","Diverticular disease","Fracture of vertebral column without spinal cord injury","Rupture of patellar tendon","Whiplash injury to neck"],["4144583","4266809","4048695","4149245","4218389"],[100,100,100,100,100]],"container":"<table class='display'>\n<thead>\n<tr><th rowspan='2' style='text-align:center;'> <\/th><th rowspan='2' style='text-align:center;'>Standard concept name<\/th><th rowspan='2' style='text-align:center;'>Standard concept id<\/th><th style='text-align:center;'>mockOmopSketch<\/th><\/tr>\n<tr><th style='text-align:center;'>N records<\/th><\/tr>\n<\/thead>\n<\/table>","options":{"scrollX":true,"scrollY":400,"scrollCollapse":true,"pageLength":10,"lengthMenu":[5,10,20,50,100],"searchHighlight":true,"scroller":true,"deferRender":true,"fixedColumns":{"leftColumns":0,"rightColumns":0},"fixedHeader":true,"rowGroup":{"dataSrc":0},"columnDefs":[{"className":"dt-right","targets":3},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"Standard concept name","targets":1},{"name":"Standard concept id","targets":2},{"name":"mockOmopSketch\nN records","targets":3}],"order":[],"autoWidth":false,"orderClasses":false,"responsive":true}},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
 
 
 
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
+- Brief outline of some R tools that will be useful for new OMOP users.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
