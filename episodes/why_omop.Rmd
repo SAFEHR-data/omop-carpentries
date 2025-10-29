@@ -4,8 +4,6 @@ teaching: 0
 exercises: 0
 ---
 
-TODO not sure we need this episode, maybe some objectives could be copied to others
-
 :::::::::::::::::::::::::::::::::::::: questions 
 
 - Why use OMOP?
@@ -23,8 +21,6 @@ TODO not sure we need this episode, maybe some objectives could be copied to oth
 - Join two or more tables together
 - Attempt to join data from spreadsheets with different structures
 - Describe the pros and cons on using OMOP vs raw data, why this is the way forward
-- Use Athena and other OHDSI tools for reference
-- Describe the full landscape of OMOP tools and the community
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 

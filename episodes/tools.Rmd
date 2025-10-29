@@ -13,6 +13,8 @@ exercises: 0
 ::::::::::::::::::::::::::::::::::::: objectives
 
 - Brief outline of some R tools that will be useful for new OMOP users.
+- Use Athena and other OHDSI tools for reference
+- Describe the full landscape of OMOP tools and the community
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
