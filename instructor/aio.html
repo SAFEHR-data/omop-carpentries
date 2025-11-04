@@ -241,7 +241,7 @@
 <div class="accordion accordion-flush" id="accordionFlush2">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading2">
-        <a href="1_what_is_omop.html">1. What is OMOP?</a>
+        <a href="what_is_omop.html">1. What is OMOP?</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -253,7 +253,7 @@
 <div class="accordion accordion-flush" id="accordionFlush3">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading3">
-        <a href="2_why_omop.html">2. Why OMOP?</a>
+        <a href="concepts.html">2. concepts and conditions</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -265,7 +265,7 @@
 <div class="accordion accordion-flush" id="accordionFlush4">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading4">
-        <a href="3_concepts.html">3. concepts and conditions</a>
+        <a href="measurement_observation.html">3. measurements and observations</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -277,7 +277,7 @@
 <div class="accordion accordion-flush" id="accordionFlush5">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading5">
-        <a href="4_measurement_observation.html">4. measurements and observations</a>
+        <a href="visits.html">4. Visits</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -289,7 +289,7 @@
 <div class="accordion accordion-flush" id="accordionFlush6">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading6">
-        <a href="5_visits.html">5. Visits</a>
+        <a href="medications.html">5. Medications</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -301,7 +301,7 @@
 <div class="accordion accordion-flush" id="accordionFlush7">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading7">
-        <a href="6_medications.html">6. Medications</a>
+        <a href="tools.html">6. Community provided software for working with OMOP data</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -313,19 +313,7 @@
 <div class="accordion accordion-flush" id="accordionFlush8">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading8">
-        <a href="7_tools.html">7. Community provided software for working with OMOP data</a>
-    </div>
-<!--/div.accordion-header-->
-
-  </div>
-<!--/div.accordion-item-->
-</div>
-<!--/div.accordion-flush-->
-
-<div class="accordion accordion-flush" id="accordionFlush9">
-  <div class="accordion-item">
-    <div class="accordion-header" id="flush-heading9">
-        <a href="chapter8.html">8. Placeholder Chapter 8</a>
+        <a href="chapter8.html">7. Placeholder Chapter 8</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -388,11 +376,11 @@
     <main id="main-content" class="main-content"><div class="container lesson-content">
         
         
-<section id="aio-1_what_is_omop"><p>Content from <a href="1_what_is_omop.html">What is OMOP?</a></p>
+<section id="aio-what_is_omop"><p>Content from <a href="what_is_omop.html">What is OMOP?</a></p>
 <hr>
-<p>Last updated on 2025-09-12 |
+<p>Last updated on 2025-11-04 |
 
-        <a href="https://github.com/SAFEHR-data/omop-carpentries/edit/main/episodes/1_what_is_omop.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
+        <a href="https://github.com/SAFEHR-data/omop-carpentries/edit/main/episodes/what_is_omop.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 0 minutes</p>
 <div class="text-end">
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
@@ -984,7 +972,7 @@ e.g.</p>
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code># Source:   table&lt;person&gt; [?? x 18]
-# Database: DuckDB 1.3.3-dev231 [unknown@Linux 6.8.0-1031-azure:R 4.5.1//tmp/RtmpVwVowP/file242c294ae4c5.duckdb]
+# Database: DuckDB 1.4.1 [unknown@Linux 6.8.0-1036-azure:R 4.5.1//tmp/RtmpKYIN08/file373f32f5969d.duckdb]
    person_id gender_concept_id year_of_birth month_of_birth day_of_birth
        &lt;int&gt;             &lt;int&gt;         &lt;int&gt;          &lt;int&gt;        &lt;int&gt;
  1         6              8532          1963             12           31
@@ -1015,7 +1003,7 @@ e.g.</p>
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code># Source:   table&lt;condition_occurrence&gt; [?? x 16]
-# Database: DuckDB 1.3.3-dev231 [unknown@Linux 6.8.0-1031-azure:R 4.5.1//tmp/RtmpVwVowP/file242c294ae4c5.duckdb]
+# Database: DuckDB 1.4.1 [unknown@Linux 6.8.0-1036-azure:R 4.5.1//tmp/RtmpKYIN08/file373f32f5969d.duckdb]
    condition_occurrence_id person_id condition_concept_id condition_start_date
                      &lt;int&gt;     &lt;int&gt;                &lt;int&gt; &lt;date&gt;
  1                    4483       263              4112343 2015-10-02
@@ -1199,16 +1187,16 @@ patients with each condition_concept_id</p>
 <pre class="output" tabindex="0"><code># A tibble: 158 × 3
    condition_concept_name    gender_concept_name num_persons
    &lt;chr&gt;                     &lt;chr&gt;                     &lt;dbl&gt;
- 1 Acute allergic reaction   FEMALE                       59
- 2 Acute allergic reaction   MALE                         57
- 3 Acute bacterial sinusitis FEMALE                      418
- 4 Acute bacterial sinusitis MALE                        368
- 5 Acute bronchitis          MALE                       1243
- 6 Acute bronchitis          FEMALE                     1300
- 7 Acute cholecystitis       FEMALE                       29
- 8 Acute cholecystitis       MALE                          6
- 9 Acute viral pharyngitis   MALE                       1284
-10 Acute viral pharyngitis   FEMALE                     1322
+ 1 Acute allergic reaction   MALE                         57
+ 2 Acute allergic reaction   FEMALE                       59
+ 3 Acute bacterial sinusitis MALE                        368
+ 4 Acute bacterial sinusitis FEMALE                      418
+ 5 Acute bronchitis          FEMALE                     1300
+ 6 Acute bronchitis          MALE                       1243
+ 7 Acute cholecystitis       MALE                          6
+ 8 Acute cholecystitis       FEMALE                       29
+ 9 Acute viral pharyngitis   FEMALE                     1322
+10 Acute viral pharyngitis   MALE                       1284
 # ℹ 148 more rows</code></pre>
 </div>
 </div>
@@ -1532,175 +1520,11 @@ Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
 </div>
-</section></section><section id="aio-2_why_omop"><p>Content from <a href="2_why_omop.html">Why OMOP?</a></p>
+</section></section><section id="aio-concepts"><p>Content from <a href="concepts.html">concepts and conditions</a></p>
 <hr>
-<p>Last updated on 2025-09-17 |
+<p>Last updated on 2025-11-04 |
 
-        <a href="https://github.com/SAFEHR-data/omop-carpentries/edit/main/episodes/2_why_omop.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
-<p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 0 minutes</p>
-<div class="text-end">
-          <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
-        </div>
-<p>TODO not sure we need this episode, maybe some objectives could be
-copied to others</p>
-<div class="overview card">
-<h2 class="card-header">Overview</h2>
-<div class="row g-0">
-<div class="col-md-4">
-<div class="card-body">
-<div class="inner">
-<h3 class="card-title">Questions</h3>
-<ul>
-<li>Why use OMOP?</li>
-<li>Why not use spreadsheets?</li>
-<li>What are the advantages of OMOP?</li>
-<li>What are the disadvantages of OMOP?</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="col-md-8">
-<div class="card-body">
-<div class="inner bordered">
-<h3 class="card-title">Objectives</h3>
-<ul>
-<li>Examine the diagram of the OMOP tables and the data
-specification</li>
-<li>Familiarise with the vocab schema</li>
-<li>Join two or more tables together</li>
-<li>Attempt to join data from spreadsheets with different
-structures</li>
-<li>Describe the pros and cons on using OMOP vs raw data, why this is
-the way forward</li>
-<li>Use Athena and other OHDSI tools for reference</li>
-<li>Describe the full landscape of OMOP tools and the community</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</div>
-<section><h2 class="section-heading" id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
-</h2>
-<hr class="half-width">
-<p>TODO decide whether to include this earlier example, doesn’t
-currently work because we don’t have the data. Maybe not ?</p>
-<div id="challenge-1-compare-data-from-two-separate-omop-data-sets" class="callout discussion">
-<div class="callout-square">
-<i class="callout-icon" data-feather="message-circle"></i>
-</div>
-<span class="callout-header">Discussion</span>
-<div id="challenge-1-compare-data-from-two-separate-omop-data-sets" class="callout-inner">
-<h3 class="callout-title">Challenge 1: Compare data from two separate
-OMOP data sets</h3>
-<div class="callout-content">
-<p>Let’s read in an OMOP extract called extract_1 from the local
-files.</p>
-<div class="codewrapper sourceCode" id="cb1">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">omop_dataset_file_location_1</span> <span class="op">&lt;-</span> <span class="fu">here</span><span class="fu">::</span><span class="fu">here</span><span class="op">(</span><span class="st">"extracts/uclh1"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">extract_1</span> <span class="op">&lt;-</span> <span class="fu">read_omop_dataset</span><span class="op">(</span><span class="va">omop_dataset_file_location_1</span><span class="op">)</span></span></code></pre>
-</div>
-<p>A colleague at the hospital is familiar with the events that occurred
-in hospital to one of the patients in the dataset. This patient has been
-identified by the data team as the anonymised patient with person id
-7.</p>
-<div class="codewrapper sourceCode" id="cb2">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">extract_1</span><span class="op">$</span><span class="va">person</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">filter</span><span class="op">(</span><span class="va">person_id</span><span class="op">==</span><span class="fl">7</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">select</span><span class="op">(</span><span class="va">person_id</span>, <span class="va">race_concept_id</span>, <span class="va">gender_concept_id</span>, <span class="va">year_of_birth</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">omopcept</span><span class="fu">::</span><span class="fu">omop_join_name_all</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">collect</span><span class="op">(</span><span class="op">)</span></span></code></pre>
-</div>
-<div id="checklist1" class="callout checklist">
-<div class="callout-square">
-<i class="callout-icon" data-feather="check-square"></i>
-</div>
-<span class="callout-header">Checklist</span>
-<div class="callout-inner">
-<div class="callout-content">
-<p>Verify that the patient details match your colleague’s
-description.</p>
-</div>
-</div>
-</div>
-<p>Let’s take a sample of patients in this dataset, selecting those same
-columns.</p>
-<div class="codewrapper sourceCode" id="cb3">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">extract_1_pt_sample</span> <span class="op">&lt;-</span> <span class="va">extract_1</span><span class="op">$</span><span class="va">person</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">slice_sample</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">select</span><span class="op">(</span><span class="va">person_id</span>, <span class="va">race_concept_id</span>, <span class="va">gender_concept_id</span>, <span class="va">year_of_birth</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">collect</span><span class="op">(</span><span class="op">)</span></span></code></pre>
-</div>
-<p>We’ve received another OMOP dataset from another site.</p>
-<div class="codewrapper sourceCode" id="cb4">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">omop_dataset_file_location_2</span> <span class="op">&lt;-</span> <span class="fu">here</span><span class="fu">::</span><span class="fu">here</span><span class="op">(</span><span class="st">"extracts/other_site_1"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">extract_2</span> <span class="op">&lt;-</span> <span class="fu">read_omop_dataset</span><span class="op">(</span><span class="va">omop_dataset_file_location_2</span><span class="op">)</span></span></code></pre>
-</div>
-<p>Let’s take a sample of patients from the second extract and bind them
-together.</p>
-<div id="callout1" class="callout">
-<div class="callout-square">
-<i class="callout-icon" data-feather="bell"></i>
-</div>
-<span class="callout-header">Callout</span>
-<div class="callout-inner">
-<div class="callout-content">
-<p>Note that, because the structure of the data (table names, columns
-and data types) are set as standard by the OMOP specification, we are
-guaranteed to be able to bind these two datasets together without error.
-We can also re-apply the same code, only changing the reference to the
-new extract.</p>
-</div>
-</div>
-</div>
-<div class="codewrapper sourceCode" id="cb5">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">extract_2_pt_sample</span> <span class="op">&lt;-</span> <span class="va">extract_2</span><span class="op">$</span><span class="va">person</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">slice_sample</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">select</span><span class="op">(</span><span class="va">person_id</span>, <span class="va">race_concept_id</span>, <span class="va">gender_concept_id</span>, <span class="va">year_of_birth</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">collect</span><span class="op">(</span><span class="op">)</span></span>
-<span>  </span>
-<span> <span class="fu">bind_rows</span><span class="op">(</span><span class="va">extract_1_pt_sample</span>, <span class="va">extract_2_pt_sample</span><span class="op">)</span></span></code></pre>
-</div>
-</div>
-</div>
-</div>
-<div id="keypoints1" class="callout keypoints">
-<div class="callout-square">
-<i class="callout-icon" data-feather="key"></i>
-</div>
-<span class="callout-header">Key Points</span>
-<div class="callout-inner">
-<div class="callout-content">
-
-</div>
-</div>
-</div>
-<!--
-Place links that you need to refer to multiple times across pages here. Delete
-any links that you are not going to use.
- -->
-</section></section><section id="aio-3_concepts"><p>Content from <a href="3_concepts.html">concepts and conditions</a></p>
-<hr>
-<p>Last updated on 2025-09-17 |
-
-        <a href="https://github.com/SAFEHR-data/omop-carpentries/edit/main/episodes/3_concepts.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
+        <a href="https://github.com/SAFEHR-data/omop-carpentries/edit/main/episodes/concepts.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 0 minutes</p>
 <div class="text-end">
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
@@ -1807,11 +1631,205 @@ studies</td>
 <hr class="half-width">
 <p>OMOP concepts can be looked up in <a href="https://athena.ohdsi.org" class="external-link">Athena</a> an online tool provided by
 OHDSI.</p>
-<p>TODO provide a challenge to look up a concept in Athena TODO add a
-challenge to look up the same concept in one of the synthea datasets
-TODO add briefly about concept relationships</p>
-<p>TODO ? add about the condition_occurrence table to make the episode
-longer and give something for concept to refer to</p>
+<p>The CDMConnector package allows connection to an OMOP Common Data
+Model in a database. It also contains synthetic example data that can be
+used to demonstrate querying the data.</p>
+<div id="discussion1" class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<span class="callout-header">Discussion</span>
+<div class="callout-inner">
+<div class="callout-content">
+<p>In the previous lesson we set up the CDMConnector package to connect
+to an OMOP Common Data Model database and used it to look at the
+concepts table.</p>
+<div class="codewrapper sourceCode" id="cb1">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw">library</span><span class="op">(</span><span class="va">CDMConnector</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">dbName</span> <span class="op">&lt;-</span> <span class="st">"GiBleed"</span></span>
+<span><span class="fu">CDMConnector</span><span class="fu">::</span><span class="fu">requireEunomia</span><span class="op">(</span>datasetName <span class="op">=</span> <span class="va">dbName</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>
+Download completed!</code></pre>
+</div>
+<div class="codewrapper sourceCode" id="cb3">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">db</span> <span class="op">&lt;-</span> <span class="fu">DBI</span><span class="fu">::</span><span class="fu">dbConnect</span><span class="op">(</span><span class="fu">duckdb</span><span class="fu">::</span><span class="fu">duckdb</span><span class="op">(</span><span class="op">)</span>, dbdir <span class="op">=</span> <span class="fu">CDMConnector</span><span class="fu">::</span><span class="fu">eunomiaDir</span><span class="op">(</span>datasetName <span class="op">=</span> <span class="va">dbName</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">cdm</span> <span class="op">&lt;-</span> <span class="fu">CDMConnector</span><span class="fu">::</span><span class="fu">cdmFromCon</span><span class="op">(</span>con <span class="op">=</span> <span class="va">db</span>, cdmSchema <span class="op">=</span> <span class="st">"main"</span>, writeSchema <span class="op">=</span> <span class="st">"main"</span><span class="op">)</span> </span></code></pre>
+</div>
+<p>The data themselves are not actually read into the created cdm
+object. Rather it is a reference that allows us to query the data from
+the database.</p>
+<p>Typing <code>cdm</code> will give a summary of the tables in the
+database and we can look at these individually using the <code>$</code>
+operator.</p>
+<div class="codewrapper sourceCode" id="cb4">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">cdm</span></span></code></pre>
+</div>
+<div class="codewrapper sourceCode" id="cb5">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">cdm</span><span class="op">$</span><span class="va">person</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code># Source:   table&lt;person&gt; [?? x 18]
+# Database: DuckDB 1.4.1 [unknown@Linux 6.8.0-1036-azure:R 4.5.1//tmp/RtmpFoKwkX/file491017c29121.duckdb]
+   person_id gender_concept_id year_of_birth month_of_birth day_of_birth
+       &lt;int&gt;             &lt;int&gt;         &lt;int&gt;          &lt;int&gt;        &lt;int&gt;
+ 1         6              8532          1963             12           31
+ 2       123              8507          1950              4           12
+ 3       129              8507          1974             10            7
+ 4        16              8532          1971             10           13
+ 5        65              8532          1967              3           31
+ 6        74              8532          1972              1            5
+ 7        42              8532          1909             11            2
+ 8       187              8507          1945              7           23
+ 9        18              8532          1965             11           17
+10       111              8532          1975              5            2
+# ℹ more rows
+# ℹ 13 more variables: birth_datetime &lt;dttm&gt;, race_concept_id &lt;int&gt;,
+#   ethnicity_concept_id &lt;int&gt;, location_id &lt;int&gt;, provider_id &lt;int&gt;,
+#   care_site_id &lt;int&gt;, person_source_value &lt;chr&gt;, gender_source_value &lt;chr&gt;,
+#   gender_source_concept_id &lt;int&gt;, race_source_value &lt;chr&gt;,
+#   race_source_concept_id &lt;int&gt;, ethnicity_source_value &lt;chr&gt;,
+#   ethnicity_source_concept_id &lt;int&gt;</code></pre>
+</div>
+</div>
+</div>
+</div>
+<p>Many of the columns in the OMOP CDM tables contain concept_ids. For
+example the <code>condition_occurrence</code> table contains a
+<code>condition_concept_id</code> column that contains the concept_id
+for the patient’s condition.</p>
+<div id="discussion2" class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<span class="callout-header">Discussion</span>
+<div class="callout-inner">
+<h3 class="callout-title">Challenge</h3>
+<div class="callout-content">
+<p>Using the functions count, filter and select from the dplyr package
+find</p>
+<ol style="list-style-type: decimal">
+<li><p>How many concepts are included in this dataset?</p></li>
+<li><p>What are the top 5 most common conditions in the
+<code>condition_occurrence</code> table.</p></li>
+<li><p>How many people were born after 1984?</p></li>
+<li><p>How many distinct vocabularies are used in the concept
+table?</p></li>
+<li><p>(Optional) Look up the concept_id for “Type 2 diabetes mellitus”
+in Athena. How many people in this dataset have this condition?
+::::::::::::::::::::::::::::::::::::::::::::::::::: solution</p></li>
+</ol>
+<div class="codewrapper sourceCode" id="cb7">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw">library</span><span class="op">(</span><span class="va">dplyr</span><span class="op">)</span></span>
+<span><span class="co"># 1. How many concepts are included in this dataset?</span></span>
+<span><span class="va">cdm</span><span class="op">$</span><span class="va">concept</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">summarise</span><span class="op">(</span>n <span class="op">=</span> <span class="fu">n_distinct</span><span class="op">(</span><span class="va">concept_id</span><span class="op">)</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code># Source:   SQL [?? x 1]
+# Database: DuckDB 1.4.1 [unknown@Linux 6.8.0-1036-azure:R 4.5.1//tmp/RtmpFoKwkX/file491017c29121.duckdb]
+      n
+  &lt;dbl&gt;
+1   444</code></pre>
+</div>
+<p>Answer: There are 444 concepts in this dataset. Remember it is not
+the full set of OMOP concepts.</p>
+<div class="codewrapper sourceCode" id="cb9">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># 2. What are the top 5 most common conditions in the condition_occurrence table.</span></span>
+<span><span class="va">cdm</span><span class="op">$</span><span class="va">condition_occurrence</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">count</span><span class="op">(</span><span class="va">condition_concept_id</span>, sort <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span>                 <span class="co"># creates n</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">mutate</span><span class="op">(</span>rn <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">row_number</span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu">desc</span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>          <span class="co"># window fn</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">filter</span><span class="op">(</span><span class="va">rn</span> <span class="op">&lt;=</span> <span class="fl">5</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">left_join</span><span class="op">(</span><span class="va">cdm</span><span class="op">$</span><span class="va">concept</span>, by <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="st">"condition_concept_id"</span> <span class="op">=</span> <span class="st">"concept_id"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">select</span><span class="op">(</span><span class="va">condition_concept_id</span>, <span class="va">concept_name</span>, <span class="va">n</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">arrange</span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu">desc</span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code># Source:     SQL [?? x 3]
+# Database:   DuckDB 1.4.1 [unknown@Linux 6.8.0-1036-azure:R 4.5.1//tmp/RtmpFoKwkX/file491017c29121.duckdb]
+# Ordered by: dplyr::desc(n)
+  condition_concept_id concept_name                n
+                 &lt;int&gt; &lt;chr&gt;                   &lt;dbl&gt;
+1               260139 Acute bronchitis         8184
+2             40481087 Viral sinusitis         17268
+3               372328 Otitis media             3605
+4              4112343 Acute viral pharyngitis 10217
+5                80180 Osteoarthritis           2694</code></pre>
+</div>
+<p>Answer: The top 5 most common conditions are:<br>
+| condition_concept_id | concept_name | n | |———————-|—————————–|——-| |
+260139 | Acute bronchitis | 8184 | | 40481087 | Viral sinusitis | 17268
+| | 372328 | Otitis media | 3605 | | 4112343 | Acute viral pharyngitis
+|10217 | |80180 | Osteoarthritis | 2694 |</p>
+<div class="codewrapper sourceCode" id="cb11">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># 3. How many people were born after 1984?</span></span>
+<span><span class="va">cdm</span><span class="op">$</span><span class="va">person</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">filter</span><span class="op">(</span><span class="va">year_of_birth</span> <span class="op">&gt;</span> <span class="fl">1984</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">count</span><span class="op">(</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code># Source:   SQL [?? x 1]
+# Database: DuckDB 1.4.1 [unknown@Linux 6.8.0-1036-azure:R 4.5.1//tmp/RtmpFoKwkX/file491017c29121.duckdb]
+      n
+  &lt;dbl&gt;
+1     6</code></pre>
+</div>
+<p>Answer: There are 6 people born after 1984 in this dataset.</p>
+<div class="codewrapper sourceCode" id="cb13">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># 4. How many distinct vocabularies are used in the concept table?</span></span>
+<span><span class="va">cdm</span><span class="op">$</span><span class="va">vocabulary</span> <span class="op">%&gt;%</span> <span class="fu">summarise</span><span class="op">(</span>n_distinct_vocabularies <span class="op">=</span> <span class="fu">n_distinct</span><span class="op">(</span><span class="va">vocabulary_id</span> <span class="op">)</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code># Source:   SQL [?? x 1]
+# Database: DuckDB 1.4.1 [unknown@Linux 6.8.0-1036-azure:R 4.5.1//tmp/RtmpFoKwkX/file491017c29121.duckdb]
+  n_distinct_vocabularies
+                    &lt;dbl&gt;
+1                     125</code></pre>
+</div>
+<p>Answer: There are 125 distinct vocabularies used in this dataset.</p>
+</div>
+</div>
+</div>
+<p>:::::::::::::::::::::::::::::::::::::::::::::::::::</p>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -1825,8 +1843,6 @@ by an OMOP concept_id.</li>
 <li>Know that OMOP data usually includes the OMOP concept table and
 other data from the vocabularies</li>
 <li>Be able to look up concepts by their name</li>
-<li>Know that patient conditions are stored in the condition_occurrence
-table</li>
 </ul>
 </div>
 </div>
@@ -1835,11 +1851,11 @@ table</li>
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
-</section></section><section id="aio-4_measurement_observation"><p>Content from <a href="4_measurement_observation.html">measurements and observations</a></p>
+</section></section><section id="aio-measurement_observation"><p>Content from <a href="measurement_observation.html">measurements and observations</a></p>
 <hr>
-<p>Last updated on 2025-09-17 |
+<p>Last updated on 2025-11-04 |
 
-        <a href="https://github.com/SAFEHR-data/omop-carpentries/edit/main/episodes/4_measurement_observation.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
+        <a href="https://github.com/SAFEHR-data/omop-carpentries/edit/main/episodes/measurement_observation.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 0 minutes</p>
 <div class="text-end">
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
@@ -2162,11 +2178,11 @@ querying by patient and/or visit, or summing across all records</li>
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
-</section></section><section id="aio-5_visits"><p>Content from <a href="5_visits.html">Visits</a></p>
+</section></section><section id="aio-visits"><p>Content from <a href="visits.html">Visits</a></p>
 <hr>
-<p>Last updated on 2025-09-17 |
+<p>Last updated on 2025-11-04 |
 
-        <a href="https://github.com/SAFEHR-data/omop-carpentries/edit/main/episodes/5_visits.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
+        <a href="https://github.com/SAFEHR-data/omop-carpentries/edit/main/episodes/visits.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 0 minutes</p>
 <div class="text-end">
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
@@ -2527,9 +2543,9 @@ numeric measurements are stored in the column
 <pre class="output" tabindex="0"><code># A tibble: 3 × 7
   measurement_id               person_id visit_occurrence_id measurement_date
   &lt;chr&gt;                            &lt;int&gt;               &lt;int&gt; &lt;dttm&gt;
-1 729e5403-5326-44a1-a538-1a0…         1                   1 2020-12-02 00:00:00
-2 80633537-2883-49d6-9d22-94a…         1                   1 2020-12-02 01:00:00
-3 7fd089fc-a1f1-44b1-adb0-09e…         1                   1 2020-12-02 02:00:00
+1 a86a85b5-4aad-40b8-a170-9fe…         1                   1 2020-12-02 00:00:00
+2 0c7dab10-beca-4127-8a0d-6b7…         1                   1 2020-12-02 01:00:00
+3 0be0111c-b066-4136-a68f-4ec…         1                   1 2020-12-02 02:00:00
 # ℹ 3 more variables: measurement_concept_id &lt;dbl&gt;, value_as_number &lt;dbl&gt;,
 #   unit_concept_id &lt;dbl&gt;</code></pre>
 </div>
@@ -2545,7 +2561,7 @@ numeric measurements are stored in the column
 <span>  <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme_minimal</span><span class="op">(</span><span class="op">)</span></span></code></pre>
 </div>
-<figure style="text-align: center"><img src="../fig/5_visits-rendered-bp-all-visit-1.png" alt="plot of blood pressure measurements for all visits" class="figure mx-auto d-block"><figcaption>
+<figure style="text-align: center"><img src="../fig/visits-rendered-bp-all-visit-1.png" alt="plot of blood pressure measurements for all visits" class="figure mx-auto d-block"><figcaption>
 plot of blood pressure measurements for all visits
 </figcaption></figure><p>You should be able to see some dates with single measurements and
 some with a few measurements very close to each other. Each separate
@@ -2602,7 +2618,7 @@ that join to the concept table to get concept_name. You can add
 <span>  <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme_minimal</span><span class="op">(</span><span class="op">)</span></span></code></pre>
 </div>
-<figure style="text-align: center"><img src="../fig/5_visits-rendered-bp-type-visit-1.png" alt="plot of blood pressure measurements for all visits" class="figure mx-auto d-block"><figcaption>
+<figure style="text-align: center"><img src="../fig/visits-rendered-bp-type-visit-1.png" alt="plot of blood pressure measurements for all visits" class="figure mx-auto d-block"><figcaption>
 plot of blood pressure measurements for all visits
 </figcaption></figure><p>To indicate the type of visit we need to join to visit_occurrence to
 get the visit_concept_id and then join to the concept table to get a
@@ -2674,7 +2690,7 @@ visit_occurrence_id from the table earlier.</p>
 <span>  <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme_minimal</span><span class="op">(</span><span class="op">)</span></span></code></pre>
 </div>
-<figure style="text-align: center"><img src="../fig/5_visits-rendered-bp-one-visit-1.png" alt="plot of blood pressure measurements for one visit" class="figure mx-auto d-block"><figcaption>
+<figure style="text-align: center"><img src="../fig/visits-rendered-bp-one-visit-1.png" alt="plot of blood pressure measurements for one visit" class="figure mx-auto d-block"><figcaption>
 plot of blood pressure measurements for one visit
 </figcaption></figure><p>You should be able to see hourly blood pressure measurements within a
 visit.</p>
@@ -2830,11 +2846,11 @@ events</li>
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
-</section></section><section id="aio-6_medications"><p>Content from <a href="6_medications.html">Medications</a></p>
+</section></section><section id="aio-medications"><p>Content from <a href="medications.html">Medications</a></p>
 <hr>
-<p>Last updated on 2025-09-17 |
+<p>Last updated on 2025-11-04 |
 
-        <a href="https://github.com/SAFEHR-data/omop-carpentries/edit/main/episodes/6_medications.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
+        <a href="https://github.com/SAFEHR-data/omop-carpentries/edit/main/episodes/medications.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 0 minutes</p>
 <div class="text-end">
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
@@ -3111,11 +3127,11 @@ vocabulary</li>
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
-</section></section><section id="aio-7_tools"><p>Content from <a href="7_tools.html">Community provided software for working with OMOP data</a></p>
+</section></section><section id="aio-tools"><p>Content from <a href="tools.html">Community provided software for working with OMOP data</a></p>
 <hr>
-<p>Last updated on 2025-09-17 |
+<p>Last updated on 2025-11-04 |
 
-        <a href="https://github.com/SAFEHR-data/omop-carpentries/edit/main/episodes/7_tools.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
+        <a href="https://github.com/SAFEHR-data/omop-carpentries/edit/main/episodes/tools.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 0 minutes</p>
 <div class="text-end">
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
@@ -3141,6 +3157,8 @@ any links that you are not going to use.
 <ul>
 <li>Brief outline of some R tools that will be useful for new OMOP
 users.</li>
+<li>Use Athena and other OHDSI tools for reference</li>
+<li>Describe the full landscape of OMOP tools and the community</li>
 </ul>
 </div>
 </div>
@@ -3185,6 +3203,28 @@ some mock data.</p>
 <span><span class="co"># Connect to mock database</span></span>
 <span><span class="va">cdm</span> <span class="op">&lt;-</span> <span class="fu">mockOmopSketch</span><span class="op">(</span><span class="op">)</span></span></code></pre>
 </div>
+<div class="codewrapper">
+<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="error" tabindex="0"><code>Error in `mockVocabularySet()`:
+✖ `datasetName` a choice between: GiBleed, empty_cdm, synpuf-1k_5.3,
+  synpuf-1k_5.4, synthea-allergies-10k, synthea-anemia-10k,
+  synthea-breast_cancer-10k, synthea-contraceptives-10k, synthea-covid19-10k,
+  synthea-covid19-200k, synthea-dermatitis-10k, synthea-heart-10k,
+  synthea-hiv-10k, synthea-lung_cancer-10k, synthea-medications-10k,
+  synthea-metabolic_syndrome-10k, synthea-opioid_addiction-10k,
+  synthea-rheumatoid_arthritis-10k, …, synthea-veterans-10k, and
+  synthea-weight_loss-10k.
+! `datasetName` must be a choice between: GiBleed, empty_cdm, synpuf-1k_5.3,
+  synpuf-1k_5.4, synthea-allergies-10k, synthea-anemia-10k,
+  synthea-breast_cancer-10k, synthea-contraceptives-10k, synthea-covid19-10k,
+  synthea-covid19-200k, synthea-dermatitis-10k, synthea-heart-10k,
+  synthea-hiv-10k, synthea-lung_cancer-10k, synthea-medications-10k,
+  synthea-metabolic_syndrome-10k, synthea-opioid_addiction-10k,
+  synthea-rheumatoid_arthritis-10k, …, synthea-veterans-10k, and
+  synthea-weight_loss-10k; with length = 1; it can not contain NA; it can not
+  be NULL.</code></pre>
+</div>
 <div class="section level4">
 <h4 id="summarise-and-table-functions">summarise* and table* functions<a class="anchor" aria-label="anchor" href="#summarise-and-table-functions"></a>
 </h4>
@@ -3211,1488 +3251,45 @@ some mock data.</p>
 </h3>
 <p>Snapshot creates a broad summary of the database including person
 count, temporal extent and other metadata.</p>
-<div class="codewrapper sourceCode" id="cb2">
+<div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">summariseOmopSnapshot</span><span class="op">(</span><span class="va">cdm</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">tableOmopSnapshot</span><span class="op">(</span>type <span class="op">=</span> <span class="st">"gt"</span><span class="op">)</span></span></code></pre>
 </div>
-<!--html_preserve-->
-<div id="kjcvjrdgvp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#kjcvjrdgvp table {
-  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-#kjcvjrdgvp thead, #kjcvjrdgvp tbody, #kjcvjrdgvp tfoot, #kjcvjrdgvp tr, #kjcvjrdgvp td, #kjcvjrdgvp th {
-  border-style: none;
-}
-
-#kjcvjrdgvp p {
-  margin: 0;
-  padding: 0;
-}
-
-#kjcvjrdgvp .gt_table {
-  display: table;
-  border-collapse: collapse;
-  line-height: normal;
-  margin-left: auto;
-  margin-right: auto;
-  color: #333333;
-  font-size: 16px;
-  font-weight: normal;
-  font-style: normal;
-  background-color: #FFFFFF;
-  width: auto;
-  border-top-style: solid;
-  border-top-width: 3px;
-  border-top-color: #D9D9D9;
-  border-right-style: solid;
-  border-right-width: 3px;
-  border-right-color: #D9D9D9;
-  border-bottom-style: solid;
-  border-bottom-width: 3px;
-  border-bottom-color: #D9D9D9;
-  border-left-style: solid;
-  border-left-width: 3px;
-  border-left-color: #D9D9D9;
-}
-
-#kjcvjrdgvp .gt_caption {
-  padding-top: 4px;
-  padding-bottom: 4px;
-}
-
-#kjcvjrdgvp .gt_title {
-  color: #333333;
-  font-size: 125%;
-  font-weight: initial;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-color: #FFFFFF;
-  border-bottom-width: 0;
-}
-
-#kjcvjrdgvp .gt_subtitle {
-  color: #333333;
-  font-size: 85%;
-  font-weight: initial;
-  padding-top: 3px;
-  padding-bottom: 5px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-color: #FFFFFF;
-  border-top-width: 0;
-}
-
-#kjcvjrdgvp .gt_heading {
-  background-color: #FFFFFF;
-  text-align: center;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#kjcvjrdgvp .gt_bottom_border {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#kjcvjrdgvp .gt_col_headings {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#kjcvjrdgvp .gt_col_heading {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  overflow-x: hidden;
-}
-
-#kjcvjrdgvp .gt_column_spanner_outer {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-#kjcvjrdgvp .gt_column_spanner_outer:first-child {
-  padding-left: 0;
-}
-
-#kjcvjrdgvp .gt_column_spanner_outer:last-child {
-  padding-right: 0;
-}
-
-#kjcvjrdgvp .gt_column_spanner {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  overflow-x: hidden;
-  display: inline-block;
-  width: 100%;
-}
-
-#kjcvjrdgvp .gt_spanner_row {
-  border-bottom-style: hidden;
-}
-
-#kjcvjrdgvp .gt_group_heading {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  text-align: left;
-}
-
-#kjcvjrdgvp .gt_empty_group_heading {
-  padding: 0.5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#kjcvjrdgvp .gt_from_md > :first-child {
-  margin-top: 0;
-}
-
-#kjcvjrdgvp .gt_from_md > :last-child {
-  margin-bottom: 0;
-}
-
-#kjcvjrdgvp .gt_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin: 10px;
-  border-top-style: solid;
-  border-top-width: 1px;
-  border-top-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  overflow-x: hidden;
-}
-
-#kjcvjrdgvp .gt_stub {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#kjcvjrdgvp .gt_stub_row_group {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-  vertical-align: top;
-}
-
-#kjcvjrdgvp .gt_row_group_first td {
-  border-top-width: 2px;
-}
-
-#kjcvjrdgvp .gt_row_group_first th {
-  border-top-width: 2px;
-}
-
-#kjcvjrdgvp .gt_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#kjcvjrdgvp .gt_first_summary_row {
-  border-top-style: solid;
-  border-top-color: #D3D3D3;
-}
-
-#kjcvjrdgvp .gt_first_summary_row.thick {
-  border-top-width: 2px;
-}
-
-#kjcvjrdgvp .gt_last_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#kjcvjrdgvp .gt_grand_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#kjcvjrdgvp .gt_first_grand_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: double;
-  border-top-width: 6px;
-  border-top-color: #D3D3D3;
-}
-
-#kjcvjrdgvp .gt_last_grand_summary_row_top {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: double;
-  border-bottom-width: 6px;
-  border-bottom-color: #D3D3D3;
-}
-
-#kjcvjrdgvp .gt_striped {
-  background-color: rgba(128, 128, 128, 0.05);
-}
-
-#kjcvjrdgvp .gt_table_body {
-  border-top-style: solid;
-  border-top-width: 3px;
-  border-top-color: #D9D9D9;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#kjcvjrdgvp .gt_footnotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#kjcvjrdgvp .gt_footnote {
-  margin: 0px;
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#kjcvjrdgvp .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#kjcvjrdgvp .gt_sourcenote {
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#kjcvjrdgvp .gt_left {
-  text-align: left;
-}
-
-#kjcvjrdgvp .gt_center {
-  text-align: center;
-}
-
-#kjcvjrdgvp .gt_right {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-#kjcvjrdgvp .gt_font_normal {
-  font-weight: normal;
-}
-
-#kjcvjrdgvp .gt_font_bold {
-  font-weight: bold;
-}
-
-#kjcvjrdgvp .gt_font_italic {
-  font-style: italic;
-}
-
-#kjcvjrdgvp .gt_super {
-  font-size: 65%;
-}
-
-#kjcvjrdgvp .gt_footnote_marks {
-  font-size: 75%;
-  vertical-align: 0.4em;
-  position: initial;
-}
-
-#kjcvjrdgvp .gt_asterisk {
-  font-size: 100%;
-  vertical-align: 0;
-}
-
-#kjcvjrdgvp .gt_indent_1 {
-  text-indent: 5px;
-}
-
-#kjcvjrdgvp .gt_indent_2 {
-  text-indent: 10px;
-}
-
-#kjcvjrdgvp .gt_indent_3 {
-  text-indent: 15px;
-}
-
-#kjcvjrdgvp .gt_indent_4 {
-  text-indent: 20px;
-}
-
-#kjcvjrdgvp .gt_indent_5 {
-  text-indent: 25px;
-}
-
-#kjcvjrdgvp .katex-display {
-  display: inline-flex !important;
-  margin-bottom: 0.75em !important;
-}
-
-#kjcvjrdgvp div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
-  height: 0px !important;
-}
-</style>
-<table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<thead>
-<tr class="gt_col_headings gt_spanner_row">
-<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="2" colspan="1" style="text-align: center; font-weight: bold;" scope="col" id="Estimate">
-Estimate
-</th>
-<th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="1" style="background-color: #D9D9D9; text-align: center; font-weight: bold;" scope="col" id="spanner-[header_name]Database name
-[header_level]mockOmopSketch">
-<div class="gt_column_spanner">
-Database name
+<div class="codewrapper">
+<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="error" tabindex="0"><code>Error: object 'cdm' not found</code></pre>
 </div>
-</th>
-</tr>
-<tr class="gt_col_headings">
-<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="background-color: #E1E1E1; text-align: center; font-weight: bold;" scope="col" id="[header_name]Database-name-[header_level]mockOmopSketch">
-mockOmopSketch
-</th>
-</tr>
-</thead>
-<tbody class="gt_table_body">
-<tr class="gt_group_heading_row">
-<th colspan="2" class="gt_group_heading" style="background-color: #E9E9E9; font-weight: bold;" scope="colgroup" id="General">
-General
-</th>
-</tr>
-<tr class="gt_row_group_first">
-<td headers="General  Estimate" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-Snapshot date
-</td>
-<td headers="General  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_left" style="text-align: right;">
-2025-09-17
-</td>
-</tr>
-<tr>
-<td headers="General  Estimate" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-Person count
-</td>
-<td headers="General  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_left" style="text-align: right;">
-100
-</td>
-</tr>
-<tr>
-<td headers="General  Estimate" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-Vocabulary version
-</td>
-<td headers="General  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_left" style="text-align: right;">
-v5.0 18-JAN-19
-</td>
-</tr>
-<tr class="gt_group_heading_row">
-<th colspan="2" class="gt_group_heading" style="background-color: #E9E9E9; font-weight: bold;" scope="colgroup" id="Observation period">
-Observation period
-</th>
-</tr>
-<tr class="gt_row_group_first">
-<td headers="Observation period  Estimate" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-N
-</td>
-<td headers="Observation period  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_left" style="text-align: right;">
-100
-</td>
-</tr>
-<tr>
-<td headers="Observation period  Estimate" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-Start date
-</td>
-<td headers="Observation period  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_left" style="text-align: right;">
-1958-01-22
-</td>
-</tr>
-<tr>
-<td headers="Observation period  Estimate" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-End date
-</td>
-<td headers="Observation period  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_left" style="text-align: right;">
-2019-12-24
-</td>
-</tr>
-<tr class="gt_group_heading_row">
-<th colspan="2" class="gt_group_heading" style="background-color: #E9E9E9; font-weight: bold;" scope="colgroup" id="Cdm">
-Cdm
-</th>
-</tr>
-<tr class="gt_row_group_first">
-<td headers="Cdm  Estimate" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-Source name
-</td>
-<td headers="Cdm  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_left" style="text-align: right;">
-eunomia
-</td>
-</tr>
-<tr>
-<td headers="Cdm  Estimate" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-Version
-</td>
-<td headers="Cdm  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_left" style="text-align: right;">
-5.3
-</td>
-</tr>
-<tr>
-<td headers="Cdm  Estimate" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-Holder name
-</td>
-<td headers="Cdm  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_left" style="text-align: right;">
--
-</td>
-</tr>
-<tr>
-<td headers="Cdm  Estimate" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-Release date
-</td>
-<td headers="Cdm  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_left" style="text-align: right;">
--
-</td>
-</tr>
-<tr>
-<td headers="Cdm  Estimate" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-Description
-</td>
-<td headers="Cdm  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_left" style="text-align: right;">
--
-</td>
-</tr>
-<tr>
-<td headers="Cdm  Estimate" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-Documentation reference
-</td>
-<td headers="Cdm  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_left" style="text-align: right;">
--
-</td>
-</tr>
-<tr>
-<td headers="Cdm  Estimate" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-Source type
-</td>
-<td headers="Cdm  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_left" style="text-align: right;">
-duckdb
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-<!--/html_preserve-->
 </div>
 <div class="section level3">
 <h3 id="missing-data">Missing data<a class="anchor" aria-label="anchor" href="#missing-data"></a>
 </h3>
 <p>Summarise missing data in each column of one or many cdm tables.</p>
-<div class="codewrapper sourceCode" id="cb3">
+<div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">missingData</span> <span class="op">&lt;-</span> <span class="fu">summariseMissingData</span><span class="op">(</span><span class="va">cdm</span>, <span class="fu">c</span><span class="op">(</span><span class="st">"drug_exposure"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu">tableMissingData</span><span class="op">(</span><span class="va">missingData</span><span class="op">)</span></span></code></pre>
+<code class="sourceCode R"><span><span class="va">missingData</span> <span class="op">&lt;-</span> <span class="fu">summariseMissingData</span><span class="op">(</span><span class="va">cdm</span>, <span class="fu">c</span><span class="op">(</span><span class="st">"drug_exposure"</span><span class="op">)</span><span class="op">)</span></span></code></pre>
 </div>
-<!--html_preserve-->
-<div id="wrbefpseml" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#wrbefpseml table {
-  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-#wrbefpseml thead, #wrbefpseml tbody, #wrbefpseml tfoot, #wrbefpseml tr, #wrbefpseml td, #wrbefpseml th {
-  border-style: none;
-}
-
-#wrbefpseml p {
-  margin: 0;
-  padding: 0;
-}
-
-#wrbefpseml .gt_table {
-  display: table;
-  border-collapse: collapse;
-  line-height: normal;
-  margin-left: auto;
-  margin-right: auto;
-  color: #333333;
-  font-size: 16px;
-  font-weight: normal;
-  font-style: normal;
-  background-color: #FFFFFF;
-  width: auto;
-  border-top-style: solid;
-  border-top-width: 3px;
-  border-top-color: #D9D9D9;
-  border-right-style: solid;
-  border-right-width: 3px;
-  border-right-color: #D9D9D9;
-  border-bottom-style: solid;
-  border-bottom-width: 3px;
-  border-bottom-color: #D9D9D9;
-  border-left-style: solid;
-  border-left-width: 3px;
-  border-left-color: #D9D9D9;
-}
-
-#wrbefpseml .gt_caption {
-  padding-top: 4px;
-  padding-bottom: 4px;
-}
-
-#wrbefpseml .gt_title {
-  color: #333333;
-  font-size: 125%;
-  font-weight: initial;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-color: #FFFFFF;
-  border-bottom-width: 0;
-}
-
-#wrbefpseml .gt_subtitle {
-  color: #333333;
-  font-size: 85%;
-  font-weight: initial;
-  padding-top: 3px;
-  padding-bottom: 5px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-color: #FFFFFF;
-  border-top-width: 0;
-}
-
-#wrbefpseml .gt_heading {
-  background-color: #FFFFFF;
-  text-align: center;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#wrbefpseml .gt_bottom_border {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#wrbefpseml .gt_col_headings {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#wrbefpseml .gt_col_heading {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  overflow-x: hidden;
-}
-
-#wrbefpseml .gt_column_spanner_outer {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-#wrbefpseml .gt_column_spanner_outer:first-child {
-  padding-left: 0;
-}
-
-#wrbefpseml .gt_column_spanner_outer:last-child {
-  padding-right: 0;
-}
-
-#wrbefpseml .gt_column_spanner {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  overflow-x: hidden;
-  display: inline-block;
-  width: 100%;
-}
-
-#wrbefpseml .gt_spanner_row {
-  border-bottom-style: hidden;
-}
-
-#wrbefpseml .gt_group_heading {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  text-align: left;
-}
-
-#wrbefpseml .gt_empty_group_heading {
-  padding: 0.5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#wrbefpseml .gt_from_md > :first-child {
-  margin-top: 0;
-}
-
-#wrbefpseml .gt_from_md > :last-child {
-  margin-bottom: 0;
-}
-
-#wrbefpseml .gt_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin: 10px;
-  border-top-style: solid;
-  border-top-width: 1px;
-  border-top-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  overflow-x: hidden;
-}
-
-#wrbefpseml .gt_stub {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#wrbefpseml .gt_stub_row_group {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-  vertical-align: top;
-}
-
-#wrbefpseml .gt_row_group_first td {
-  border-top-width: 2px;
-}
-
-#wrbefpseml .gt_row_group_first th {
-  border-top-width: 2px;
-}
-
-#wrbefpseml .gt_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#wrbefpseml .gt_first_summary_row {
-  border-top-style: solid;
-  border-top-color: #D3D3D3;
-}
-
-#wrbefpseml .gt_first_summary_row.thick {
-  border-top-width: 2px;
-}
-
-#wrbefpseml .gt_last_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#wrbefpseml .gt_grand_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#wrbefpseml .gt_first_grand_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: double;
-  border-top-width: 6px;
-  border-top-color: #D3D3D3;
-}
-
-#wrbefpseml .gt_last_grand_summary_row_top {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: double;
-  border-bottom-width: 6px;
-  border-bottom-color: #D3D3D3;
-}
-
-#wrbefpseml .gt_striped {
-  background-color: rgba(128, 128, 128, 0.05);
-}
-
-#wrbefpseml .gt_table_body {
-  border-top-style: solid;
-  border-top-width: 3px;
-  border-top-color: #D9D9D9;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#wrbefpseml .gt_footnotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#wrbefpseml .gt_footnote {
-  margin: 0px;
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#wrbefpseml .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#wrbefpseml .gt_sourcenote {
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#wrbefpseml .gt_left {
-  text-align: left;
-}
-
-#wrbefpseml .gt_center {
-  text-align: center;
-}
-
-#wrbefpseml .gt_right {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-#wrbefpseml .gt_font_normal {
-  font-weight: normal;
-}
-
-#wrbefpseml .gt_font_bold {
-  font-weight: bold;
-}
-
-#wrbefpseml .gt_font_italic {
-  font-style: italic;
-}
-
-#wrbefpseml .gt_super {
-  font-size: 65%;
-}
-
-#wrbefpseml .gt_footnote_marks {
-  font-size: 75%;
-  vertical-align: 0.4em;
-  position: initial;
-}
-
-#wrbefpseml .gt_asterisk {
-  font-size: 100%;
-  vertical-align: 0;
-}
-
-#wrbefpseml .gt_indent_1 {
-  text-indent: 5px;
-}
-
-#wrbefpseml .gt_indent_2 {
-  text-indent: 10px;
-}
-
-#wrbefpseml .gt_indent_3 {
-  text-indent: 15px;
-}
-
-#wrbefpseml .gt_indent_4 {
-  text-indent: 20px;
-}
-
-#wrbefpseml .gt_indent_5 {
-  text-indent: 25px;
-}
-
-#wrbefpseml .katex-display {
-  display: inline-flex !important;
-  margin-bottom: 0.75em !important;
-}
-
-#wrbefpseml div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
-  height: 0px !important;
-}
-</style>
-<table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<thead>
-<tr class="gt_col_headings gt_spanner_row">
-<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="2" colspan="1" style="text-align: center; font-weight: bold;" scope="col" id="Column-name">
-Column name
-</th>
-<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="2" colspan="1" style="text-align: center; font-weight: bold;" scope="col" id="Estimate-name">
-Estimate name
-</th>
-<th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="1" style="background-color: #D9D9D9; text-align: center; font-weight: bold;" scope="col" id="spanner-[header_name]Database name
-[header_level]mockOmopSketch">
-<div class="gt_column_spanner">
-Database name
+<div class="codewrapper">
+<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="error" tabindex="0"><code>Error: object 'cdm' not found</code></pre>
 </div>
-</th>
-</tr>
-<tr class="gt_col_headings">
-<th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="background-color: #E1E1E1; text-align: center; font-weight: bold;" scope="col" id="[header_name]Database-name-[header_level]mockOmopSketch">
-mockOmopSketch
-</th>
-</tr>
-</thead>
-<tbody class="gt_table_body">
-<tr class="gt_group_heading_row">
-<th colspan="3" class="gt_group_heading" style="background-color: #E9E9E9; font-weight: bold;" scope="colgroup" id="drug_exposure">
-drug_exposure
-</th>
-</tr>
-<tr class="gt_row_group_first">
-<td headers="drug_exposure  Column name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-drug_exposure_id
-</td>
-<td headers="drug_exposure  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-N missing data (%)
-</td>
-<td headers="drug_exposure  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">
-0 (0.00%)
-</td>
-</tr>
-<tr>
-<td headers="drug_exposure  Column name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-</td>
-<td headers="drug_exposure  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-N zeros (%)
-</td>
-<td headers="drug_exposure  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">
-0 (0.00%)
-</td>
-</tr>
-<tr>
-<td headers="drug_exposure  Column name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-person_id
-</td>
-<td headers="drug_exposure  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-N missing data (%)
-</td>
-<td headers="drug_exposure  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">
-0 (0.00%)
-</td>
-</tr>
-<tr>
-<td headers="drug_exposure  Column name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-</td>
-<td headers="drug_exposure  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-N zeros (%)
-</td>
-<td headers="drug_exposure  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">
-0 (0.00%)
-</td>
-</tr>
-<tr>
-<td headers="drug_exposure  Column name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-drug_concept_id
-</td>
-<td headers="drug_exposure  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-N missing data (%)
-</td>
-<td headers="drug_exposure  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">
-0 (0.00%)
-</td>
-</tr>
-<tr>
-<td headers="drug_exposure  Column name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-</td>
-<td headers="drug_exposure  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-N zeros (%)
-</td>
-<td headers="drug_exposure  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">
-0 (0.00%)
-</td>
-</tr>
-<tr>
-<td headers="drug_exposure  Column name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-drug_exposure_start_date
-</td>
-<td headers="drug_exposure  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-N missing data (%)
-</td>
-<td headers="drug_exposure  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">
-0 (0.00%)
-</td>
-</tr>
-<tr>
-<td headers="drug_exposure  Column name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-drug_exposure_start_datetime
-</td>
-<td headers="drug_exposure  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-N missing data (%)
-</td>
-<td headers="drug_exposure  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">
-21,600 (100.00%)
-</td>
-</tr>
-<tr>
-<td headers="drug_exposure  Column name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-drug_exposure_end_date
-</td>
-<td headers="drug_exposure  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-N missing data (%)
-</td>
-<td headers="drug_exposure  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">
-0 (0.00%)
-</td>
-</tr>
-<tr>
-<td headers="drug_exposure  Column name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-drug_exposure_end_datetime
-</td>
-<td headers="drug_exposure  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-N missing data (%)
-</td>
-<td headers="drug_exposure  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">
-21,600 (100.00%)
-</td>
-</tr>
-<tr>
-<td headers="drug_exposure  Column name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-verbatim_end_date
-</td>
-<td headers="drug_exposure  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-N missing data (%)
-</td>
-<td headers="drug_exposure  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">
-21,600 (100.00%)
-</td>
-</tr>
-<tr>
-<td headers="drug_exposure  Column name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-drug_type_concept_id
-</td>
-<td headers="drug_exposure  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-N missing data (%)
-</td>
-<td headers="drug_exposure  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">
-0 (0.00%)
-</td>
-</tr>
-<tr>
-<td headers="drug_exposure  Column name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-</td>
-<td headers="drug_exposure  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-N zeros (%)
-</td>
-<td headers="drug_exposure  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">
-0 (0.00%)
-</td>
-</tr>
-<tr>
-<td headers="drug_exposure  Column name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-stop_reason
-</td>
-<td headers="drug_exposure  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-N missing data (%)
-</td>
-<td headers="drug_exposure  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">
-21,600 (100.00%)
-</td>
-</tr>
-<tr>
-<td headers="drug_exposure  Column name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-refills
-</td>
-<td headers="drug_exposure  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-N missing data (%)
-</td>
-<td headers="drug_exposure  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">
-21,600 (100.00%)
-</td>
-</tr>
-<tr>
-<td headers="drug_exposure  Column name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-quantity
-</td>
-<td headers="drug_exposure  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-N missing data (%)
-</td>
-<td headers="drug_exposure  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">
-21,600 (100.00%)
-</td>
-</tr>
-<tr>
-<td headers="drug_exposure  Column name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-days_supply
-</td>
-<td headers="drug_exposure  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-N missing data (%)
-</td>
-<td headers="drug_exposure  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">
-21,600 (100.00%)
-</td>
-</tr>
-<tr>
-<td headers="drug_exposure  Column name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-sig
-</td>
-<td headers="drug_exposure  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-N missing data (%)
-</td>
-<td headers="drug_exposure  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">
-21,600 (100.00%)
-</td>
-</tr>
-<tr>
-<td headers="drug_exposure  Column name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-route_concept_id
-</td>
-<td headers="drug_exposure  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-N missing data (%)
-</td>
-<td headers="drug_exposure  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">
-21,600 (100.00%)
-</td>
-</tr>
-<tr>
-<td headers="drug_exposure  Column name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-</td>
-<td headers="drug_exposure  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-N zeros (%)
-</td>
-<td headers="drug_exposure  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">
-0 (0.00%)
-</td>
-</tr>
-<tr>
-<td headers="drug_exposure  Column name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-lot_number
-</td>
-<td headers="drug_exposure  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-N missing data (%)
-</td>
-<td headers="drug_exposure  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">
-21,600 (100.00%)
-</td>
-</tr>
-<tr>
-<td headers="drug_exposure  Column name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-provider_id
-</td>
-<td headers="drug_exposure  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-N missing data (%)
-</td>
-<td headers="drug_exposure  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">
-21,600 (100.00%)
-</td>
-</tr>
-<tr>
-<td headers="drug_exposure  Column name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-</td>
-<td headers="drug_exposure  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-N zeros (%)
-</td>
-<td headers="drug_exposure  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">
-0 (0.00%)
-</td>
-</tr>
-<tr>
-<td headers="drug_exposure  Column name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-visit_occurrence_id
-</td>
-<td headers="drug_exposure  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-N missing data (%)
-</td>
-<td headers="drug_exposure  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">
-0 (0.00%)
-</td>
-</tr>
-<tr>
-<td headers="drug_exposure  Column name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-</td>
-<td headers="drug_exposure  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-N zeros (%)
-</td>
-<td headers="drug_exposure  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">
-0 (0.00%)
-</td>
-</tr>
-<tr>
-<td headers="drug_exposure  Column name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-visit_detail_id
-</td>
-<td headers="drug_exposure  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-N missing data (%)
-</td>
-<td headers="drug_exposure  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">
-21,600 (100.00%)
-</td>
-</tr>
-<tr>
-<td headers="drug_exposure  Column name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-</td>
-<td headers="drug_exposure  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-N zeros (%)
-</td>
-<td headers="drug_exposure  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">
-0 (0.00%)
-</td>
-</tr>
-<tr>
-<td headers="drug_exposure  Column name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-drug_source_value
-</td>
-<td headers="drug_exposure  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-N missing data (%)
-</td>
-<td headers="drug_exposure  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">
-21,600 (100.00%)
-</td>
-</tr>
-<tr>
-<td headers="drug_exposure  Column name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-drug_source_concept_id
-</td>
-<td headers="drug_exposure  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-N missing data (%)
-</td>
-<td headers="drug_exposure  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">
-21,600 (100.00%)
-</td>
-</tr>
-<tr>
-<td headers="drug_exposure  Column name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-</td>
-<td headers="drug_exposure  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-N zeros (%)
-</td>
-<td headers="drug_exposure  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">
-0 (0.00%)
-</td>
-</tr>
-<tr>
-<td headers="drug_exposure  Column name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-route_source_value
-</td>
-<td headers="drug_exposure  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-N missing data (%)
-</td>
-<td headers="drug_exposure  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">
-21,600 (100.00%)
-</td>
-</tr>
-<tr>
-<td headers="drug_exposure  Column name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-dose_unit_source_value
-</td>
-<td headers="drug_exposure  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-N missing data (%)
-</td>
-<td headers="drug_exposure  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">
-21,600 (100.00%)
-</td>
-</tr>
-</tbody>
-</table>
+<div class="codewrapper sourceCode" id="cb7">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">tableMissingData</span><span class="op">(</span><span class="va">missingData</span><span class="op">)</span></span></code></pre>
 </div>
-<!--/html_preserve-->
+<div class="codewrapper">
+<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="error" tabindex="0"><code>Error: object 'missingData' not found</code></pre>
+</div>
 </div>
 <div class="section level3">
 <h3 id="clinical-records">Clinical Records<a class="anchor" aria-label="anchor" href="#clinical-records"></a>
@@ -4700,644 +3297,18 @@ N missing data (%)
 <p>Allows you to summarise omop tables from a cdm. By default it gives
 measures including records per person, how many concepts are standard
 and source vocabularies.</p>
-<div class="codewrapper sourceCode" id="cb4">
+<div class="codewrapper sourceCode" id="cb9">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">summariseClinicalRecords</span><span class="op">(</span><span class="va">cdm</span>, <span class="st">"condition_occurrence"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">tableClinicalRecords</span><span class="op">(</span>type <span class="op">=</span> <span class="st">"gt"</span><span class="op">)</span></span></code></pre>
 </div>
-<!--html_preserve-->
-<div id="bcxerkuhut" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#bcxerkuhut table {
-  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-#bcxerkuhut thead, #bcxerkuhut tbody, #bcxerkuhut tfoot, #bcxerkuhut tr, #bcxerkuhut td, #bcxerkuhut th {
-  border-style: none;
-}
-
-#bcxerkuhut p {
-  margin: 0;
-  padding: 0;
-}
-
-#bcxerkuhut .gt_table {
-  display: table;
-  border-collapse: collapse;
-  line-height: normal;
-  margin-left: auto;
-  margin-right: auto;
-  color: #333333;
-  font-size: 16px;
-  font-weight: normal;
-  font-style: normal;
-  background-color: #FFFFFF;
-  width: auto;
-  border-top-style: solid;
-  border-top-width: 3px;
-  border-top-color: #D9D9D9;
-  border-right-style: solid;
-  border-right-width: 3px;
-  border-right-color: #D9D9D9;
-  border-bottom-style: solid;
-  border-bottom-width: 3px;
-  border-bottom-color: #D9D9D9;
-  border-left-style: solid;
-  border-left-width: 3px;
-  border-left-color: #D9D9D9;
-}
-
-#bcxerkuhut .gt_caption {
-  padding-top: 4px;
-  padding-bottom: 4px;
-}
-
-#bcxerkuhut .gt_title {
-  color: #333333;
-  font-size: 125%;
-  font-weight: initial;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-color: #FFFFFF;
-  border-bottom-width: 0;
-}
-
-#bcxerkuhut .gt_subtitle {
-  color: #333333;
-  font-size: 85%;
-  font-weight: initial;
-  padding-top: 3px;
-  padding-bottom: 5px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-color: #FFFFFF;
-  border-top-width: 0;
-}
-
-#bcxerkuhut .gt_heading {
-  background-color: #FFFFFF;
-  text-align: center;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#bcxerkuhut .gt_bottom_border {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#bcxerkuhut .gt_col_headings {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#bcxerkuhut .gt_col_heading {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  overflow-x: hidden;
-}
-
-#bcxerkuhut .gt_column_spanner_outer {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-#bcxerkuhut .gt_column_spanner_outer:first-child {
-  padding-left: 0;
-}
-
-#bcxerkuhut .gt_column_spanner_outer:last-child {
-  padding-right: 0;
-}
-
-#bcxerkuhut .gt_column_spanner {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  overflow-x: hidden;
-  display: inline-block;
-  width: 100%;
-}
-
-#bcxerkuhut .gt_spanner_row {
-  border-bottom-style: hidden;
-}
-
-#bcxerkuhut .gt_group_heading {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  text-align: left;
-}
-
-#bcxerkuhut .gt_empty_group_heading {
-  padding: 0.5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#bcxerkuhut .gt_from_md > :first-child {
-  margin-top: 0;
-}
-
-#bcxerkuhut .gt_from_md > :last-child {
-  margin-bottom: 0;
-}
-
-#bcxerkuhut .gt_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin: 10px;
-  border-top-style: solid;
-  border-top-width: 1px;
-  border-top-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  overflow-x: hidden;
-}
-
-#bcxerkuhut .gt_stub {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#bcxerkuhut .gt_stub_row_group {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-  vertical-align: top;
-}
-
-#bcxerkuhut .gt_row_group_first td {
-  border-top-width: 2px;
-}
-
-#bcxerkuhut .gt_row_group_first th {
-  border-top-width: 2px;
-}
-
-#bcxerkuhut .gt_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#bcxerkuhut .gt_first_summary_row {
-  border-top-style: solid;
-  border-top-color: #D3D3D3;
-}
-
-#bcxerkuhut .gt_first_summary_row.thick {
-  border-top-width: 2px;
-}
-
-#bcxerkuhut .gt_last_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#bcxerkuhut .gt_grand_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#bcxerkuhut .gt_first_grand_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: double;
-  border-top-width: 6px;
-  border-top-color: #D3D3D3;
-}
-
-#bcxerkuhut .gt_last_grand_summary_row_top {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: double;
-  border-bottom-width: 6px;
-  border-bottom-color: #D3D3D3;
-}
-
-#bcxerkuhut .gt_striped {
-  background-color: rgba(128, 128, 128, 0.05);
-}
-
-#bcxerkuhut .gt_table_body {
-  border-top-style: solid;
-  border-top-width: 3px;
-  border-top-color: #D9D9D9;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#bcxerkuhut .gt_footnotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#bcxerkuhut .gt_footnote {
-  margin: 0px;
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#bcxerkuhut .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#bcxerkuhut .gt_sourcenote {
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#bcxerkuhut .gt_left {
-  text-align: left;
-}
-
-#bcxerkuhut .gt_center {
-  text-align: center;
-}
-
-#bcxerkuhut .gt_right {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-#bcxerkuhut .gt_font_normal {
-  font-weight: normal;
-}
-
-#bcxerkuhut .gt_font_bold {
-  font-weight: bold;
-}
-
-#bcxerkuhut .gt_font_italic {
-  font-style: italic;
-}
-
-#bcxerkuhut .gt_super {
-  font-size: 65%;
-}
-
-#bcxerkuhut .gt_footnote_marks {
-  font-size: 75%;
-  vertical-align: 0.4em;
-  position: initial;
-}
-
-#bcxerkuhut .gt_asterisk {
-  font-size: 100%;
-  vertical-align: 0;
-}
-
-#bcxerkuhut .gt_indent_1 {
-  text-indent: 5px;
-}
-
-#bcxerkuhut .gt_indent_2 {
-  text-indent: 10px;
-}
-
-#bcxerkuhut .gt_indent_3 {
-  text-indent: 15px;
-}
-
-#bcxerkuhut .gt_indent_4 {
-  text-indent: 20px;
-}
-
-#bcxerkuhut .gt_indent_5 {
-  text-indent: 25px;
-}
-
-#bcxerkuhut .katex-display {
-  display: inline-flex !important;
-  margin-bottom: 0.75em !important;
-}
-
-#bcxerkuhut div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
-  height: 0px !important;
-}
-</style>
-<table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<thead>
-<tr class="gt_col_headings gt_spanner_row">
-<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="2" colspan="1" style="text-align: center; font-weight: bold;" scope="col" id="Variable-name">
-Variable name
-</th>
-<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="2" colspan="1" style="text-align: center; font-weight: bold;" scope="col" id="Variable-level">
-Variable level
-</th>
-<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="2" colspan="1" style="text-align: center; font-weight: bold;" scope="col" id="Estimate-name">
-Estimate name
-</th>
-<th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="1" style="background-color: #D9D9D9; text-align: center; font-weight: bold;" scope="col" id="spanner-[header_name]Database name
-[header_level]mockOmopSketch">
-<div class="gt_column_spanner">
-Database name
+<div class="codewrapper">
+<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="error" tabindex="0"><code>Error: object 'cdm' not found</code></pre>
 </div>
-</th>
-</tr>
-<tr class="gt_col_headings">
-<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="background-color: #E1E1E1; text-align: center; font-weight: bold;" scope="col" id="[header_name]Database-name-[header_level]mockOmopSketch">
-mockOmopSketch
-</th>
-</tr>
-</thead>
-<tbody class="gt_table_body">
-<tr class="gt_group_heading_row">
-<th colspan="4" class="gt_group_heading" style="background-color: #E9E9E9; font-weight: bold;" scope="colgroup" id="condition_occurrence">
-condition_occurrence
-</th>
-</tr>
-<tr class="gt_row_group_first">
-<td headers="condition_occurrence  Variable name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-Number records
-</td>
-<td headers="condition_occurrence  Variable level" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
--
-</td>
-<td headers="condition_occurrence  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-N
-</td>
-<td headers="condition_occurrence  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_left" style="text-align: right;">
-8,400
-</td>
-</tr>
-<tr>
-<td headers="condition_occurrence  Variable name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-Number subjects
-</td>
-<td headers="condition_occurrence  Variable level" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
--
-</td>
-<td headers="condition_occurrence  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-N (%)
-</td>
-<td headers="condition_occurrence  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_left" style="text-align: right;">
-100 (100.00%)
-</td>
-</tr>
-<tr>
-<td headers="condition_occurrence  Variable name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-Records per person
-</td>
-<td headers="condition_occurrence  Variable level" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
--
-</td>
-<td headers="condition_occurrence  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-Mean (SD)
-</td>
-<td headers="condition_occurrence  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_left" style="text-align: right;">
-84.00 (9.83)
-</td>
-</tr>
-<tr>
-<td headers="condition_occurrence  Variable name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-</td>
-<td headers="condition_occurrence  Variable level" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-</td>
-<td headers="condition_occurrence  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-Median [Q25 - Q75]
-</td>
-<td headers="condition_occurrence  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_left" style="text-align: right;">
-84 [77 - 91]
-</td>
-</tr>
-<tr>
-<td headers="condition_occurrence  Variable name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-</td>
-<td headers="condition_occurrence  Variable level" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-</td>
-<td headers="condition_occurrence  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-Range [min to max]
-</td>
-<td headers="condition_occurrence  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_left" style="text-align: right;">
-[65 to 107]
-</td>
-</tr>
-<tr>
-<td headers="condition_occurrence  Variable name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-In observation
-</td>
-<td headers="condition_occurrence  Variable level" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-Yes
-</td>
-<td headers="condition_occurrence  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-N (%)
-</td>
-<td headers="condition_occurrence  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_left" style="text-align: right;">
-8,400 (100.00%)
-</td>
-</tr>
-<tr>
-<td headers="condition_occurrence  Variable name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-Domain
-</td>
-<td headers="condition_occurrence  Variable level" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-Condition
-</td>
-<td headers="condition_occurrence  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-N (%)
-</td>
-<td headers="condition_occurrence  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_left" style="text-align: right;">
-8,400 (100.00%)
-</td>
-</tr>
-<tr>
-<td headers="condition_occurrence  Variable name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-Source vocabulary
-</td>
-<td headers="condition_occurrence  Variable level" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-No matching concept
-</td>
-<td headers="condition_occurrence  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-N (%)
-</td>
-<td headers="condition_occurrence  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_left" style="text-align: right;">
-8,400 (100.00%)
-</td>
-</tr>
-<tr>
-<td headers="condition_occurrence  Variable name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-Standard concept
-</td>
-<td headers="condition_occurrence  Variable level" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-S
-</td>
-<td headers="condition_occurrence  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-N (%)
-</td>
-<td headers="condition_occurrence  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_left" style="text-align: right;">
-8,400 (100.00%)
-</td>
-</tr>
-<tr>
-<td headers="condition_occurrence  Variable name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-Type concept id
-</td>
-<td headers="condition_occurrence  Variable level" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-Unknown type concept: 1
-</td>
-<td headers="condition_occurrence  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-N (%)
-</td>
-<td headers="condition_occurrence  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_left" style="text-align: right;">
-8,400 (100.00%)
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-<!--/html_preserve-->
 <p>You can also</p>
 <ul>
 <li>apply to more than one table at a time</li>
@@ -5346,7 +3317,7 @@ N (%)
 <li>stratify by sex and/or age</li>
 <li>set a date range</li>
 </ul>
-<div class="codewrapper sourceCode" id="cb5">
+<div class="codewrapper sourceCode" id="cb11">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -5360,786 +3331,11 @@ N (%)
 <span>                         sex <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>                     <span class="fu">tableClinicalRecords</span><span class="op">(</span>type <span class="op">=</span> <span class="st">"gt"</span><span class="op">)</span></span></code></pre>
 </div>
-<!--html_preserve-->
-<div id="ymmjpieldi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ymmjpieldi table {
-  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-#ymmjpieldi thead, #ymmjpieldi tbody, #ymmjpieldi tfoot, #ymmjpieldi tr, #ymmjpieldi td, #ymmjpieldi th {
-  border-style: none;
-}
-
-#ymmjpieldi p {
-  margin: 0;
-  padding: 0;
-}
-
-#ymmjpieldi .gt_table {
-  display: table;
-  border-collapse: collapse;
-  line-height: normal;
-  margin-left: auto;
-  margin-right: auto;
-  color: #333333;
-  font-size: 16px;
-  font-weight: normal;
-  font-style: normal;
-  background-color: #FFFFFF;
-  width: auto;
-  border-top-style: solid;
-  border-top-width: 3px;
-  border-top-color: #D9D9D9;
-  border-right-style: solid;
-  border-right-width: 3px;
-  border-right-color: #D9D9D9;
-  border-bottom-style: solid;
-  border-bottom-width: 3px;
-  border-bottom-color: #D9D9D9;
-  border-left-style: solid;
-  border-left-width: 3px;
-  border-left-color: #D9D9D9;
-}
-
-#ymmjpieldi .gt_caption {
-  padding-top: 4px;
-  padding-bottom: 4px;
-}
-
-#ymmjpieldi .gt_title {
-  color: #333333;
-  font-size: 125%;
-  font-weight: initial;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-color: #FFFFFF;
-  border-bottom-width: 0;
-}
-
-#ymmjpieldi .gt_subtitle {
-  color: #333333;
-  font-size: 85%;
-  font-weight: initial;
-  padding-top: 3px;
-  padding-bottom: 5px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-color: #FFFFFF;
-  border-top-width: 0;
-}
-
-#ymmjpieldi .gt_heading {
-  background-color: #FFFFFF;
-  text-align: center;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#ymmjpieldi .gt_bottom_border {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#ymmjpieldi .gt_col_headings {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#ymmjpieldi .gt_col_heading {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  overflow-x: hidden;
-}
-
-#ymmjpieldi .gt_column_spanner_outer {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-#ymmjpieldi .gt_column_spanner_outer:first-child {
-  padding-left: 0;
-}
-
-#ymmjpieldi .gt_column_spanner_outer:last-child {
-  padding-right: 0;
-}
-
-#ymmjpieldi .gt_column_spanner {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  overflow-x: hidden;
-  display: inline-block;
-  width: 100%;
-}
-
-#ymmjpieldi .gt_spanner_row {
-  border-bottom-style: hidden;
-}
-
-#ymmjpieldi .gt_group_heading {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  text-align: left;
-}
-
-#ymmjpieldi .gt_empty_group_heading {
-  padding: 0.5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#ymmjpieldi .gt_from_md > :first-child {
-  margin-top: 0;
-}
-
-#ymmjpieldi .gt_from_md > :last-child {
-  margin-bottom: 0;
-}
-
-#ymmjpieldi .gt_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin: 10px;
-  border-top-style: solid;
-  border-top-width: 1px;
-  border-top-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  overflow-x: hidden;
-}
-
-#ymmjpieldi .gt_stub {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#ymmjpieldi .gt_stub_row_group {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-  vertical-align: top;
-}
-
-#ymmjpieldi .gt_row_group_first td {
-  border-top-width: 2px;
-}
-
-#ymmjpieldi .gt_row_group_first th {
-  border-top-width: 2px;
-}
-
-#ymmjpieldi .gt_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#ymmjpieldi .gt_first_summary_row {
-  border-top-style: solid;
-  border-top-color: #D3D3D3;
-}
-
-#ymmjpieldi .gt_first_summary_row.thick {
-  border-top-width: 2px;
-}
-
-#ymmjpieldi .gt_last_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#ymmjpieldi .gt_grand_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#ymmjpieldi .gt_first_grand_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: double;
-  border-top-width: 6px;
-  border-top-color: #D3D3D3;
-}
-
-#ymmjpieldi .gt_last_grand_summary_row_top {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: double;
-  border-bottom-width: 6px;
-  border-bottom-color: #D3D3D3;
-}
-
-#ymmjpieldi .gt_striped {
-  background-color: rgba(128, 128, 128, 0.05);
-}
-
-#ymmjpieldi .gt_table_body {
-  border-top-style: solid;
-  border-top-width: 3px;
-  border-top-color: #D9D9D9;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#ymmjpieldi .gt_footnotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#ymmjpieldi .gt_footnote {
-  margin: 0px;
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#ymmjpieldi .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#ymmjpieldi .gt_sourcenote {
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#ymmjpieldi .gt_left {
-  text-align: left;
-}
-
-#ymmjpieldi .gt_center {
-  text-align: center;
-}
-
-#ymmjpieldi .gt_right {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-#ymmjpieldi .gt_font_normal {
-  font-weight: normal;
-}
-
-#ymmjpieldi .gt_font_bold {
-  font-weight: bold;
-}
-
-#ymmjpieldi .gt_font_italic {
-  font-style: italic;
-}
-
-#ymmjpieldi .gt_super {
-  font-size: 65%;
-}
-
-#ymmjpieldi .gt_footnote_marks {
-  font-size: 75%;
-  vertical-align: 0.4em;
-  position: initial;
-}
-
-#ymmjpieldi .gt_asterisk {
-  font-size: 100%;
-  vertical-align: 0;
-}
-
-#ymmjpieldi .gt_indent_1 {
-  text-indent: 5px;
-}
-
-#ymmjpieldi .gt_indent_2 {
-  text-indent: 10px;
-}
-
-#ymmjpieldi .gt_indent_3 {
-  text-indent: 15px;
-}
-
-#ymmjpieldi .gt_indent_4 {
-  text-indent: 20px;
-}
-
-#ymmjpieldi .gt_indent_5 {
-  text-indent: 25px;
-}
-
-#ymmjpieldi .katex-display {
-  display: inline-flex !important;
-  margin-bottom: 0.75em !important;
-}
-
-#ymmjpieldi div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
-  height: 0px !important;
-}
-</style>
-<table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<thead>
-<tr class="gt_col_headings gt_spanner_row">
-<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="2" colspan="1" style="text-align: center; font-weight: bold;" scope="col" id="Variable-name">
-Variable name
-</th>
-<th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="2" colspan="1" style="text-align: center; font-weight: bold;" scope="col" id="Variable-level">
-Variable level
-</th>
-<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="2" colspan="1" style="text-align: center; font-weight: bold;" scope="col" id="Estimate-name">
-Estimate name
-</th>
-<th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="1" style="background-color: #D9D9D9; text-align: center; font-weight: bold;" scope="col" id="spanner-[header_name]Database name
-[header_level]mockOmopSketch">
-<div class="gt_column_spanner">
-Database name
+<div class="codewrapper">
+<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="error" tabindex="0"><code>Error: object 'cdm' not found</code></pre>
 </div>
-</th>
-</tr>
-<tr class="gt_col_headings">
-<th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="background-color: #E1E1E1; text-align: center; font-weight: bold;" scope="col" id="[header_name]Database-name-[header_level]mockOmopSketch">
-mockOmopSketch
-</th>
-</tr>
-</thead>
-<tbody class="gt_table_body">
-<tr class="gt_group_heading_row">
-<th colspan="4" class="gt_group_heading" style="background-color: #E9E9E9; font-weight: bold;" scope="colgroup" id="drug_exposure; overall">
-drug_exposure; overall
-</th>
-</tr>
-<tr class="gt_row_group_first">
-<td headers="drug_exposure; overall  Variable name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-Number records
-</td>
-<td headers="drug_exposure; overall  Variable level" class="gt_row gt_right" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
--
-</td>
-<td headers="drug_exposure; overall  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-N
-</td>
-<td headers="drug_exposure; overall  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">
-21,600.00
-</td>
-</tr>
-<tr>
-<td headers="drug_exposure; overall  Variable name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-Number subjects
-</td>
-<td headers="drug_exposure; overall  Variable level" class="gt_row gt_right" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
--
-</td>
-<td headers="drug_exposure; overall  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-N (%)
-</td>
-<td headers="drug_exposure; overall  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">
-100 (100.00%)
-</td>
-</tr>
-<tr>
-<td headers="drug_exposure; overall  Variable name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-Records per person
-</td>
-<td headers="drug_exposure; overall  Variable level" class="gt_row gt_right" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
--
-</td>
-<td headers="drug_exposure; overall  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-Mean (SD)
-</td>
-<td headers="drug_exposure; overall  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">
-216.00 (14.47)
-</td>
-</tr>
-<tr class="gt_group_heading_row">
-<th colspan="4" class="gt_group_heading" style="background-color: #E9E9E9; font-weight: bold;" scope="colgroup" id="drug_exposure; Female">
-drug_exposure; Female
-</th>
-</tr>
-<tr class="gt_row_group_first">
-<td headers="drug_exposure; Female  Variable name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-Number records
-</td>
-<td headers="drug_exposure; Female  Variable level" class="gt_row gt_right" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
--
-</td>
-<td headers="drug_exposure; Female  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-N
-</td>
-<td headers="drug_exposure; Female  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">
-13,526.00
-</td>
-</tr>
-<tr>
-<td headers="drug_exposure; Female  Variable name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-Number subjects
-</td>
-<td headers="drug_exposure; Female  Variable level" class="gt_row gt_right" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
--
-</td>
-<td headers="drug_exposure; Female  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-N (%)
-</td>
-<td headers="drug_exposure; Female  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">
-63 (100.00%)
-</td>
-</tr>
-<tr>
-<td headers="drug_exposure; Female  Variable name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-Records per person
-</td>
-<td headers="drug_exposure; Female  Variable level" class="gt_row gt_right" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
--
-</td>
-<td headers="drug_exposure; Female  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-Mean (SD)
-</td>
-<td headers="drug_exposure; Female  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">
-214.70 (15.68)
-</td>
-</tr>
-<tr class="gt_group_heading_row">
-<th colspan="4" class="gt_group_heading" style="background-color: #E9E9E9; font-weight: bold;" scope="colgroup" id="drug_exposure; Male">
-drug_exposure; Male
-</th>
-</tr>
-<tr class="gt_row_group_first">
-<td headers="drug_exposure; Male  Variable name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-Number records
-</td>
-<td headers="drug_exposure; Male  Variable level" class="gt_row gt_right" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
--
-</td>
-<td headers="drug_exposure; Male  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-N
-</td>
-<td headers="drug_exposure; Male  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">
-8,074.00
-</td>
-</tr>
-<tr>
-<td headers="drug_exposure; Male  Variable name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-Number subjects
-</td>
-<td headers="drug_exposure; Male  Variable level" class="gt_row gt_right" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
--
-</td>
-<td headers="drug_exposure; Male  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-N (%)
-</td>
-<td headers="drug_exposure; Male  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">
-37 (100.00%)
-</td>
-</tr>
-<tr>
-<td headers="drug_exposure; Male  Variable name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-Records per person
-</td>
-<td headers="drug_exposure; Male  Variable level" class="gt_row gt_right" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
--
-</td>
-<td headers="drug_exposure; Male  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-Mean (SD)
-</td>
-<td headers="drug_exposure; Male  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">
-218.22 (12.01)
-</td>
-</tr>
-<tr class="gt_group_heading_row">
-<th colspan="4" class="gt_group_heading" style="background-color: #E9E9E9; font-weight: bold;" scope="colgroup" id="measurement; overall">
-measurement; overall
-</th>
-</tr>
-<tr class="gt_row_group_first">
-<td headers="measurement; overall  Variable name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-Number records
-</td>
-<td headers="measurement; overall  Variable level" class="gt_row gt_right" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
--
-</td>
-<td headers="measurement; overall  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-N
-</td>
-<td headers="measurement; overall  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">
-5,900.00
-</td>
-</tr>
-<tr>
-<td headers="measurement; overall  Variable name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-Number subjects
-</td>
-<td headers="measurement; overall  Variable level" class="gt_row gt_right" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
--
-</td>
-<td headers="measurement; overall  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-N (%)
-</td>
-<td headers="measurement; overall  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">
-100 (100.00%)
-</td>
-</tr>
-<tr>
-<td headers="measurement; overall  Variable name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-Records per person
-</td>
-<td headers="measurement; overall  Variable level" class="gt_row gt_right" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
--
-</td>
-<td headers="measurement; overall  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-Mean (SD)
-</td>
-<td headers="measurement; overall  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">
-59.00 (7.85)
-</td>
-</tr>
-<tr class="gt_group_heading_row">
-<th colspan="4" class="gt_group_heading" style="background-color: #E9E9E9; font-weight: bold;" scope="colgroup" id="measurement; Female">
-measurement; Female
-</th>
-</tr>
-<tr class="gt_row_group_first">
-<td headers="measurement; Female  Variable name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-Number records
-</td>
-<td headers="measurement; Female  Variable level" class="gt_row gt_right" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
--
-</td>
-<td headers="measurement; Female  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-N
-</td>
-<td headers="measurement; Female  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">
-3,742.00
-</td>
-</tr>
-<tr>
-<td headers="measurement; Female  Variable name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-Number subjects
-</td>
-<td headers="measurement; Female  Variable level" class="gt_row gt_right" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
--
-</td>
-<td headers="measurement; Female  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-N (%)
-</td>
-<td headers="measurement; Female  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">
-63 (100.00%)
-</td>
-</tr>
-<tr>
-<td headers="measurement; Female  Variable name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-Records per person
-</td>
-<td headers="measurement; Female  Variable level" class="gt_row gt_right" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
--
-</td>
-<td headers="measurement; Female  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-Mean (SD)
-</td>
-<td headers="measurement; Female  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">
-59.40 (8.37)
-</td>
-</tr>
-<tr class="gt_group_heading_row">
-<th colspan="4" class="gt_group_heading" style="background-color: #E9E9E9; font-weight: bold;" scope="colgroup" id="measurement; Male">
-measurement; Male
-</th>
-</tr>
-<tr class="gt_row_group_first">
-<td headers="measurement; Male  Variable name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-Number records
-</td>
-<td headers="measurement; Male  Variable level" class="gt_row gt_right" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
--
-</td>
-<td headers="measurement; Male  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-N
-</td>
-<td headers="measurement; Male  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">
-2,158.00
-</td>
-</tr>
-<tr>
-<td headers="measurement; Male  Variable name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-Number subjects
-</td>
-<td headers="measurement; Male  Variable level" class="gt_row gt_right" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
--
-</td>
-<td headers="measurement; Male  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-N (%)
-</td>
-<td headers="measurement; Male  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">
-37 (100.00%)
-</td>
-</tr>
-<tr>
-<td headers="measurement; Male  Variable name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-Records per person
-</td>
-<td headers="measurement; Male  Variable level" class="gt_row gt_right" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
--
-</td>
-<td headers="measurement; Male  Estimate name" class="gt_row gt_left" style="text-align: left; border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3;">
-Mean (SD)
-</td>
-<td headers="measurement; Male  [header_name]Database name
-[header_level]mockOmopSketch" class="gt_row gt_right" style="text-align: right;">
-58.32 (6.93)
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-<!--/html_preserve-->
 </div>
 <div class="section level3">
 <h3 id="record-counts-over-time">Record counts over time<a class="anchor" aria-label="anchor" href="#record-counts-over-time"></a>
@@ -6147,7 +3343,7 @@ Mean (SD)
 <p>You can plot the number of records over time for any cdm table also
 stratified by age and sex (so behind the scenes this will be joining
 clinical tables to the person table).</p>
-<div class="codewrapper sourceCode" id="cb6">
+<div class="codewrapper sourceCode" id="cb13">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -6156,11 +3352,24 @@ clinical tables to the person table).</p>
 <span>                                    interval <span class="op">=</span> <span class="st">"years"</span>,</span>
 <span>                                    sex <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>                                    ageGroup <span class="op">=</span>  <span class="fu">list</span><span class="op">(</span><span class="st">"&lt;40"</span> <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="fl">0</span>,<span class="fl">39</span><span class="op">)</span>, <span class="st">"&gt;=40"</span> <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="fl">40</span>, <span class="cn">Inf</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>                                    dateRange <span class="op">=</span> <span class="fu">as.Date</span><span class="op">(</span><span class="fu">c</span><span class="op">(</span><span class="st">"2002-01-01"</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> </span>
-<span></span>
-<span><span class="fu">plotRecordCount</span><span class="op">(</span><span class="va">recordCount</span>, facet <span class="op">=</span> <span class="st">"sex"</span>, colour <span class="op">=</span> <span class="st">"age_group"</span><span class="op">)</span></span></code></pre>
+<span>                                    dateRange <span class="op">=</span> <span class="fu">as.Date</span><span class="op">(</span><span class="fu">c</span><span class="op">(</span><span class="st">"2002-01-01"</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> </span></code></pre>
 </div>
-<figure><img src="../fig/7_tools-rendered-unnamed-chunk-7-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure>
+<div class="codewrapper">
+<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="error" tabindex="0"><code>Error: object 'cdm' not found</code></pre>
+</div>
+<div class="codewrapper sourceCode" id="cb15">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">plotRecordCount</span><span class="op">(</span><span class="va">recordCount</span>, facet <span class="op">=</span> <span class="st">"sex"</span>, colour <span class="op">=</span> <span class="st">"age_group"</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="error" tabindex="0"><code>Error: object 'recordCount' not found</code></pre>
+</div>
 </div>
 <div class="section level3">
 <h3 id="concept-id-counts">Concept Id counts<a class="anchor" aria-label="anchor" href="#concept-id-counts"></a>
@@ -6168,18 +3377,29 @@ clinical tables to the person table).</p>
 <p>You can get a summary of the numbers of concept ids in a cdm table.
 Unfortuntaely the summary doesn’t display here but you can copy and
 paste the code into your console to see it.</p>
-<div class="codewrapper sourceCode" id="cb7">
+<div class="codewrapper sourceCode" id="cb17">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu">summariseConceptIdCounts</span><span class="op">(</span>cdm <span class="op">=</span> <span class="va">cdm</span>, omopTableName <span class="op">=</span> <span class="st">"condition_occurrence"</span><span class="op">)</span></span>
-<span><span class="fu">tableConceptIdCounts</span><span class="op">(</span><span class="fu">head</span><span class="op">(</span><span class="va">result</span>,<span class="fl">5</span><span class="op">)</span>, display <span class="op">=</span> <span class="st">"standard"</span>, type <span class="op">=</span> <span class="st">"datatable"</span><span class="op">)</span></span></code></pre>
+<code class="sourceCode R"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu">summariseConceptIdCounts</span><span class="op">(</span>cdm <span class="op">=</span> <span class="va">cdm</span>, omopTableName <span class="op">=</span> <span class="st">"condition_occurrence"</span><span class="op">)</span></span></code></pre>
 </div>
-<!--html_preserve-->
-<div id="htmlwidget-3ce62cc614967c041078" class="datatables html-widget html-fill-item" style="width:100%;height:auto;">
-
+<div class="codewrapper">
+<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="error" tabindex="0"><code>Error: object 'cdm' not found</code></pre>
 </div>
-<script type="application/json" data-for="htmlwidget-3ce62cc614967c041078">{"x":{"filter":"bottom","vertical":false,"filterHTML":"<tr>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\" disabled=\"\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\" disabled=\"\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0\" data-max=\"1\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","class":"display","extensions":["FixedColumns","FixedHeader","Responsive","RowGroup","Scroller"],"data":[["condition_occurrence","condition_occurrence","condition_occurrence","condition_occurrence","condition_occurrence"],["Diabetes mellitus due to cystic fibrosis","Diverticular disease","Fracture of vertebral column without spinal cord injury","Rupture of patellar tendon","Whiplash injury to neck"],["4144583","4266809","4048695","4149245","4218389"],[100,100,100,100,100]],"container":"<table class='display'>\n<thead>\n<tr><th rowspan='2' style='text-align:center;'> <\/th><th rowspan='2' style='text-align:center;'>Standard concept name<\/th><th rowspan='2' style='text-align:center;'>Standard concept id<\/th><th style='text-align:center;'>mockOmopSketch<\/th><\/tr>\n<tr><th style='text-align:center;'>N records<\/th><\/tr>\n<\/thead>\n<\/table>","options":{"scrollX":true,"scrollY":400,"scrollCollapse":true,"pageLength":10,"lengthMenu":[5,10,20,50,100],"searchHighlight":true,"scroller":true,"deferRender":true,"fixedColumns":{"leftColumns":0,"rightColumns":0},"fixedHeader":true,"rowGroup":{"dataSrc":0},"columnDefs":[{"className":"dt-right","targets":3},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"Standard concept name","targets":1},{"name":"Standard concept id","targets":2},{"name":"mockOmopSketch\nN records","targets":3}],"order":[],"autoWidth":false,"orderClasses":false,"responsive":true}},"evals":[],"jsHooks":[]}</script><!--/html_preserve--><div id="keypoints1" class="callout keypoints">
+<div class="codewrapper sourceCode" id="cb19">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">tableConceptIdCounts</span><span class="op">(</span><span class="fu">head</span><span class="op">(</span><span class="va">result</span>,<span class="fl">5</span><span class="op">)</span>, display <span class="op">=</span> <span class="st">"standard"</span>, type <span class="op">=</span> <span class="st">"datatable"</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="error" tabindex="0"><code>Error: object 'result' not found</code></pre>
+</div>
+<div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
 </div>
@@ -6200,7 +3420,7 @@ any links that you are not going to use.
 </div>
 </section></section><section id="aio-chapter8"><p>Content from <a href="chapter8.html">Placeholder Chapter 8</a></p>
 <hr>
-<p>Last updated on 2025-09-12 |
+<p>Last updated on 2025-11-04 |
 
         <a href="https://github.com/SAFEHR-data/omop-carpentries/edit/main/episodes/chapter8.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 0 minutes</p>
@@ -6259,7 +3479,7 @@ reinforce the objectives.</li>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
   <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
 <div class="accordion-body">
 <p>Inline instructor notes can help inform instructors of timing
 challenges associated with the lessons. They appear in the “Instructor
@@ -6291,7 +3511,7 @@ View”</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Output </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -6320,7 +3540,7 @@ challenge blocks?</h3>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>You can add a line with at least three colons and a
 <code>solution</code> tag.</p>
@@ -6444,8 +3664,8 @@ any links that you are not going to use.
   "url": "https://SAFEHR-data.github.io/omop-carpentries/instructor/aio.html",
   "identifier": "https://SAFEHR-data.github.io/omop-carpentries/instructor/aio.html",
   "dateCreated": "2025-06-18",
-  "dateModified": "2025-09-30",
-  "datePublished": "2025-09-30"
+  "dateModified": "2025-11-04",
+  "datePublished": "2025-11-04"
 }
 
   </script><script>

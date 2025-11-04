@@ -70,6 +70,9 @@
     <loc>https://SAFEHR-data.github.io/omop-carpentries/chapter8.html</loc>
   </url>
   <url>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/concepts.html</loc>
+  </url>
+  <url>
     <loc>https://SAFEHR-data.github.io/omop-carpentries/images.html</loc>
   </url>
   <url>
@@ -145,6 +148,9 @@
     <loc>https://SAFEHR-data.github.io/omop-carpentries/instructor/chapter8.html</loc>
   </url>
   <url>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/instructor/concepts.html</loc>
+  </url>
+  <url>
     <loc>https://SAFEHR-data.github.io/omop-carpentries/instructor/images.html</loc>
   </url>
   <url>
@@ -163,10 +169,25 @@
     <loc>https://SAFEHR-data.github.io/omop-carpentries/instructor/keypoints.html</loc>
   </url>
   <url>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/instructor/measurement_observation.html</loc>
+  </url>
+  <url>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/instructor/medications.html</loc>
+  </url>
+  <url>
     <loc>https://SAFEHR-data.github.io/omop-carpentries/instructor/profiles.html</loc>
   </url>
   <url>
     <loc>https://SAFEHR-data.github.io/omop-carpentries/instructor/reference.html</loc>
+  </url>
+  <url>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/instructor/tools.html</loc>
+  </url>
+  <url>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/instructor/visits.html</loc>
+  </url>
+  <url>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/instructor/what_is_omop.html</loc>
   </url>
   <url>
     <loc>https://SAFEHR-data.github.io/omop-carpentries/instructor-notes.html</loc>
@@ -181,9 +202,24 @@
     <loc>https://SAFEHR-data.github.io/omop-carpentries/keypoints.html</loc>
   </url>
   <url>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/measurement_observation.html</loc>
+  </url>
+  <url>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/medications.html</loc>
+  </url>
+  <url>
     <loc>https://SAFEHR-data.github.io/omop-carpentries/profiles.html</loc>
   </url>
   <url>
     <loc>https://SAFEHR-data.github.io/omop-carpentries/reference.html</loc>
+  </url>
+  <url>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/tools.html</loc>
+  </url>
+  <url>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/visits.html</loc>
+  </url>
+  <url>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/what_is_omop.html</loc>
   </url>
 </urlset>
