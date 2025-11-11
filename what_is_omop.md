@@ -361,7 +361,7 @@ cdm$person
 
 ``` output
 # Source:   table<person> [?? x 18]
-# Database: DuckDB 1.4.1 [unknown@Linux 6.8.0-1036-azure:R 4.5.1//tmp/RtmpKYIN08/file373f32f5969d.duckdb]
+# Database: DuckDB 1.4.1 [unknown@Linux 6.8.0-1041-azure:R 4.5.2//tmp/RtmpMKI98q/file5a1243673072.duckdb]
    person_id gender_concept_id year_of_birth month_of_birth day_of_birth
        <int>             <int>         <int>          <int>        <int>
  1         6              8532          1963             12           31
@@ -389,7 +389,7 @@ cdm$condition_occurrence
 
 ``` output
 # Source:   table<condition_occurrence> [?? x 16]
-# Database: DuckDB 1.4.1 [unknown@Linux 6.8.0-1036-azure:R 4.5.1//tmp/RtmpKYIN08/file373f32f5969d.duckdb]
+# Database: DuckDB 1.4.1 [unknown@Linux 6.8.0-1041-azure:R 4.5.2//tmp/RtmpMKI98q/file5a1243673072.duckdb]
    condition_occurrence_id person_id condition_concept_id condition_start_date
                      <int>     <int>                <int> <date>              
  1                    4483       263              4112343 2015-10-02          
@@ -545,14 +545,14 @@ cdm$person |>
    <chr>                     <chr>                     <dbl>
  1 Acute allergic reaction   MALE                         57
  2 Acute allergic reaction   FEMALE                       59
- 3 Acute bacterial sinusitis MALE                        368
- 4 Acute bacterial sinusitis FEMALE                      418
+ 3 Acute bacterial sinusitis FEMALE                      418
+ 4 Acute bacterial sinusitis MALE                        368
  5 Acute bronchitis          FEMALE                     1300
  6 Acute bronchitis          MALE                       1243
- 7 Acute cholecystitis       MALE                          6
- 8 Acute cholecystitis       FEMALE                       29
- 9 Acute viral pharyngitis   FEMALE                     1322
-10 Acute viral pharyngitis   MALE                       1284
+ 7 Acute cholecystitis       FEMALE                       29
+ 8 Acute cholecystitis       MALE                          6
+ 9 Acute viral pharyngitis   MALE                       1284
+10 Acute viral pharyngitis   FEMALE                     1322
 # ℹ 148 more rows
 ```
 :::::::::::::::::::::::::::::::::::::::::::::::
