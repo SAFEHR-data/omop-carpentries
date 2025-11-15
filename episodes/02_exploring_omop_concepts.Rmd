@@ -1,0 +1,184 @@
+---
+title: "Exploring OMOP concepts with R"
+teaching: 0
+exercises: 0
+---
+
+:::::::::::::::::::::::::::::::::::::: questions 
+
+- Find the `vocabulary` and `domain` for a given concept_id
+- Establish whether a concept_id is a standard concept
+- Find all concepts within a given domain
+- Find all concepts within a given vocabulary
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::: objectives
+
+- Understand that concepts have additional attributes such as vocabulary, domain, and standard concept status
+- Use R to query the `concept` table for specific attributes of concepts
+- Filter concepts based on domain and vocabulary
+- Identify standard concepts within the OMOP vocabulary
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+## Introduction
+
+Nearly everything in a hospital can be represented by an OMOP concept_id.
+
+Any column within the OMOP CDM named `*concept_id` contains OMOP concept IDs. An OMOP concept_id is a unique integer identifier. Concept_ids are defined in the OMOP concept table where a corresponding name and other attributes are stored. OMOP contains concept_ids for other medical vocabularies such as SNOMED and LOINC, which OMOP terms as source vocabularies.
+
+
+## Looking up OMOP concepts
+
+OMOP concepts can be looked up in [Athena](https://athena.ohdsi.org) an online tool provided by OHDSI.
+
+The CDMConnector package allows connection to an OMOP Common Data Model in a database. It also contains synthetic example data that can be used to demonstrate querying the data.
+
+
+
+In the previous lesson we set up the CDMConnector package to connect to an OMOP Common Data Model database and used it to look at the concepts table. We also created the function `get_concept_name()` to get a humanly readable name for a concept_id.
+### Setting up the connection
+```{r, warning = FALSE, message = FALSE}
+library(CDMConnector)
+
+db_name <- "GiBleed"
+CDMConnector::requireEunomia(datasetName = db_name)
+
+db <- DBI::dbConnect(duckdb::duckdb(),
+                     dbdir = CDMConnector::eunomiaDir(datasetName = db_name))
+
+cdm <- CDMConnector::cdmFromCon(con = db, cdmSchema = "main",
+                                writeSchema = "main")
+```
+### Import function to get concept name from concept_id
+```{r, warning = FALSE, message = FALSE}
+library(dplyr)
+get_concept_name <- function(id) {
+  cdm$concept |>
+    filter(concept_id == !!id) |>
+    select(concept_name) |>
+    pull()
+}
+```
+
+## Exploring the concept table
+```{r, warning = FALSE, message = FALSE}
+colnames(cdm$concept)
+```
+
+
+| concept table columns           | Description
+|-----------------------|---------------------------------------
+| concept_id            | Unique identifier for the concept.
+| concept_name          | Name or description of the concept.
+| domain_id             | The domain to which the concept belongs (e.g. Condition, Drug).
+| vocabulary_id         | The vocabulary from which the concept originates (e.g. SNOMED, RxNorm).
+| concept_class_id      | Classification within the vocabulary (e.g. Clinical Finding, Ingredient).
+| standard_concept      | 'S' for standard concepts that can be included in network studies
+| concept_code          | Code used by the source vocabulary to identify the concept.
+| valid_start_date      | Date the concept became valid in OMOP.
+| valid_end_date        | Date the concept ceased to be valid.
+| invalid_reason        | Reason for invalidation, if applicable 
+
+### Querying the concept table
+
+The concept table is the main table for looking up information about concepts. We can use R to query the concept table for specific attributes of concepts.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::: challenge
+Answer the following questions using R and the concept table:
+1. How many entries are there in the concept table?
+2. How many distinct vocabularies are there in the concept table?
+3. How many distinct domains other than 'None' are there in the concept table?
+::::::::::::::::::::::::::::::::::::::::::::::::::: solution
+```{r, warning = FALSE, message = FALSE}
+# 1. How many entries are there in the concept table?
+cdm$concept %>% summarise(n_concepts = n())
+```
+Answer: There are 444 entries in the concept table. This is a tiny fraction of the overall tablewhich can be found at https://athena.ohdsi.org
+```{r, warning = FALSE, message = FALSE}
+# 2. How many distinct vocabularies are there in the concept table?
+cdm$concept %>% summarise(n_distinct_vocabularies = n_distinct(vocabulary_id))
+```
+Answer: There are 9 distinct vocabularies used in this dataset.
+```{r, warning = FALSE, message = FALSE}
+# 3. How many distinct domains other than 'None' are there in the concept table?
+cdm$concept %>%
+  filter(domain_id != "None") %>%
+  summarise(n_distinct_domains = n_distinct(domain_id))
+```
+Answer: There are 8 distinct domains other than 'None' in this dataset.    
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::::::::::::::::::::::::::
+
+### Filtering concepts by domain, vocabulary and standard concept status
+
+Let's look into filtering concepts based on their domain and vocabulary.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::: challenge
+Lists the first ten rows of the concept table, listing concept_id, domain_id, vocabulary_id and standard_concept columns.
+::::::::::::::::::::::::::::::::::::::::::::::::::: solution
+```{r, warning = FALSE, message = FALSE}
+cdm$concept |>
+  arrange(concept_id) |>
+  filter(row_number() <= 10) |>
+  select(concept_id, domain_id, vocabulary_id, standard_concept) |>
+  collect()
+```
+
+Note we have to use `collect()` to pull the data into R memory to view it.
+:::::::::::::::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::::::::::::::::::::::::::
+
+Look at non standard concepts
+
+::::::::::::::::::::::::::::::::::::::::::::::::::: challenge
+Find any nonstandard concepts (i.e. concepts where standard_concept is not 'S') by filtering the concept table. List the first 10 concept_ids of nonstandard concepts.
+Then look up their concept_name, domain_id, vocabulary_id and standard_concept status.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::: solution
+```{r, warning = FALSE, message = FALSE}
+cdm$concept |>
+  filter(is.na(standard_concept) | standard_concept != "S") |>
+  slice_min(order_by = concept_id, n = 10, with_ties = FALSE) |>
+  pull(concept_id)
+```
+```{r, warning = FALSE, message = FALSE}
+cdm$concept |>
+  filter(concept_id %in% c(1569708, 35208414, 44923712, 45011828)) |>
+  select(concept_id, concept_name, domain_id, vocabulary_id, standard_concept) |>
+  collect()
+```
+:::::::::::::::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::::::::::::::::::::::::::
+
+Look at vocabularies
+::::::::::::::::::::::::::::::::::::::::::::::::::: challenge
+List all distinct vocabularies in the concept table.
+::::::::::::::::::::::::::::::::::::::::::::::::::: solution
+```{r, warning = FALSE, message = FALSE}
+cdm$concept |>
+  filter(!is.na(vocabulary_id)) |>
+  distinct(vocabulary_id) |>
+  arrange(vocabulary_id) |>
+  pull(vocabulary_id)
+```
+:::::::::::::::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::::::::::::::::::::::::::
+```
+r{}
+cdm$concept |>
+  dplyr::filter(vocabulary_id == "SNOMED", domain_id == "Condition") |>
+  dplyr::summarise(n = dplyr::n()) |>
+  dplyr::pull(n)
+  ```
+::::::::::::::::::::::::::::::::::::: keypoints 
+- Concepts have additional attributes such as vocabulary, domain, and standard concept status
+- The `concept` table can be queried using R to retrieve specific attributes of concepts
+- Concepts can be filtered based on their domain and vocabulary
+- Standard concepts are those that are recommended for use in analyses within the OMOP framework
+
+::::::::::::::::::::::::::::::::::::::::::::::::

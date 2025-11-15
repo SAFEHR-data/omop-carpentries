@@ -57,15 +57,18 @@ We will be using the `CDMConnector` package to connect to an OMOP Common Data Mo
 
 ```{r, warning = FALSE, message = FALSE}
 # Libraries
-library(CDMConnector); library(DBI); library(duckdb)
-library(dplyr); library(dbplyr)
+library(CDMConnector)
+library(DBI)
+library(duckdb)
+library(dplyr)
+library(dbplyr)
 
 # Connect to GiBleed if not already connected
 if (!exists("cdm") || !inherits(cdm, "cdm_reference")) {
-  dbName <- "GiBleed"
-  CDMConnector::requireEunomia(datasetName = dbName)
+  db_name <- "GiBleed"
+  CDMConnector::requireEunomia(datasetName = db_name)
   con <- DBI::dbConnect(duckdb::duckdb(),
-                        dbdir = CDMConnector::eunomiaDir(datasetName = dbName))
+                        dbdir = CDMConnector::eunomiaDir(datasetName = db_name))
   cdm <- CDMConnector::cdmFromCon(con, cdmSchema = "main", writeSchema = "main")
 }
 ```
@@ -148,17 +151,21 @@ Looking at both tables we can see that they both have a column labelled `person_
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-Noticed that the visit_concept_id column in the visit_occurrence table is also a concept_id. This concept_id can be used to find out more information about the type of visit (e.g. inpatient, outpatient etc) by looking it up in the concept table. In this case the visit_concept_id is 9201 which relates to an inpatient visit. We can find this out by filtering the concept table for concept_id 9201 and selecting the concept_name column.
+Notice that the visit_concept_id column in the visit_occurrence table is also a concept_id. This concept_id can be used to find out more information about the type of visit (e.g. inpatient, outpatient etc) by looking it up in the concept table. In this case the visit_concept_id is 9201 which relates to an inpatient visit. We can find this out by filtering the concept table for concept_id 9201 and selecting the concept_name column.
 
 ```{r, warning = FALSE, message = FALSE}
 cdm$concept |>
   filter(concept_id == 9201) |>
   select(concept_name)
 ```
+### A useful function
+
+Finding the humanly readable name for a concept_id will be a useful function. We can create a function `get_concept_name()` that takes a concept_id as input and returns the concept_name.
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: challenge
 
-Retrieving the name from a concept id will be a useful function. Create the function `get_concept_name()` that takes a concept_id as input and returns the concept_name.
+Create the function `get_concept_name()` that takes a concept_id as input and returns the concept_name.
+
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: solution
 ```{r, warning = FALSE, message = FALSE}
 get_concept_name <- function(id) {
@@ -168,7 +175,6 @@ get_concept_name <- function(id) {
     pull()
 }
 ```
- 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -179,6 +185,7 @@ get_concept_name <- function(id) {
 - We then use `select` to choose only the `concept_name` column from the filtered results.
 - Finally, we use `pull()` to extract the `concept_name` as a vector, which is returned by the function.
 
+## Other useful tables
 
 There are also other tables which will give you other information about concepts. 
 
