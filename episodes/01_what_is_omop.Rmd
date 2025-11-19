@@ -101,10 +101,13 @@ Look at the OMOP-CDM figure and answer the following questions:
 2. Which table allows you to distinguish between different stays in hospital?
 
 :::::::::::::::::::::::: solution 
+
 1. The **Person** table
 
 2. The **Visit_occurrence** table
+
 :::::::::::::::::::::::::::::::::
+
 :::::::::::::::::::::::::::::::::::::::::::::::
 
 ## Why use OMOP?
@@ -140,15 +143,19 @@ colnames(cdm$person)
 ```
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: challenge
+
 How do you think the visit_occurrence table is used to connect to the person table?
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: solution
+
 ```{r, warning = FALSE, message = FALSE}
 colnames(cdm$visit_occurrence)
 ```
+
 Looking at both tables we can see that they both have a column labelled `person_id` which could be used to link them together.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 Notice that the visit_concept_id column in the visit_occurrence table is also a concept_id. This concept_id can be used to find out more information about the type of visit (e.g. inpatient, outpatient etc) by looking it up in the concept table. In this case the visit_concept_id is 9201 which relates to an inpatient visit. We can find this out by filtering the concept table for concept_id 9201 and selecting the concept_name column.
@@ -158,6 +165,7 @@ cdm$concept |>
   filter(concept_id == 9201) |>
   select(concept_name)
 ```
+
 ### A useful function
 
 Finding the humanly readable name for a concept_id will be a useful function. We can create a function `get_concept_name()` that takes a concept_id as input and returns the concept_name.
@@ -167,6 +175,7 @@ Finding the humanly readable name for a concept_id will be a useful function. We
 Create the function `get_concept_name()` that takes a concept_id as input and returns the concept_name.
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: solution
+
 ```{r, warning = FALSE, message = FALSE}
 get_concept_name <- function(id) {
   cdm$concept |>
@@ -175,7 +184,9 @@ get_concept_name <- function(id) {
     pull()
 }
 ```
+
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 #### Explanation of function code
@@ -192,9 +203,11 @@ There are also other tables which will give you other information about concepts
 ```{r, warning = FALSE, message = FALSE}
 colnames(cdm$concept)
 ```
+
 ```{r, warning = FALSE, message = FALSE}
 colnames(cdm$domain)
 ```
+
 ```{r, warning = FALSE, message = FALSE}
 colnames(cdm$vocabulary)
 ```
