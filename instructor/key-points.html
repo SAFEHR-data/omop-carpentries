@@ -241,7 +241,7 @@
 <div class="accordion accordion-flush" id="accordionFlush2">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading2">
-        <a href="what_is_omop.html">1. What is OMOP?</a>
+        <a href="01_what_is_omop.html">1. What is OMOP?</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -253,67 +253,7 @@
 <div class="accordion accordion-flush" id="accordionFlush3">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading3">
-        <a href="concepts.html">2. concepts and conditions</a>
-    </div>
-<!--/div.accordion-header-->
-
-  </div>
-<!--/div.accordion-item-->
-</div>
-<!--/div.accordion-flush-->
-
-<div class="accordion accordion-flush" id="accordionFlush4">
-  <div class="accordion-item">
-    <div class="accordion-header" id="flush-heading4">
-        <a href="measurement_observation.html">3. measurements and observations</a>
-    </div>
-<!--/div.accordion-header-->
-
-  </div>
-<!--/div.accordion-item-->
-</div>
-<!--/div.accordion-flush-->
-
-<div class="accordion accordion-flush" id="accordionFlush5">
-  <div class="accordion-item">
-    <div class="accordion-header" id="flush-heading5">
-        <a href="visits.html">4. Visits</a>
-    </div>
-<!--/div.accordion-header-->
-
-  </div>
-<!--/div.accordion-item-->
-</div>
-<!--/div.accordion-flush-->
-
-<div class="accordion accordion-flush" id="accordionFlush6">
-  <div class="accordion-item">
-    <div class="accordion-header" id="flush-heading6">
-        <a href="medications.html">5. Medications</a>
-    </div>
-<!--/div.accordion-header-->
-
-  </div>
-<!--/div.accordion-item-->
-</div>
-<!--/div.accordion-flush-->
-
-<div class="accordion accordion-flush" id="accordionFlush7">
-  <div class="accordion-item">
-    <div class="accordion-header" id="flush-heading7">
-        <a href="tools.html">6. Community provided software for working with OMOP data</a>
-    </div>
-<!--/div.accordion-header-->
-
-  </div>
-<!--/div.accordion-item-->
-</div>
-<!--/div.accordion-flush-->
-
-<div class="accordion accordion-flush" id="accordionFlush8">
-  <div class="accordion-item">
-    <div class="accordion-header" id="flush-heading8">
-        <a href="chapter8.html">7. Placeholder Chapter 8</a>
+        <a href="02_exploring_omop_concepts.html">2. Exploring OMOP concepts with R</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -376,72 +316,23 @@
     <main id="main-content" class="main-content"><div class="container lesson-content">
         
         
-<section id="what_is_omop"><h2 class="section-heading"><a href="what_is_omop.html">What is OMOP?</a></h2>
+<section id="01_what_is_omop"><h2 class="section-heading"><a href="01_what_is_omop.html">What is OMOP?</a></h2>
 <hr class="half-width">
 <ul>
 <li>Using a standard makes it much easier to share data</li>
-<li>OMOP uses concepts to link dated to standard vocabularies</li>
-<li>R can be used to join and interrogate data</li>
-</ul></section><section id="concepts"><h2 class="section-heading"><a href="concepts.html">concepts and conditions</a></h2>
+<li>OMOP uses concepts to link different tables together</li>
+<li>The <code>concept</code> table contains humanly readable names for
+concept_ids</li>
+</ul></section><section id="02_exploring_omop_concepts"><h2 class="section-heading"><a href="02_exploring_omop_concepts.html">Exploring OMOP concepts with R</a></h2>
 <hr class="half-width">
 <ul>
-<li>Understand that nearly everything in a hospital can be represented
-by an OMOP concept_id.</li>
-<li>Know that OMOP data usually includes the OMOP concept table and
-other data from the vocabularies</li>
-<li>Be able to look up concepts by their name</li>
-</ul></section><section id="measurement_observation"><h2 class="section-heading"><a href="measurement_observation.html">measurements and observations</a></h2>
-<hr class="half-width">
-<ul>
-<li>know that measurements are mainly lab results and other records like
-pulse rate</li>
-<li>know observations are other facts obtained through questioning or
-direct observation</li>
-<li>understand concept ids identify the measure or observation, values
-are stored in value_as_number or value_as_concept_id</li>
-<li>be able to join to the concept table to find a particular
-measurement or observation concept by name</li>
-<li>understand that different clinical questions can be answered by
-querying by patient and/or visit, or summing across all records</li>
-</ul></section><section id="visits"><h2 class="section-heading"><a href="visits.html">Visits</a></h2>
-<hr class="half-width">
-<ul>
-<li>Know that a visit is a period of time and patients can have multiple
-visits</li>
-<li>Understand that multiple measurements, conditions etc. can occur
-within and between visits</li>
-<li>Understand that for some analyses you will want to look within
-visits and for other analyses to sum across visits</li>
-<li>Know that visits are recorded in the visit_occurrence table</li>
-<li>Know each visit is unique to a person</li>
-<li>Understand that other tables link to visits</li>
-<li>Understand how visits can be used to find co-occurrence of other
-events</li>
-</ul></section><section id="medications"><h2 class="section-heading"><a href="medications.html">Medications</a></h2>
-<hr class="half-width">
-<ul>
-<li>Know that exposure of a patient to medications is mainly stored in
-the drug_exposure table</li>
-<li>Understand that drug concepts can be at different levels of
-granularity</li>
-<li>Understand that source values are mapped to a standard
-vocabulary</li>
-</ul></section><section id="tools"><h2 class="section-heading"><a href="tools.html">Community provided software for working with OMOP data</a></h2>
-<hr class="half-width">
-<ul>
-<li>Brief outline of some R tools that will be useful for new OMOP
-users.</li>
-</ul></section><section id="chapter8"><h2 class="section-heading"><a href="chapter8.html">Placeholder Chapter 8</a></h2>
-<hr class="half-width">
-<ul>
-<li>Use <code>.md</code> files for episodes when you want static
-content</li>
-<li>Use <code>.Rmd</code> files for episodes when you need to generate
-output</li>
-<li>Run <code>sandpaper::check_lesson()</code> to identify any issues
-with your lesson</li>
-<li>Run <code>sandpaper::build_lesson()</code> to preview your lesson
-locally</li>
+<li>Concepts have additional attributes such as vocabulary, domain, and
+standard concept status</li>
+<li>The <code>concept</code> table can be queried using R to retrieve
+specific attributes of concepts</li>
+<li>Concepts can be filtered based on their domain and vocabulary</li>
+<li>Standard concepts are those that are recommended for use in analyses
+within the OMOP framework</li>
 </ul></section>
 </div>
     </main>

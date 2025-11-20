@@ -11,7 +11,3 @@ install.packages("duckdb", verbose=FALSE)
 install.packages("lubridate", verbose=FALSE)
 
 install.packages("renv", verbose=FALSE)
-
-install.packages("remotes", verbose=FALSE)
-
-remotes::install_github("SAFEHR-data/omopcept",force = TRUE, verbose = FALSE)
