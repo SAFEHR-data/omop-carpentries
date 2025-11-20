@@ -60,27 +60,6 @@ library(OmopSketch)
 cdm <- mockOmopSketch()
 ```
 
-``` error
-Error in `mockVocabularySet()`:
-✖ `datasetName` a choice between: GiBleed, empty_cdm, synpuf-1k_5.3,
-  synpuf-1k_5.4, synthea-allergies-10k, synthea-anemia-10k,
-  synthea-breast_cancer-10k, synthea-contraceptives-10k, synthea-covid19-10k,
-  synthea-covid19-200k, synthea-dermatitis-10k, synthea-heart-10k,
-  synthea-hiv-10k, synthea-lung_cancer-10k, synthea-medications-10k,
-  synthea-metabolic_syndrome-10k, synthea-opioid_addiction-10k,
-  synthea-rheumatoid_arthritis-10k, …, synthea-veterans-10k, and
-  synthea-weight_loss-10k.
-! `datasetName` must be a choice between: GiBleed, empty_cdm, synpuf-1k_5.3,
-  synpuf-1k_5.4, synthea-allergies-10k, synthea-anemia-10k,
-  synthea-breast_cancer-10k, synthea-contraceptives-10k, synthea-covid19-10k,
-  synthea-covid19-200k, synthea-dermatitis-10k, synthea-heart-10k,
-  synthea-hiv-10k, synthea-lung_cancer-10k, synthea-medications-10k,
-  synthea-metabolic_syndrome-10k, synthea-opioid_addiction-10k,
-  synthea-rheumatoid_arthritis-10k, …, synthea-veterans-10k, and
-  synthea-weight_loss-10k; with length = 1; it can not contain NA; it can not
-  be NULL.
-```
-
 #### summarise* and table* functions
 
 The package has the following types of functions :
@@ -101,7 +80,7 @@ summariseOmopSnapshot(cdm) |>
 ```
 
 ``` error
-Error: object 'cdm' not found
+Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]): namespace 'xfun' 0.53 is already loaded, but >= 0.54 is required
 ```
 
 ### Missing data
@@ -111,18 +90,11 @@ Summarise missing data in each column of one or many cdm tables.
 
 ``` r
 missingData <- summariseMissingData(cdm, c("drug_exposure"))
-```
-
-``` error
-Error: object 'cdm' not found
-```
-
-``` r
 tableMissingData(missingData)
 ```
 
 ``` error
-Error: object 'missingData' not found
+Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]): namespace 'xfun' 0.53 is already loaded, but >= 0.54 is required
 ```
 
 ### Clinical Records
@@ -136,7 +108,7 @@ summariseClinicalRecords(cdm, "condition_occurrence") |>
 ```
 
 ``` error
-Error: object 'cdm' not found
+Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]): namespace 'xfun' 0.53 is already loaded, but >= 0.54 is required
 ```
 
 
@@ -162,7 +134,7 @@ summariseClinicalRecords(cdm, c("drug_exposure","measurement"),
 ```
 
 ``` error
-Error: object 'cdm' not found
+Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]): namespace 'xfun' 0.53 is already loaded, but >= 0.54 is required
 ```
 
 ### Record counts over time
@@ -177,19 +149,11 @@ recordCount <- summariseRecordCount(cdm,
                                     sex = TRUE,
                                     ageGroup =  list("<40" = c(0,39), ">=40" = c(40, Inf)),
                                     dateRange = as.Date(c("2002-01-01", NA))) 
-```
 
-``` error
-Error: object 'cdm' not found
-```
-
-``` r
 plotRecordCount(recordCount, facet = "sex", colour = "age_group")
 ```
 
-``` error
-Error: object 'recordCount' not found
-```
+<img src="fig/tools-rendered-unnamed-chunk-7-1.png" style="display: block; margin: auto;" />
 
 ### Concept Id counts
 
@@ -198,19 +162,11 @@ You can get a summary of the numbers of concept ids in a cdm table. Unfortuntael
 
 ``` r
 result <- summariseConceptIdCounts(cdm = cdm, omopTableName = "condition_occurrence")
-```
-
-``` error
-Error: object 'cdm' not found
-```
-
-``` r
 tableConceptIdCounts(head(result,5), display = "standard", type = "datatable")
 ```
 
-``` error
-Error: object 'result' not found
-```
+<!--html_preserve--><div class="datatables html-widget html-fill-item" id="htmlwidget-694287d41210ea7f6b1c" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-694287d41210ea7f6b1c">{"x":{"filter":"bottom","vertical":false,"filterHTML":"<tr>\n  <td data-type=\"factor\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\" disabled=\"\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"width: 100%; display: none;\">\n      <select multiple=\"multiple\" style=\"width: 100%;\" data-options=\"[&quot;condition_occurrence&quot;]\"><\/select>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\" disabled=\"\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0\" data-max=\"1\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","class":"display","extensions":["FixedColumns","FixedHeader","Responsive","RowGroup","Scroller"],"data":[["condition_occurrence","condition_occurrence","condition_occurrence","condition_occurrence","condition_occurrence"],["Acute bacterial sinusitis","Angiodysplasia of stomach","Childhood asthma","Escherichia coli urinary tract infection","Sinusitis"],["4294548","4310024","4051466","4116491","4283893"],[100,100,100,100,100]],"container":"<table class='display'>\n<thead>\n<tr><th rowspan='2' style='text-align:center;'> <\/th><th rowspan='2' style='text-align:center;'>Standard concept name<\/th><th rowspan='2' style='text-align:center;'>Standard concept id<\/th><th style='text-align:center;'>mockOmopSketch<\/th><\/tr>\n<tr><th style='text-align:center;'>N records<\/th><\/tr>\n<\/thead>\n<\/table>","options":{"scrollX":true,"scrollY":400,"scrollCollapse":true,"pageLength":10,"lengthMenu":[5,10,20,50,100],"searchHighlight":true,"scroller":true,"deferRender":true,"fixedColumns":{"leftColumns":0,"rightColumns":0},"fixedHeader":true,"rowGroup":{"dataSrc":0},"columnDefs":[{"className":"dt-right","targets":3},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"Standard concept name","targets":1},{"name":"Standard concept id","targets":2},{"name":"mockOmopSketch\nN records","targets":3}],"order":[],"autoWidth":false,"orderClasses":false,"responsive":true}},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
 
 
 

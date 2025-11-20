@@ -85,7 +85,7 @@ cdm$person
 
 ``` output
 # Source:   table<person> [?? x 18]
-# Database: DuckDB 1.4.1 [unknown@Linux 6.8.0-1041-azure:R 4.5.2//tmp/Rtmp2HW82a/file6bfea9aaf5f.duckdb]
+# Database: DuckDB 1.4.2 [unknown@Linux 6.8.0-1041-azure:R 4.5.2//tmp/RtmpqM9C9A/file2b2ee119870.duckdb]
    person_id gender_concept_id year_of_birth month_of_birth day_of_birth
        <int>             <int>         <int>          <int>        <int>
  1         6              8532          1963             12           31
@@ -133,7 +133,7 @@ cdm$concept %>%
 
 ``` output
 # Source:   SQL [?? x 1]
-# Database: DuckDB 1.4.1 [unknown@Linux 6.8.0-1041-azure:R 4.5.2//tmp/Rtmp2HW82a/file6bfea9aaf5f.duckdb]
+# Database: DuckDB 1.4.2 [unknown@Linux 6.8.0-1041-azure:R 4.5.2//tmp/RtmpqM9C9A/file2b2ee119870.duckdb]
       n
   <dbl>
 1   444
@@ -153,7 +153,7 @@ cdm$condition_occurrence %>%
 
 ``` output
 # Source:     SQL [?? x 3]
-# Database:   DuckDB 1.4.1 [unknown@Linux 6.8.0-1041-azure:R 4.5.2//tmp/Rtmp2HW82a/file6bfea9aaf5f.duckdb]
+# Database:   DuckDB 1.4.2 [unknown@Linux 6.8.0-1041-azure:R 4.5.2//tmp/RtmpqM9C9A/file2b2ee119870.duckdb]
 # Ordered by: dplyr::desc(n)
   condition_concept_id concept_name                n
                  <int> <chr>                   <dbl>
@@ -183,7 +183,7 @@ cdm$person |>
 
 ``` output
 # Source:   SQL [?? x 1]
-# Database: DuckDB 1.4.1 [unknown@Linux 6.8.0-1041-azure:R 4.5.2//tmp/Rtmp2HW82a/file6bfea9aaf5f.duckdb]
+# Database: DuckDB 1.4.2 [unknown@Linux 6.8.0-1041-azure:R 4.5.2//tmp/RtmpqM9C9A/file2b2ee119870.duckdb]
       n
   <dbl>
 1     6
@@ -197,7 +197,7 @@ cdm$vocabulary %>% summarise(n_distinct_vocabularies = n_distinct(vocabulary_id 
 
 ``` output
 # Source:   SQL [?? x 1]
-# Database: DuckDB 1.4.1 [unknown@Linux 6.8.0-1041-azure:R 4.5.2//tmp/Rtmp2HW82a/file6bfea9aaf5f.duckdb]
+# Database: DuckDB 1.4.2 [unknown@Linux 6.8.0-1041-azure:R 4.5.2//tmp/RtmpqM9C9A/file2b2ee119870.duckdb]
   n_distinct_vocabularies
                     <dbl>
 1                     125
