@@ -4,28 +4,22 @@ teaching: 0
 exercises: 0
 ---
 
-```{r setup, include = FALSE}
-source("setup.R")
-knitr::opts_chunk$set(fig.height = 6)
-```
 
 :::::::::::::::::::::::::::::::::::::: questions 
 
 - What is OMOP?
-- Which tables would you use to map a term to its standard concept_id?
-- How do you determine the domain and vocabulary of a concept?
-- Why is standard_concept == "S" important when analysing OMOP data?
-- Identify whether a given concept_id is standard and in which domain
-- Given a term, retrieve its standard concept_id and vocabulary_id
+- Why is using a standard important in healthcare data?
+- How do OMOP tables relate to each other?
+- What are concept_ids and how can we get an humanly readable name for them?
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
-
 - Examine the diagram of the OMOP tables and the data specification
 - Understand OMOP standardization and vocabularies
-- Recognize that most clinical facts map to a concept_id
+- Connect to an OMOP database and explore the `concept` table
+- Get a humanly readable name for a concept_id
 ::::::::::::::::::::::::::::::::::::::::::::::::
- 
+
 ## Setting up R
 
 ### Getting started
@@ -34,13 +28,6 @@ The "Projects" interface in RStudio not only creates a working directory for
 you, but also remembers its location (allowing you to quickly navigate to it).
 The interface also (optionally) preserves custom settings and open files to
 make it easier to resume work after a break.
-
-
-### Install the required packages
-
-You will need the `dplyr`, `remotes` and `readr` packages from CRAN (the official package repository).
-
-
 
 ### Create a new project
 
@@ -63,22 +50,25 @@ Create a new project in your environment.
   script. Click the save icon on your toolbar and save your script as
   "`script.R`".
 :::::::::::::::::::::::::::::::::::::::::::::::
-
+ 
 ### Connect to a database
 
 We will be using the `CDMConnector` package to connect to an OMOP Common Data Model database. This package also contains synthetic example data that can be used to demonstrate querying the data.
 
-```{r, warning = FALSE, message = FALSE, output = FALSE}
+```{r, warning = FALSE, message = FALSE}
 # Libraries
-library(CDMConnector); library(DBI); library(duckdb)
-library(dplyr); library(dbplyr)
+library(CDMConnector)
+library(DBI)
+library(duckdb)
+library(dplyr)
+library(dbplyr)
 
 # Connect to GiBleed if not already connected
 if (!exists("cdm") || !inherits(cdm, "cdm_reference")) {
-  dbName <- "GiBleed"
-  CDMConnector::requireEunomia(datasetName = dbName)
+  db_name <- "GiBleed"
+  CDMConnector::requireEunomia(datasetName = db_name)
   con <- DBI::dbConnect(duckdb::duckdb(),
-                        dbdir = CDMConnector::eunomiaDir(datasetName = dbName))
+                        dbdir = CDMConnector::eunomiaDir(datasetName = db_name))
   cdm <- CDMConnector::cdmFromCon(con, cdmSchema = "main", writeSchema = "main")
 }
 ```
@@ -103,9 +93,7 @@ OMOP is a format for recording Electronic Healthcare Records. It allows you to f
 OMOP CDM stands for the Observational Medical Outcomes Partnership Common Data Model. You don't really need to remember what OMOP stands for. Remembering that CDM stands for Common Data Model can help you remember that it is a data standard that can be applied to different data sources to create data in a Common (same) format.
 The table diagram will look confusing to start with but you can use data in the OMOP CDM without needing to understand (or populate) all 37 tables.
 
-::::::::::::::::::::::::::::::::::::: challenge 
-
-### Test yourself
+::::::::::::::::::::::::::::::::::: challenge
 
 Look at the OMOP-CDM figure and answer the following questions:
 
@@ -113,22 +101,14 @@ Look at the OMOP-CDM figure and answer the following questions:
 2. Which table allows you to distinguish between different stays in hospital?
 
 :::::::::::::::::::::::: solution 
+
 1. The **Person** table
 
 2. The **Visit_occurrence** table
+
 :::::::::::::::::::::::::::::::::
+
 :::::::::::::::::::::::::::::::::::::::::::::::
-
-There are a handful of core tables and columns that contain key information about a patient's journey in the hospital. These are 7 tables to get you started :
-
-- [person](https://ohdsi.github.io/CommonDataModel/cdm54.html#person) uniquely identifies each person or patient, and some demographic information. This is the central table that all other tables relate to.
-- [condition_occurrence](https://ohdsi.github.io/CommonDataModel/cdm54.html#condition_occurrence) records relating to a Person suggesting the presence of a medical condition.
-- [drug_exposure](https://ohdsi.github.io/CommonDataModel/cdm54.html#drug_exposure) records about exposure of a patient to a drug.
-- [procedure_occurrence](https://ohdsi.github.io/CommonDataModel/cdm54.html#procedure_occurrence) activities carried out by a healthcare provider on the patient with a diagnostic or therapeutic purpose.
-- [measurement](https://ohdsi.github.io/CommonDataModel/cdm54.html#measurement) numerical or categorical values obtained through standardized examination of a Person or Person's sample.
-- [observation](https://ohdsi.github.io/CommonDataModel/cdm54.html#observation) clinical facts about a Person obtained in the context of examination, questioning or a procedure.
-- [visit_occurrence](https://ohdsi.github.io/CommonDataModel/cdm54.html#visit_occurrence) records of times where Persons engage with the healthcare system.
-
 
 ## Why use OMOP?
 
@@ -142,39 +122,43 @@ Check that everyone knows what FAIR stands for
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: callout
 Read in the database as above.
 
 The data themselves are not actually read into the created cdm object.
 Rather it is a reference that allows us to query the data from the database.
 
-Typing `cdm` will give a summary of the tables in the database  and we can look at these individually using the `$` operator.
-```{r, warning = FALSE, message = FALSE}
-cdm
-```
+Typing `names(cdm)` will give a summary of the tables in the database  and we can look at these individually using the `$` operator and the `colnames` command.
+
+
+### OMOP Tables
 
 ```{r, warning = FALSE, message = FALSE}
-cdm$person
+names(cdm)
 ```
 
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+### Looking at the column names in each table
 
-Many of the columns in the OMOP CDM tables contain concept_ids. For example the `condition_occurrence` table contains a `condition_concept_id` column that contains the concept_id for the patient's condition.
+```{r, warning = FALSE, message = FALSE}
+colnames(cdm$person)
+```
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: challenge
-How do you think they visit_occurrence table is used to connect to the person table?
+
+How do you think the visit_occurrence table is used to connect to the person table?
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: solution
+
 ```{r, warning = FALSE, message = FALSE}
-cdm$visit_occurrence
+colnames(cdm$visit_occurrence)
 ```
+
 Looking at both tables we can see that they both have a column labelled `person_id` which could be used to link them together.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-Noticed that the visit_concept_id column in the visit_occurrence table is also a concept_id. This concept_id can be used to find out more information about the type of visit (e.g. inpatient, outpatient etc) by looking it up in the concept table. In this case the visit_concept_id is 9201 which relates to an inpatient visit. We can find this out by filtering the concept table for concept_id 9201 and selecting the concept_name column.
+Notice that the visit_concept_id column in the visit_occurrence table is also a concept_id. This concept_id can be used to find out more information about the type of visit (e.g. inpatient, outpatient etc) by looking it up in the concept table. In this case the visit_concept_id is 9201 which relates to an inpatient visit. We can find this out by filtering the concept table for concept_id 9201 and selecting the concept_name column.
 
 ```{r, warning = FALSE, message = FALSE}
 cdm$concept |>
@@ -182,38 +166,56 @@ cdm$concept |>
   select(concept_name)
 ```
 
+### A useful function
+
+Finding the humanly readable name for a concept_id will be a useful function. We can create a function `get_concept_name()` that takes a concept_id as input and returns the concept_name.
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: challenge
+
+Create the function `get_concept_name()` that takes a concept_id as input and returns the concept_name.
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: solution
+
+```{r, warning = FALSE, message = FALSE}
+get_concept_name <- function(id) {
+  cdm$concept |>
+    filter(concept_id == !!id) |>
+    select(concept_name) |>
+    pull()
+}
+```
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+#### Explanation of function code
+- The function is called `get_concept_name` and it takes one argument, `id`.
+- Inside the function, we query the `concept` table from the `cdm` object.
+- We use the `filter` function to select rows where the `concept_id` matches the input `id`. The `!!` operator is used to unquote the variable so that its value is used in the filter.
+- We then use `select` to choose only the `concept_name` column from the filtered results.
+- Finally, we use `pull()` to extract the `concept_name` as a vector, which is returned by the function.
+
+## Other useful tables
+
 There are also other tables which will give you other information about concepts. 
 
 ```{r, warning = FALSE, message = FALSE}
-cdm$concept
-
-cdm$domain
-
-cdm$vocabulary
-
+colnames(cdm$concept)
 ```
 
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: challenge
-Which of the `gender_concept_id` values in the person table relate to male and female?
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: solution
 ```{r, warning = FALSE, message = FALSE}
-cdm$concept %>%
-  filter(concept_id == 8532) %>%
-  select(concept_name)
-
+colnames(cdm$domain)
 ```
 
-8532 relates to 'Female'
-8507 relates to 'Male'
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+```{r, warning = FALSE, message = FALSE}
+colnames(cdm$vocabulary)
+```
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
 - Using a standard makes it much easier to share data
-- OMOP uses concepts to link data to standard vocabularies
-- Use concept, concept_relationship, and vocabulary to navigate meaning
-- Prefer standard_concept == "S" for analyses
+- OMOP uses concepts to link different tables together
+- The `concept` table contains humanly readable names for concept_ids
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
