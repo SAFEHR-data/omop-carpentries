@@ -334,7 +334,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Community provided software for working with OMOP data</h1>
-        <p>Last updated on 2025-11-11 |
+        <p>Last updated on 2025-11-20 |
 
         <a href="https://github.com/SAFEHR-data/omop-carpentries/edit/main/episodes/tools.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -405,28 +405,6 @@ some mock data.</p>
 <span><span class="co"># Connect to mock database</span></span>
 <span><span class="va">cdm</span> <span class="op">&lt;-</span> <span class="fu">mockOmopSketch</span><span class="op">(</span><span class="op">)</span></span></code></pre>
 </div>
-<div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="error" tabindex="0"><code>Error in `mockVocabularySet()`:
-✖ `datasetName` a choice between: GiBleed, empty_cdm, synpuf-1k_5.3,
-  synpuf-1k_5.4, synthea-allergies-10k, synthea-anemia-10k,
-  synthea-breast_cancer-10k, synthea-contraceptives-10k, synthea-covid19-10k,
-  synthea-covid19-200k, synthea-dermatitis-10k, synthea-heart-10k,
-  synthea-hiv-10k, synthea-lung_cancer-10k, synthea-medications-10k,
-  synthea-metabolic_syndrome-10k, synthea-opioid_addiction-10k,
-  synthea-rheumatoid_arthritis-10k, …, synthea-veterans-10k, and
-  synthea-weight_loss-10k.
-! `datasetName` must be a choice between: GiBleed, empty_cdm, synpuf-1k_5.3,
-  synpuf-1k_5.4, synthea-allergies-10k, synthea-anemia-10k,
-  synthea-breast_cancer-10k, synthea-contraceptives-10k, synthea-covid19-10k,
-  synthea-covid19-200k, synthea-dermatitis-10k, synthea-heart-10k,
-  synthea-hiv-10k, synthea-lung_cancer-10k, synthea-medications-10k,
-  synthea-metabolic_syndrome-10k, synthea-opioid_addiction-10k,
-  synthea-rheumatoid_arthritis-10k, …, synthea-veterans-10k, and
-  synthea-weight_loss-10k; with length = 1; it can not contain NA; it can not
-  be NULL.</code></pre>
-</div>
 <div class="section level4">
 <h4 id="summarise-and-table-functions">summarise* and table* functions<a class="anchor" aria-label="anchor" href="#summarise-and-table-functions"></a></h4>
 <p>The package has the following types of functions :</p>
@@ -441,7 +419,7 @@ some mock data.</p>
 <h3 id="snapshot">Snapshot<a class="anchor" aria-label="anchor" href="#snapshot"></a></h3>
 <p>Snapshot creates a broad summary of the database including person
 count, temporal extent and other metadata.</p>
-<div class="codewrapper sourceCode" id="cb3">
+<div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -451,33 +429,23 @@ count, temporal extent and other metadata.</p>
 <div class="codewrapper">
 <h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="error" tabindex="0"><code>Error: object 'cdm' not found</code></pre>
+<pre class="error" tabindex="0"><code>Error in loadNamespace(j &lt;- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]): namespace 'xfun' 0.53 is already loaded, but &gt;= 0.54 is required</code></pre>
 </div>
 </div>
 <div class="section level3">
 <h3 id="missing-data">Missing data<a class="anchor" aria-label="anchor" href="#missing-data"></a></h3>
 <p>Summarise missing data in each column of one or many cdm tables.</p>
-<div class="codewrapper sourceCode" id="cb5">
+<div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">missingData</span> <span class="op">&lt;-</span> <span class="fu">summariseMissingData</span><span class="op">(</span><span class="va">cdm</span>, <span class="fu">c</span><span class="op">(</span><span class="st">"drug_exposure"</span><span class="op">)</span><span class="op">)</span></span></code></pre>
+<code class="sourceCode R"><span><span class="va">missingData</span> <span class="op">&lt;-</span> <span class="fu">summariseMissingData</span><span class="op">(</span><span class="va">cdm</span>, <span class="fu">c</span><span class="op">(</span><span class="st">"drug_exposure"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">tableMissingData</span><span class="op">(</span><span class="va">missingData</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="error" tabindex="0"><code>Error: object 'cdm' not found</code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb7">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">tableMissingData</span><span class="op">(</span><span class="va">missingData</span><span class="op">)</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="error" tabindex="0"><code>Error: object 'missingData' not found</code></pre>
+<pre class="error" tabindex="0"><code>Error in loadNamespace(j &lt;- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]): namespace 'xfun' 0.53 is already loaded, but &gt;= 0.54 is required</code></pre>
 </div>
 </div>
 <div class="section level3">
@@ -485,7 +453,7 @@ count, temporal extent and other metadata.</p>
 <p>Allows you to summarise omop tables from a cdm. By default it gives
 measures including records per person, how many concepts are standard
 and source vocabularies.</p>
-<div class="codewrapper sourceCode" id="cb9">
+<div class="codewrapper sourceCode" id="cb6">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -495,7 +463,7 @@ and source vocabularies.</p>
 <div class="codewrapper">
 <h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="error" tabindex="0"><code>Error: object 'cdm' not found</code></pre>
+<pre class="error" tabindex="0"><code>Error in loadNamespace(j &lt;- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]): namespace 'xfun' 0.53 is already loaded, but &gt;= 0.54 is required</code></pre>
 </div>
 <p>You can also</p>
 <ul><li>apply to more than one table at a time</li>
@@ -503,7 +471,7 @@ and source vocabularies.</p>
 <li>reduce the number of rows by setting options to FALSE</li>
 <li>stratify by sex and/or age</li>
 <li>set a date range</li>
-</ul><div class="codewrapper sourceCode" id="cb11">
+</ul><div class="codewrapper sourceCode" id="cb8">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -520,7 +488,7 @@ and source vocabularies.</p>
 <div class="codewrapper">
 <h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="error" tabindex="0"><code>Error: object 'cdm' not found</code></pre>
+<pre class="error" tabindex="0"><code>Error in loadNamespace(j &lt;- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]): namespace 'xfun' 0.53 is already loaded, but &gt;= 0.54 is required</code></pre>
 </div>
 </div>
 <div class="section level3">
@@ -528,7 +496,7 @@ and source vocabularies.</p>
 <p>You can plot the number of records over time for any cdm table also
 stratified by age and sex (so behind the scenes this will be joining
 clinical tables to the person table).</p>
-<div class="codewrapper sourceCode" id="cb13">
+<div class="codewrapper sourceCode" id="cb10">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -537,53 +505,28 @@ clinical tables to the person table).</p>
 <span>                                    interval <span class="op">=</span> <span class="st">"years"</span>,</span>
 <span>                                    sex <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>                                    ageGroup <span class="op">=</span>  <span class="fu">list</span><span class="op">(</span><span class="st">"&lt;40"</span> <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="fl">0</span>,<span class="fl">39</span><span class="op">)</span>, <span class="st">"&gt;=40"</span> <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="fl">40</span>, <span class="cn">Inf</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>                                    dateRange <span class="op">=</span> <span class="fu">as.Date</span><span class="op">(</span><span class="fu">c</span><span class="op">(</span><span class="st">"2002-01-01"</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> </span></code></pre>
+<span>                                    dateRange <span class="op">=</span> <span class="fu">as.Date</span><span class="op">(</span><span class="fu">c</span><span class="op">(</span><span class="st">"2002-01-01"</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> </span>
+<span></span>
+<span><span class="fu">plotRecordCount</span><span class="op">(</span><span class="va">recordCount</span>, facet <span class="op">=</span> <span class="st">"sex"</span>, colour <span class="op">=</span> <span class="st">"age_group"</span><span class="op">)</span></span></code></pre>
 </div>
-<div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="error" tabindex="0"><code>Error: object 'cdm' not found</code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb15">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">plotRecordCount</span><span class="op">(</span><span class="va">recordCount</span>, facet <span class="op">=</span> <span class="st">"sex"</span>, colour <span class="op">=</span> <span class="st">"age_group"</span><span class="op">)</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="error" tabindex="0"><code>Error: object 'recordCount' not found</code></pre>
-</div>
-</div>
+<figure><img src="fig/tools-rendered-unnamed-chunk-7-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></div>
 <div class="section level3">
 <h3 id="concept-id-counts">Concept Id counts<a class="anchor" aria-label="anchor" href="#concept-id-counts"></a></h3>
 <p>You can get a summary of the numbers of concept ids in a cdm table.
 Unfortuntaely the summary doesn’t display here but you can copy and
 paste the code into your console to see it.</p>
-<div class="codewrapper sourceCode" id="cb17">
+<div class="codewrapper sourceCode" id="cb11">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu">summariseConceptIdCounts</span><span class="op">(</span>cdm <span class="op">=</span> <span class="va">cdm</span>, omopTableName <span class="op">=</span> <span class="st">"condition_occurrence"</span><span class="op">)</span></span></code></pre>
+<code class="sourceCode R"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu">summariseConceptIdCounts</span><span class="op">(</span>cdm <span class="op">=</span> <span class="va">cdm</span>, omopTableName <span class="op">=</span> <span class="st">"condition_occurrence"</span><span class="op">)</span></span>
+<span><span class="fu">tableConceptIdCounts</span><span class="op">(</span><span class="fu">head</span><span class="op">(</span><span class="va">result</span>,<span class="fl">5</span><span class="op">)</span>, display <span class="op">=</span> <span class="st">"standard"</span>, type <span class="op">=</span> <span class="st">"datatable"</span><span class="op">)</span></span></code></pre>
 </div>
-<div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="error" tabindex="0"><code>Error: object 'cdm' not found</code></pre>
+<!--html_preserve-->
+<div id="htmlwidget-694287d41210ea7f6b1c" class="datatables html-widget html-fill-item" style="width:100%;height:auto;">
+
 </div>
-<div class="codewrapper sourceCode" id="cb19">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">tableConceptIdCounts</span><span class="op">(</span><span class="fu">head</span><span class="op">(</span><span class="va">result</span>,<span class="fl">5</span><span class="op">)</span>, display <span class="op">=</span> <span class="st">"standard"</span>, type <span class="op">=</span> <span class="st">"datatable"</span><span class="op">)</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="error" tabindex="0"><code>Error: object 'result' not found</code></pre>
-</div>
-<div id="keypoints1" class="callout keypoints">
+<script type="application/json" data-for="htmlwidget-694287d41210ea7f6b1c">{"x":{"filter":"bottom","vertical":false,"filterHTML":"<tr>\n  <td data-type=\"factor\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\" disabled=\"\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"width: 100%; display: none;\">\n      <select multiple=\"multiple\" style=\"width: 100%;\" data-options=\"[&quot;condition_occurrence&quot;]\"><\/select>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\" disabled=\"\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0\" data-max=\"1\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","class":"display","extensions":["FixedColumns","FixedHeader","Responsive","RowGroup","Scroller"],"data":[["condition_occurrence","condition_occurrence","condition_occurrence","condition_occurrence","condition_occurrence"],["Acute bacterial sinusitis","Angiodysplasia of stomach","Childhood asthma","Escherichia coli urinary tract infection","Sinusitis"],["4294548","4310024","4051466","4116491","4283893"],[100,100,100,100,100]],"container":"<table class='display'>\n<thead>\n<tr><th rowspan='2' style='text-align:center;'> <\/th><th rowspan='2' style='text-align:center;'>Standard concept name<\/th><th rowspan='2' style='text-align:center;'>Standard concept id<\/th><th style='text-align:center;'>mockOmopSketch<\/th><\/tr>\n<tr><th style='text-align:center;'>N records<\/th><\/tr>\n<\/thead>\n<\/table>","options":{"scrollX":true,"scrollY":400,"scrollCollapse":true,"pageLength":10,"lengthMenu":[5,10,20,50,100],"searchHighlight":true,"scroller":true,"deferRender":true,"fixedColumns":{"leftColumns":0,"rightColumns":0},"fixedHeader":true,"rowGroup":{"dataSrc":0},"columnDefs":[{"className":"dt-right","targets":3},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"Standard concept name","targets":1},{"name":"Standard concept id","targets":2},{"name":"mockOmopSketch\nN records","targets":3}],"order":[],"autoWidth":false,"orderClasses":false,"responsive":true}},"evals":[],"jsHooks":[]}</script><!--/html_preserve--><div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
 </div>
@@ -658,8 +601,8 @@ any links that you are not going to use.
   "url": "https://SAFEHR-data.github.io/omop-carpentries/tools.html",
   "identifier": "https://SAFEHR-data.github.io/omop-carpentries/tools.html",
   "dateCreated": "2025-06-18",
-  "dateModified": "2025-11-11",
-  "datePublished": "2025-11-18"
+  "dateModified": "2025-11-20",
+  "datePublished": "2025-11-20"
 }
 
   </script><script>
