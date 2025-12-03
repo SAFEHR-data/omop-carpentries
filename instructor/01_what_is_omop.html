@@ -57,6 +57,7 @@
           </ul></li>
       </div>
 
+
       <div class="dropdown" id="instructor-dropdown">
         <button class="btn btn-secondary dropdown-toggle bordered-button" type="button" id="dropdownMenu1" data-bs-toggle="dropdown" aria-expanded="false">
           <i aria-hidden="true" class="icon" data-feather="eye"></i> Instructor View <i data-feather="chevron-down"></i>
@@ -234,6 +235,15 @@
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
+<div class="accordion accordion-flush" id="accordionFlush4">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading4">
+        <a href="03_other_concepts.html">3. More on concepts</a>
+    </div><!--/div.accordion-header-->
+
+  </div><!--/div.accordion-item-->
+</div><!--/div.accordion-flush-->
+
                 </div>
               </div>
             </div>
@@ -291,7 +301,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>What is OMOP?</h1>
-        <p>Last updated on 2025-11-20 |
+        <p>Last updated on 2025-12-03 |
 
         <a href="https://github.com/SAFEHR-data/omop-carpentries/edit/main/episodes/01_what_is_omop.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -360,10 +370,10 @@ break.</p>
 </button>
 </div>
 </nav><div id="nav-tabContent-1" class="tab-content">
-<div id="nav-tabpanel-1-Experienced" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-1-Experienced">
+<div id="nav-tabpanel-1-Experienced" class="tab-pane show active" aria-labelledby="nav-tab-1-Experienced" role="tabpanel">
 <p>Create a new project in your environment.</p>
 </div>
-<div id="nav-tabpanel-1-Needareminder" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-Needareminder">
+<div id="nav-tabpanel-1-Needareminder" class="tab-pane" aria-labelledby="nav-tab-1-Needareminder" role="tabpanel">
 <ul><li>Under the <code>File</code> menu in RStudio, click on
 <code>New project</code>, choose <code>New directory</code>, then
 <code>New project</code>
@@ -450,9 +460,9 @@ without needing to understand (or populate) all 37 tables.</p>
 <h3 class="callout-title">Challenge</h3>
 <div class="callout-content">
 <p>Look at the OMOP-CDM figure and answer the following questions:</p>
-<ol style="list-style-type: decimal"><li>Which table is the key to all the other tables?</li>
-<li>Which table allows you to distinguish between different stays in
-hospital?</li>
+<ol style="list-style-type: decimal"><li><p>Which table is the key to all the other tables?</p></li>
+<li><p>Which table allows you to distinguish between different stays in
+hospital?</p></li>
 </ol></div>
 </div>
 </div>
@@ -549,8 +559,8 @@ the database and we can look at these individually using the
 <div class="callout-inner">
 <h3 class="callout-title">Challenge</h3>
 <div class="callout-content">
-<p>How do you think the visit_occurrence table is used to connect to the
-person table?</p>
+<p>Question How do you think the visit_occurrence table is used to
+connect to the person table?</p>
 </div>
 </div>
 </div>
@@ -606,7 +616,7 @@ concept_name column.</p>
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code># Source:   SQL [?? x 1]
-# Database: DuckDB 1.4.1 [unknown@Linux 6.8.0-1041-azure:R 4.5.2//tmp/RtmpCWBlKA/file15b641ffe2ec.duckdb]
+# Database: DuckDB 1.4.1 [unknown@Linux 6.8.0-1041-azure:R 4.5.2//tmp/Rtmpir2lFS/file16e64382d7af.duckdb]
   concept_name
   &lt;chr&gt;
 1 Inpatient Visit</code></pre>
@@ -755,15 +765,17 @@ any links that you are not going to use.
 	
         | <a href="https://github.com/SAFEHR-data/omop-carpentries/blob/main/CONTRIBUTING.md" class="external-link">Contributing</a>
         | <a href="https://github.com/SAFEHR-data/omop-carpentries/" class="external-link">Source</a></p>
-				<p><a href="https://github.com/SAFEHR-data/omop-carpentries/blob/main/CITATION.cff" class="external-link">Cite</a> | <a href="mailto:team@carpentries.org">Contact</a> | <a href="https://carpentries.org/about/" class="external-link">About</a></p>
-			</div>
-			<div class="col-md-6">
+        <p>
+        <a href="https://github.com/SAFEHR-data/omop-carpentries/blob/main/" class="external-link">Cite</a>
+        | <a href="mailto:team@carpentries.org">Contact</a> | <a href="https://carpentries.org/about/" class="external-link">About</a></p>
+		</div>
+		<div class="col-md-6">
 
         <p>Materials licensed under <a href="LICENSE.html">CC-BY 4.0</a> by the authors</p>
 
         <p>Template licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">CC-BY 4.0</a> by <a href="https://carpentries.org/" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.17.1" class="external-link">sandpaper (0.17.1)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.9" class="external-link">pegboard (0.7.9)</a>, and <a href="https://github.com/carpentries/varnish/tree/1.0.7" class="external-link">varnish (1.0.7)</a></p>
-			</div>
+        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.17.2" class="external-link">sandpaper (0.17.2)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.9" class="external-link">pegboard (0.7.9)</a>, and <a href="https://github.com/carpentries/varnish/tree/1.0.8" class="external-link">varnish (1.0.8)</a></p>
+		</div>
 		</footer></div> <!-- / div.container -->
 	<div id="to-top">
 		<a href="#top">
@@ -784,8 +796,8 @@ any links that you are not going to use.
   "url": "https://SAFEHR-data.github.io/omop-carpentries/instructor/01_what_is_omop.html",
   "identifier": "https://SAFEHR-data.github.io/omop-carpentries/instructor/01_what_is_omop.html",
   "dateCreated": "2025-06-18",
-  "dateModified": "2025-11-20",
-  "datePublished": "2025-12-02"
+  "dateModified": "2025-12-03",
+  "datePublished": "2025-12-03"
 }
 
   </script><script>
