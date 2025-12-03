@@ -94,8 +94,11 @@ The concept table is the main table for looking up information about concepts. W
 ::::::::::::::::::::::::::::::::::::::::::::::::::: challenge
 
 Answer the following questions using R and the concept table:
+
 1. How many entries are there in the concept table?
+
 2. How many distinct vocabularies are there in the concept table?
+
 3. How many distinct domains other than 'None' are there in the concept table?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::: solution
@@ -272,7 +275,10 @@ Now you should be able to replicate our get_concept_name() function to look up o
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::: challenge
 
+Questions?
+
 Find the domain and vocabulary for concept_id 35208414
+
 Is this concept a standard concept?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::: solution
@@ -325,8 +331,11 @@ get_concept_standard_status(35208414)
 ```
 
 Answer:
+
 - The domain for concept_id 319835 is 'Condition'.
+
 - The vocabulary for concept_id 319835 is 'ICD10CM'.
+
 - This concept is not a standard concept (standard_concept = 'NA').
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::

@@ -104,6 +104,7 @@ The table diagram will look confusing to start with but you can use data in the 
 Look at the OMOP-CDM figure and answer the following questions:
 
 1. Which table is the key to all the other tables?
+
 2. Which table allows you to distinguish between different stays in hospital?
 
 :::::::::::::::::::::::: solution 
@@ -179,6 +180,7 @@ colnames(cdm$person)
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: challenge
 
+Question
 How do you think the visit_occurrence table is used to connect to the person table?
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: solution
@@ -217,7 +219,7 @@ cdm$concept |>
 
 ``` output
 # Source:   SQL [?? x 1]
-# Database: DuckDB 1.4.1 [unknown@Linux 6.8.0-1041-azure:R 4.5.2//tmp/RtmpCWBlKA/file15b641ffe2ec.duckdb]
+# Database: DuckDB 1.4.1 [unknown@Linux 6.8.0-1041-azure:R 4.5.2//tmp/Rtmpir2lFS/file16e64382d7af.duckdb]
   concept_name   
   <chr>          
 1 Inpatient Visit
