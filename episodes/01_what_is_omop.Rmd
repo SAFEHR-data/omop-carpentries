@@ -98,6 +98,7 @@ The table diagram will look confusing to start with but you can use data in the 
 Look at the OMOP-CDM figure and answer the following questions:
 
 1. Which table is the key to all the other tables?
+
 2. Which table allows you to distinguish between different stays in hospital?
 
 :::::::::::::::::::::::: solution 
@@ -144,6 +145,7 @@ colnames(cdm$person)
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: challenge
 
+Question
 How do you think the visit_occurrence table is used to connect to the person table?
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: solution
