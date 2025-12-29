@@ -196,7 +196,7 @@ get_concept_name <- function(id) {
 - Inside the function, we query the `concept` table from the `cdm` object.
 - We use the `filter` function to select rows where the `concept_id` matches the input `id`. The `!!` operator is used to unquote the variable so that its value is used in the filter.
 - We then use `select` to choose only the `concept_name` column from the filtered results.
-- Finally, we use `pull()` to extract the `concept_name` as a vector, which is returned by the function.
+- Finally, we use `pull()` to extract the `concept_name` as a vector, which is returned by the function. We need to use this because we are querying a remote database, not one that is local.
 
 ## Other useful tables
 
