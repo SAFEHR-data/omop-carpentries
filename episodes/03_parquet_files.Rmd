@@ -1,0 +1,133 @@
+---
+title: "Parquet files"
+teaching: 0
+exercises: 0
+---
+
+:::::::::::::::::::::::::::::::::::::: questions 
+
+- What is a parquet file?
+
+- How to explore and open parquet files in R?
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::: objectives
+
+- Understand the structure of parquet files.
+
+- Learn how to read parquet files in R.
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+## Introduction
+
+In this episode, we will explore parquet files, a popular file format for storing large datasets efficiently. We will learn how to read parquet files in R and understand their structure.
+
+::::::::::::::::::::::::::::::::::::::::::::::::callout
+
+
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+### Parquet files
+
+Parquet is a columnar storage file format that is optimized for use with big data processing frameworks. It is designed to be efficient in terms of both storage space and read/write performance. Parquet files are often used in data warehousing and big data analytics applications.
+
+### Exploring Parquet files
+
+We have provided a function that will allow you to browse the structure of the data in the same way as we did with the database in the previous episode. This code is available in the `data/code/open_omop_dataset.R` file. You can source this file to load the function into your R environment.
+
+```{r, warning = FALSE, message = FALSE}
+open_omop_dataset <- function(dir) {
+  open_omop_schema <- function(path) {
+    # iterate table level folders
+    list.dirs(path, recursive = FALSE) |>
+      # exclude folder name from path
+      # and use it as index for named list
+      purrr::set_names(~ basename(.)) |>
+      # "lazy-open" list of parquet files
+      # from specified folder
+      purrr::map(arrow::open_dataset)
+  }
+  # iterate top-level folders
+  list.dirs(dir, recursive = FALSE) |>
+    # exclude folder name from path
+    # and use it as index for named list
+    purrr::set_names(~ basename(.)) |>
+    purrr::map(open_omop_schema)
+}
+```
+
+Now we can use this function to open the sample OMOP CDM dataset located in the `data/public/` directory and explore it in the same way as we did with the database in the previous episode.
+```{r, warning = FALSE, message = FALSE}
+omop <- open_omop_dataset("./data/")
+```
+
+::::::::::::::::::::::::::::::::::::: instructor
+
+Note that the path to the data directory may be different depending on where you have stored the sample OMOP CDM dataset on your local machine.
+
+Check the people have used the right path.Their environment should now have an entry under Data omop List of 1
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+Explore the data using the following:
+```{r, warning = FALSE, message = FALSE}
+omop$public
+```
+
+You will see that this gives you a list of all the tables in this dataset and what columns they contain. It is obviously a much smaller dataset!You can explore individual tables which will also give you the column names.
+
+```{r, warning = FALSE, message = FALSE}
+omop$public$person
+```
+To actually open each table we can use
+```{r, warning = FALSE, message = FALSE}
+library(dplyr)
+person <- omop$public$person |> collect()
+person
+```
+ 
+or we can use the specific functions from the `arrow` package to read in the parquet files directly.
+
+```{r, warning = FALSE, message = FALSE}
+library(arrow)
+person <- read_parquet("./data/public/person/person.parquet")
+person
+```
+
+::::::::::::::::::::::::::::::::::::: challenge
+
+Adapt the code we had developed for the get_concept_name function in the previous episode to work with this parquet file dataset.
+
+::::::::::::::::::::::::::::::::::::: solution
+```{r, warning = FALSE, message = FALSE}
+library(arrow)
+library(dplyr)
+get_concept_name <- function(id) {
+  omop$public$concept |>
+    filter(concept_id == !!id) |>
+    select(concept_name) |>
+    collect()
+}
+```
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+Now we can use this function to look up concept names by their concept_id.
+
+```{r, warning = FALSE, message = FALSE}
+get_concept_name(8507)
+```
+
+::::::::::::::::::::::::::::::::::::: keypoints 
+
+- Parquet files are a columnar storage file format optimized for big data processing.
+
+- The `arrow` package in R can be used to read and manipulate parquet files.
+
+::::::::::::::::::::::::::::::::::::::::::::::::
