@@ -27,16 +27,20 @@ In this episode, we will explore parquet files, a popular file format for storin
 
 ::::::::::::::::::::::::::::::::::::::::::::::::callout
 
+For the following episodes, we will be using a sample OMOP CDM database that is pre-loaded with data. This database is a simplified version of a real-world OMOP CDM database and is intended for educational purposes only.
 
+(UCLH only) This will come in the same form as you would get data if you asked for a data extract via the SAFEHR platform (i.e. a set of parquet files).
+
+As part of the setup prior to this course you were asked to download and install the sample database. If you have not done this yet, please refer to the setup instructions provided earlier in the course. For now, we will assume that you have the sample OMOP CDM database available on your local machine at the following path: `data/public/` and the functions in a folder `data/code`.
 
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-### Parquet files
+## Parquet files
 
 Parquet is a columnar storage file format that is optimized for use with big data processing frameworks. It is designed to be efficient in terms of both storage space and read/write performance. Parquet files are often used in data warehousing and big data analytics applications.
 
-### Exploring Parquet files
+## Exploring Parquet files
 
 We have provided a function that will allow you to browse the structure of the data in the same way as we did with the database in the previous episode. This code is available in the `data/code/open_omop_dataset.R` file. You can source this file to load the function into your R environment.
 
