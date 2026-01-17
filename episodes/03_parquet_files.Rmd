@@ -31,7 +31,7 @@ For the following episodes, we will be using a sample OMOP CDM database that is 
 
 (UCLH only) This will come in the same form as you would get data if you asked for a data extract via the SAFEHR platform (i.e. a set of parquet files).
 
-As part of the setup prior to this course you were asked to download and install the sample database. If you have not done this yet, please refer to the setup instructions provided earlier in the course. For now, we will assume that you have the sample OMOP CDM database available on your local machine at the following path: `data/public/` and the functions in a folder `data/code`.
+As part of the setup prior to this course you were asked to download and install the sample database. If you have not done this yet, please refer to the setup instructions provided earlier in the course. For now, we will assume that you have the sample OMOP CDM database available on your local machine at the following path: `workshop/data/public/` and the functions in a folder `workshop/code`.
 
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
@@ -42,7 +42,7 @@ Parquet is a columnar storage file format that is optimized for use with big dat
 
 ## Exploring Parquet files
 
-We have provided a function that will allow you to browse the structure of the data in the same way as we did with the database in the previous episode. This code is available in the `data/code/open_omop_dataset.R` file. You can source this file to load the function into your R environment.
+We have provided a function that will allow you to browse the structure of the data in the same way as we did with the database in the previous episode. This code is available in the `workshop/code/open_omop_dataset.R` file. You can source this file to load the function into your R environment.
 
 ```{r, warning = FALSE, message = FALSE}
 open_omop_dataset <- function(dir) {
@@ -65,7 +65,7 @@ open_omop_dataset <- function(dir) {
 }
 ```
 
-Now we can use this function to open the sample OMOP CDM dataset located in the `data/public/` directory and explore it in the same way as we did with the database in the previous episode.
+Now we can use this function to open the sample OMOP CDM dataset located in the `workshop/data/public/` directory and explore it in the same way as we did with the database in the previous episode.
 ```{r, warning = FALSE, message = FALSE}
 omop <- open_omop_dataset("./data/")
 ```
@@ -74,7 +74,7 @@ omop <- open_omop_dataset("./data/")
 
 Note that the path to the data directory may be different depending on where you have stored the sample OMOP CDM dataset on your local machine.
 
-Check the people have used the right path.Their environment should now have an entry under Data omop List of 1
+Check the people have used the right path.Their environment should now have an entry under Data reading 'omop List of 1'
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -83,7 +83,7 @@ Explore the data using the following:
 omop$public
 ```
 
-You will see that this gives you a list of all the tables in this dataset and what columns they contain. It is obviously a much smaller dataset!You can explore individual tables which will also give you the column names.
+You will see that this gives you a list of all the tables in this dataset and what columns they contain. It is obviously a much smaller dataset! You can explore individual tables which will also give you the column names.
 
 ```{r, warning = FALSE, message = FALSE}
 omop$public$person

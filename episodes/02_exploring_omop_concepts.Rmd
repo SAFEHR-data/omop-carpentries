@@ -40,7 +40,9 @@ The CDMConnector package allows connection to an OMOP Common Data Model in a dat
 
 
 In the previous lesson we set up the CDMConnector package to connect to an OMOP Common Data Model database and used it to look at the concepts table. We also created the function `get_concept_name()` to get a humanly readable name for a concept_id.
+
 ### Setting up the connection
+
 ```{r, warning = FALSE, message = FALSE}
 library(CDMConnector)
 
@@ -89,11 +91,14 @@ Answer the following questions using R and the concept table:
 ::::::::::::::::::::::::::::::::::::::::::::::::::: solution
 
 ```{r, warning = FALSE, message = FALSE}
+library(dplyr)
 # 1. How many entries are there in the concept table?
 cdm$concept %>% summarise(n_concepts = n())
 ```
 
 Answer: There are 444 entries in the concept table. This is a tiny fraction of the overall table which can be found at [Athena](https://athena.ohdsi.org)
+
+NOTE: The function `n()` counts the number of rows in the table and `summarise()` creates a summary table with that count. These functions are part of the `dplyr` package. Once you have loaded the library once your environment will remember it for the rest of the session.
 
 ```{r, warning = FALSE, message = FALSE}
 # 2. How many distinct vocabularies are there in the concept table?
@@ -122,7 +127,7 @@ Let's look into filtering concepts based on their domain and vocabulary.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::: challenge
 
-Lists the first ten rows of the concept table, listing concept_id, domain_id, vocabulary_id and standard_concept columns.
+List the first ten rows of the concept table, listing only the concept_id, domain_id, vocabulary_id and standard_concept columns.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::: solution
 

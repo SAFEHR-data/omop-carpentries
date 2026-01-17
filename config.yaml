@@ -71,9 +71,7 @@ episodes:
 - 02_exploring_omop_concepts.Rmd
 - 03_parquet_files.Rmd
 - 04_other_concepts.Rmd
-# - 03_other_concepts.Rmd
-# - concepts.Rmd
-# - measurement_observation.Rmd
+- 05_measurement_observation.Rmd
 # - visits.Rmd
 # - medications.Rmd
 # - tools.Rmd
