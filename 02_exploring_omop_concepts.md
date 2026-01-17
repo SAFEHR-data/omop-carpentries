@@ -40,7 +40,9 @@ The CDMConnector package allows connection to an OMOP Common Data Model in a dat
 
 
 In the previous lesson we set up the CDMConnector package to connect to an OMOP Common Data Model database and used it to look at the concepts table. We also created the function `get_concept_name()` to get a humanly readable name for a concept_id.
+
 ### Setting up the connection
+
 
 ``` r
 library(CDMConnector)
@@ -105,15 +107,22 @@ Answer the following questions using R and the concept table:
 
 
 ``` r
+library(dplyr)
 # 1. How many entries are there in the concept table?
 cdm$concept %>% summarise(n_concepts = n())
 ```
 
-``` error
-Error in summarise(., n_concepts = n()): could not find function "summarise"
+``` output
+# Source:   SQL [?? x 1]
+# Database: DuckDB 1.4.1 [unknown@Linux 6.8.0-1044-azure:R 4.5.2//tmp/RtmpPQMIux/file1977188e0e05.duckdb]
+  n_concepts
+       <dbl>
+1        444
 ```
 
 Answer: There are 444 entries in the concept table. This is a tiny fraction of the overall table which can be found at [Athena](https://athena.ohdsi.org)
+
+NOTE: The function `n()` counts the number of rows in the table and `summarise()` creates a summary table with that count. These functions are part of the `dplyr` package. Once you have loaded the library once your environment will remember it for the rest of the session.
 
 
 ``` r
@@ -121,8 +130,12 @@ Answer: There are 444 entries in the concept table. This is a tiny fraction of t
 cdm$concept %>% summarise(n_distinct_vocabularies = n_distinct(vocabulary_id))
 ```
 
-``` error
-Error in summarise(., n_distinct_vocabularies = n_distinct(vocabulary_id)): could not find function "summarise"
+``` output
+# Source:   SQL [?? x 1]
+# Database: DuckDB 1.4.1 [unknown@Linux 6.8.0-1044-azure:R 4.5.2//tmp/RtmpPQMIux/file1977188e0e05.duckdb]
+  n_distinct_vocabularies
+                    <dbl>
+1                       9
 ```
 
 Answer: There are 9 distinct vocabularies used in this dataset.
@@ -135,8 +148,12 @@ cdm$concept %>%
   summarise(n_distinct_domains = n_distinct(domain_id))
 ```
 
-``` error
-Error in summarise(., n_distinct_domains = n_distinct(domain_id)): could not find function "summarise"
+``` output
+# Source:   SQL [?? x 1]
+# Database: DuckDB 1.4.1 [unknown@Linux 6.8.0-1044-azure:R 4.5.2//tmp/RtmpPQMIux/file1977188e0e05.duckdb]
+  n_distinct_domains
+               <dbl>
+1                  8
 ```
 
 Answer: There are 8 distinct domains other than 'None' in this dataset.    
@@ -152,7 +169,7 @@ Let's look into filtering concepts based on their domain and vocabulary.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::: challenge
 
-Lists the first ten rows of the concept table, listing concept_id, domain_id, vocabulary_id and standard_concept columns.
+List the first ten rows of the concept table, listing only the concept_id, domain_id, vocabulary_id and standard_concept columns.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::: solution
 
@@ -165,8 +182,20 @@ cdm$concept |>
   collect()
 ```
 
-``` error
-Error in collect(select(filter(arrange(cdm$concept, concept_id), row_number() <= : could not find function "collect"
+``` output
+# A tibble: 10 × 4
+   concept_id domain_id vocabulary_id standard_concept
+        <int> <chr>     <chr>         <chr>           
+ 1          0 Metadata  None          <NA>            
+ 2       8507 Gender    Gender        S               
+ 3       8532 Gender    Gender        S               
+ 4       9201 Visit     Visit         S               
+ 5       9202 Visit     Visit         S               
+ 6       9203 Visit     Visit         S               
+ 7      28060 Condition SNOMED        S               
+ 8      30753 Condition SNOMED        S               
+ 9      78272 Condition SNOMED        S               
+10      80180 Condition SNOMED        S               
 ```
 
 Note we have to use `collect()` to pull the data into R memory to view it.
@@ -195,8 +224,9 @@ cdm$concept |>
   pull(vocabulary_id)
 ```
 
-``` error
-Error in pull(arrange(distinct(filter(cdm$concept, !is.na(vocabulary_id)), : could not find function "pull"
+``` output
+[1] "Gender"  "RxNorm"  "CVX"     "SNOMED"  "None"    "ICD10CM" "LOINC"  
+[8] "NDC"     "Visit"  
 ```
 
 Here we can use `pull(x)` to pull the data x into R memory to view it.
@@ -224,8 +254,9 @@ cdm$concept |>
   pull(domain_id)
 ```
 
-``` error
-Error in pull(arrange(distinct(filter(cdm$concept, !is.na(domain_id)), : could not find function "pull"
+``` output
+[1] "Drug"        "Observation" "Visit"       "Metadata"    "Gender"     
+[6] "Measurement" "Condition"   "Procedure"  
 ```
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -251,8 +282,8 @@ cdm$concept |>
   pull(concept_id)
 ```
 
-``` error
-Error in pull(slice_min(filter(cdm$concept, is.na(standard_concept) | : could not find function "pull"
+``` output
+[1]        0  1569708 35208414 44923712 45011828
 ```
 
 
@@ -263,8 +294,14 @@ cdm$concept |>
   collect()
 ```
 
-``` error
-Error in collect(select(filter(cdm$concept, concept_id %in% c(1569708, : could not find function "collect"
+``` output
+# A tibble: 4 × 5
+  concept_id concept_name               domain_id vocabulary_id standard_concept
+       <int> <chr>                      <chr>     <chr>         <chr>           
+1   35208414 Gastrointestinal hemorrha… Condition ICD10CM       <NA>            
+2   44923712 celecoxib 200 MG Oral Cap… Drug      NDC           <NA>            
+3    1569708 Other diseases of digesti… Condition ICD10CM       <NA>            
+4   45011828 Diclofenac Sodium 75 MG D… Drug      NDC           <NA>            
 ```
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::

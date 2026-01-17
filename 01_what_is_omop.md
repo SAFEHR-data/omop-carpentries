@@ -219,7 +219,7 @@ cdm$concept |>
 
 ``` output
 # Source:   SQL [?? x 1]
-# Database: DuckDB 1.4.1 [unknown@Linux 6.8.0-1041-azure:R 4.5.2//tmp/Rtmpir2lFS/file16e64382d7af.duckdb]
+# Database: DuckDB 1.4.1 [unknown@Linux 6.8.0-1044-azure:R 4.5.2//tmp/RtmpNoPyBV/file19457c6addd8.duckdb]
   concept_name   
   <chr>          
 1 Inpatient Visit
@@ -254,7 +254,7 @@ get_concept_name <- function(id) {
 - Inside the function, we query the `concept` table from the `cdm` object.
 - We use the `filter` function to select rows where the `concept_id` matches the input `id`. The `!!` operator is used to unquote the variable so that its value is used in the filter.
 - We then use `select` to choose only the `concept_name` column from the filtered results.
-- Finally, we use `pull()` to extract the `concept_name` as a vector, which is returned by the function.
+- Finally, we use `pull()` to extract the `concept_name` as a vector, which is returned by the function. We need to use this because we are querying a remote database, not one that is local.
 
 ## Other useful tables
 

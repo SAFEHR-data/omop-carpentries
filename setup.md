@@ -9,13 +9,13 @@ This lesson assumes you have current versions of the following installed on your
 
 You also need to download some files to follow this lesson:
 
-1. Make a new folder in your Desktop called `omop_taster`.
-2. Download [omop-data.zip](data/omop-data.zip) and move the file to this folder.
+1. Make a new folder in your Desktop called `omop_course`.
+2. Download [omop_data.zip](data/omop_data.zip) and move the file to this folder.
 3. If it's not unzipped yet, unzip it. There should now be a folder called `data` in the `omop_taster` folder.
 4. You can access this folder from the Unix shell with:
 
 ```bash
 $ cd
-$ cd Desktop/omop_taster/data
+$ cd Desktop/omop_course/data
 ```
 
