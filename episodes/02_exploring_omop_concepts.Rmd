@@ -38,8 +38,7 @@ OMOP concepts can be looked up in [Athena](https://athena.ohdsi.org) an online t
 The CDMConnector package allows connection to an OMOP Common Data Model in a database. It also contains synthetic example data that can be used to demonstrate querying the data.
 
 
-
-In the previous lesson we set up the CDMConnector package to connect to an OMOP Common Data Model database and used it to look at the concepts table. We also created the function `get_concept_name()` to get a humanly readable name for a concept_id.
+In the previous episode we set up the CDMConnector package to connect to an OMOP Common Data Model database and used it to look at the concepts table. We also created the function `get_concept_name()` to get a humanly readable name for a concept_id. We will use these again in this episode.
 
 ### Setting up the connection
 
