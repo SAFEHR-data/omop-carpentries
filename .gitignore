@@ -52,3 +52,6 @@ po/*~
 
 # renv detritus
 renv/sandbox/
+
+# files used by me for changing data
+util/
