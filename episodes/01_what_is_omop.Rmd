@@ -39,7 +39,6 @@ Create a new project in your environment.
 
 ### Need a reminder
 
-
 - Under the `File` menu in RStudio, click on `New project`, choose
   `New directory`, then `New project`
 - Enter a name for this new folder (or "directory") and choose a convenient
