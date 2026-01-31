@@ -1,4 +1,4 @@
----
+.---
 title: "Parquet files"
 teaching: 0
 exercises: 0
@@ -33,7 +33,7 @@ For this episode we will be using a sample OMOP CDM database that is pre-loaded 
 
 As part of the setup prior to this course you were asked to download and install the sample database. If you have not done this yet, please refer to the setup instructions provided earlier in the course. For now, we will assume that you have the sample OMOP CDM database available on your local machine at the following path: `workshop/data/public/` and the functions in a folder `workshop/code/parquet_dataset`.
 
-
+  
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## Parquet files
@@ -102,6 +102,26 @@ library(arrow)
 person <- read_parquet("./data/public/person/person.parquet")
 person
 ```
+
+::::::::::::::::::::::::::::::::::::: instructor
+
+Check that everyone has been able to read in the person table and see the data.
+
+Points worth a discussion:
+
+- the day and month of birth
+
+- gender_source_value and race_source_value are given for some rows but not others
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::: callout
+
+As part of the privacy preserving policies around health data, dates of birth are often de-identified to only show the year of birth. This is why in this dataset the day and month of birth are set to 15/6 or 0/0 for all individuals.
+
+You can also see that in some cases the gender_source_value and race_source_value columns are populated while in others they are not. This depends on the policy of the individual hospital. Note the data in this dataset is a number of different sources combined together to form a single OMOP CDM database.
+
+::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: challenge
 

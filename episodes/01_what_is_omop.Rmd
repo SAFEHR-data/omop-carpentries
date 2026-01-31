@@ -52,7 +52,7 @@ Create a new project in your environment.
  
 ### Connect to a database
 
-For this episode we will be using the `CDMConnector` package to connect to an OMOP Common Data Model database. We define a function that will open this package and connect an appropriate dataset. You will find this in the `workspace/code/CDMConnector` directory that you should have downloaded. This package also contains synthetic example data that can be used to demonstrate querying the data.
+For this episode we will be using the `CDMConnector` package to connect to an OMOP Common Data Model database. We define a function that will open this package and connect an appropriate dataset. You will find this in the `workshop/code/CDMConnector` directory that you should have downloaded. This package also contains synthetic example data that can be used to demonstrate querying the data.
 
 ```{r, warning = FALSE, message = FALSE}
 
