@@ -72,6 +72,9 @@ episodes:
 - 03_parquet_files.Rmd
 - 04_other_concepts.Rmd
 - 05_measurement_observation.Rmd
+- 06_conditions_visits.Rmd
+- 07_medications.Rmd
+- 08_dates_and_times.Rmd
 # - visits.Rmd
 # - medications.Rmd
 # - tools.Rmd

@@ -19,6 +19,15 @@
     <loc>https://SAFEHR-data.github.io/omop-carpentries/05_measurement_observation.html</loc>
   </url>
   <url>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/06_conditions_visits.html</loc>
+  </url>
+  <url>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/07_medications.html</loc>
+  </url>
+  <url>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/08_dates_and_times.html</loc>
+  </url>
+  <url>
     <loc>https://SAFEHR-data.github.io/omop-carpentries/404.html</loc>
   </url>
   <url>
@@ -62,6 +71,15 @@
   </url>
   <url>
     <loc>https://SAFEHR-data.github.io/omop-carpentries/instructor/05_measurement_observation.html</loc>
+  </url>
+  <url>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/instructor/06_conditions_visits.html</loc>
+  </url>
+  <url>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/instructor/07_medications.html</loc>
+  </url>
+  <url>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/instructor/08_dates_and_times.html</loc>
   </url>
   <url>
     <loc>https://SAFEHR-data.github.io/omop-carpentries/instructor/404.html</loc>

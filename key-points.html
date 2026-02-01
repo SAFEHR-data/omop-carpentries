@@ -299,6 +299,42 @@
 </div>
 <!--/div.accordion-flush-->
 
+<div class="accordion accordion-flush" id="accordionFlush7">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading7">
+        <a href="06_conditions_visits.html">6. Conditions and Visits</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush8">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading8">
+        <a href="07_medications.html">7. Medications</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush9">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading9">
+        <a href="08_dates_and_times.html">8. Dates and times</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
                 </div>
               </div>
             </div>
@@ -367,7 +403,8 @@ concept_ids</li>
 standard concept status</li>
 <li>The <code>concept</code> table can be queried using R to retrieve
 specific attributes of concepts</li>
-<li>Concepts can be filtered based on their domain and vocabulary</li>
+<li>Concepts can be filtered based on their domain, vocabulary and
+class</li>
 <li>Standard concepts are those that are recommended for use in analyses
 within the OMOP framework</li>
 </ul></section><section id="03_parquet_files"><h2 class="section-heading"><a href="03_parquet_files.html">Parquet files</a></h2>
@@ -398,7 +435,32 @@ are stored in value_as_number or value_as_concept_id</li>
 measurement or observation concept by name</li>
 <li>understand that different clinical questions can be answered by
 querying by patient and/or visit, or summing across all records</li>
-</ul></section>
+</ul></section><section id="06_conditions_visits"><h2 class="section-heading"><a href="06_conditions_visits.html">Conditions and Visits2 List any of the conditions that occur more than once in the table
+along with their humanly readable names.<a class="anchor" aria-label="anchor" href="#list-any-of-the-conditions-that-occur-more-than-once-in-the-table-along-with-their-humanly-readable-names-"></a>3 Choose one patient and list all the conditions they have?<a class="anchor" aria-label="anchor" href="#choose-one-patient-and-list-all-the-conditions-they-have"></a>2 Find patients who had more than one visit.<a class="anchor" aria-label="anchor" href="#find-patients-who-had-more-than-one-visit-"></a>3 How many patients had both an emergency room visit and an
+inpatient visit?<a class="anchor" aria-label="anchor" href="#how-many-patients-had-both-an-emergency-room-visit-and-an-inpatient-visit"></a></a></h2>
+<hr class="half-width">
+<ul>
+<li><p>Conditions are stored in the <code>condition_occurrence</code>
+table in the OMOP CDM.</p></li>
+<li><p>Visits are stored in the <code>visit_occurrence</code> table and
+linked to other clinical tables via
+<code>visit_occurrence_id</code>.</p></li>
+<li><p>A visit represents a period of time during which a patient
+interacts with the healthcare system and there can be multiple types of
+visits.</p></li>
+<li><p>Visits may be important to consider in analyses depending on the
+research question.</p></li>
+</ul></section><section id="07_medications"><h2 class="section-heading"><a href="07_medications.html">Medications</a></h2>
+<hr class="half-width">
+<ul>
+<li>Know that exposure of a patient to medications is mainly stored in
+the drug_exposure table</li>
+<li>Understand that drug concepts can be at different levels of
+granularity</li>
+<li>Understand that source values are mapped to a standard
+vocabulary</li>
+</ul></section><section id="08_dates_and_times"><h2 class="section-heading"><a href="08_dates_and_times.html">Dates and times</a></h2>
+<hr class="half-width"></section>
 </div>
     </main>
 </div>
@@ -448,8 +510,8 @@ querying by patient and/or visit, or summing across all records</li>
   "url": "https://SAFEHR-data.github.io/omop-carpentries/key-points.html",
   "identifier": "https://SAFEHR-data.github.io/omop-carpentries/key-points.html",
   "dateCreated": "2025-06-18",
-  "dateModified": "2026-01-27",
-  "datePublished": "2026-01-27"
+  "dateModified": "2026-02-01",
+  "datePublished": "2026-02-01"
 }
 
   </script><script>

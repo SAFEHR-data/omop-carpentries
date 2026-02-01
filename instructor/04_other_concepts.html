@@ -261,6 +261,33 @@
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
+<div class="accordion accordion-flush" id="accordionFlush7">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading7">
+        <a href="06_conditions_visits.html">6. Conditions and Visits</a>
+    </div><!--/div.accordion-header-->
+
+  </div><!--/div.accordion-item-->
+</div><!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush8">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading8">
+        <a href="07_medications.html">7. Medications</a>
+    </div><!--/div.accordion-header-->
+
+  </div><!--/div.accordion-item-->
+</div><!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush9">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading9">
+        <a href="08_dates_and_times.html">8. Dates and times</a>
+    </div><!--/div.accordion-header-->
+
+  </div><!--/div.accordion-item-->
+</div><!--/div.accordion-flush-->
+
                 </div>
               </div>
             </div>
@@ -318,7 +345,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>More on concepts</h1>
-        <p>Last updated on 2026-01-17 |
+        <p>Last updated on 2026-02-01 |
 
         <a href="https://github.com/SAFEHR-data/omop-carpentries/edit/main/episodes/04_other_concepts.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -374,10 +401,10 @@ healthcare data stored in the OMOP format.</p>
 <span class="callout-header">Callout</span>
 <div class="callout-inner">
 <div class="callout-content">
-<p>For the following episodes, we will be using a sample OMOP CDM
-database that is pre-loaded with data. This database is a simplified
-version of a real-world OMOP CDM database and is intended for
-educational purposes only.</p>
+<p>For this episode we will be using a sample OMOP CDM database that is
+pre-loaded with data. This database is a simplified version of a
+real-world OMOP CDM database and is intended for educational purposes
+only.</p>
 <p>(UCLH only) This will come in the same form as you would get data if
 you asked for a data extract via the SAFEHR platform (i.e. a set of
 parquet files).</p>
@@ -387,7 +414,7 @@ refer to the setup instructions provided earlier in the course. For now,
 we will assume that you have the sample OMOP CDM database available on
 your local machine at the following path:
 <code>workshop/data/public/</code> and the functions in a folder
-<code>workshop/code</code>.</p>
+<code>workshop/code/parquet_dataset</code>.</p>
 <p>You will then need to load the database as shown in the previous
 episode.</p>
 <div class="codewrapper sourceCode" id="cb1">
@@ -439,7 +466,7 @@ concept names.</p>
 </div>
 </section><section><h2 class="section-heading" id="other-concept_ids-in-omop">Other concept_ids in OMOP<a class="anchor" aria-label="anchor" href="#other-concept_ids-in-omop"></a></h2>
 <hr class="half-width"><p>In addition to the <code>concept_id</code> column in various OMOP
-tables, there are several other columns that use *_concept_ids provide
+tables, there are several other columns that use *_concept_id to provide
 information.</p>
 <p>Look at the column names of the <code>person</code> table.</p>
 <div class="codewrapper sourceCode" id="cb4">
@@ -452,22 +479,22 @@ information.</p>
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code>FileSystemDataset with 1 Parquet file
-7 columns
+8 columns
 person_id: int32
 gender_concept_id: int32
 year_of_birth: int32
 month_of_birth: int32
 day_of_birth: int32
 race_concept_id: int32
-ethnicity_concept_id: int32
+gender_source_value: string
+race_source_value: string
 
 See $metadata for additional Schema metadata</code></pre>
 </div>
 <p>Several of these columns end with <code>_concept_id</code>, such as
-<code>gender_concept_id</code>, <code>race_concept_id</code>, and
-<code>ethnicity_concept_id</code>. These columns link to the
-<code>concept</code> table to provide humanly readable names for the
-concepts represented by these IDs.</p>
+<code>gender_concept_id</code> and <code>race_concept_id</code>. These
+columns link to the <code>concept</code> table to provide humanly
+readable names for the concepts represented by these IDs.</p>
 <p>For example, to get the gender name for a person, you can use the
 <code>gender_concept_id</code> column in the <code>person</code> table
 and look it up in the <code>concept</code> table.</p>
@@ -577,6 +604,8 @@ concept_name as input and returns the concept_id.</p>
 we have defined, answer the following questions:</p>
 <ol style="list-style-type: decimal"><li><p>What is the gender of the <code>White</code> patient in the
 <code>person</code> table?</p></li>
+<li><p>What is the gender of the <code>White British</code> patient in
+the <code>person</code> table?</p></li>
 <li><p>How many men and women are in the person table?</p></li>
 </ol></div>
 </div>
@@ -623,22 +652,59 @@ the corresponding gender_concept_id is for this patient.</p>
   &lt;chr&gt;
 1 Female      </code></pre>
 </div>
-<p>The White patient is female. (Note the code above assumes there is
-only one <code>White</code> patient.)</p>
-<ol start="2" style="list-style-type: decimal"><li>The table is small enough to actually count by hand but also we can
-use dplyr to count the number of men and women.</li>
+<p>Answer: The White patient is female. (Note the code above assumes
+there is only one <code>White</code> patient.)</p>
+<ol start="2" style="list-style-type: decimal"><li>Similarly, we first need to know the <code>concept_id</code> of the
+concept <code>White British</code>
+</li>
 </ol><div class="codewrapper sourceCode" id="cb18">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Let's create a mini version # of the concepts we want</span></span>
+<code class="sourceCode R"><span><span class="fu">get_concept_id</span><span class="op">(</span><span class="st">"White British"</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code># A tibble: 1 × 1
+  concept_id
+       &lt;int&gt;
+1   46286810</code></pre>
+</div>
+<p>Then we need to know which patient has this race_concept_id and what
+the corresponding gender_concept_id is for this patient.</p>
+<div class="codewrapper sourceCode" id="cb20">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">white_british</span> <span class="op">&lt;-</span> <span class="va">person</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">filter</span><span class="op">(</span><span class="va">race_concept_id</span> <span class="op">==</span> <span class="fl">46286810</span><span class="op">)</span></span>
+<span><span class="fu">get_concept_name</span><span class="op">(</span><span class="va">white_british</span><span class="op">$</span><span class="va">gender_concept_id</span><span class="op">)</span> </span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code># A tibble: 1 × 1
+  concept_name
+  &lt;chr&gt;
+1 Female      </code></pre>
+</div>
+<p>Answer: The White British patient is female. (Note the code above
+assumes there is only one <code>White British</code> patient.)</p>
+<ol start="3" style="list-style-type: decimal"><li>The table is small enough to actually count by hand but also we can
+use dplyr to count the number of men and women.</li>
+</ol><div class="codewrapper sourceCode" id="cb22">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Let's create a mini version of the concept table that contains only the concepts(the gender concepts) and the columns(concept_id, concept_name)  we want</span></span>
 <span></span>
 <span><span class="va">gender_concept</span> <span class="op">&lt;-</span> <span class="va">omop</span><span class="op">$</span><span class="va">public</span><span class="op">$</span><span class="va">concept</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">filter</span><span class="op">(</span><span class="va">concept_id</span> <span class="op">%in%</span> <span class="fu">c</span><span class="op">(</span><span class="fl">8507</span>, <span class="fl">8532</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">select</span><span class="op">(</span><span class="va">concept_id</span>, <span class="va">concept_name</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">collect</span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Now we can join to get the names</span></span>
+<span><span class="co"># Now we can join to get the number of people of each gender</span></span>
 <span><span class="va">person</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">left_join</span><span class="op">(</span><span class="va">gender_concept</span>, by <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="st">"gender_concept_id"</span> <span class="op">=</span> <span class="st">"concept_id"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">concept_name</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -650,9 +716,13 @@ use dplyr to count the number of men and women.</li>
 <pre class="output" tabindex="0"><code># A tibble: 2 × 2
   concept_name count
   &lt;chr&gt;        &lt;int&gt;
-1 Female           3
-2 Male             2</code></pre>
+1 Female           5
+2 Male             3</code></pre>
 </div>
+<p>NOTE: The <code>left_join</code> function is used to combine the
+person table with the gender_concept table we created, based on the
+gender_concept_id. This allows us to get the humanly readable gender
+names.</p>
 </div>
 </div>
 </div>
@@ -665,7 +735,7 @@ are linked together using common identifiers.</p>
 <code>person_id</code> column that links to the <code>person</code>
 table. This allows us to retrieve information about the person
 associated with a particular visit.</p>
-<div class="codewrapper sourceCode" id="cb20">
+<div class="codewrapper sourceCode" id="cb24">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -675,7 +745,7 @@ associated with a particular visit.</p>
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code>FileSystemDataset with 1 Parquet file
-9 columns
+10 columns
 visit_occurrence_id: int32
 person_id: int32
 visit_concept_id: int32
@@ -684,11 +754,12 @@ visit_start_datetime: string
 visit_end_date: string
 visit_end_datetime: string
 visit_type_concept_id: int32
+discharged_to_concept_id: int32
 preceding_visit_occurrence_id: int32
 
 See $metadata for additional Schema metadata</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb22">
+<div class="codewrapper sourceCode" id="cb26">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -698,14 +769,15 @@ See $metadata for additional Schema metadata</code></pre>
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code>FileSystemDataset with 1 Parquet file
-7 columns
+8 columns
 person_id: int32
 gender_concept_id: int32
 year_of_birth: int32
 month_of_birth: int32
 day_of_birth: int32
 race_concept_id: int32
-ethnicity_concept_id: int32
+gender_source_value: string
+race_source_value: string
 
 See $metadata for additional Schema metadata</code></pre>
 </div>
@@ -734,7 +806,7 @@ tables, answer the following questions:</p>
 <ol style="list-style-type: decimal"><li>We can count the number of visits for each person by grouping the
 <code>visit_occurrence</code> table by <code>person_id</code> and
 counting the number of occurrences.</li>
-</ol><div class="codewrapper sourceCode" id="cb24">
+</ol><div class="codewrapper sourceCode" id="cb28">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -747,14 +819,17 @@ counting the number of occurrences.</li>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code># A tibble: 5 × 2
+<pre class="output" tabindex="0"><code># A tibble: 8 × 2
   person_id visit_count
       &lt;int&gt;       &lt;int&gt;
 1      1111           1
 2      1112           2
 3      1113           1
 4     78901           1
-5     34567           1</code></pre>
+5     34567           1
+6        31           2
+7         2           2
+8        58          10</code></pre>
 </div>
 </div>
 </div>
@@ -839,8 +914,8 @@ any links that you are not going to use.
   "url": "https://SAFEHR-data.github.io/omop-carpentries/instructor/04_other_concepts.html",
   "identifier": "https://SAFEHR-data.github.io/omop-carpentries/instructor/04_other_concepts.html",
   "dateCreated": "2025-06-18",
-  "dateModified": "2026-01-17",
-  "datePublished": "2026-01-27"
+  "dateModified": "2026-02-01",
+  "datePublished": "2026-02-01"
 }
 
   </script><script>

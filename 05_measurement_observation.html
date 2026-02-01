@@ -254,9 +254,37 @@
       <div class="accordion-body">
         <ul><li><a href="#introduction">Introduction</a></li>
 <li><a href="#concepts-and-values">Concepts and values</a></li>
-<li><a href="#looking-at-numeric-measurement-values">Looking at numeric measurement values</a></li>
+<li><a href="#looking-at-observation-values">Looking at observation values</a></li>
+<li><a href="#looking-at-measurement-values">Looking at measurement values</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
+
+  </div><!--/div.accordion-item-->
+</div><!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush7">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading7">
+        <a href="06_conditions_visits.html">6. Conditions and Visits</a>
+    </div><!--/div.accordion-header-->
+
+  </div><!--/div.accordion-item-->
+</div><!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush8">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading8">
+        <a href="07_medications.html">7. Medications</a>
+    </div><!--/div.accordion-header-->
+
+  </div><!--/div.accordion-item-->
+</div><!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush9">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading9">
+        <a href="08_dates_and_times.html">8. Dates and times</a>
+    </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
@@ -304,7 +332,7 @@
   <div class="col-xl-8 col-lg-12 primary-content">
     <nav class="lesson-content mx-md-4" aria-label="Previous and Next Chapter"><!-- content for small screens --><div class="d-block d-sm-block d-md-none">
         <a class="chapter-link" href="04_other_concepts.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
-        <a class="chapter-link float-end" href="index.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
+        <a class="chapter-link float-end" href="06_conditions_visits.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
       </div>
       <!-- content for large screens -->
       <div class="d-none d-sm-none d-md-block">
@@ -312,14 +340,14 @@
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>
           Previous: More on concepts
         </a>
-        <a class="chapter-link float-end" href="index.html" rel="next">
-          Home
+        <a class="chapter-link float-end" href="06_conditions_visits.html" rel="next">
+          Next: Conditions and...
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i>
         </a>
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Measurements and Observations</h1>
-        <p>Last updated on 2026-01-17 |
+        <p>Last updated on 2026-02-01 |
 
         <a href="https://github.com/SAFEHR-data/omop-carpentries/edit/main/episodes/05_measurement_observation.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -368,10 +396,10 @@ measurement or observation concept by name</p></li>
 <span class="callout-header">Callout</span>
 <div class="callout-inner">
 <div class="callout-content">
-<p>For the following episodes, we will be using a sample OMOP CDM
-database that is pre-loaded with data. This database is a simplified
-version of a real-world OMOP CDM database and is intended for
-educational purposes only.</p>
+<p>For this episode we will be using a sample OMOP CDM database that is
+pre-loaded with data. This database is a simplified version of a
+real-world OMOP CDM database and is intended for educational purposes
+only.</p>
 <p>(UCLH only) This will come in the same form as you would get data if
 you asked for a data extract via the SAFEHR platform (i.e. a set of
 parquet files).</p>
@@ -490,7 +518,8 @@ recorded. Here are some examples :</p>
 <h3 class="callout-title">Challenge</h3>
 <div class="callout-content">
 <p>Looking at their measurement and observation tables identify the
-various columns that might store a value.</p>
+various columns that might store a value and associated information
+(e.g. units).</p>
 </div>
 </div>
 </div>
@@ -540,9 +569,10 @@ our database.</p>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>[1] "measurement_id"         "person_id"              "measurement_concept_id"
-[4] "measurement_date"       "measurement_datetime"   "value_as_number"
-[7] "unit_concept_id"        "visit_occurrence_id"   </code></pre>
+<pre class="output" tabindex="0"><code> [1] "measurement_id"         "person_id"              "measurement_concept_id"
+ [4] "measurement_date"       "measurement_datetime"   "operator_concept_id"
+ [7] "value_as_number"        "value_as_concept_id"    "unit_concept_id"
+[10] "range_low"              "range_high"             "visit_occurrence_id"   </code></pre>
 </div>
 <div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -554,15 +584,19 @@ our database.</p>
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code>[1] "observation_id"         "person_id"              "observation_concept_id"
-[4] "observation_date"       "observation_datetime"   "value_as_string"
-[7] "value_as_concept_id"    "visit_occurrence_id"   </code></pre>
+[4] "observation_date"       "observation_datetime"   "value_as_number"
+[7] "value_as_string"        "value_as_concept_id"    "visit_occurrence_id"   </code></pre>
 </div>
 <p>You can see that for observations the main value is a string or a
 concept, whereas for a measurement the main value is a number
 accompanied by the concept id of a unit.</p>
-</section><section><h2 class="section-heading" id="looking-at-numeric-measurement-values">Looking at numeric measurement values<a class="anchor" aria-label="anchor" href="#looking-at-numeric-measurement-values"></a></h2>
-<hr class="half-width"><p>Let’s focus on a single patient and look at what measurements and
-observations have been taken about them.</p>
+</section><section><h2 class="section-heading" id="looking-at-observation-values">Looking at observation values<a class="anchor" aria-label="anchor" href="#looking-at-observation-values"></a></h2>
+<hr class="half-width"><p>Let’s focus on observations.</p>
+<p>Now we could go through each table and use our
+<code>get_concept_name</code> function to work out what all these
+measurements and observations are, but that could get a bit tedious!</p>
+<p>Let’s try and join to the concept table and produce a table that
+gives us the humanly readable names to start with.</p>
 <div id="challenge2" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
@@ -571,8 +605,9 @@ observations have been taken about them.</p>
 <div class="callout-inner">
 <h3 class="callout-title">Challenge</h3>
 <div class="callout-content">
-<p>Create a mini measurement and observation table for person_id
-1113</p>
+<p>By joining to the concept table produce a version of the observation
+table with concept names. Only include columns that are relevant to the
+value.</p>
 </div>
 </div>
 </div>
@@ -588,58 +623,50 @@ observations have been taken about them.</p>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">library</span><span class="op">(</span><span class="va">dplyr</span><span class="op">)</span></span>
-<span><span class="va">person_measurements</span> <span class="op">&lt;-</span> <span class="va">omop</span><span class="op">$</span><span class="va">public</span><span class="op">$</span><span class="va">measurement</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">filter</span><span class="op">(</span><span class="va">person_id</span> <span class="op">==</span> <span class="fl">1113</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span><span class="co"># Pre-load concept names and ids</span></span>
+<span><span class="va">concepts</span> <span class="op">&lt;-</span> <span class="fu">select</span><span class="op">(</span><span class="va">omop</span><span class="op">$</span><span class="va">public</span><span class="op">$</span><span class="va">concept</span> <span class="op">|&gt;</span> <span class="fu">collect</span><span class="op">(</span><span class="op">)</span>, <span class="va">concept_id</span>, <span class="va">concept_name</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Create a mini observation table with only the columns relevant to value</span></span>
+<span><span class="va">mini_observation</span> <span class="op">&lt;-</span> <span class="va">omop</span><span class="op">$</span><span class="va">public</span><span class="op">$</span><span class="va">observation</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="va">observation_id</span>, <span class="va">person_id</span>, <span class="va">observation_concept_id</span>, <span class="va">value_as_concept_id</span>, <span class="va">value_as_number</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">collect</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="va">person_observations</span> <span class="op">&lt;-</span> <span class="va">omop</span><span class="op">$</span><span class="va">public</span><span class="op">$</span><span class="va">observation</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">filter</span><span class="op">(</span><span class="va">person_id</span> <span class="op">==</span> <span class="fl">1113</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">collect</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="va">person_measurements</span></span></code></pre>
+<span></span>
+<span><span class="co"># Join to get names of the observation concept id</span></span>
+<span><span class="co"># Rename the new column to observation_concept_name</span></span>
+<span><span class="co"># Relocate the new column to be after observation_concept_id</span></span>
+<span><span class="va">mini_observation</span> <span class="op">&lt;-</span> <span class="va">mini_observation</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">left_join</span><span class="op">(</span><span class="va">concepts</span>, by<span class="op">=</span><span class="fu">join_by</span><span class="op">(</span><span class="va">observation_concept_id</span> <span class="op">==</span> <span class="va">concept_id</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">rename</span><span class="op">(</span>observation_concept_name <span class="op">=</span> <span class="va">concept_name</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">relocate</span><span class="op">(</span><span class="va">observation_concept_name</span>, .after <span class="op">=</span> <span class="va">observation_concept_id</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Repeat the join to get names of the value concept id</span></span>
+<span><span class="va">mini_observation</span> <span class="op">&lt;-</span> <span class="va">mini_observation</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">left_join</span><span class="op">(</span><span class="va">concepts</span>, by <span class="op">=</span> <span class="fu">join_by</span><span class="op">(</span><span class="va">value_as_concept_id</span> <span class="op">==</span> <span class="va">concept_id</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">rename</span><span class="op">(</span>value_as_concept_name <span class="op">=</span> <span class="va">concept_name</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">relocate</span><span class="op">(</span><span class="va">value_as_concept_name</span>, .after <span class="op">=</span> <span class="va">value_as_concept_id</span><span class="op">)</span></span></code></pre>
 </div>
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code># A tibble: 7 × 8
-  measurement_id person_id measurement_concept_id measurement_date
-           &lt;int&gt;     &lt;int&gt;                  &lt;int&gt; &lt;chr&gt;
-1           8015      1113                3020891 2025-03-15
-2           8016      1113                3004249 2025-03-15
-3           8017      1113                3012888 2025-03-15
-4           8018      1113                3027018 2025-03-15
-5           8019      1113                3010813 2025-03-15
-6           8020      1113                3020891 2025-03-17
-7           8021      1113                3020891 2025-03-19
-# ℹ 4 more variables: measurement_datetime &lt;chr&gt;, value_as_number &lt;dbl&gt;,
-#   unit_concept_id &lt;int&gt;, visit_occurrence_id &lt;int&gt;</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb11">
+</div>
+</div>
+</div>
+<p>Now we can look at this named table.</p>
+<div class="codewrapper sourceCode" id="cb10">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">person_observations</span></span></code></pre>
+<code class="sourceCode R"><span><span class="fu">View</span><span class="op">(</span><span class="va">mini_observation</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code># A tibble: 4 × 8
-  observation_id person_id observation_concept_id observation_date
-           &lt;int&gt;     &lt;int&gt;                  &lt;int&gt; &lt;chr&gt;
-1           6008      1113                4024958 2025-03-15
-2           6009      1113                4232313 2025-03-15
-3           6010      1113                4160001 2025-03-15
-4           6011      1113                4203130 2025-03-19
-# ℹ 4 more variables: observation_datetime &lt;chr&gt;, value_as_string &lt;chr&gt;,
-#   value_as_concept_id &lt;int&gt;, visit_occurrence_id &lt;int&gt;</code></pre>
+<pre class="error" tabindex="0"><code>Error in .External2(C_dataviewer, x, title): unable to start data viewer</code></pre>
 </div>
-</div>
-</div>
-</div>
-</div>
-<p>Now we could go through each table and use our
-<code>get_concept_name</code> function to work out what all these
-measurements and observations are, but that could get a bit tedious!</p>
-<p>Let’s try and join to the concept table and produce a table that
-gives us the humanly readable names to start with.</p>
+<div class="section level3">
+<h3 id="social-indexes">Social indexes<a class="anchor" aria-label="anchor" href="#social-indexes"></a></h3>
+
+<p>It is interesting to note that some observations relate to social
+indexes such as deprivation indices. As noted in the title these are
+observations made in England only.</p>
 <div id="challenge3" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
@@ -648,9 +675,8 @@ gives us the humanly readable names to start with.</p>
 <div class="callout-inner">
 <h3 class="callout-title">Challenge</h3>
 <div class="callout-content">
-<p>By joining to the concept table produce a version of the
-person_measurements and person_observations tables with concept
-names.</p>
+<p>Create a mini version of the concepts table that contains only the
+concepts relating to social indices.</p>
 </div>
 </div>
 </div>
@@ -661,64 +687,137 @@ names.</p>
 </button>
 <div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
-<div class="codewrapper sourceCode" id="cb13">
+<div class="codewrapper sourceCode" id="cb12">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw">library</span><span class="op">(</span><span class="va">dplyr</span><span class="op">)</span></span>
-<span><span class="co"># Pre-load concept names and ids</span></span>
-<span><span class="va">concepts</span> <span class="op">&lt;-</span> <span class="fu">select</span><span class="op">(</span><span class="va">omop</span><span class="op">$</span><span class="va">public</span><span class="op">$</span><span class="va">concept</span> <span class="op">|&gt;</span> <span class="fu">collect</span><span class="op">(</span><span class="op">)</span>, <span class="va">concept_id</span>, <span class="va">concept_name</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">social_concepts</span> <span class="op">&lt;-</span> <span class="va">omop</span><span class="op">$</span><span class="va">public</span><span class="op">$</span><span class="va">concept</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">filter</span><span class="op">(</span><span class="va">concept_id</span> <span class="op">%in%</span> <span class="fu">c</span><span class="op">(</span><span class="fl">35812888</span>, <span class="fl">35812884</span>, <span class="fl">35812883</span>, <span class="fl">35812882</span>, <span class="fl">35812883</span>, <span class="fl">35812885</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">collect</span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Join to get names of the measurement concept id</span></span>
-<span><span class="co"># Rename the new column to measurement_concept_name</span></span>
-<span><span class="co"># Relocate the new column to be after measurement_concept_id</span></span>
-<span><span class="va">person_measurements_named</span> <span class="op">&lt;-</span> <span class="va">person_measurements</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">left_join</span><span class="op">(</span><span class="va">concepts</span>, by<span class="op">=</span><span class="fu">join_by</span><span class="op">(</span><span class="va">measurement_concept_id</span> <span class="op">==</span> <span class="va">concept_id</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">rename</span><span class="op">(</span>measurement_concept_name <span class="op">=</span> <span class="va">concept_name</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">relocate</span><span class="op">(</span><span class="va">measurement_concept_name</span>, .after <span class="op">=</span> <span class="va">measurement_concept_id</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Repeat the join to get names of the unit concept id</span></span>
-<span><span class="va">person_measurements_named</span> <span class="op">&lt;-</span> <span class="va">person_measurements_named</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">left_join</span><span class="op">(</span><span class="va">concepts</span>, by <span class="op">=</span> <span class="fu">join_by</span><span class="op">(</span><span class="va">unit_concept_id</span> <span class="op">==</span> <span class="va">concept_id</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">rename</span><span class="op">(</span>unit_concept_name <span class="op">=</span> <span class="va">concept_name</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">relocate</span><span class="op">(</span><span class="va">unit_concept_name</span>, .after <span class="op">=</span> <span class="va">unit_concept_id</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Alternatively we could do it all in one go</span></span>
-<span><span class="va">person_observations_named</span> <span class="op">&lt;-</span> <span class="va">person_observations</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">left_join</span><span class="op">(</span><span class="fu">select</span><span class="op">(</span><span class="va">omop</span><span class="op">$</span><span class="va">public</span><span class="op">$</span><span class="va">concept</span> <span class="op">|&gt;</span> <span class="fu">collect</span><span class="op">(</span><span class="op">)</span>, <span class="va">concept_id</span>, <span class="va">concept_name</span><span class="op">)</span>, by<span class="op">=</span><span class="fu">join_by</span><span class="op">(</span><span class="va">observation_concept_id</span><span class="op">==</span><span class="va">concept_id</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">rename</span><span class="op">(</span>observation_concept_name<span class="op">=</span><span class="va">concept_name</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">relocate</span><span class="op">(</span><span class="va">observation_concept_name</span>, .after<span class="op">=</span><span class="va">observation_concept_id</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">left_join</span><span class="op">(</span><span class="fu">select</span><span class="op">(</span><span class="va">omop</span><span class="op">$</span><span class="va">public</span><span class="op">$</span><span class="va">concept</span> <span class="op">|&gt;</span> <span class="fu">collect</span><span class="op">(</span><span class="op">)</span>, <span class="va">concept_id</span>, <span class="va">concept_name</span><span class="op">)</span>, by<span class="op">=</span><span class="fu">join_by</span><span class="op">(</span><span class="va">value_as_concept_id</span><span class="op">==</span><span class="va">concept_id</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">rename</span><span class="op">(</span>value_as_concept_name<span class="op">=</span><span class="va">concept_name</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">relocate</span><span class="op">(</span><span class="va">value_as_concept_name</span>, .after<span class="op">=</span><span class="va">value_as_concept_id</span><span class="op">)</span></span></code></pre>
+<span><span class="va">social_concepts</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code># A tibble: 5 × 6
+  concept_id concept_name               domain_id vocabulary_id standard_concept
+       &lt;int&gt; &lt;chr&gt;                      &lt;chr&gt;     &lt;chr&gt;         &lt;chr&gt;
+1   35812882 Index of Multiple Depriva… Observat… UK Biobank    ""
+2   35812883 Income score (England)     Observat… UK Biobank    ""
+3   35812884 Employment score (England) Observat… UK Biobank    ""
+4   35812885 Health score (England)     Observat… UK Biobank    ""
+5   35812888 Crime score (England)      Observat… UK Biobank    ""
+# ℹ 1 more variable: concept_class_id &lt;chr&gt;</code></pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-<p>Now we can look at these named tables.</p>
+<p>This is an instance of a nonstandard concept being used within
+OMOP.</p>
+
+</div>
+</section><section><h2 class="section-heading" id="looking-at-measurement-values">Looking at measurement values<a class="anchor" aria-label="anchor" href="#looking-at-measurement-values"></a></h2>
+<hr class="half-width"><p>Let’s now look at measurements. As we said before, measurements are
+often numerical values with associated units. This can arise from lab
+results or vital signs.</p>
+<div id="challenge4" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div class="callout-inner">
+<h3 class="callout-title">Challenge</h3>
+<div class="callout-content">
+<p>Consider the concept with the name <code>Heart rate</code>. Use the
+measurement and concept tables to answer the following question:</p>
+<ol style="list-style-type: decimal"><li><p>What are the units associated with this measurement
+concept?</p></li>
+<li><p>What is the average value recorded for this measurement across
+all persons?</p></li>
+<li><p>What class of concept is this measurement concept?</p></li>
+</ol></div>
+</div>
+</div>
+<div id="accordionSolution4" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
+  <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
+</button>
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
+<div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb14">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">View</span><span class="op">(</span><span class="va">person_measurements_named</span><span class="op">)</span></span></code></pre>
+<code class="sourceCode R"><span><span class="co"># Get the concept id for Heart rate  </span></span>
+<span><span class="va">heart_rate_id</span> <span class="op">&lt;-</span> <span class="fu">get_concept_id</span><span class="op">(</span><span class="st">"Heart rate"</span><span class="op">)</span><span class="op">$</span><span class="va">concept_id</span></span>
+<span><span class="va">heart_rate_id</span></span></code></pre>
 </div>
 <div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="error" tabindex="0"><code>Error in .External2(C_dataviewer, x, title): unable to start data viewer</code></pre>
+<pre class="output" tabindex="0"><code>[1] 3027018</code></pre>
 </div>
 <div class="codewrapper sourceCode" id="cb16">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">View</span><span class="op">(</span><span class="va">person_observations_named</span><span class="op">)</span></span></code></pre>
+<code class="sourceCode R"><span><span class="co"># 1. Filter measurement table for this concept id</span></span>
+<span><span class="va">heart_rate_measurements</span> <span class="op">&lt;-</span> <span class="va">omop</span><span class="op">$</span><span class="va">public</span><span class="op">$</span><span class="va">measurement</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">filter</span><span class="op">(</span><span class="va">measurement_concept_id</span> <span class="op">==</span> <span class="va">heart_rate_id</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">collect</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co"># Get the unique unit concept ids</span></span>
+<span><span class="va">unique_units</span> <span class="op">&lt;-</span> <span class="fu">unique</span><span class="op">(</span><span class="va">heart_rate_measurements</span><span class="op">$</span><span class="va">unit_concept_id</span><span class="op">)</span></span>
+<span><span class="fu">get_concept_name</span><span class="op">(</span><span class="va">unique_units</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="error" tabindex="0"><code>Error in .External2(C_dataviewer, x, title): unable to start data viewer</code></pre>
+<pre class="output" tabindex="0"><code># A tibble: 1 × 1
+  concept_name
+  &lt;chr&gt;
+1 per minute  </code></pre>
 </div>
+<div class="codewrapper sourceCode" id="cb18">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># 2. Calculate the average value recorded for this measurement</span></span>
+<span><span class="va">average_heart_rate</span> <span class="op">&lt;-</span> <span class="fu">mean</span><span class="op">(</span><span class="va">heart_rate_measurements</span><span class="op">$</span><span class="va">value_as_number</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">average_heart_rate</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>[1] 95</code></pre>
+</div>
+<div class="codewrapper sourceCode" id="cb20">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># 3. Get the class of concept for Heart rate</span></span>
+<span><span class="va">heart_rate_class</span> <span class="op">&lt;-</span> <span class="va">omop</span><span class="op">$</span><span class="va">public</span><span class="op">$</span><span class="va">concept</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">filter</span><span class="op">(</span><span class="va">concept_id</span> <span class="op">==</span> <span class="va">heart_rate_id</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="va">concept_class_id</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">collect</span><span class="op">(</span><span class="op">)</span> </span>
+<span><span class="va">heart_rate_class</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code># A tibble: 1 × 1
+  concept_class_id
+  &lt;chr&gt;
+1 Clinical Observation</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>exercise on operator concepts</p>
+<p>exercise on value_as_concept_id</p>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -746,7 +845,7 @@ any links that you are not going to use.
 </section></div> <!-- / div.lesson-content -->
     </main><!-- / main#main-content.main-content --><nav class="bottom-pagination mx-md-4" aria-label="Previous and Next Chapter"><div class="d-block d-sm-block d-md-none">
         <a class="chapter-link" href="04_other_concepts.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
-        <a class="chapter-link float-end" href="index.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
+        <a class="chapter-link float-end" href="06_conditions_visits.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
       </div>
       <!-- content for large screens -->
       <div class="d-none d-sm-none d-md-block">
@@ -754,8 +853,8 @@ any links that you are not going to use.
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>
           Previous: More on concepts
         </a>
-        <a class="chapter-link float-end" href="index.html" rel="next">
-          Home
+        <a class="chapter-link float-end" href="06_conditions_visits.html" rel="next">
+          Next: Conditions and...
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i>
         </a>
       </div>
@@ -803,8 +902,8 @@ any links that you are not going to use.
   "url": "https://SAFEHR-data.github.io/omop-carpentries/05_measurement_observation.html",
   "identifier": "https://SAFEHR-data.github.io/omop-carpentries/05_measurement_observation.html",
   "dateCreated": "2025-06-18",
-  "dateModified": "2026-01-17",
-  "datePublished": "2026-01-27"
+  "dateModified": "2026-02-01",
+  "datePublished": "2026-02-01"
 }
 
   </script><script>
