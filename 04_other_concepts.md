@@ -30,11 +30,11 @@ In this episode, we will explore more concepts related to the OMOP Common Data M
 
 :::::::::::::::::::::::::::::::::::::::::::::::: callout
 
-For the following episodes, we will be using a sample OMOP CDM database that is pre-loaded with data. This database is a simplified version of a real-world OMOP CDM database and is intended for educational purposes only.
+For this episode we will be using a sample OMOP CDM database that is pre-loaded with data. This database is a simplified version of a real-world OMOP CDM database and is intended for educational purposes only.
 
 (UCLH only) This will come in the same form as you would get data if you asked for a data extract via the SAFEHR platform (i.e. a set of parquet files).
 
-As part of the setup prior to this course you were asked to download and install the sample database. If you have not done this yet, please refer to the setup instructions provided earlier in the course. For now, we will assume that you have the sample OMOP CDM database available on your local machine at the following path: `workshop/data/public/` and the functions in a folder `workshop/code`.
+As part of the setup prior to this course you were asked to download and install the sample database. If you have not done this yet, please refer to the setup instructions provided earlier in the course. For now, we will assume that you have the sample OMOP CDM database available on your local machine at the following path: `workshop/data/public/` and the functions in a folder `workshop/code/parquet_dataset`.
 
 You will then need to load the database as shown in the previous episode.
 
@@ -83,7 +83,7 @@ get_concept_name <- function(id) {
 
 ## Other concept_ids in OMOP
 
-In addition to the `concept_id` column in various OMOP tables, there are several other columns that use *_concept_ids provide information.
+In addition to the `concept_id` column in various OMOP tables, there are several other columns that use *_concept_id to provide information.
 
 Look at the column names of the `person` table.
 
@@ -93,19 +93,20 @@ omop$public$person
 
 ``` output
 FileSystemDataset with 1 Parquet file
-7 columns
+8 columns
 person_id: int32
 gender_concept_id: int32
 year_of_birth: int32
 month_of_birth: int32
 day_of_birth: int32
 race_concept_id: int32
-ethnicity_concept_id: int32
+gender_source_value: string
+race_source_value: string
 
 See $metadata for additional Schema metadata
 ```
 
-Several of these columns end with `_concept_id`, such as `gender_concept_id`, `race_concept_id`, and `ethnicity_concept_id`. These columns link to the `concept` table to provide humanly readable names for the concepts represented by these IDs.
+Several of these columns end with `_concept_id`, such as `gender_concept_id` and `race_concept_id`. These columns link to the `concept` table to provide humanly readable names for the concepts represented by these IDs.
 
 For example, to get the gender name for a person, you can use the `gender_concept_id` column in the `person` table and look it up in the `concept` table.
  
@@ -183,7 +184,9 @@ Using the `person` table and the functions `get_concept_name()` and `get_concept
 
 1. What is the gender of the `White` patient in the `person` table?
 
-2. How many men and women are in the person table?
+2. What is the gender of the `White British` patient in the `person` table?
+
+3. How many men and women are in the person table?
 
 ::::::::::::::::::::::::::::::::::: solution
 
@@ -216,21 +219,50 @@ get_concept_name(white$gender_concept_id)
 1 Female      
 ```
 
-The White patient is female. (Note the code above assumes there is only one `White` patient.)
+Answer: The White patient is female. (Note the code above assumes there is only one `White` patient.)
 
+2. Similarly, we first need to know the `concept_id` of the concept `White British`
 
-2. The table is small enough to actually count by hand but also we can use dplyr to count the number of men and women.
+``` r
+get_concept_id("White British")
+```
+
+``` output
+# A tibble: 1 × 1
+  concept_id
+       <int>
+1   46286810
+```
+
+Then we need to know which patient has this race_concept_id and what the corresponding gender_concept_id is for this patient.   
+
+``` r
+white_british <- person |> 
+  filter(race_concept_id == 46286810)
+get_concept_name(white_british$gender_concept_id) 
+```
+
+``` output
+# A tibble: 1 × 1
+  concept_name
+  <chr>       
+1 Female      
+```
+
+Answer: The White British patient is female. (Note the code above assumes there is only one `White British` patient.)
+
+3. The table is small enough to actually count by hand but also we can use dplyr to count the number of men and women.
 
 
 ``` r
-# Let's create a mini version # of the concepts we want
+# Let's create a mini version of the concept table that contains only the concepts(the gender concepts) and the columns(concept_id, concept_name)  we want
 
 gender_concept <- omop$public$concept |> 
   filter(concept_id %in% c(8507, 8532)) |>
   select(concept_id, concept_name) |> 
   collect()
 
-# Now we can join to get the names
+# Now we can join to get the number of people of each gender
 person |> 
   left_join(gender_concept, by = c("gender_concept_id" = "concept_id")) |>
   group_by(concept_name) |>
@@ -241,9 +273,11 @@ person |>
 # A tibble: 2 × 2
   concept_name count
   <chr>        <int>
-1 Female           3
-2 Male             2
+1 Female           5
+2 Male             3
 ```
+
+NOTE: The `left_join` function is used to combine the person table with the gender_concept table we created, based on the gender_concept_id. This allows us to get the humanly readable gender names. 
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -262,7 +296,7 @@ omop$public$visit_occurrence
 
 ``` output
 FileSystemDataset with 1 Parquet file
-9 columns
+10 columns
 visit_occurrence_id: int32
 person_id: int32
 visit_concept_id: int32
@@ -271,6 +305,7 @@ visit_start_datetime: string
 visit_end_date: string
 visit_end_datetime: string
 visit_type_concept_id: int32
+discharged_to_concept_id: int32
 preceding_visit_occurrence_id: int32
 
 See $metadata for additional Schema metadata
@@ -283,14 +318,15 @@ omop$public$person
 
 ``` output
 FileSystemDataset with 1 Parquet file
-7 columns
+8 columns
 person_id: int32
 gender_concept_id: int32
 year_of_birth: int32
 month_of_birth: int32
 day_of_birth: int32
 race_concept_id: int32
-ethnicity_concept_id: int32
+gender_source_value: string
+race_source_value: string
 
 See $metadata for additional Schema metadata
 ```
@@ -314,7 +350,7 @@ visit_counts
 ```
 
 ``` output
-# A tibble: 5 × 2
+# A tibble: 8 × 2
   person_id visit_count
       <int>       <int>
 1      1111           1
@@ -322,18 +358,14 @@ visit_counts
 3      1113           1
 4     78901           1
 5     34567           1
+6        31           2
+7         2           2
+8        58          10
 ```
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
-
-
-
-
-
-
-
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 

@@ -27,13 +27,13 @@ In this episode, we will explore parquet files, a popular file format for storin
 
 ::::::::::::::::::::::::::::::::::::::::::::::::callout
 
-For the following episodes, we will be using a sample OMOP CDM database that is pre-loaded with data. This database is a simplified version of a real-world OMOP CDM database and is intended for educational purposes only.
+For this episode we will be using a sample OMOP CDM database that is pre-loaded with data. This database is a simplified version of a real-world OMOP CDM database and is intended for educational purposes only.
 
 (UCLH only) This will come in the same form as you would get data if you asked for a data extract via the SAFEHR platform (i.e. a set of parquet files).
 
-As part of the setup prior to this course you were asked to download and install the sample database. If you have not done this yet, please refer to the setup instructions provided earlier in the course. For now, we will assume that you have the sample OMOP CDM database available on your local machine at the following path: `workshop/data/public/` and the functions in a folder `workshop/code`.
+As part of the setup prior to this course you were asked to download and install the sample database. If you have not done this yet, please refer to the setup instructions provided earlier in the course. For now, we will assume that you have the sample OMOP CDM database available on your local machine at the following path: `workshop/data/public/` and the functions in a folder `workshop/code/parquet_dataset`.
 
-
+  
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## Parquet files
@@ -89,32 +89,35 @@ omop$public
 ``` output
 $concept
 FileSystemDataset with 1 Parquet file
-5 columns
+6 columns
 concept_id: int32
 concept_name: string
 domain_id: string
 vocabulary_id: string
 standard_concept: string
+concept_class_id: string
 
 See $metadata for additional Schema metadata
 
 $condition_occurrence
 FileSystemDataset with 1 Parquet file
-8 columns
+10 columns
 condition_occurrence_id: int32
 person_id: int32
 condition_concept_id: int32
 condition_start_date: string
-condition_start_datetime: string
 condition_end_date: string
 condition_type_concept_id: int32
+condition_status_concept_id: int32
 visit_occurrence_id: int32
+condition_source_value: string
+condition_source_concept_id: int32
 
 See $metadata for additional Schema metadata
 
 $drug_exposure
 FileSystemDataset with 1 Parquet file
-9 columns
+12 columns
 drug_exposure_id: int32
 person_id: int32
 drug_concept_id: int32
@@ -123,32 +126,40 @@ drug_exposure_start_datetime: string
 drug_exposure_end_date: string
 drug_exposure_end_datetime: string
 drug_type_concept_id: int32
+quantity: double
+route_concept_id: int32
 visit_occurrence_id: int32
+drug_source_concept_id: int32
 
 See $metadata for additional Schema metadata
 
 $measurement
 FileSystemDataset with 1 Parquet file
-8 columns
+12 columns
 measurement_id: int32
 person_id: int32
 measurement_concept_id: int32
 measurement_date: string
 measurement_datetime: string
+operator_concept_id: int32
 value_as_number: double
+value_as_concept_id: int32
 unit_concept_id: int32
+range_low: int32
+range_high: int32
 visit_occurrence_id: int32
 
 See $metadata for additional Schema metadata
 
 $observation
 FileSystemDataset with 1 Parquet file
-8 columns
+9 columns
 observation_id: int32
 person_id: int32
 observation_concept_id: int32
 observation_date: string
 observation_datetime: string
+value_as_number: int32
 value_as_string: string
 value_as_concept_id: int32
 visit_occurrence_id: int32
@@ -157,20 +168,21 @@ See $metadata for additional Schema metadata
 
 $person
 FileSystemDataset with 1 Parquet file
-7 columns
+8 columns
 person_id: int32
 gender_concept_id: int32
 year_of_birth: int32
 month_of_birth: int32
 day_of_birth: int32
 race_concept_id: int32
-ethnicity_concept_id: int32
+gender_source_value: string
+race_source_value: string
 
 See $metadata for additional Schema metadata
 
 $procedure_occurrence
 FileSystemDataset with 1 Parquet file
-8 columns
+7 columns
 procedure_occurrence_id: int32
 person_id: int32
 procedure_concept_id: int32
@@ -178,13 +190,12 @@ procedure_date: string
 procedure_datetime: string
 procedure_type_concept_id: int32
 visit_occurrence_id: int32
-procedure_end_datetime: string
 
 See $metadata for additional Schema metadata
 
 $visit_occurrence
 FileSystemDataset with 1 Parquet file
-9 columns
+10 columns
 visit_occurrence_id: int32
 person_id: int32
 visit_concept_id: int32
@@ -193,6 +204,7 @@ visit_start_datetime: string
 visit_end_date: string
 visit_end_datetime: string
 visit_type_concept_id: int32
+discharged_to_concept_id: int32
 preceding_visit_occurrence_id: int32
 
 See $metadata for additional Schema metadata
@@ -207,14 +219,15 @@ omop$public$person
 
 ``` output
 FileSystemDataset with 1 Parquet file
-7 columns
+8 columns
 person_id: int32
 gender_concept_id: int32
 year_of_birth: int32
 month_of_birth: int32
 day_of_birth: int32
 race_concept_id: int32
-ethnicity_concept_id: int32
+gender_source_value: string
+race_source_value: string
 
 See $metadata for additional Schema metadata
 ```
@@ -227,15 +240,19 @@ person
 ```
 
 ``` output
-# A tibble: 5 × 7
+# A tibble: 8 × 8
   person_id gender_concept_id year_of_birth month_of_birth day_of_birth
       <int>             <int>         <int>          <int>        <int>
-1      1111              8507          1993              8           15
-2      1112              8532          1970              8           15
-3      1113              8507          1983              8           15
-4     34567              8532          2015              7           27
-5     78901              8532          1989              5           29
-# ℹ 2 more variables: race_concept_id <int>, ethnicity_concept_id <int>
+1      1111              8507          1993              6           15
+2      1112              8532          1970              6           15
+3      1113              8507          1983              6           15
+4     34567              8532          2015              6           15
+5     78901              8532          1989              6           15
+6        31              8532          1987              0            0
+7         2              8532          2008              0            0
+8        58              8507          1985              0            0
+# ℹ 3 more variables: race_concept_id <int>, gender_source_value <chr>,
+#   race_source_value <chr>
 ```
  
 or we can use the specific functions from the `arrow` package to read in the parquet files directly.
@@ -248,16 +265,40 @@ person
 ```
 
 ``` output
-# A tibble: 5 × 7
+# A tibble: 8 × 8
   person_id gender_concept_id year_of_birth month_of_birth day_of_birth
       <int>             <int>         <int>          <int>        <int>
-1      1111              8507          1993              8           15
-2      1112              8532          1970              8           15
-3      1113              8507          1983              8           15
-4     34567              8532          2015              7           27
-5     78901              8532          1989              5           29
-# ℹ 2 more variables: race_concept_id <int>, ethnicity_concept_id <int>
+1      1111              8507          1993              6           15
+2      1112              8532          1970              6           15
+3      1113              8507          1983              6           15
+4     34567              8532          2015              6           15
+5     78901              8532          1989              6           15
+6        31              8532          1987              0            0
+7         2              8532          2008              0            0
+8        58              8507          1985              0            0
+# ℹ 3 more variables: race_concept_id <int>, gender_source_value <chr>,
+#   race_source_value <chr>
 ```
+
+::::::::::::::::::::::::::::::::::::: instructor
+
+Check that everyone has been able to read in the person table and see the data.
+
+Points worth a discussion:
+
+- the day and month of birth
+
+- gender_source_value and race_source_value are given for some rows but not others
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::: callout
+
+As part of the privacy preserving policies around health data, dates of birth are often de-identified to only show the year of birth. This is why in this dataset the day and month of birth are set to 15/6 or 0/0 for all individuals.
+
+You can also see that in some cases the gender_source_value and race_source_value columns are populated while in others they are not. This depends on the policy of the individual hospital. Note the data in this dataset is a number of different sources combined together to form a single OMOP CDM database.
+
+::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: challenge
 

@@ -39,7 +39,6 @@ Create a new project in your environment.
 
 ### Need a reminder
 
-
 - Under the `File` menu in RStudio, click on `New project`, choose
   `New directory`, then `New project`
 - Enter a name for this new folder (or "directory") and choose a convenient
@@ -53,7 +52,7 @@ Create a new project in your environment.
  
 ### Connect to a database
 
-We will be using the `CDMConnector` package to connect to an OMOP Common Data Model database. This package also contains synthetic example data that can be used to demonstrate querying the data.
+For this episode we will be using the `CDMConnector` package to connect to an OMOP Common Data Model database. We define a function that will open this package and connect an appropriate dataset. You will find this in the `workshop/code/CDMConnector` directory that you should have downloaded. This package also contains synthetic example data that can be used to demonstrate querying the data.
 
 
 ``` r
@@ -219,7 +218,7 @@ cdm$concept |>
 
 ``` output
 # Source:   SQL [?? x 1]
-# Database: DuckDB 1.4.1 [unknown@Linux 6.8.0-1044-azure:R 4.5.2//tmp/RtmpNoPyBV/file19457c6addd8.duckdb]
+# Database: DuckDB 1.4.1 [unknown@Linux 6.8.0-1044-azure:R 4.5.2//tmp/RtmpIQO2OV/file1819375fd5f0.duckdb]
   concept_name   
   <chr>          
 1 Inpatient Visit
