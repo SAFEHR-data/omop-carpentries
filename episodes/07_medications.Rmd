@@ -121,6 +121,8 @@ omop$public$concept |>
   distinct() |>
   arrange(concept_class_id)
 ```
+
+NOTE: There are more levels than shown here, but that is an disadvantaged of using a small sample database. In a full OMOP CDM database you would see more levels.
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -145,8 +147,27 @@ column name           | content
 **drug_source_value**  | in UCLH the NHS dm+d Dictionary of Medicines and Devices ID
 **drug_source_concept_id**  | OMOP concept ID for the source value
 
+::::::::::::::::::::::::::::::::: challenge
+^
+Look up the concepts for dm+d code `861826` and `21234362` and find their corresponding RxNorm concept ids.
 
+::::::::::::::::::::::::::::::::: solution
+```{r, warning = FALSE, message = FALSE}
+dmd_concept_1 <- omop$public$concept |>
+  filter(concept_id == 21234362) |>
+  select(concept_id, concept_name, domain_id, vocabulary_id, concept_class_id) |>
+  collect()
 
+dmd_concept_2 <- omop$public$concept |>
+  filter(vocabulary_id == "dm+d",
+         concept_id == 21234362) |>
+  select(concept_id, concept_name) |>
+  collect()
+dmd_concept_1
+dmd_concept_2
+```
+::::::::::::::::::::::::::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
