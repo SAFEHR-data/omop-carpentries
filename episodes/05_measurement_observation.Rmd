@@ -113,7 +113,7 @@ Leukocytes [#/volume] in Blood      | State of consciousness and awareness
 
 ::::::::::::::::::::::::::::::::::: challenge
 
-Looking at their measurement and observation tables identify the various columns that might store a value.
+Looking at their measurement and observation tables identify the various columns that might store a value and associated information (e.g. units).
 
 :::::::::::::::::::::::: solution
 The various **value** columns store values :
@@ -139,29 +139,9 @@ omop$public$observation |> colnames() |> print()
 ```                                               
 You can see that for observations the main value is a string or a concept, whereas for a measurement the main value is a number accompanied by the concept id of a unit.
 
-## Looking at numeric measurement values
+## Looking at observation values
 
-Let's focus on a single patient and look at what measurements and observations have been taken about them.
-
-::::::::::::::::::::::::::::::::::: challenge
-
-Create a mini measurement and observation table for person_id 1113
-
-:::::::::::::::::::::::: solution
-
-```{r, warning = FALSE, message = FALSE}
-library(dplyr)
-person_measurements <- omop$public$measurement |>
-  filter(person_id == 1113) |>
-  collect()
-person_observations <- omop$public$observation |>
-  filter(person_id == 1113) |>
-  collect()
-person_measurements
-person_observations
-```
-::::::::::::::::::::::::::::::::::::::::::::::::
-::::::::::::::::::::::::::::::::::::::::::::::::
+Let's focus on observations.
 
 Now we could go through each table and use our `get_concept_name` function to work out what all these measurements and observations are, but that could get a bit tedious!
 
@@ -169,7 +149,7 @@ Let's try and join to the concept table and produce a table that gives us the hu
 
 :::::::::::::::::::::::: challenge
 
-By joining to the concept table produce a version of the person_measurements and person_observations tables with concept names.
+By joining to the concept table produce a version of the observation table with concept names. Only include columns that are relevant to the value.
 
 :::::::::::::::::::::::: solution
 
@@ -178,39 +158,119 @@ library(dplyr)
 # Pre-load concept names and ids
 concepts <- select(omop$public$concept |> collect(), concept_id, concept_name)
 
-# Join to get names of the measurement concept id
-# Rename the new column to measurement_concept_name
-# Relocate the new column to be after measurement_concept_id
-person_measurements_named <- person_measurements |>
-  left_join(concepts, by=join_by(measurement_concept_id == concept_id)) |>
-  rename(measurement_concept_name = concept_name) |>
-  relocate(measurement_concept_name, .after = measurement_concept_id)
+# Create a mini observation table with only the columns relevant to value
+mini_observation <- omop$public$observation |>
+  select(observation_id, person_id, observation_concept_id, value_as_concept_id, value_as_number) |>
+  collect()
 
-# Repeat the join to get names of the unit concept id
-person_measurements_named <- person_measurements_named |>
-  left_join(concepts, by = join_by(unit_concept_id == concept_id)) |>
-  rename(unit_concept_name = concept_name) |>
-  relocate(unit_concept_name, .after = unit_concept_id)
+# Join to get names of the observation concept id
+# Rename the new column to observation_concept_name
+# Relocate the new column to be after observation_concept_id
+mini_observation <- mini_observation |>
+  left_join(concepts, by=join_by(observation_concept_id == concept_id)) |>
+  rename(observation_concept_name = concept_name) |>
+  relocate(observation_concept_name, .after = observation_concept_id)
 
-# Alternatively we could do it all in one go
-person_observations_named <- person_observations |>
-  left_join(select(omop$public$concept |> collect(), concept_id, concept_name), by=join_by(observation_concept_id==concept_id)) |> 
-  rename(observation_concept_name=concept_name) |> 
-  relocate(observation_concept_name, .after=observation_concept_id) |>
-  left_join(select(omop$public$concept |> collect(), concept_id, concept_name), by=join_by(value_as_concept_id==concept_id)) |> 
-  rename(value_as_concept_name=concept_name) |> 
-  relocate(value_as_concept_name, .after=value_as_concept_id)
-  
+# Repeat the join to get names of the value concept id
+mini_observation <- mini_observation |>
+  left_join(concepts, by = join_by(value_as_concept_id == concept_id)) |>
+  rename(value_as_concept_name = concept_name) |>
+  relocate(value_as_concept_name, .after = value_as_concept_id)
 ```
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-Now we can look at these named tables.
+Now we can look at this named table.
 ```{r, warning = FALSE, message = FALSE}
-View(person_measurements_named)
-View(person_observations_named)
+View(mini_observation)
 ```
+
+### Social indexes
+
+::::::::::::::::::::::::::::::::::::::::::::::::instructor
+
+Could be skipped if short of time
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+It is interesting to note that some observations relate to social indexes such as deprivation indices. As noted in the title these are observations made
+in England only.
+
+
+:::::::::::::::::::::::: challenge
+
+Create a mini version of the concepts table that contains only the concepts relating to social indices.
+
+:::::::::::::::::::::::: solution
+
+```{r, warning = FALSE, message = FALSE}
+social_concepts <- omop$public$concept |>
+  filter(concept_id %in% c(35812888, 35812884, 35812883, 35812882, 35812883, 35812885)) |>
+  collect()
+
+social_concepts
+```
+::::::::::::::::::::::::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+This is an instance of a nonstandard concept being used within OMOP. 
+
+::::::::::::::::::::::::::::::::::::::::::::::::instructor
+
+Comment on the fact that these concepts are nonstandard and that this is an example of how local data can be mapped to OMOP concepts even if they are not part of the standard vocabulary.
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+## Looking at measurement values
+
+Let's now look at measurements. As we said before, measurements are often numerical values with associated units. This can arise from lab results or vital signs.
+
+:::::::::::::::::::::::: challenge
+
+Consider the concept with the name `Heart rate`.
+Use the measurement and concept tables to answer the following question:
+
+1. What are the units associated with this measurement concept?
+
+2. What is the average value recorded for this measurement across all persons?
+
+3. What class of concept is this measurement concept?
+
+:::::::::::::::::::::::: solution
+```{r, warning = FALSE, message = FALSE}
+# Get the concept id for Heart rate  
+heart_rate_id <- get_concept_id("Heart rate")$concept_id
+heart_rate_id
+```
+```{r, warning = FALSE, message = FALSE}
+# 1. Filter measurement table for this concept id
+heart_rate_measurements <- omop$public$measurement |>
+  filter(measurement_concept_id == heart_rate_id) |>
+  collect()
+# Get the unique unit concept ids
+unique_units <- unique(heart_rate_measurements$unit_concept_id)
+get_concept_name(unique_units)
+```
+```{r, warning = FALSE, message = FALSE}
+# 2. Calculate the average value recorded for this measurement
+average_heart_rate <- mean(heart_rate_measurements$value_as_number, na.rm = TRUE)
+average_heart_rate
+```
+```{r, warning = FALSE, message = FALSE}
+# 3. Get the class of concept for Heart rate
+heart_rate_class <- omop$public$concept |>
+  filter(concept_id == heart_rate_id) |>
+  select(concept_class_id) |>
+  collect() 
+heart_rate_class
+```
+::::::::::::::::::::::::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+exercise on operator concepts
+
+exercise on value_as_concept_id
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 

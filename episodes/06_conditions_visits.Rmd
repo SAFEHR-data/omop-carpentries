@@ -1,0 +1,161 @@
+---
+title: "Conditions and Visits"
+teaching: 0
+exercises: 0
+---
+
+#```{r setup, include = FALSE}
+#source("setup.R")
+#knitr::opts_chunk$set(fig.height = 6)
+#```
+
+:::::::::::::::::::::::::::::::::::::: questions 
+
+- What are conditions in the OMOP CDM?
+
+- When do we need to consider visits in our analysis?
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::: objectives
+
+- Understand the structure and purpose of the conditions table in the OMOP CDM.
+
+- Know their visits are recorded in the visit_occurrence table.
+
+- Learn when and how to consider visits in data analysis.
+
+- Know that a visit is a period of time and patients can have multiple visits
+
+- Understand that multiple measurements, conditions etc. can occur within a visit.
+
+- Understand that other tables link to visits
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+## Introduction
+
+This lesson covers the OMOP conditions and visits table.
+
+:::::::::::::::::::::::::::::::::::::::::::::::: callout
+
+For this episode we will be using a sample OMOP CDM database that is pre-loaded with data. This database is a simplified version of a real-world OMOP CDM database and is intended for educational purposes only.
+
+(UCLH only) This will come in the same form as you would get data if you asked for a data extract via the SAFEHR platform (i.e. a set of parquet files).
+
+As part of the setup prior to this course you were asked to download and install the sample database. If you have not done this yet, please refer to the setup instructions provided earlier in the course. For now, we will assume that you have the sample OMOP CDM database available on your local machine at the following path: `workshop/data/public/` and the functions in a folder `workshop/code`.
+
+You will then need to load the database as shown in the previous episode.
+
+```{r, warning = FALSE, message = FALSE}
+open_omop_dataset <- function(dir) {
+  open_omop_schema <- function(path) {
+    # iterate table level folders
+    list.dirs(path, recursive = FALSE) |>
+      # exclude folder name from path
+      # and use it as index for named list
+      purrr::set_names(~ basename(.)) |>
+      # "lazy-open" list of parquet files
+      # from specified folder
+      purrr::map(arrow::open_dataset)
+  }
+  # iterate top-level folders
+  list.dirs(dir, recursive = FALSE) |>
+    # exclude folder name from path
+    # and use it as index for named list
+    purrr::set_names(~ basename(.)) |>
+    purrr::map(open_omop_schema)
+}
+```
+
+```{r, warning = FALSE, message = FALSE}
+omop <- open_omop_dataset("./data/")
+```
+
+and the useful functions we created in the previous episode to look up concept names/ids.
+
+```{r, warning = FALSE, message = FALSE}
+library(arrow)
+library(dplyr)
+get_concept_name <- function(id) {
+  omop$public$concept |>
+    filter(concept_id == !!id) |>
+    select(concept_name) |>
+    collect()
+}
+```
+
+```{r, warning = FALSE, message = FALSE}
+get_concept_id <- function(name) {
+  omop$public$concept |>
+    filter(concept_name == !!name) |>
+    select(concept_id) |>
+    collect()
+}
+``` 
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+## Conditions
+
+
+[Conditions](https://ohdsi.github.io/CommonDataModel/cdm54.html#conditions) are a key part of the OMOP CDM. They represent diagnoses that have been made for patients. Conditions are stored in the `condition_occurrence` table. Each record in this table represents a single occurrence of a condition for a patient. The table contains records of diseases, medical conditions, diagnoses, signs, or symptoms observed by providers or reported by patients. Conditions are mapped from diagnostic codes and represented using standardized concepts in a hierarchical structure. 
+
+::::::::::::::::::::::::::::::::::::: challenge
+
+- Using the `cdm` object, explore the `condition_occurrence` table. How many records are there in this table?
+
+- Produce a version of the table with humanly readable names for the condition concepts.
+
+- List the number of occurrences of each condition concept.
+
+::::::::::::::::::::::::::::::::::::: solution
+
+```{r, warning = FALSE, message = FALSE}
+```
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+## Visits
+
+The `visit_occurrence` table contains [events where Persons engage with the healthcare system for a duration of time](https://ohdsi.github.io/CommonDataModel/cdm54.html#visit_occurrence).
+
+
+The main clinical tables `condition_occurrence`, `measurement`, `observation` and `drug_exposure` contain a `visit_occurrence_id` that links to this table.
+
+
+`visit_concept_id` specifies the kind of visit that took place using standardised OMOP concepts. These include `Inpatient visit`, `Emergency Room Visit` and `Outpatient Visit`. Inpatient visits can last for longer than one day.    
+
+As we have seen we don't need to consider visits to answer all questions. For example if we can count the number of patients with a particular condition without considering visits. However, in some cases visits are important. For example, if we want to know how many emergency room visits resulted in a hospital admission we need to consider visits.
+
+::::::::::::::::::::::::::::::::::::: challenge
+
+- Find out how many different types of visits are recorded in the `visit_occurrence` table.
+
+- Find patients who had more than one visit.
+
+- How many patients had both an emergency room visit and an inpatient visit?
+
+::::::::::::::::::::::::::::::::::::: solution
+
+```{r, warning = FALSE, message = FALSE}
+```
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+
+::::::::::::::::::::::::::::::::::::: keypoints 
+
+- Conditions are stored in the `condition_occurrence` table in the OMOP CDM.
+
+- Visits are stored in the `visit_occurrence` table and linked to other clinical tables via `visit_occurrence_id`.
+
+- A visit represents a period of time during which a patient interacts with the healthcare system and there can be multiple types of visits.
+
+- Visits may be important to consider in analyses depending on the research question.
+
+::::::::::::::::::::::::::::::::::::::::::::::::

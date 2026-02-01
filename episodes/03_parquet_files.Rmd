@@ -1,4 +1,4 @@
-.---
+---
 title: "Parquet files"
 teaching: 0
 exercises: 0
