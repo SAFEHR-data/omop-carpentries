@@ -93,7 +93,7 @@ Answer the following questions using R and the concept table:
 
 ```{r, warning = FALSE, message = FALSE}
 library(dplyr)
-# 1. How many entries are there in the concept table?
+1. How many entries are there in the concept table?
 cdm$concept %>% summarise(n_concepts = n())
 ```
 
@@ -102,7 +102,7 @@ Answer: There are 444 entries in the concept table. This is a tiny fraction of t
 **CODING_NOTE**: The function `n()` counts the number of rows in the table and `summarise()` creates a summary table with that count. These functions are part of the `dplyr` package. When you have loaded the library once your environment will remember it for the rest of the session.
 
 ```{r, warning = FALSE, message = FALSE}
-# 2. How many distinct vocabularies are there in the concept table?
+2. How many distinct vocabularies are there in the concept table?
 cdm$concept %>% summarise(n_distinct_vocabularies = n_distinct(vocabulary_id))
 ```
 
@@ -111,7 +111,7 @@ Answer: There are 9 distinct vocabularies used in this dataset.
 **CODING_NOTE**: The function `n_distinct(x)` counts the number of distinct values in the column x.
 
 ```{r, warning = FALSE, message = FALSE}
-# 3. How many distinct domains other than 'None' are there in the concept table?
+3. How many distinct domains other than 'None' are there in the concept table?
 cdm$concept %>%
   filter(domain_id != "None") %>%
   summarise(n_distinct_domains = n_distinct(domain_id))
@@ -122,7 +122,7 @@ Answer: There are 8 distinct domains other than 'None' in this dataset.
 **CODING_NOTE**: We use the `filter()` function to filter out rows where the domain_id is 'None' before counting the distinct domains.
 
 ```{r, warning = FALSE, message = FALSE}
-# 4. How many distinct concept_classes are there in the concept table?
+4. How many distinct concept_classes are there in the concept table?
 cdm$concept %>% summarise(n_distinct_concept_classes = n_distinct(concept_class_id))
 ```
 

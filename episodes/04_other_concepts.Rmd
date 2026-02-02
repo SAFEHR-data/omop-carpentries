@@ -174,7 +174,7 @@ get_concept_name(white_british$gender_concept_id)
 
 Answer: The White British patient is female. (Note the code above assumes there is only one `White British` patient.)
 
-3. The table is small enough to actually count by hand but also we can use dplyr to count the number of men and women.
+3. The table is small enough to actually count by hand but also we can use the R package `dplyr` to count the number of men and women.
 
 ```{r, warning = FALSE, message = FALSE}
 # Let's create a mini version of the concept table that contains only the concepts(the gender concepts) and the columns(concept_id, concept_name)  we want

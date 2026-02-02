@@ -244,7 +244,7 @@ heart_rate_id <- get_concept_id("Heart rate")$concept_id
 heart_rate_id
 ```
 ```{r, warning = FALSE, message = FALSE}
-# 1. Filter measurement table for this concept id
+1. Filter measurement table for this concept id
 heart_rate_measurements <- omop$public$measurement |>
   filter(measurement_concept_id == heart_rate_id) |>
   collect()
@@ -253,12 +253,12 @@ unique_units <- unique(heart_rate_measurements$unit_concept_id)
 get_concept_name(unique_units)
 ```
 ```{r, warning = FALSE, message = FALSE}
-# 2. Calculate the average value recorded for this measurement
+2. Calculate the average value recorded for this measurement
 average_heart_rate <- mean(heart_rate_measurements$value_as_number, na.rm = TRUE)
 average_heart_rate
 ```
 ```{r, warning = FALSE, message = FALSE}
-# 3. Get the class of concept for Heart rate
+3. Get the class of concept for Heart rate
 heart_rate_class <- omop$public$concept |>
   filter(concept_id == heart_rate_id) |>
   select(concept_class_id) |>
