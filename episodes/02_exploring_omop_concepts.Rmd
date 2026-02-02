@@ -151,7 +151,7 @@ cdm$concept |>
   collect()
 ```
 
-**CODING_NOTE**: We have to use `collect()` to pull the data into R memory to view it.
+**CODING_NOTE**: We have to use `collect()` to pull the data into R memory to view it. The `arrange()` function orders the rows by concept_id. The `filter(row_number() <= 10)` function filters to the first 10 rows. The `select()` function selects only the specified columns.
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -211,6 +211,7 @@ cdm$concept |>
 ::::::::::::::::::::::::::::::::::::::::::::::::::: challenge
 
 List all distinct concept_classes in the concept table.
+
 ::::::::::::::::::::::::::::::::::::::::::::::::::: solution
 
 ```{r, warning = FALSE, message = FALSE}
@@ -224,9 +225,10 @@ cdm$concept |>
 :::::::::::::::::::::::::::::::::::::::::::::::::::
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::
+
 ### Look at non standard concepts
 
-A standard concept is the preferred, harmonised code in OMOP that represents a clinical idea across vocabularies. Standard concepts (standard_concept = "S") are the target of mappings from source codes, and they define which domain and table the data belong to for consistent analysis.
+A standard concept is the preferred, harmonised code in OMOP that represents a clinical idea across vocabularies. Standard concepts (standard_concept = "S") are the target of mappings from source codes, and they define which domain and table the data belong to for consistent analysis. However, OMOP also include nonstandard concepts from sources that are not globally used but maybe useful locally. `dm+d`, the NHS Dictionary of Medicines and Devices is one such vocabulary that is included in OMOP but is not a standard vocabulary.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::: challenge
 

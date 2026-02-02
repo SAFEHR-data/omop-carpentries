@@ -83,7 +83,7 @@ Explore the data using the following:
 omop$public
 ```
 
-You will see that this gives you a list of all the tables in this dataset and what columns they contain. It is obviously a much smaller dataset! You can explore individual tables which will also give you the column names.
+You will see that this gives you a list of all the tables in this dataset and what columns they contain. It is obviously a much smaller dataset! You can explore individual tables which will also give you the column names and the data type of the entry.
 
 ```{r, warning = FALSE, message = FALSE}
 omop$public$person
