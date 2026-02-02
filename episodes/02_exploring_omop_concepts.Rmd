@@ -99,7 +99,7 @@ cdm$concept %>% summarise(n_concepts = n())
 
 Answer: There are 444 entries in the concept table. This is a tiny fraction of the overall table which can be found at [Athena](https://athena.ohdsi.org)
 
-NOTE: The function `n()` counts the number of rows in the table and `summarise()` creates a summary table with that count. These functions are part of the `dplyr` package. When you have loaded the library once your environment will remember it for the rest of the session.
+**CODING_NOTE**: The function `n()` counts the number of rows in the table and `summarise()` creates a summary table with that count. These functions are part of the `dplyr` package. When you have loaded the library once your environment will remember it for the rest of the session.
 
 ```{r, warning = FALSE, message = FALSE}
 # 2. How many distinct vocabularies are there in the concept table?
@@ -108,7 +108,7 @@ cdm$concept %>% summarise(n_distinct_vocabularies = n_distinct(vocabulary_id))
 
 Answer: There are 9 distinct vocabularies used in this dataset.
 
-NOTE: The function `n_distinct(x)` counts the number of distinct values in the column x.
+**CODING_NOTE**: The function `n_distinct(x)` counts the number of distinct values in the column x.
 
 ```{r, warning = FALSE, message = FALSE}
 # 3. How many distinct domains other than 'None' are there in the concept table?
@@ -119,7 +119,7 @@ cdm$concept %>%
 
 Answer: There are 8 distinct domains other than 'None' in this dataset.    
 
-NOTE: We use the `filter()` function to filter out rows where the domain_id is 'None' before counting the distinct domains.
+**CODING_NOTE**: We use the `filter()` function to filter out rows where the domain_id is 'None' before counting the distinct domains.
 
 ```{r, warning = FALSE, message = FALSE}
 # 4. How many distinct concept_classes are there in the concept table?
@@ -151,7 +151,7 @@ cdm$concept |>
   collect()
 ```
 
-Note we have to use `collect()` to pull the data into R memory to view it.
+**CODING_NOTE**: We have to use `collect()` to pull the data into R memory to view it.
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -244,7 +244,7 @@ cdm$concept |>
 
 Answer: There are only four nonstandard concepts in this dataset: 1569708, 35208414, 44923712, 45011828.
 
-NOTE: We use `slice_min()` to get the first 10 rows ordered by concept_id.
+**CODING_NOTE**: We use `slice_min()` to get the first 10 rows ordered by concept_id.
 
 ```{r, warning = FALSE, message = FALSE}
 cdm$concept |>
@@ -253,7 +253,7 @@ cdm$concept |>
   collect()
 ```
 
-NOTE: We use `%in%` to filter for multiple concept_ids which we can list in a vector.
+**CODING_NOTE**: We use `%in%` to filter for multiple concept_ids which we can list in a vector.
 :::::::::::::::::::::::::::::::::::::::::::::::::::
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::

@@ -20,9 +20,9 @@ exercises: 0
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-## Medications
+## Introduction
 
-This lesson considers medications in the OMOP Common Data Model (CDM).
+This lesson considers medications (the drug exposure table) in the OMOP Common Data Model (CDM).
 
 :::::::::::::::::::::::::::::::::::::::::::::::: callout
 
@@ -122,7 +122,7 @@ omop$public$concept |>
   arrange(concept_class_id)
 ```
 
-NOTE: There are more levels than shown here, but that is an disadvantaged of using a small sample database. In a full OMOP CDM database you would see more levels.
+**CODING_NOTE**: There are more levels than shown here, but that is a disadvantage of using a small sample database. In a full OMOP CDM database you would see more levels.
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 

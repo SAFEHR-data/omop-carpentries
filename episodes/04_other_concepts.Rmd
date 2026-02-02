@@ -191,7 +191,7 @@ person |>
   summarise(count = n())
 ```
 
-NOTE: The `left_join` function is used to combine the person table with the gender_concept table we created, based on the gender_concept_id. This allows us to get the humanly readable gender names. 
+**CODING_NOTE**: The `left_join` function is used to combine the person table with the gender_concept table we created, based on the gender_concept_id. This allows us to get the humanly readable gender names. 
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
