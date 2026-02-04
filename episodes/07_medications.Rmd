@@ -137,37 +137,39 @@ omop$public$concept |>
 
 Drugs in the NHS are standardised to the NHS Dictionary of Medicines and Devices (dm+d). dm+d is included in OMOP so there are values of OMOP concept_id for each dm+d. However because dm+d is not a standard vocabulary in OMOP it is translate once more to get to a standard OMOP concept id in `RxNorm` or `RxNormExtension` that can be used in collaborative studies. If there is a drug_concept_id value of 0 and there are source codes this can be because that drug doesn't map to a standard ID. Reminder that the source values are stored in these columns.
 
-861826 dm+d 12-hour modified-release capsule Form=class
-21234362 Aspirin dm+d 
-Ingredient
 
-1112807 rxnorm for the same thing
 column name           | content
 ----------------      | ------------
 **drug_source_value**  | in UCLH the NHS dm+d Dictionary of Medicines and Devices ID
 **drug_source_concept_id**  | OMOP concept ID for the source value
 
 ::::::::::::::::::::::::::::::::: challenge
-^
-Look up the concepts for dm+d code `861826` and `21234362` and find their corresponding RxNorm concept ids.
+
+Look up the concept for code `36816707` and find the corresponding RxNorm concept id.
 
 ::::::::::::::::::::::::::::::::: solution
 ```{r, warning = FALSE, message = FALSE}
-dmd_concept_1 <- omop$public$concept |>
-  filter(concept_id == 21234362) |>
+library(dplyr)
+# make a copy of the concept table
+concepts <- omop$public$concept |> collect()
+# look up the concept entry
+dmd_concept_1 <- concepts |>
+  filter(concept_id == 36816707) |>
   select(concept_id, concept_name, domain_id, vocabulary_id, concept_class_id) |>
   collect()
-
-dmd_concept_2 <- omop$public$concept |>
-  filter(vocabulary_id == "dm+d",
-         concept_id == 21234362) |>
-  select(concept_id, concept_name) |>
-  collect()
 dmd_concept_1
-dmd_concept_2
+# this is the dose of lorazepam
+# now look up any concepts that have a similar name
+similar <- filter(concepts, grepl('Lorazepam', concept_name, TRUE))
+similar
+
 ```
+
+Answer: We can see from the resulting table that there are entries for each lorazepam dose from both the dm+d and RxNorm vocabularies
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::::
+
+![The OMOP Code 36816707 ](fig/lorazepam-Athena.png){alt='A snapshot of the Athena table for code 36816707.'}
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 

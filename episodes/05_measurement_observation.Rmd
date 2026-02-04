@@ -238,13 +238,13 @@ Use the measurement and concept tables to answer the following question:
 3. What class of concept is this measurement concept?
 
 :::::::::::::::::::::::: solution
+
+1. What are the units associated with `Heart rate`?
 ```{r, warning = FALSE, message = FALSE}
 # Get the concept id for Heart rate  
 heart_rate_id <- get_concept_id("Heart rate")$concept_id
 heart_rate_id
-```
-```{r, warning = FALSE, message = FALSE}
-1. Filter measurement table for this concept id
+# Filter measurement table for this concept id
 heart_rate_measurements <- omop$public$measurement |>
   filter(measurement_concept_id == heart_rate_id) |>
   collect()
@@ -252,13 +252,15 @@ heart_rate_measurements <- omop$public$measurement |>
 unique_units <- unique(heart_rate_measurements$unit_concept_id)
 get_concept_name(unique_units)
 ```
+
+2. What is the average value recorded for `Heart rate` across all persons?
 ```{r, warning = FALSE, message = FALSE}
-2. Calculate the average value recorded for this measurement
 average_heart_rate <- mean(heart_rate_measurements$value_as_number, na.rm = TRUE)
 average_heart_rate
 ```
+
+3. Get the class of concept for `Heart rate`
 ```{r, warning = FALSE, message = FALSE}
-3. Get the class of concept for Heart rate
 heart_rate_class <- omop$public$concept |>
   filter(concept_id == heart_rate_id) |>
   select(concept_class_id) |>
