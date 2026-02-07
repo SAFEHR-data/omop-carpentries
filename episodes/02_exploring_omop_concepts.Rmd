@@ -179,7 +179,7 @@ cdm$concept |>
   pull(vocabulary_id)
 ```
 
-**CODING_NOTE**: Here we can use `pull(x)` to pull the data x into R memory to view it. This is because we are only requiring one piece of data.
+**CODING_NOTE**: Here we can use `pull(x)` to pull the data x into R memory to view it. This is because we are only requiring one column of data, so we can pull that column directly into R memory without needing to use `collect()` first.
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::
 
