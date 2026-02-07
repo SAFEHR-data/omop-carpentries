@@ -158,7 +158,7 @@ white <- person |>
 get_concept_name(white$gender_concept_id)
 ```
 
-Answer: The White patient is female. (Note the code above assumes there is only one `White` patient.)
+***Answer:*** The White patient is female. (Note the code above assumes there is only one `White` patient.)
 
 2. Similarly, we first need to know the `concept_id` of the concept `White British`
 ```{r, warning = FALSE, message = FALSE}
@@ -172,7 +172,7 @@ white_british <- person |>
 get_concept_name(white_british$gender_concept_id) 
 ```
 
-Answer: The White British patient is female. (Note the code above assumes there is only one `White British` patient.)
+***Answer:*** The White British patient is female. (Note the code above assumes there is only one `White British` patient.)
 
 3. The table is small enough to actually count by hand but also we can use the R package `dplyr` to count the number of men and women.
 

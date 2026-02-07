@@ -165,7 +165,7 @@ similar
 
 ```
 
-Answer: We can see from the resulting table that there are entries for each lorazepam dose from both the dm+d and RxNorm vocabularies
+***Answer:*** We can see from the resulting table that there are entries for each lorazepam dose from both the dm+d and RxNorm vocabularies
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
