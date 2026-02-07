@@ -22,7 +22,7 @@ exercises: 0
 
 ## Introduction
 
-This lesson considers medications (the drug exposure table) in the OMOP Common Data Model (CDM).
+This episode considers medications (the drug exposure table) in the OMOP Common Data Model (CDM).
 
 :::::::::::::::::::::::::::::::::::::::::::::::: callout
 

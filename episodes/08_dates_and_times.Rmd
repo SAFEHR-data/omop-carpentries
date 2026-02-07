@@ -18,4 +18,4 @@ exercises: 0
 
 ## Introduction
 
-This lesson considers dates and times in the OMOP Common Data Model (CDM). They are used in most tables to record when events happened,usually where they start and end date recorded. In many places there is also a time component, for example to record the time of day when a measurement was taken. Column names are frequently either suffixed with `_date` or `_datetime` to indicate whether they contain just a date or both date and time information.
+This episode considers dates and times in the OMOP Common Data Model (CDM). They are used in most tables to record when events happened,usually where they start and end date recorded. In many places there is also a time component, for example to record the time of day when a measurement was taken. Column names are frequently either suffixed with `_date` or `_datetime` to indicate whether they contain just a date or both date and time information.

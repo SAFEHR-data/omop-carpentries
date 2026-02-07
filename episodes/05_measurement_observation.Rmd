@@ -23,7 +23,7 @@ exercises: 0
 
 ## Introduction
 
-This lesson covers the OMOP measurement and observation tables.
+This episode covers the OMOP measurement and observation tables.
 
 :::::::::::::::::::::::::::::::::::::::::::::::: callout
 

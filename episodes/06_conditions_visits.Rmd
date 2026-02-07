@@ -35,7 +35,7 @@ exercises: 0
 
 ## Introduction
 
-This lesson covers the OMOP conditions and visits table.
+This episode covers the OMOP conditions and visits table.
 
 :::::::::::::::::::::::::::::::::::::::::::::::: callout
 
