@@ -26,9 +26,11 @@ exercises: 0
 
 ## Introduction
 
-Nearly everything in a hospital can be represented by an OMOP `concept_id`.
+The primary purpose of the `concept` table is to provide a standardised representation of medical Concepts, allowing for consistent querying and analysis across healthcare databases. Users can join the `concept` table with other tables in the CDM to enrich clinical data with Concept information or use the `concept` table as a reference for mapping clinical data from source terminologies to Standard or other Concepts.
 
-Any column within the OMOP CDM named `concept_id` contains OMOP concept IDs. An OMOP `concept_id` is a unique integer identifier. Concept_ids are defined in the OMOP `concept` table where a corresponding name and other attributes are stored. OMOP contains concept_ids for other medical vocabularies such as SNOMED and LOINC, which OMOP terms as source vocabularies.
+An OMOP `concept_id` is a unique integer identifier. Concept_ids are defined in the OMOP `concept` table where a corresponding name and other attributes are stored. OMOP contains concept_ids for other medical vocabularies such as SNOMED and LOINC, which OMOP terms as source vocabularies.
+
+Nearly everything in a hospital can be represented by an OMOP `concept_id`.
 
 
 ## Looking up OMOP concepts
