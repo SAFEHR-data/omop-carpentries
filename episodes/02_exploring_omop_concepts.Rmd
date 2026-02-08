@@ -249,7 +249,7 @@ cdm$concept |>
   pull(concept_id)
 ```
 
-***Answer:*** There are only four nonstandard concepts in this dataset: 1569708, 35208414, 44923712, 45011828.
+***Answer:*** There are only four nonstandard concepts in this dataset: **1569708**, **35208414**, **44923712**, **45011828**.
 
 **CODING_NOTE**: We use `slice_min()` to get the first 10 rows which match the filter, ordered by `concept_id`.
 
@@ -269,7 +269,7 @@ Now you should be able to replicate our get_concept_name() function to look up o
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::: challenge
 
-Find the domain,vocabulary and concept class for `concept_id` 35208414
+Find the domain,vocabulary and concept class for `concept_id` **35208414**
 
 Is this concept a standard concept?
 
@@ -314,11 +314,11 @@ get_concept_standard_status(35208414)
 
 ***Answer:***
 
-- The domain for `concept_id` 319835 is 'Condition'.
+- The domain for `concept_id` **319835** is 'Condition'.
 
-- The vocabulary for `concept_id` 319835 is 'ICD10CM'.
+- The vocabulary for `concept_id` **319835** is 'ICD10CM'.
 
-- The concept class for concept id 319835 is '4-char billing code'
+- The concept class for concept id **319835** is '4-char billing code'
 
 - This concept is not a standard concept (standard_concept = 'NA').
 

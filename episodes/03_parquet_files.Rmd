@@ -157,7 +157,7 @@ Now we can use this function to look up concept names by their concept_id.
 get_concept_name(8507)
 ```
 
-***Answer:*** The concept_id 8507 corresponds to the concept "Male".
+***Answer:*** The concept_id **8507** corresponds to the concept "Male".
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 

@@ -97,7 +97,7 @@ library(dplyr)
 person <- omop$public$person |> collect()
 ```
 
-From this we can see that the `gender_concept_id` can have values 8507 or 8532. We can look these up in the `concept` table using the previously defined function `get_concept_name()`.
+From this we can see that the `gender_concept_id` can have values **8507** or **8532**. We can look these up in the `concept` table using the previously defined function `get_concept_name()`.
 
 ```{r, warning = FALSE, message = FALSE}
 get_concept_name(8507)
@@ -111,7 +111,7 @@ It might also be useful to look up id values from the names. We can create a fun
 
 ::::::::::::::::::::::::::::::::::: challenge
 
-Create the function `get_concept_id()` that takes a concept_name as input and returns the concept_id.
+Create the function `get_concept_id()` that takes a `concept_name` as input and returns the `concept_id`.
 
 ::::::::::::::::::::::::::::::::::: solution
 
@@ -124,14 +124,18 @@ get_concept_id <- function(name) {
 }
 ``` 
 
+**CODING_NOTE**: The `!!` operator is used to unquote the variable `name` so that it can be evaluated within the `filter` function and the `collect()` function is used to retrieve the results from the remote database.
+
 ::::::::::::::::::::::::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-Check that these work by looking up the concept_id for "Female".
+Check that this works by looking up the concept_id for "Female".
 
 ```{r, warning = FALSE, message = FALSE}
 get_concept_id("Female")
 ```
+
+***Answer:*** The concept_id for "Female" is **8532**.
 
 ::::::::::::::::::::::::::::::::::: challenge
 
@@ -227,6 +231,8 @@ visit_counts <- omop$public$visit_occurrence |>
   collect()
 visit_counts
 ```               
+
+**CODING_NOTE**: The `group_by` function is used to group the data by `person_id`, and the `summarise` function is used to count the number of visits for each person. The `collect()` function is used to retrieve the results from the remote database.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 

@@ -150,7 +150,7 @@ Drugs in the NHS are standardised to the NHS Dictionary of Medicines and Devices
 
 ::::::::::::::::::::::::::::::::: challenge
 
-Look up the `concept_id` `871182 ` and find the corresponding `RxNorm` `concept_id`.
+Look up the `concept_id` **871182** and find the corresponding `RxNorm` `concept_id`.
 
 ::::::::::::::::::::::::::::::::: solution
 ```{r, warning = FALSE, message = FALSE}
@@ -169,7 +169,7 @@ similar <- filter(concepts, grepl('Lorazepam', concept_name, TRUE))
 similar
 ```
 
-***Answer:*** We can see from the resulting table that there are entries for each lorazepam dose from both the dm+d and RxNorm vocabularies. The `concept_id` `871182` corresponds to the dm+d concept "Lorazepam 1mg tablets". This seems maps to the RxNorm concept "lorazepam Oral Tablet" which has `concept_id` `19019113` ,but without knowing the quantity we can't be sure which dose it maps to. This is an example of the complexity of drug data and the mapping process.
+***Answer:*** We can see from the resulting table that there are entries for each lorazepam dose from both the dm+d and RxNorm vocabularies. The `concept_id` **871182** corresponds to the dm+d concept "Lorazepam 1mg tablets". This seems maps to the RxNorm concept "lorazepam Oral Tablet" which has `concept_id` **19019113**, but without knowing the quantity we can't be sure which dose it maps to. This is an example of the complexity of drug data and the mapping process.
 
 **CODING_NOTE**: The function `grepl()` is used to find all concepts that have "Lorazepam" in their name. We have added the `ignore.case = TRUE` argument to make the search case-insensitive. This allows us to find all relevant concepts regardless of how they are capitalized in the concept names.
 
@@ -179,7 +179,7 @@ similar
 
 ![The OMOP Code 871182  ](fig/lorazepam-Athena.png){alt='A snapshot of the Athena table for code 871182.'}
 
-Looking at the entry for `concept_id` `871182` we can see that it is in the dm+d vocabulary. We can see that is connected to the RxNorm concept "lorazepam 1 MG Oral Tablet" which has `concept_id` `19019113`. So our assumption above was correct, but the concept table in our dataset didn't fill in the name fully so we couldn't be sure without looking it up in the  official table.
+Looking at the entry for `concept_id` **871182** we can see that it is in the dm+d vocabulary. We can see that is connected to the RxNorm concept "lorazepam 1 MG Oral Tablet" which has `concept_id` **19019113**. So our assumption above was correct, but the concept table in our dataset didn't fill in the name fully so we couldn't be sure without looking it up in the  official table.
 
 TO TO: We need an example on quantity and route of administration to show how these are stored in the drug_exposure table and how they can be looked up in the concept table.
 

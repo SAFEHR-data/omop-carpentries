@@ -121,9 +121,9 @@ The various **value** columns store values :
 column name             | data type                  | example   | concept_name
 ----------------        | ------------               | --------- | -------
 **value_as_number**     | numeric value              | 1.2       | -
-**unit_concept_id**     | units of the numeric value | 9529      | kilogram
-**value_as_concept_id** | categorical value          | 4328749   | High
-**operator_concept_id** | optional operators         | 4172704   | >
+**unit_concept_id**     | units of the numeric value | **9529**      | kilogram
+**value_as_concept_id** | categorical value          | **4328749**   | High
+**operator_concept_id** | optional operators         | **4172704**   | >
 
 Note where values are a concept_id, the name of that concept can be looked up in the concept table that is part of the OMOP vocabularies and included in most CDM instances.
 
