@@ -248,7 +248,7 @@ patient_visits
 
 Outpatient and Emergency Room Visits usually end on the same day, where Inpatient visits can last longer.
 
-Here is how we can plot a measurement (in this case blood pressure) over time for a patient. You may remember from a previous lesson that numeric measurements are stored in the column `value_as_number`.
+Here is how we can plot a measurement (in this case blood pressure) over time for a patient. You may remember from a previous episode that numeric measurements are stored in the column `value_as_number`.
 
 First we filter the data.
 

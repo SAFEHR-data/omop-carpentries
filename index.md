@@ -14,17 +14,10 @@ We suggest that learners are familiar with R and the tidyverse or do one of the 
 
 ::: prereq
 
-A laptop
+- A laptop with the current versions of the following installed:
+    - the [R software](https://cran.r-project.org/mirrors.html) itself, and
+    - [RStudio Desktop](https://www.rstudio.com/products/rstudio/download/#download).
 
-This lesson assumes you have current versions of the following installed on your computer:
-
-- the [R software](https://cran.r-project.org/mirrors.html) itself, and
-- [RStudio Desktop](https://www.rstudio.com/products/rstudio/download/#download).
-
-You also need to download some files to follow this lesson:
-
-- Download [omop_data.zip](episodes/data/omop_data.zip).
-
-TODO: update this file with download requirements for the whole course.
+- Download [workshop.zip](episodes/workshop.zip).
 
 :::

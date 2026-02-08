@@ -8,6 +8,8 @@ exercises: 0
 
 - Where are medications stored ?
 
+- How do you trace the relationship between concepts from different vocabularies?
+
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
@@ -20,9 +22,9 @@ exercises: 0
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-## Medications
+## Introduction
 
-This lesson considers medications in the OMOP Common Data Model (CDM).
+This episode considers medications (the drug exposure table) in the OMOP Common Data Model (CDM).
 
 :::::::::::::::::::::::::::::::::::::::::::::::: callout
 
@@ -84,19 +86,21 @@ get_concept_id <- function(name) {
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 
-The OMOP [drug_exposure](https://ohdsi.github.io/CommonDataModel/cdm54.html#drug_exposure) table stores exposure of a patient to medications.
+The OMOP [drug_exposure](https://ohdsi.github.io/CommonDataModel/cdm54.html#drug_exposure) table stores exposure of a patient to medications. The purpose of records in this table is to indicate an exposure to a certain drug as best as possible. In this context a drug is defined as an active ingredient. Drug Exposures are defined by Concepts from the Drug domain, which form a complex hierarchy. As a result, one `drug_source_concept_id` may map to multiple standard `concept_id`s if it is a combination product. Records in this table represent prescriptions written, prescriptions dispensed, and drugs administered by a provider to name a few. The `drug_type_concept_id` can be used to find and filter on these types. This table includes additional information about the drug products, the quantity given, and route of administration.
 
 The main columns are :
 
-column name           | content
+column name                        | content
 ----------------      | ------------
 **drug_exposure_id**   | unique identifier given that person can get multiple exposures per visit
-**person_id**   |    the patient
-**drug_concept_id** |   standard drug identifier, can be at different levels of granularity
+**person_id**         |    the patient
+**drug_concept_id**          |   standard drug identifier, can be at different levels of granularity
 **drug_exposure_start_date** |  may also be an optional start_datetime
-**drug_exposure_end_date** | may also be an optional end_datetime
-**drug_type_concept_id**  | where the record came from e.g. EHR administration record
-**drug_source_value**  | in UCLH the NHS dm+d Dictionary of Medicines and Devices ID
+**drug_exposure_end_date**   | may also be an optional end_datetime
+**drug_type_concept_id**    | where the record came from e.g. EHR administration record
+**quantity**             | the amount of drug given
+**route_concept_id**     | the route of administration e.g. oral, intravenous etc
+**visit_occurrence_id**  | the visit during which the drug was given
 **drug_source_concept_id**  | OMOP concept ID for the source value
 
 Drug data can be very complicated, as can the process of converting from the source data to OMOP. You may not find what you expect depending on this and the quality of the source data. 
@@ -122,52 +126,62 @@ omop$public$concept |>
   arrange(concept_class_id)
 ```
 
-NOTE: There are more levels than shown here, but that is an disadvantaged of using a small sample database. In a full OMOP CDM database you would see more levels.
+***Answer:*** There are more levels than shown here, but that is a disadvantage of using a small sample database. In a full OMOP CDM database you would see more levels.
+
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
+A fuller example of the drug concept hierarchy in RxNorm is shown in the table below.
 
 | RxNorm concept_class_id                | Description |
 |--------------------------------|-------------|
-| **Ingredient**                 | A base active drug ingredient, without strength or dose form (e.g., *Ibuprofen*). |
-| **Clinical Drug Component**    | A drug component with strength but no form (e.g., *Ibuprofen 200 mg*). |
 | **Clinical Drug**              | A combination of an ingredient, strength, and dose form (e.g., *Ibuprofen 200 mg Oral Tablet*). |
+| **Clinical Drug Comp**    | A drug component with strength but no form (e.g., *Ibuprofen 200 mg*). |
+| **Clinical Drug Form**         | A drug with a specific dose form but no strength (e.g., *Ibuprofen Oral Tablet*). |
+| **Quant Clinical Drug**         | A clinical drug with a specific quantity (e.g., *Ibuprofen 200 mg Oral Tablet 1*). |
+| **Ingredient**                 | A base active drug ingredient, without strength or dose form (e.g., *Ibuprofen*). |
+
+There are also concepts for Branded drugs and for packs of drugs (e.g. a box of 30 tablets) but these are not shown in this sample table.
+
 
 ## Drug mapping in the NHS
 
 Drugs in the NHS are standardised to the NHS Dictionary of Medicines and Devices (dm+d). dm+d is included in OMOP so there are values of OMOP concept_id for each dm+d. However because dm+d is not a standard vocabulary in OMOP it is translate once more to get to a standard OMOP concept id in `RxNorm` or `RxNormExtension` that can be used in collaborative studies. If there is a drug_concept_id value of 0 and there are source codes this can be because that drug doesn't map to a standard ID. Reminder that the source values are stored in these columns.
 
-861826 dm+d 12-hour modified-release capsule Form=class
-21234362 Aspirin dm+d 
-Ingredient
-
-1112807 rxnorm for the same thing
-column name           | content
-----------------      | ------------
-**drug_source_value**  | in UCLH the NHS dm+d Dictionary of Medicines and Devices ID
-**drug_source_concept_id**  | OMOP concept ID for the source value
-
 ::::::::::::::::::::::::::::::::: challenge
-^
-Look up the concepts for dm+d code `861826` and `21234362` and find their corresponding RxNorm concept ids.
+
+Look up the `concept_id` **871182** and find the corresponding `RxNorm` `concept_id`.
 
 ::::::::::::::::::::::::::::::::: solution
 ```{r, warning = FALSE, message = FALSE}
-dmd_concept_1 <- omop$public$concept |>
-  filter(concept_id == 21234362) |>
+library(dplyr)
+# make a copy of the concept table
+concepts <- omop$public$concept |> collect()
+# look up the concept entry
+dmd_concept_1 <- concepts |>
+  filter(concept_id == 871182) |>
   select(concept_id, concept_name, domain_id, vocabulary_id, concept_class_id) |>
   collect()
-
-dmd_concept_2 <- omop$public$concept |>
-  filter(vocabulary_id == "dm+d",
-         concept_id == 21234362) |>
-  select(concept_id, concept_name) |>
-  collect()
 dmd_concept_1
-dmd_concept_2
+# this is the dose of lorazepam
+# now look up any concepts that have a similar name
+similar <- filter(concepts, grepl('Lorazepam', concept_name, TRUE))
+similar
 ```
+
+***Answer:*** We can see from the resulting table that there are entries for each lorazepam dose from both the dm+d and RxNorm vocabularies. The `concept_id` **871182** corresponds to the dm+d concept "Lorazepam 1mg tablets". This seems maps to the RxNorm concept "lorazepam Oral Tablet" which has `concept_id` **19019113**, but without knowing the quantity we can't be sure which dose it maps to. This is an example of the complexity of drug data and the mapping process.
+
+**CODING_NOTE**: The function `grepl()` is used to find all concepts that have "Lorazepam" in their name. We have added the `ignore.case = TRUE` argument to make the search case-insensitive. This allows us to find all relevant concepts regardless of how they are capitalized in the concept names.
+
+
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::::
+
+![The OMOP Code 871182  ](fig/lorazepam-Athena.png){alt='A snapshot of the Athena table for code 871182.'}
+
+Looking at the entry for `concept_id` **871182** we can see that it is in the dm+d vocabulary. We can see that is connected to the RxNorm concept "lorazepam 1 MG Oral Tablet" which has `concept_id` **19019113**. So our assumption above was correct, but the concept table in our dataset didn't fill in the name fully so we couldn't be sure without looking it up in the  official table.
+
+TO TO: We need an example on quantity and route of administration to show how these are stored in the drug_exposure table and how they can be looked up in the concept table.
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
