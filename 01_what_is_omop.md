@@ -11,6 +11,7 @@ exercises: 0
 - Why is using a standard important in healthcare data?
 - How do OMOP tables relate to each other?
 - What are concept_ids and how can we get an humanly readable name for them?
+
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
@@ -52,7 +53,7 @@ Create a new project in your environment.
  
 ### Connect to a database
 
-For this episode we will be using the `CDMConnector` package to connect to an OMOP Common Data Model database. We define a function that will open this package and connect an appropriate dataset. You will find this in the `workshop/code/CDMConnector` directory that you should have downloaded. This package also contains synthetic example data that can be used to demonstrate querying the data.
+For this episode we will be using the `CDMConnector` package to connect to an OMOP Common Data Model database. We define a function that will open this package and connect an appropriate dataset. It is listed below but you will also find it in the `workshop/code/CDMConnector` directory that you should have downloaded. This package also contains synthetic example data that can be used to demonstrate querying the data.
 
 
 ``` r
@@ -118,7 +119,7 @@ Look at the OMOP-CDM figure and answer the following questions:
 
 ## Why use OMOP?
 
-![Why use the OMOP-CDM](fig/Why-CDM.png){alt='A diagram showing that different sources of data, transformed to OMOP, can then be used by multiple analysis tools.'}
+![Rationale for the use of OMOP-CDM](fig/Why-CDM.png){alt='A diagram showing that different sources of data, transformed to OMOP, can then be used by multiple analysis tools.'}
 
 Once a database has been converted to the OMOP CDM, evidence can be generated using standardized analytics tools. This means that different tools can also be shared and reused. So using OMOP can help make your research FAIR.
 
@@ -179,8 +180,7 @@ colnames(cdm$person)
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: challenge
 
-Question
-How do you think the visit_occurrence table is used to connect to the person table?
+How do you think the `visit_occurrence` table is used to connect to the `person` table?
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: solution
 
@@ -207,7 +207,7 @@ Looking at both tables we can see that they both have a column labelled `person_
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-Notice that the visit_concept_id column in the visit_occurrence table is also a concept_id. This concept_id can be used to find out more information about the type of visit (e.g. inpatient, outpatient etc) by looking it up in the concept table. In this case the visit_concept_id is 9201 which relates to an inpatient visit. We can find this out by filtering the concept table for concept_id 9201 and selecting the concept_name column.
+Notice that the `visit_concept_id` column in the `visit_occurrence` table is also a concept_id. This concept_id can be used to find out more information about the type of visit (e.g. inpatient, outpatient etc) by looking it up in the `concept` table. In this case the `visit_concept_id` is 9201 which relates to an inpatient visit. We can find this out by filtering the `concept` table for `concept_id` 9201 and selecting the `concept_name` column.
 
 
 ``` r
@@ -218,19 +218,21 @@ cdm$concept |>
 
 ``` output
 # Source:   SQL [?? x 1]
-# Database: DuckDB 1.4.1 [unknown@Linux 6.8.0-1044-azure:R 4.5.2//tmp/RtmpIQO2OV/file1819375fd5f0.duckdb]
+# Database: DuckDB 1.4.1 [unknown@Linux 6.8.0-1044-azure:R 4.5.2//tmp/RtmpY0FW18/file17431739c2fc.duckdb]
   concept_name   
   <chr>          
 1 Inpatient Visit
 ```
 
+**CODING_NOTE**: We use `filter` to identify the row we want and `select` to choose the column we want. This is because we are querying a remote database, not one that is local. If we were working with a local database we could just use `cdm$concept$concept_name[cdm$concept$concept_id == 9201]` to get the same result.
+
 ### A useful function
 
-Finding the humanly readable name for a concept_id will be a useful function. We can create a function `get_concept_name()` that takes a concept_id as input and returns the concept_name.
+Finding the humanly readable name for a `concept_id` will be a useful function. We can create a function `get_concept_name()` that takes a `concept_id` as input and returns the `concept_name`.
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: challenge
 
-Create the function `get_concept_name()` that takes a concept_id as input and returns the concept_name.
+Create the function `get_concept_name()` that takes a `concept_id` as input and returns the `concept_name`.
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: solution
 

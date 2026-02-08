@@ -117,7 +117,7 @@ library(dplyr)
 person <- omop$public$person |> collect()
 ```
 
-From this we can see that the `gender_concept_id` can have values 8507 or 8532. We can look these up in the `concept` table using the previously defined function `get_concept_name()`.
+From this we can see that the `gender_concept_id` can have values **8507** or **8532**. We can look these up in the `concept` table using the previously defined function `get_concept_name()`.
 
 
 ``` r
@@ -147,7 +147,7 @@ It might also be useful to look up id values from the names. We can create a fun
 
 ::::::::::::::::::::::::::::::::::: challenge
 
-Create the function `get_concept_id()` that takes a concept_name as input and returns the concept_id.
+Create the function `get_concept_id()` that takes a `concept_name` as input and returns the `concept_id`.
 
 ::::::::::::::::::::::::::::::::::: solution
 
@@ -161,10 +161,12 @@ get_concept_id <- function(name) {
 }
 ```
 
+**CODING_NOTE**: The `!!` operator is used to unquote the variable `name` so that it can be evaluated within the `filter` function and the `collect()` function is used to retrieve the results from the remote database.
+
 ::::::::::::::::::::::::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-Check that these work by looking up the concept_id for "Female".
+Check that this works by looking up the concept_id for "Female".
 
 
 ``` r
@@ -177,6 +179,8 @@ get_concept_id("Female")
        <int>
 1       8532
 ```
+
+***Answer:*** The concept_id for "Female" is **8532**.
 
 ::::::::::::::::::::::::::::::::::: challenge
 
@@ -219,7 +223,7 @@ get_concept_name(white$gender_concept_id)
 1 Female      
 ```
 
-Answer: The White patient is female. (Note the code above assumes there is only one `White` patient.)
+***Answer:*** The White patient is female. (Note the code above assumes there is only one `White` patient.)
 
 2. Similarly, we first need to know the `concept_id` of the concept `White British`
 
@@ -249,9 +253,9 @@ get_concept_name(white_british$gender_concept_id)
 1 Female      
 ```
 
-Answer: The White British patient is female. (Note the code above assumes there is only one `White British` patient.)
+***Answer:*** The White British patient is female. (Note the code above assumes there is only one `White British` patient.)
 
-3. The table is small enough to actually count by hand but also we can use dplyr to count the number of men and women.
+3. The table is small enough to actually count by hand but also we can use the R package `dplyr` to count the number of men and women.
 
 
 ``` r
@@ -277,7 +281,7 @@ person |>
 2 Male             3
 ```
 
-NOTE: The `left_join` function is used to combine the person table with the gender_concept table we created, based on the gender_concept_id. This allows us to get the humanly readable gender names. 
+**CODING_NOTE**: The `left_join` function is used to combine the person table with the gender_concept table we created, based on the gender_concept_id. This allows us to get the humanly readable gender names. 
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -362,6 +366,8 @@ visit_counts
 7         2           2
 8        58          10
 ```
+
+**CODING_NOTE**: The `group_by` function is used to group the data by `person_id`, and the `summarise` function is used to count the number of visits for each person. The `collect()` function is used to retrieve the results from the remote database.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 

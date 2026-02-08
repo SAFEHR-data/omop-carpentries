@@ -31,7 +31,7 @@ For this episode we will be using a sample OMOP CDM database that is pre-loaded 
 
 (UCLH only) This will come in the same form as you would get data if you asked for a data extract via the SAFEHR platform (i.e. a set of parquet files).
 
-As part of the setup prior to this course you were asked to download and install the sample database. If you have not done this yet, please refer to the setup instructions provided earlier in the course. For now, we will assume that you have the sample OMOP CDM database available on your local machine at the following path: `workshop/data/public/` and the functions in a folder `workshop/code/parquet_dataset`.
+As part of the setup prior to this course you were asked to download and install the sample database. If you have not done this yet, please refer to the setup instructions provided earlier in the course. For now, we will assume that you have the sample OMOP CDM database available on your local machine at the following path: `../workshop/data/public/` and the functions in a folder `../workshop/code/parquet_dataset`.
 
   
 ::::::::::::::::::::::::::::::::::::::::::::::::
@@ -42,7 +42,7 @@ Parquet is a columnar storage file format that is optimized for use with big dat
 
 ## Exploring Parquet files
 
-We have provided a function that will allow you to browse the structure of the data in the same way as we did with the database in the previous episode. This code is available in the `workshop/code/open_omop_dataset.R` file. You can source this file to load the function into your R environment.
+We have provided a function that will allow you to browse the structure of the data in the same way as we did with the database in the previous episode. This code is available below or in the downloaded `workshop/code/open_omop_dataset.R` file. You can source this file to load the function into your R environment.
 
 
 ``` r
@@ -66,7 +66,10 @@ open_omop_dataset <- function(dir) {
 }
 ```
 
+**CODING_NOTE**: This function uses the `arrow` package to read in the parquet files. The `open_dataset()` function from the `arrow` package allows us to read in the parquet files without having to load the entire dataset into memory. This is particularly useful when working with large datasets. The function is reasonably complex but it is designed to be flexible and work with any OMOP CDM dataset that is structured in the same way as the one we are using for this course. It will read in all the parquet files in the specified directory and create a nested list structure that allows us to easily access the different tables in the dataset. We leave it to you to explore the code and understand how it works.
+
 Now we can use this function to open the sample OMOP CDM dataset located in the `workshop/data/public/` directory and explore it in the same way as we did with the database in the previous episode.
+
 
 ``` r
 omop <- open_omop_dataset("./data/")
@@ -76,7 +79,7 @@ omop <- open_omop_dataset("./data/")
 
 Note that the path to the data directory may be different depending on where you have stored the sample OMOP CDM dataset on your local machine.
 
-Check the people have used the right path.Their environment should now have an entry under Data reading 'omop List of 1'
+Check the people have used the right path. Their environment should now have an entry under Data reading 'omop List of 1'
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -210,7 +213,7 @@ preceding_visit_occurrence_id: int32
 See $metadata for additional Schema metadata
 ```
 
-You will see that this gives you a list of all the tables in this dataset and what columns they contain. It is obviously a much smaller dataset! You can explore individual tables which will also give you the column names.
+You will see that this gives you a list of all the tables in this dataset and what columns they contain. It is obviously a much smaller dataset! You can explore individual tables which will also give you the column names and the data type of the entry.
 
 
 ``` r
@@ -254,8 +257,10 @@ person
 # ℹ 3 more variables: race_concept_id <int>, gender_source_value <chr>,
 #   race_source_value <chr>
 ```
- 
-or we can use the specific functions from the `arrow` package to read in the parquet files directly.
+
+**CODING_NOTE**: The `collect()` function is used to actually read the data from the parquet files into memory. This is necessary because the `open_dataset()` function creates a reference to the data rather than loading it into memory. By using `collect()`, we can work with the data as a regular data frame in R.
+
+Or we can use the specific functions from the `arrow` package to read in the parquet files directly.
 
 
 ``` r
@@ -279,6 +284,8 @@ person
 # ℹ 3 more variables: race_concept_id <int>, gender_source_value <chr>,
 #   race_source_value <chr>
 ```
+
+**CODING_NOTE**: The `read_parquet()` function from the `arrow` package allows us to read in a specific parquet file directly into R. This can be useful if we only want to work with a specific table from the dataset and do not want to load the entire dataset into memory.
 
 ::::::::::::::::::::::::::::::::::::: instructor
 
@@ -317,6 +324,8 @@ get_concept_name <- function(id) {
 }
 ```
 
+**CODING_NOTE**: The `get_concept_name()` function is adapted to work with the parquet file dataset. It uses the `filter()` and `select()` functions from the `dplyr` package to query the `concept` table in the parquet dataset. The `collect()` function is used to read the result into memory so that we can work with it as a regular data frame in R.
+
 ::::::::::::::::::::::::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -333,6 +342,8 @@ get_concept_name(8507)
   <chr>       
 1 Male        
 ```
+
+***Answer:*** The concept_id **8507** corresponds to the concept "Male".
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 

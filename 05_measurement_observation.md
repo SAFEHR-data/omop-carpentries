@@ -23,7 +23,7 @@ exercises: 0
 
 ## Introduction
 
-This lesson covers the OMOP measurement and observation tables.
+This episode covers the OMOP measurement and observation tables.
 
 :::::::::::::::::::::::::::::::::::::::::::::::: callout
 
@@ -125,9 +125,9 @@ The various **value** columns store values :
 column name             | data type                  | example   | concept_name
 ----------------        | ------------               | --------- | -------
 **value_as_number**     | numeric value              | 1.2       | -
-**unit_concept_id**     | units of the numeric value | 9529      | kilogram
-**value_as_concept_id** | categorical value          | 4328749   | High
-**operator_concept_id** | optional operators         | 4172704   | >
+**unit_concept_id**     | units of the numeric value | **9529**      | kilogram
+**value_as_concept_id** | categorical value          | **4328749**   | High
+**operator_concept_id** | optional operators         | **4172704**   | >
 
 Note where values are a concept_id, the name of that concept can be looked up in the concept table that is part of the OMOP vocabularies and included in most CDM instances.
 
@@ -279,6 +279,8 @@ Use the measurement and concept tables to answer the following question:
 
 :::::::::::::::::::::::: solution
 
+1. What are the units associated with `Heart rate`?
+
 ``` r
 # Get the concept id for Heart rate  
 heart_rate_id <- get_concept_id("Heart rate")$concept_id
@@ -290,7 +292,7 @@ heart_rate_id
 ```
 
 ``` r
-# 1. Filter measurement table for this concept id
+# Filter measurement table for this concept id
 heart_rate_measurements <- omop$public$measurement |>
   filter(measurement_concept_id == heart_rate_id) |>
   collect()
@@ -306,8 +308,9 @@ get_concept_name(unique_units)
 1 per minute  
 ```
 
+2. What is the average value recorded for `Heart rate` across all persons?
+
 ``` r
-# 2. Calculate the average value recorded for this measurement
 average_heart_rate <- mean(heart_rate_measurements$value_as_number, na.rm = TRUE)
 average_heart_rate
 ```
@@ -316,8 +319,9 @@ average_heart_rate
 [1] 95
 ```
 
+3. Get the class of concept for `Heart rate`
+
 ``` r
-# 3. Get the class of concept for Heart rate
 heart_rate_class <- omop$public$concept |>
   filter(concept_id == heart_rate_id) |>
   select(concept_class_id) |>

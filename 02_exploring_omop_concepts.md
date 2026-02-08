@@ -6,8 +6,8 @@ exercises: 0
 
 :::::::::::::::::::::::::::::::::::::: questions 
 
-e- Find the `vocabulary`, `domain` and `concept_class` for a given concept_id
-- Establish whether a concept_id is a standard concept
+- Find the `vocabulary`, `domain` and `concept_class` for a given `concept_id`
+- Establish whether a `concept_id` is a standard concept
 - Find all concepts within a given domain
 - Find all concepts within a given vocabulary
 
@@ -26,9 +26,11 @@ e- Find the `vocabulary`, `domain` and `concept_class` for a given concept_id
 
 ## Introduction
 
-Nearly everything in a hospital can be represented by an OMOP concept_id.
+The primary purpose of the `concept` table is to provide a standardised representation of medical Concepts, allowing for consistent querying and analysis across healthcare databases. Users can join the `concept` table with other tables in the CDM to enrich clinical data with Concept information or use the `concept` table as a reference for mapping clinical data from source terminologies to Standard or other Concepts.
 
-Any column within the OMOP CDM named `*concept_id` contains OMOP concept IDs. An OMOP concept_id is a unique integer identifier. Concept_ids are defined in the OMOP concept table where a corresponding name and other attributes are stored. OMOP contains concept_ids for other medical vocabularies such as SNOMED and LOINC, which OMOP terms as source vocabularies.
+An OMOP `concept_id` is a unique integer identifier. Concept_ids are defined in the OMOP `concept` table where a corresponding name and other attributes are stored. OMOP contains concept_ids for other medical vocabularies such as SNOMED and LOINC, which OMOP terms as source vocabularies.
+
+Nearly everything in a hospital can be represented by an OMOP `concept_id`.
 
 
 ## Looking up OMOP concepts
@@ -38,7 +40,7 @@ OMOP concepts can be looked up in [Athena](https://athena.ohdsi.org) an online t
 The CDMConnector package allows connection to an OMOP Common Data Model in a database. It also contains synthetic example data that can be used to demonstrate querying the data.
 
 
-In the previous episode we set up the CDMConnector package to connect to an OMOP Common Data Model database and used it to look at the concepts table. We also created the function `get_concept_name()` to get a humanly readable name for a concept_id. We will use these again in this episode.
+In the previous episode we set up the CDMConnector package to connect to an OMOP Common Data Model database and used it to look at the concepts table. We also created the function `get_concept_name()` to get a humanly readable name for a `concept_id`. We will use these again in this episode.
 
 ### Setting up the connection
 
@@ -63,7 +65,7 @@ cdm <- CDMConnector::cdmFromCon(con = db, cdmSchema = "main",
                                 writeSchema = "main")
 ```
 
-## Exploring the concept table
+## Exploring the `concept` table
 
 ``` r
 colnames(cdm$concept)
@@ -83,101 +85,104 @@ colnames(cdm$concept)
 | domain_id             | The domain to which the concept belongs (e.g. Condition, Drug). |
 | vocabulary_id         | The vocabulary from which the concept originates (e.g. SNOMED, RxNorm). |
 | concept_class_id      | Classification within the vocabulary (e.g. Clinical Finding, Ingredient). |
-| standard_concept      | 'S' for standard concepts that can be included in network studies |
+| standard_concept      | 'S' for standard concepts that come from internationally accepted standard vocabularies. |
 | concept_code          | Code used by the source vocabulary to identify the concept. |
 | valid_start_date      | Date the concept became valid in OMOP. |
 | valid_end_date        | Date the concept ceased to be valid. |
 | invalid_reason        | Reason for invalidation, if applicable | 
 
 
-The concept table is the main table for looking up information about concepts. We can use R to query the concept table for specific attributes of concepts.
+The `concept` table is the main table for looking up information about concepts. We can use R to query the `concept` table for specific attributes of concepts.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::: challenge
 
-Answer the following questions using R and the concept table:
+Answer the following questions using R and the `concept` table:
 
-1. How many entries are there in the concept table?
+1. How many entries are there in the `concept` table?
 
-2. How many distinct vocabularies are there in the concept table?
+2. How many distinct vocabularies are there in the `concept` table?
 
-3. How many distinct domains other than 'None' are there in the concept table?
+3. How many distinct domains other than 'None' are there in the `concept` table?
 
-4. How many distinct concept_classes are there in the concept table?
+4. How many distinct concept_classes are there in the `concept` table?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::: solution
 
+1. How many entries are there in the `concept` table?
 
 ``` r
 library(dplyr)
-# 1. How many entries are there in the concept table?
-cdm$concept %>% summarise(n_concepts = n())
+cdm$concept |>
+  summarise(n_concepts = n())
 ```
 
 ``` output
 # Source:   SQL [?? x 1]
-# Database: DuckDB 1.4.1 [unknown@Linux 6.8.0-1044-azure:R 4.5.2//tmp/RtmpGaBIx7/file184a6fd9d846.duckdb]
+# Database: DuckDB 1.4.1 [unknown@Linux 6.8.0-1044-azure:R 4.5.2//tmp/Rtmpd8tQ6t/file17767ba676cb.duckdb]
   n_concepts
        <dbl>
 1        444
 ```
 
-Answer: There are 444 entries in the concept table. This is a tiny fraction of the overall table which can be found at [Athena](https://athena.ohdsi.org)
+***Answer:*** There are 444 entries in the `concept` table. This is a tiny fraction of the overall table which can be found at [Athena](https://athena.ohdsi.org)
 
-NOTE: The function `n()` counts the number of rows in the table and `summarise()` creates a summary table with that count. These functions are part of the `dplyr` package. When you have loaded the library once your environment will remember it for the rest of the session.
+**CODING_NOTE**: The function `n()` counts the number of rows in the table and `summarise()` creates a summary table with that count. These functions are part of the `dplyr` package. When you have loaded the library once your environment will remember it for the rest of the session.
 
+2. How many distinct vocabularies are there in the `concept` table?
 
 ``` r
-# 2. How many distinct vocabularies are there in the concept table?
-cdm$concept %>% summarise(n_distinct_vocabularies = n_distinct(vocabulary_id))
+cdm$concept |>
+  summarise(n_distinct_vocabularies = n_distinct(vocabulary_id))
 ```
 
 ``` output
 # Source:   SQL [?? x 1]
-# Database: DuckDB 1.4.1 [unknown@Linux 6.8.0-1044-azure:R 4.5.2//tmp/RtmpGaBIx7/file184a6fd9d846.duckdb]
+# Database: DuckDB 1.4.1 [unknown@Linux 6.8.0-1044-azure:R 4.5.2//tmp/Rtmpd8tQ6t/file17767ba676cb.duckdb]
   n_distinct_vocabularies
                     <dbl>
 1                       9
 ```
 
-Answer: There are 9 distinct vocabularies used in this dataset.
+***Answer:*** There are 9 distinct vocabularies used in this dataset.
 
-NOTE: The function `n_distinct(x)` counts the number of distinct values in the column x.
+**CODING_NOTE**: The function `n_distinct(x)` counts the number of distinct values in the column x.
 
+3. How many distinct domains other than 'None' are there in the `concept` table?
 
 ``` r
-# 3. How many distinct domains other than 'None' are there in the concept table?
-cdm$concept %>%
-  filter(domain_id != "None") %>%
+cdm$concept |>
+  filter(domain_id != "None") |>
   summarise(n_distinct_domains = n_distinct(domain_id))
 ```
 
 ``` output
 # Source:   SQL [?? x 1]
-# Database: DuckDB 1.4.1 [unknown@Linux 6.8.0-1044-azure:R 4.5.2//tmp/RtmpGaBIx7/file184a6fd9d846.duckdb]
+# Database: DuckDB 1.4.1 [unknown@Linux 6.8.0-1044-azure:R 4.5.2//tmp/Rtmpd8tQ6t/file17767ba676cb.duckdb]
   n_distinct_domains
                <dbl>
 1                  8
 ```
 
-Answer: There are 8 distinct domains other than 'None' in this dataset.    
+***Answer:*** There are 8 distinct domains other than 'None' in this dataset.    
 
-NOTE: We use the `filter()` function to filter out rows where the domain_id is 'None' before counting the distinct domains.
+**CODING_NOTE**: We use the `filter()` function to filter out rows where the domain_id is 'None' before counting the distinct domains.
 
+4. How many distinct concept_classes are there in the `concept` table?
 
 ``` r
-# 4. How many distinct concept_classes are there in the concept table?
-cdm$concept %>% summarise(n_distinct_concept_classes = n_distinct(concept_class_id))
+cdm$concept |>
+  summarise(n_distinct_concept_classes = n_distinct(concept_class_id))
 ```
 
 ``` output
 # Source:   SQL [?? x 1]
-# Database: DuckDB 1.4.1 [unknown@Linux 6.8.0-1044-azure:R 4.5.2//tmp/RtmpGaBIx7/file184a6fd9d846.duckdb]
+# Database: DuckDB 1.4.1 [unknown@Linux 6.8.0-1044-azure:R 4.5.2//tmp/Rtmpd8tQ6t/file17767ba676cb.duckdb]
   n_distinct_concept_classes
                        <dbl>
 1                         21
 ```
 
-Answer: There are 21 distinct concept_classes used in this dataset.
+***Answer:*** There are 21 distinct concept_classes used in this dataset.
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -190,7 +195,7 @@ Let's look into filtering concepts based on their domain, vocabulary, concept_cl
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::: challenge
 
-List the first ten rows of the concept table, listing only the concept_id, domain_id, vocabulary_id, concept_class_id and standard_concept columns.
+List the first ten rows of the `concept table`, listing only the `concept_id`, `domain_id`, `vocabulary_id`, `concept_class_id` and `standard_concept` columns.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::: solution
 
@@ -219,7 +224,7 @@ cdm$concept |>
 10      80180 Condition SNOMED        Clinical Finding S               
 ```
 
-Note we have to use `collect()` to pull the data into R memory to view it.
+**CODING_NOTE**: The `arrange()` function orders the rows by `concept_id`. The `filter(row_number() <= 10)` function filters to the first 10 rows. The `select()` function selects only the specified columns. We have to use `collect()` to pull the data into R memory to view it. This is because we are querying a remote database, not one that is local..
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -232,7 +237,7 @@ Vocabulary: The source or system of coding for concepts, such as SNOMED, RxNorm,
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::: challenge
 
-List all distinct vocabularies in the concept table.
+List all distinct vocabularies in the `concept` table.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::: solution
 
@@ -246,11 +251,11 @@ cdm$concept |>
 ```
 
 ``` output
-[1] "Gender"  "RxNorm"  "CVX"     "SNOMED"  "None"    "ICD10CM" "LOINC"  
-[8] "NDC"     "Visit"  
+[1] "ICD10CM" "LOINC"   "NDC"     "Visit"   "Gender"  "RxNorm"  "CVX"    
+[8] "SNOMED"  "None"   
 ```
 
-Here we can use `pull(x)` to pull the data x into R memory to view it.
+**CODING_NOTE**: Here we can use `pull(x)` to pull the data x into R memory to view it. This is because we are only requiring one column of data, so we can pull that column directly into R memory without needing to use `collect()` first.
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -262,7 +267,7 @@ Here we can use `pull(x)` to pull the data x into R memory to view it.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::: challenge
 
-List all distinct domains in the concept table.
+List all distinct domains in the `concept` table.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::: solution
 
@@ -276,8 +281,8 @@ cdm$concept |>
 ```
 
 ``` output
-[1] "Drug"        "Measurement" "Observation" "Visit"       "Metadata"   
-[6] "Gender"      "Condition"   "Procedure"  
+[1] "Drug"        "Measurement" "Condition"   "Procedure"   "Observation"
+[6] "Visit"       "Metadata"    "Gender"     
 ```
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -290,7 +295,8 @@ cdm$concept |>
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::: challenge
 
-List all distinct concept_classes in the concept table.
+List all distinct concept_classes in the `concept` table.
+
 ::::::::::::::::::::::::::::::::::::::::::::::::::: solution
 
 
@@ -305,23 +311,24 @@ cdm$concept |>
 ``` output
  [1] "Branded Drug"         "3-char nonbill code"  "Quant Branded Drug"  
  [4] "Branded Drug Comp"    "Visit"                "Context-dependent"   
- [7] "Undefined"            "CVX"                  "Ingredient"          
-[10] "11-digit NDC"         "Branded Pack"         "Clinical Drug Comp"  
-[13] "Gender"               "4-char billing code"  "Procedure"           
-[16] "Lab Test"             "Clinical Drug"        "Clinical Finding"    
-[19] "Clinical Observation" "Quant Clinical Drug"  "Morph Abnormality"   
+ [7] "Undefined"            "Morph Abnormality"    "4-char billing code" 
+[10] "Procedure"            "Lab Test"             "Clinical Drug"       
+[13] "Clinical Finding"     "Clinical Observation" "Quant Clinical Drug" 
+[16] "CVX"                  "Ingredient"           "11-digit NDC"        
+[19] "Branded Pack"         "Clinical Drug Comp"   "Gender"              
 ```
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::
+
 ### Look at non standard concepts
 
-A standard concept is the preferred, harmonised code in OMOP that represents a clinical idea across vocabularies. Standard concepts (standard_concept = "S") are the target of mappings from source codes, and they define which domain and table the data belong to for consistent analysis.
+A standard concept is the preferred, harmonised code in OMOP that represents a clinical idea across vocabularies. Standard concepts (standard_concept = "S") are the target of mappings from source codes, and they define which domain and table the data belong to for consistent analysis. However, OMOP also include nonstandard concepts from sources that are not globally used but maybe useful locally. `dm+d`, the NHS Dictionary of Medicines and Devices is one such vocabulary that is included in OMOP but is not a standard vocabulary.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::: challenge
 
-Find any nonstandard concepts (i.e. concepts where standard_concept is not 'S') by filtering the concept table. List the first 10 concept_ids of nonstandard concepts.
+Find any nonstandard concepts (i.e. concepts where standard_concept is not 'S') by filtering the concept table. List the first 10 `concept_id`s of nonstandard concepts.
 Then look up their concept_name, domain_id, vocabulary_id and standard_concept status.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::: solution
@@ -338,9 +345,9 @@ cdm$concept |>
 [1]        0  1569708 35208414 44923712 45011828
 ```
 
-Answer: There are only four nonstandard concepts in this dataset: 1569708, 35208414, 44923712, 45011828.
+***Answer:*** There are only four nonstandard concepts in this dataset: **1569708**, **35208414**, **44923712**, **45011828**.
 
-NOTE: We use `slice_min()` to get the first 10 rows ordered by concept_id.
+**CODING_NOTE**: We use `slice_min()` to get the first 10 rows which match the filter, ordered by `concept_id`.
 
 
 ``` r
@@ -360,7 +367,7 @@ cdm$concept |>
 4   45011828 Diclofenac Sodium 75 MG D… Drug      NDC           <NA>            
 ```
 
-NOTE: We use `%in%` to filter for multiple concept_ids which we can list in a vector.
+**CODING_NOTE**: We use `%in%` to filter for multiple `concept_id`s which we can list in a vector.
 :::::::::::::::::::::::::::::::::::::::::::::::::::
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -369,9 +376,7 @@ Now you should be able to replicate our get_concept_name() function to look up o
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::: challenge
 
-Questions?
-
-Find the domain,vocabulary and concept class for concept_id 35208414
+Find the domain,vocabulary and concept class for `concept_id` **35208414**
 
 Is this concept a standard concept?
 
@@ -439,13 +444,13 @@ get_concept_standard_status(35208414)
 [1] NA
 ```
 
-Answer:
+***Answer:***
 
-- The domain for concept_id 319835 is 'Condition'.
+- The domain for `concept_id` **319835** is 'Condition'.
 
-- The vocabulary for concept_id 319835 is 'ICD10CM'.
+- The vocabulary for `concept_id` **319835** is 'ICD10CM'.
 
-- The concept class for concept id 319835 is '4-char billing code'
+- The concept class for concept id **319835** is '4-char billing code'
 
 - This concept is not a standard concept (standard_concept = 'NA').
 

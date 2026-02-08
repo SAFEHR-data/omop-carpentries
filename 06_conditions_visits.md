@@ -35,7 +35,7 @@ exercises: 0
 
 ## Introduction
 
-This lesson covers the OMOP conditions and visits table.
+This episode covers the OMOP conditions and visits table.
 
 :::::::::::::::::::::::::::::::::::::::::::::::: callout
 
@@ -115,7 +115,7 @@ get_concept_id <- function(name) {
 3. Choose one patient and list all the conditions they have? 
 
 ::::::::::::::::::::::::::::::::::::: solution
-# 1 How many records are there in the `condition_occurrence` table?
+1. How many records are there in the `condition_occurrence` table?
 
 ``` r
 omop$public$condition_occurrence |>
@@ -130,7 +130,7 @@ omop$public$condition_occurrence |>
 1    35
 ```
 
-# 2 List any of the conditions that occur more than once in the table along with their humanly readable names.
+2. List any of the conditions that occur more than once in the table along with their humanly readable names.
 
 ``` r
 omop$public$condition_occurrence |>
@@ -154,7 +154,7 @@ omop$public$condition_occurrence |>
 3 Gastritis                                          2
 4 Hemorrhoids                                        2
 ```
-# 3 Choose one patient and list all the conditions they have?
+3. Choose one patient and list all the conditions they have?
 
 ``` r
 patient_id <- 1111  # Replace with the desired person_id 
@@ -177,7 +177,7 @@ omop$public$condition_occurrence |>
 ::::::::::::::::::::::::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-Question three can be repeated for different patients by changing the `patient_id` variable. Interestingly if you choose patient 31 you will see that the entry for their condition and start date is repeated. Investigate the table further to see why this might be the case. (Hint: look at the `condition_type_concept_id`, `conditions_status_concept_id` and `condition_source_value` columns).
+Question three can be repeated for different patients by changing the `patient_id` variable. Interestingly if you choose patient **31** you will see that the entry for their condition and start date is repeated. Investigate the table further to see why this might be the case. (Hint: look at the `condition_type_concept_id`, `conditions_status_concept_id` and `condition_source_value` columns).
 
 ::::::::::::::::::::::::::::::::::::: challenge
 
@@ -225,7 +225,7 @@ omop$public$condition_occurrence |>
 ::::::::::::::::::::::::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-As you can see from the output, although the `condition_concept_id` and `condition_start_date` are the same for patient 31, the `condition_type_concept_id` and `condition_status_concept_id` differ between the entries. This indicates that the same condition was recorded in different contexts or with different statuses, which explains the repeated entries in the `condition_occurrence` table. This is commonly found in hospital records!
+As you can see from the output, although the `condition_concept_id` and `condition_start_date` are the same for patient **31**, the `condition_type_concept_id` and `condition_status_concept_id` differ between the entries. This indicates that the same condition was recorded in different contexts or with different statuses, which explains the repeated entries in the `condition_occurrence` table. This is commonly found in hospital records!
 
 ## Visits
 
@@ -248,7 +248,7 @@ As we have seen we don't need to consider visits to answer all questions. For ex
 3. How many patients had both an emergency room visit and an inpatient visit?
 
 ::::::::::::::::::::::::::::::::::::: solution
-# 1 Find out how many different types of visits are recorded in the `visit_occurrence` table and link these to get their name.
+1. Find out how many different types of visits are recorded in the `visit_occurrence` table and link these to get their name.
 
 ``` r
 omop$public$visit_occurrence |>
@@ -271,7 +271,7 @@ omop$public$visit_occurrence |>
 3             9202 Outpatient Visit                       4
 4              262 Emergency Room and Inpatient Visit     1
 ```
-# 2 Find patients who had more than one visit.
+2. Find patients who had more than one visit.
 
 ``` r
 omop$public$visit_occurrence |>
@@ -290,7 +290,7 @@ omop$public$visit_occurrence |>
 3         2           2
 4        58          10
 ```
-# 3 How many patients had both an emergency room visit and an inpatient visit?
+3. How many patients had both an emergency room visit and an inpatient visit?
 
 ``` r
 patients_with_both_visits <- omop$public$visit_occurrence |>
