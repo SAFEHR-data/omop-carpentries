@@ -344,19 +344,15 @@ one of the carpentries introductory R courses.</p>
 <span class="callout-header">Prerequisite</span>
 <div class="callout-inner">
 <div class="callout-content">
-<p>A laptop</p>
-<p>This lesson assumes you have current versions of the following
-installed on your computer:</p>
+<ul><li>A laptop with the current versions of the following installed:
 <ul><li>the <a href="https://cran.r-project.org/mirrors.html" class="external-link">R software</a>
 itself, and</li>
 <li>
 <a href="https://www.rstudio.com/products/rstudio/download/#download" class="external-link">RStudio
 Desktop</a>.</li>
-</ul><p>You also need to download some files to follow this lesson:</p>
-<ul><li>Download <a href="../data/omop_data.zip">omop_data.zip</a>.</li>
-</ul><p>TODO: update this file with download requirements for the whole
-course.</p>
-</div>
+</ul></li>
+<li>Download <a href="../workshop.zip">workshop.zip</a>.</li>
+</ul></div>
 </div>
 </div>
 <!--
@@ -375,8 +371,7 @@ any links that you are not going to use.
 <td>
 What is OMOP?<br>Why is using a standard important in healthcare
 data?<br>How do OMOP tables relate to each other?<br>What are
-concept_ids and how can we get an humanly readable name for
-them?<br>::::::::::::::::::::::::::::::::::::::::::::::::
+concept_ids and how can we get an humanly readable name for them?
 </td>
 </tr><tr><td>
 <span class="visually-hidden">Duration: </span>00h 00m
@@ -386,9 +381,11 @@ them?<br>::::::::::::::::::::::::::::::::::::::::::::::::
 with R</a>
 </td>
 <td>
-Establish whether a concept_id is a standard concept<br>Find all
-concepts within a given domain<br>Find all concepts within a given
-vocabulary
+Find the <code>vocabulary</code>, <code>domain</code> and
+<code>concept_class</code> for a given
+<code>concept_id</code><br>Establish whether a <code>concept_id</code>
+is a standard concept<br>Find all concepts within a given
+domain<br>Find all concepts within a given vocabulary
 </td>
 </tr><tr><td>
 <span class="visually-hidden">Duration: </span>00h 00m
@@ -436,7 +433,8 @@ consider visits in our analysis?
  7. <a href="07_medications.html">Medications</a>
 </td>
 <td>
-Where are medications stored ?
+Where are medications stored ?<br><br>How do you trace the
+relationship between concepts from different vocabularies?
 </td>
 </tr><tr><td>
 <span class="visually-hidden">Duration: </span>00h 00m
@@ -461,32 +459,41 @@ any links that you are not going to use.
  --></tbody></table><p>
       The actual schedule may vary slightly depending on the topics and exercises chosen by the instructor.
       </p>
-      </section><section id="setup"><p>This lesson assumes you have current versions of the following
-installed on your computer:</p>
-<ol style="list-style-type: decimal"><li>the <a href="https://cran.r-project.org/mirrors.html" class="external-link">R software</a>
-itself, and</li>
-<li>
-<a href="https://www.rstudio.com/products/rstudio/download/#download" class="external-link">RStudio
-Desktop</a>.</li>
-</ol><p>You also need to download some files to follow this lesson:</p>
+      </section><section id="setup"><div class="section level1">
+<h1 id="setup-instructions">Setup instructions<a class="anchor" aria-label="anchor" href="#setup-instructions"></a></h1>
+<div class="section level2">
+<h2 id="install-r-packages">Install R Packages<a class="anchor" aria-label="anchor" href="#install-r-packages"></a></h2>
+<ul><li><p>install.packages(“dplyr”, verbose=FALSE)</p></li>
+<li><p>install.packages(“readr”, verbose=FALSE)</p></li>
+<li><p>install.packages(“purrr”, verbose=FALSE)</p></li>
+<li><p>install.packages(“CDMConnector”, verbose=FALSE)</p></li>
+<li><p>install.packages(“duckdb”, verbose=FALSE)</p></li>
+<li><p>install.packages(“lubridate”, verbose=FALSE)</p></li>
+<li><p>install.packages(“renv”, verbose=FALSE)</p></li>
+<li><p>install.packages(“arrow”, verbose=FALSE)</p></li>
+</ul></div>
+<div class="section level2">
+<h2 id="create-environment">Create environment<a class="anchor" aria-label="anchor" href="#create-environment"></a></h2>
 <ol style="list-style-type: decimal"><li>Make a new folder in your Desktop called
 <code>omop_course</code>.</li>
-<li>Download <a href="../data/omop_data.zip">omop_data.zip</a> and move the
-file to this folder.</li>
-<li>If it’s not unzipped yet, unzip it. There should now be a folder
-called <code>data</code> in the <code>omop_taster</code> folder.</li>
+<li>Download <a href="../workshop.zip">workshop.zip</a> and move the file
+to this folder.</li>
+<li>If it’s not unzipped yet, unzip it. There should now be a folders
+called <code>workshop</code> in the <code>omop_course</code> folder
+containing sub folders <code>code</code> and <code>data</code>.</li>
 <li>You can access this folder from the Unix shell with:</li>
 </ol><div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="ex">$</span> cd</span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="ex">$</span> cd Desktop/omop_course/data</span></code></pre>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="ex">$</span> cd Desktop/omop_course/workshop</span></code></pre>
 </div>
 <!--
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
-
+</div>
+</div>
 
       </section></main><nav class="bottom-pagination mx-md-4" aria-label="Next Chapter"><!-- content for small screens --><div class="d-block d-sm-block d-md-none">
         <a class="chapter-link float-end" href="../instructor/01_what_is_omop.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
@@ -539,8 +546,8 @@ any links that you are not going to use.
   "url": "https://SAFEHR-data.github.io/omop-carpentries/instructor/index.html",
   "identifier": "https://SAFEHR-data.github.io/omop-carpentries/instructor/index.html",
   "dateCreated": "2025-06-18",
-  "dateModified": "2026-02-03",
-  "datePublished": "2026-02-03"
+  "dateModified": "2026-02-08",
+  "datePublished": "2026-02-08"
 }
 
   </script><script>

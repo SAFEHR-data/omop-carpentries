@@ -227,7 +227,7 @@
       <div class="accordion-body">
         <ul><li><a href="#introduction">Introduction</a></li>
 <li><a href="#looking-up-omop-concepts">Looking up OMOP concepts</a></li>
-<li><a href="#exploring-the-concept-table">Exploring the concept table</a></li>
+<li><a href="#exploring-the-concept-table">Exploring the <code>concept</code> table</a></li>
 <li><a href="#filtering-concepts-by-domain-vocabulary-class-and-standard-concept-status">Filtering concepts by domain, vocabulary, class and standard concept
 status</a></li>
         </ul></div><!--/div.accordion-body-->
@@ -347,7 +347,7 @@ status</a></li>
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Exploring OMOP concepts with R</h1>
-        <p>Last updated on 2026-02-01 |
+        <p>Last updated on 2026-02-08 |
 
         <a href="https://github.com/SAFEHR-data/omop-carpentries/edit/main/episodes/02_exploring_omop_concepts.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -368,11 +368,14 @@ status</a></li>
 <div class="card-body">
 <div class="inner">
 <h3 class="card-title">Questions</h3>
-<p>e- Find the <code>vocabulary</code>, <code>domain</code> and
-<code>concept_class</code> for a given concept_id - Establish whether a
-concept_id is a standard concept - Find all concepts within a given
-domain - Find all concepts within a given vocabulary</p>
-</div>
+<ul><li>Find the <code>vocabulary</code>, <code>domain</code> and
+<code>concept_class</code> for a given <code>concept_id</code>
+</li>
+<li>Establish whether a <code>concept_id</code> is a standard
+concept</li>
+<li>Find all concepts within a given domain</li>
+<li>Find all concepts within a given vocabulary</li>
+</ul></div>
 </div>
 </div>
 <div class="col-md-8">
@@ -391,14 +394,20 @@ attributes of concepts</li>
 </div>
 </div>
 <section><h2 class="section-heading" id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a></h2>
-<hr class="half-width"><p>Nearly everything in a hospital can be represented by an OMOP
-concept_id.</p>
-<p>Any column within the OMOP CDM named <code>*concept_id</code>
-contains OMOP concept IDs. An OMOP concept_id is a unique integer
-identifier. Concept_ids are defined in the OMOP concept table where a
+<hr class="half-width"><p>The primary purpose of the <code>concept</code> table is to provide a
+standardised representation of medical Concepts, allowing for consistent
+querying and analysis across healthcare databases. Users can join the
+<code>concept</code> table with other tables in the CDM to enrich
+clinical data with Concept information or use the <code>concept</code>
+table as a reference for mapping clinical data from source terminologies
+to Standard or other Concepts.</p>
+<p>An OMOP <code>concept_id</code> is a unique integer identifier.
+Concept_ids are defined in the OMOP <code>concept</code> table where a
 corresponding name and other attributes are stored. OMOP contains
 concept_ids for other medical vocabularies such as SNOMED and LOINC,
 which OMOP terms as source vocabularies.</p>
+<p>Nearly everything in a hospital can be represented by an OMOP
+<code>concept_id</code>.</p>
 </section><section><h2 class="section-heading" id="looking-up-omop-concepts">Looking up OMOP concepts<a class="anchor" aria-label="anchor" href="#looking-up-omop-concepts"></a></h2>
 <hr class="half-width"><p>OMOP concepts can be looked up in <a href="https://athena.ohdsi.org" class="external-link">Athena</a> an online tool provided by
 OHDSI.</p>
@@ -409,7 +418,7 @@ used to demonstrate querying the data.</p>
 to an OMOP Common Data Model database and used it to look at the
 concepts table. We also created the function
 <code>get_concept_name()</code> to get a humanly readable name for a
-concept_id. We will use these again in this episode.</p>
+<code>concept_id</code>. We will use these again in this episode.</p>
 <div class="section level3">
 <h3 id="setting-up-the-connection">Setting up the connection<a class="anchor" aria-label="anchor" href="#setting-up-the-connection"></a></h3>
 <div class="codewrapper sourceCode" id="cb1">
@@ -438,7 +447,7 @@ Download completed!</code></pre>
 <span>                                writeSchema <span class="op">=</span> <span class="st">"main"</span><span class="op">)</span></span></code></pre>
 </div>
 </div>
-</section><section><h2 class="section-heading" id="exploring-the-concept-table">Exploring the concept table<a class="anchor" aria-label="anchor" href="#exploring-the-concept-table"></a></h2>
+</section><section><h2 class="section-heading" id="exploring-the-concept-table">Exploring the <code>concept</code> table<a class="anchor" aria-label="anchor" href="#exploring-the-concept-table"></a></h2>
 <hr class="half-width"><div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -467,8 +476,8 @@ RxNorm).</td>
 <td>Classification within the vocabulary (e.g. Clinical Finding,
 Ingredient).</td>
 </tr><tr class="even"><td>standard_concept</td>
-<td>‘S’ for standard concepts that can be included in network
-studies</td>
+<td>‘S’ for standard concepts that come from internationally accepted
+standard vocabularies.</td>
 </tr><tr class="odd"><td>concept_code</td>
 <td>Code used by the source vocabulary to identify the concept.</td>
 </tr><tr class="even"><td>valid_start_date</td>
@@ -477,9 +486,9 @@ studies</td>
 <td>Date the concept ceased to be valid.</td>
 </tr><tr class="even"><td>invalid_reason</td>
 <td>Reason for invalidation, if applicable</td>
-</tr></tbody></table><p>The concept table is the main table for looking up information about
-concepts. We can use R to query the concept table for specific
-attributes of concepts.</p>
+</tr></tbody></table><p>The <code>concept</code> table is the main table for looking up
+information about concepts. We can use R to query the
+<code>concept</code> table for specific attributes of concepts.</p>
 <div id="challenge1" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
@@ -488,14 +497,16 @@ attributes of concepts.</p>
 <div class="callout-inner">
 <h3 class="callout-title">Challenge</h3>
 <div class="callout-content">
-<p>Answer the following questions using R and the concept table:</p>
-<ol style="list-style-type: decimal"><li><p>How many entries are there in the concept table?</p></li>
-<li><p>How many distinct vocabularies are there in the concept
+<p>Answer the following questions using R and the <code>concept</code>
+table:</p>
+<ol style="list-style-type: decimal"><li><p>How many entries are there in the <code>concept</code>
 table?</p></li>
+<li><p>How many distinct vocabularies are there in the
+<code>concept</code> table?</p></li>
 <li><p>How many distinct domains other than ‘None’ are there in the
-concept table?</p></li>
-<li><p>How many distinct concept_classes are there in the concept
-table?</p></li>
+<code>concept</code> table?</p></li>
+<li><p>How many distinct concept_classes are there in the
+<code>concept</code> table?</p></li>
 </ol></div>
 </div>
 </div>
@@ -504,91 +515,100 @@ table?</p></li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
-<div class="codewrapper sourceCode" id="cb6">
+<ol style="list-style-type: decimal"><li>How many entries are there in the <code>concept</code> table?</li>
+</ol><div class="codewrapper sourceCode" id="cb6">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">library</span><span class="op">(</span><span class="va">dplyr</span><span class="op">)</span></span>
-<span><span class="co"># 1. How many entries are there in the concept table?</span></span>
-<span><span class="va">cdm</span><span class="op">$</span><span class="va">concept</span> <span class="op">%&gt;%</span> <span class="fu">summarise</span><span class="op">(</span>n_concepts <span class="op">=</span> <span class="fu">n</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre>
+<span><span class="va">cdm</span><span class="op">$</span><span class="va">concept</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">summarise</span><span class="op">(</span>n_concepts <span class="op">=</span> <span class="fu">n</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code># Source:   SQL [?? x 1]
-# Database: DuckDB 1.4.1 [unknown@Linux 6.8.0-1044-azure:R 4.5.2//tmp/RtmpGaBIx7/file184a6fd9d846.duckdb]
+# Database: DuckDB 1.4.1 [unknown@Linux 6.8.0-1044-azure:R 4.5.2//tmp/Rtmpd8tQ6t/file17767ba676cb.duckdb]
   n_concepts
        &lt;dbl&gt;
 1        444</code></pre>
 </div>
-<p>Answer: There are 444 entries in the concept table. This is a tiny
-fraction of the overall table which can be found at <a href="https://athena.ohdsi.org" class="external-link">Athena</a></p>
-<p>NOTE: The function <code>n()</code> counts the number of rows in the
-table and <code>summarise()</code> creates a summary table with that
-count. These functions are part of the <code>dplyr</code> package. When
-you have loaded the library once your environment will remember it for
-the rest of the session.</p>
-<div class="codewrapper sourceCode" id="cb8">
+<p><strong><em>Answer:</em></strong> There are 444 entries in the
+<code>concept</code> table. This is a tiny fraction of the overall table
+which can be found at <a href="https://athena.ohdsi.org" class="external-link">Athena</a></p>
+<p><strong>CODING_NOTE</strong>: The function <code>n()</code> counts
+the number of rows in the table and <code>summarise()</code> creates a
+summary table with that count. These functions are part of the
+<code>dplyr</code> package. When you have loaded the library once your
+environment will remember it for the rest of the session.</p>
+<ol start="2" style="list-style-type: decimal"><li>How many distinct vocabularies are there in the <code>concept</code>
+table?</li>
+</ol><div class="codewrapper sourceCode" id="cb8">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># 2. How many distinct vocabularies are there in the concept table?</span></span>
-<span><span class="va">cdm</span><span class="op">$</span><span class="va">concept</span> <span class="op">%&gt;%</span> <span class="fu">summarise</span><span class="op">(</span>n_distinct_vocabularies <span class="op">=</span> <span class="fu">n_distinct</span><span class="op">(</span><span class="va">vocabulary_id</span><span class="op">)</span><span class="op">)</span></span></code></pre>
+<code class="sourceCode R"><span><span class="va">cdm</span><span class="op">$</span><span class="va">concept</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">summarise</span><span class="op">(</span>n_distinct_vocabularies <span class="op">=</span> <span class="fu">n_distinct</span><span class="op">(</span><span class="va">vocabulary_id</span><span class="op">)</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code># Source:   SQL [?? x 1]
-# Database: DuckDB 1.4.1 [unknown@Linux 6.8.0-1044-azure:R 4.5.2//tmp/RtmpGaBIx7/file184a6fd9d846.duckdb]
+# Database: DuckDB 1.4.1 [unknown@Linux 6.8.0-1044-azure:R 4.5.2//tmp/Rtmpd8tQ6t/file17767ba676cb.duckdb]
   n_distinct_vocabularies
                     &lt;dbl&gt;
 1                       9</code></pre>
 </div>
-<p>Answer: There are 9 distinct vocabularies used in this dataset.</p>
-<p>NOTE: The function <code>n_distinct(x)</code> counts the number of
-distinct values in the column x.</p>
-<div class="codewrapper sourceCode" id="cb10">
+<p><strong><em>Answer:</em></strong> There are 9 distinct vocabularies
+used in this dataset.</p>
+<p><strong>CODING_NOTE</strong>: The function <code>n_distinct(x)</code>
+counts the number of distinct values in the column x.</p>
+<ol start="3" style="list-style-type: decimal"><li>How many distinct domains other than ‘None’ are there in the
+<code>concept</code> table?</li>
+</ol><div class="codewrapper sourceCode" id="cb10">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># 3. How many distinct domains other than 'None' are there in the concept table?</span></span>
-<span><span class="va">cdm</span><span class="op">$</span><span class="va">concept</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">filter</span><span class="op">(</span><span class="va">domain_id</span> <span class="op">!=</span> <span class="st">"None"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<code class="sourceCode R"><span><span class="va">cdm</span><span class="op">$</span><span class="va">concept</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">filter</span><span class="op">(</span><span class="va">domain_id</span> <span class="op">!=</span> <span class="st">"None"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">summarise</span><span class="op">(</span>n_distinct_domains <span class="op">=</span> <span class="fu">n_distinct</span><span class="op">(</span><span class="va">domain_id</span><span class="op">)</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code># Source:   SQL [?? x 1]
-# Database: DuckDB 1.4.1 [unknown@Linux 6.8.0-1044-azure:R 4.5.2//tmp/RtmpGaBIx7/file184a6fd9d846.duckdb]
+# Database: DuckDB 1.4.1 [unknown@Linux 6.8.0-1044-azure:R 4.5.2//tmp/Rtmpd8tQ6t/file17767ba676cb.duckdb]
   n_distinct_domains
                &lt;dbl&gt;
 1                  8</code></pre>
 </div>
-<p>Answer: There are 8 distinct domains other than ‘None’ in this
-dataset.</p>
-<p>NOTE: We use the <code>filter()</code> function to filter out rows
-where the domain_id is ‘None’ before counting the distinct domains.</p>
-<div class="codewrapper sourceCode" id="cb12">
+<p><strong><em>Answer:</em></strong> There are 8 distinct domains other
+than ‘None’ in this dataset.</p>
+<p><strong>CODING_NOTE</strong>: We use the <code>filter()</code>
+function to filter out rows where the domain_id is ‘None’ before
+counting the distinct domains.</p>
+<ol start="4" style="list-style-type: decimal"><li>How many distinct concept_classes are there in the
+<code>concept</code> table?</li>
+</ol><div class="codewrapper sourceCode" id="cb12">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># 4. How many distinct concept_classes are there in the concept table?</span></span>
-<span><span class="va">cdm</span><span class="op">$</span><span class="va">concept</span> <span class="op">%&gt;%</span> <span class="fu">summarise</span><span class="op">(</span>n_distinct_concept_classes <span class="op">=</span> <span class="fu">n_distinct</span><span class="op">(</span><span class="va">concept_class_id</span><span class="op">)</span><span class="op">)</span></span></code></pre>
+<code class="sourceCode R"><span><span class="va">cdm</span><span class="op">$</span><span class="va">concept</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">summarise</span><span class="op">(</span>n_distinct_concept_classes <span class="op">=</span> <span class="fu">n_distinct</span><span class="op">(</span><span class="va">concept_class_id</span><span class="op">)</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code># Source:   SQL [?? x 1]
-# Database: DuckDB 1.4.1 [unknown@Linux 6.8.0-1044-azure:R 4.5.2//tmp/RtmpGaBIx7/file184a6fd9d846.duckdb]
+# Database: DuckDB 1.4.1 [unknown@Linux 6.8.0-1044-azure:R 4.5.2//tmp/Rtmpd8tQ6t/file17767ba676cb.duckdb]
   n_distinct_concept_classes
                        &lt;dbl&gt;
 1                         21</code></pre>
 </div>
-<p>Answer: There are 21 distinct concept_classes used in this
-dataset.</p>
+<p><strong><em>Answer:</em></strong> There are 21 distinct
+concept_classes used in this dataset.</p>
 </div>
 </div>
 </div>
@@ -605,9 +625,10 @@ concept_class and standard_concept status.</p>
 <div class="callout-inner">
 <h3 class="callout-title">Challenge</h3>
 <div class="callout-content">
-<p>List the first ten rows of the concept table, listing only the
-concept_id, domain_id, vocabulary_id, concept_class_id and
-standard_concept columns.</p>
+<p>List the first ten rows of the <code>concept table</code>, listing
+only the <code>concept_id</code>, <code>domain_id</code>,
+<code>vocabulary_id</code>, <code>concept_class_id</code> and
+<code>standard_concept</code> columns.</p>
 </div>
 </div>
 </div>
@@ -616,7 +637,7 @@ standard_concept columns.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb14">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -645,8 +666,13 @@ standard_concept columns.</p>
  9      78272 Condition SNOMED        Clinical Finding S
 10      80180 Condition SNOMED        Clinical Finding S               </code></pre>
 </div>
-<p>Note we have to use <code>collect()</code> to pull the data into R
-memory to view it.</p>
+<p><strong>CODING_NOTE</strong>: The <code>arrange()</code> function
+orders the rows by <code>concept_id</code>. The
+<code>filter(row_number() &lt;= 10)</code> function filters to the first
+10 rows. The <code>select()</code> function selects only the specified
+columns. We have to use <code>collect()</code> to pull the data into R
+memory to view it. This is because we are querying a remote database,
+not one that is local..</p>
 </div>
 </div>
 </div>
@@ -665,7 +691,7 @@ together.</p>
 <div class="callout-inner">
 <h3 class="callout-title">Challenge</h3>
 <div class="callout-content">
-<p>List all distinct vocabularies in the concept table.</p>
+<p>List all distinct vocabularies in the <code>concept</code> table.</p>
 </div>
 </div>
 </div>
@@ -674,7 +700,7 @@ together.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb16">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -689,11 +715,13 @@ together.</p>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>[1] "Gender"  "RxNorm"  "CVX"     "SNOMED"  "None"    "ICD10CM" "LOINC"
-[8] "NDC"     "Visit"  </code></pre>
+<pre class="output" tabindex="0"><code>[1] "ICD10CM" "LOINC"   "NDC"     "Visit"   "Gender"  "RxNorm"  "CVX"
+[8] "SNOMED"  "None"   </code></pre>
 </div>
-<p>Here we can use <code>pull(x)</code> to pull the data x into R memory
-to view it.</p>
+<p><strong>CODING_NOTE</strong>: Here we can use <code>pull(x)</code> to
+pull the data x into R memory to view it. This is because we are only
+requiring one column of data, so we can pull that column directly into R
+memory without needing to use <code>collect()</code> first.</p>
 </div>
 </div>
 </div>
@@ -713,7 +741,7 @@ table it belongs to and how it’s used analytically.</p>
 <div class="callout-inner">
 <h3 class="callout-title">Challenge</h3>
 <div class="callout-content">
-<p>List all distinct domains in the concept table.</p>
+<p>List all distinct domains in the <code>concept</code> table.</p>
 </div>
 </div>
 </div>
@@ -722,7 +750,7 @@ table it belongs to and how it’s used analytically.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb18">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -737,8 +765,8 @@ table it belongs to and how it’s used analytically.</p>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>[1] "Drug"        "Measurement" "Observation" "Visit"       "Metadata"
-[6] "Gender"      "Condition"   "Procedure"  </code></pre>
+<pre class="output" tabindex="0"><code>[1] "Drug"        "Measurement" "Condition"   "Procedure"   "Observation"
+[6] "Visit"       "Metadata"    "Gender"     </code></pre>
 </div>
 </div>
 </div>
@@ -749,16 +777,26 @@ table it belongs to and how it’s used analytically.</p>
 <h3 id="look-at-concept-classes">Look at concept classes<a class="anchor" aria-label="anchor" href="#look-at-concept-classes"></a></h3>
 <p>Class: A lower level category that groups concepts within a domain by
 what they represent in clinical data.</p>
-<div id="discussion1" class="callout discussion">
+<div id="challenge5" class="callout challenge">
 <div class="callout-square">
-<i class="callout-icon" data-feather="message-circle"></i>
+<i class="callout-icon" data-feather="zap"></i>
 </div>
-<span class="callout-header">Discussion</span>
+<span class="callout-header">Challenge</span>
 <div class="callout-inner">
 <h3 class="callout-title">Challenge</h3>
 <div class="callout-content">
-<p>List all distinct concept_classes in the concept table.
-::::::::::::::::::::::::::::::::::::::::::::::::::: solution</p>
+<p>List all distinct concept_classes in the <code>concept</code>
+table.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution5" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution5" aria-expanded="false" aria-controls="collapseSolution5">
+  <h4 class="accordion-header" id="headingSolution5"> Show me the solution </h4>
+</button>
+<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
+<div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb20">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -774,23 +812,28 @@ what they represent in clinical data.</p>
 </h3>
 <pre class="output" tabindex="0"><code> [1] "Branded Drug"         "3-char nonbill code"  "Quant Branded Drug"
  [4] "Branded Drug Comp"    "Visit"                "Context-dependent"
- [7] "Undefined"            "CVX"                  "Ingredient"
-[10] "11-digit NDC"         "Branded Pack"         "Clinical Drug Comp"
-[13] "Gender"               "4-char billing code"  "Procedure"
-[16] "Lab Test"             "Clinical Drug"        "Clinical Finding"
-[19] "Clinical Observation" "Quant Clinical Drug"  "Morph Abnormality"   </code></pre>
+ [7] "Undefined"            "Morph Abnormality"    "4-char billing code"
+[10] "Procedure"            "Lab Test"             "Clinical Drug"
+[13] "Clinical Finding"     "Clinical Observation" "Quant Clinical Drug"
+[16] "CVX"                  "Ingredient"           "11-digit NDC"
+[19] "Branded Pack"         "Clinical Drug Comp"   "Gender"              </code></pre>
 </div>
 </div>
 </div>
 </div>
-<p>::::::::::::::::::::::::::::::::::::::::::::::::::: ### Look at non
-standard concepts</p>
+</div>
+</div>
+<div class="section level3">
+<h3 id="look-at-non-standard-concepts">Look at non standard concepts<a class="anchor" aria-label="anchor" href="#look-at-non-standard-concepts"></a></h3>
 <p>A standard concept is the preferred, harmonised code in OMOP that
 represents a clinical idea across vocabularies. Standard concepts
 (standard_concept = “S”) are the target of mappings from source codes,
 and they define which domain and table the data belong to for consistent
-analysis.</p>
-<div id="challenge5" class="callout challenge">
+analysis. However, OMOP also include nonstandard concepts from sources
+that are not globally used but maybe useful locally. <code>dm+d</code>,
+the NHS Dictionary of Medicines and Devices is one such vocabulary that
+is included in OMOP but is not a standard vocabulary.</p>
+<div id="challenge6" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
@@ -800,17 +843,17 @@ analysis.</p>
 <div class="callout-content">
 <p>Find any nonstandard concepts (i.e. concepts where standard_concept
 is not ‘S’) by filtering the concept table. List the first 10
-concept_ids of nonstandard concepts. Then look up their concept_name,
-domain_id, vocabulary_id and standard_concept status.</p>
+<code>concept_id</code>s of nonstandard concepts. Then look up their
+concept_name, domain_id, vocabulary_id and standard_concept status.</p>
 </div>
 </div>
 </div>
-<div id="accordionSolution5" class="accordion challenge-accordion accordion-flush">
+<div id="accordionSolution6" class="accordion challenge-accordion accordion-flush">
 <div class="accordion-item">
-<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution5" aria-expanded="false" aria-controls="collapseSolution5">
-  <h4 class="accordion-header" id="headingSolution5"> Show me the solution </h4>
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution6" aria-expanded="false" aria-controls="collapseSolution6">
+  <h4 class="accordion-header" id="headingSolution6"> Show me the solution </h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
+<div id="collapseSolution6" class="accordion-collapse collapse" aria-labelledby="headingSolution6" data-bs-parent="#accordionSolution6">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb22">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -826,10 +869,13 @@ domain_id, vocabulary_id and standard_concept status.</p>
 </h3>
 <pre class="output" tabindex="0"><code>[1]        0  1569708 35208414 44923712 45011828</code></pre>
 </div>
-<p>Answer: There are only four nonstandard concepts in this dataset:
-1569708, 35208414, 44923712, 45011828.</p>
-<p>NOTE: We use <code>slice_min()</code> to get the first 10 rows
-ordered by concept_id.</p>
+<p><strong><em>Answer:</em></strong> There are only four nonstandard
+concepts in this dataset: <strong>1569708</strong>,
+<strong>35208414</strong>, <strong>44923712</strong>,
+<strong>45011828</strong>.</p>
+<p><strong>CODING_NOTE</strong>: We use <code>slice_min()</code> to get
+the first 10 rows which match the filter, ordered by
+<code>concept_id</code>.</p>
 <div class="codewrapper sourceCode" id="cb24">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -850,8 +896,8 @@ ordered by concept_id.</p>
 3    1569708 Other diseases of digesti… Condition ICD10CM       &lt;NA&gt;
 4   45011828 Diclofenac Sodium 75 MG D… Drug      NDC           &lt;NA&gt;            </code></pre>
 </div>
-<p>NOTE: We use <code>%in%</code> to filter for multiple concept_ids
-which we can list in a vector.</p>
+<p><strong>CODING_NOTE</strong>: We use <code>%in%</code> to filter for
+multiple <code>concept_id</code>s which we can list in a vector.</p>
 </div>
 </div>
 </div>
@@ -859,7 +905,7 @@ which we can list in a vector.</p>
 <p>Now you should be able to replicate our get_concept_name() function
 to look up other attributes of concepts such as domain, vocabulary and
 standard concept status.</p>
-<div id="challenge6" class="callout challenge">
+<div id="challenge7" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
@@ -867,19 +913,18 @@ standard concept status.</p>
 <div class="callout-inner">
 <h3 class="callout-title">Challenge</h3>
 <div class="callout-content">
-<p>Questions?</p>
-<p>Find the domain,vocabulary and concept class for concept_id
-35208414</p>
+<p>Find the domain,vocabulary and concept class for
+<code>concept_id</code> <strong>35208414</strong></p>
 <p>Is this concept a standard concept?</p>
 </div>
 </div>
 </div>
-<div id="accordionSolution6" class="accordion challenge-accordion accordion-flush">
+<div id="accordionSolution7" class="accordion challenge-accordion accordion-flush">
 <div class="accordion-item">
-<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution6" aria-expanded="false" aria-controls="collapseSolution6">
-  <h4 class="accordion-header" id="headingSolution6"> Show me the solution </h4>
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution7" aria-expanded="false" aria-controls="collapseSolution7">
+  <h4 class="accordion-header" id="headingSolution7"> Show me the solution </h4>
 </button>
-<div id="collapseSolution6" class="accordion-collapse collapse" data-bs-parent="#accordionSolution6" aria-labelledby="headingSolution6">
+<div id="collapseSolution7" class="accordion-collapse collapse" aria-labelledby="headingSolution7" data-bs-parent="#accordionSolution7">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb26">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -954,11 +999,13 @@ standard concept status.</p>
 </h3>
 <pre class="output" tabindex="0"><code>[1] NA</code></pre>
 </div>
-<p>Answer:</p>
-<ul><li><p>The domain for concept_id 319835 is ‘Condition’.</p></li>
-<li><p>The vocabulary for concept_id 319835 is ‘ICD10CM’.</p></li>
-<li><p>The concept class for concept id 319835 is ‘4-char billing
-code’</p></li>
+<p><strong><em>Answer:</em></strong></p>
+<ul><li><p>The domain for <code>concept_id</code> <strong>319835</strong> is
+‘Condition’.</p></li>
+<li><p>The vocabulary for <code>concept_id</code>
+<strong>319835</strong> is ‘ICD10CM’.</p></li>
+<li><p>The concept class for concept id <strong>319835</strong> is
+‘4-char billing code’</p></li>
 <li><p>This concept is not a standard concept (standard_concept =
 ‘NA’).</p></li>
 </ul></div>
@@ -1048,8 +1095,8 @@ any links that you are not going to use.
   "url": "https://SAFEHR-data.github.io/omop-carpentries/instructor/02_exploring_omop_concepts.html",
   "identifier": "https://SAFEHR-data.github.io/omop-carpentries/instructor/02_exploring_omop_concepts.html",
   "dateCreated": "2025-06-18",
-  "dateModified": "2026-02-01",
-  "datePublished": "2026-02-03"
+  "dateModified": "2026-02-08",
+  "datePublished": "2026-02-08"
 }
 
   </script><script>

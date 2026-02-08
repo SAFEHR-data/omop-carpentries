@@ -346,7 +346,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Conditions and Visits</h1>
-        <p>Last updated on 2026-02-01 |
+        <p>Last updated on 2026-02-08 |
 
         <a href="https://github.com/SAFEHR-data/omop-carpentries/edit/main/episodes/06_conditions_visits.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -391,7 +391,7 @@ within a visit.</p></li>
 </div>
 </div>
 <section><h2 class="section-heading" id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a></h2>
-<hr class="half-width"><p>This lesson covers the OMOP conditions and visits table.</p>
+<hr class="half-width"><p>This episode covers the OMOP conditions and visits table.</p>
 <div id="callout1" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
@@ -503,11 +503,13 @@ have?</p></li>
 <div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
 <div class="accordion-item">
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
-  <h4 class="accordion-header" id="headingSolution1"> 1 How many records are there in the condition_occurrence table? </h4>
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
 <div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
-<div class="codewrapper sourceCode" id="cb5">
+<ol style="list-style-type: decimal"><li>How many records are there in the <code>condition_occurrence</code>
+table?</li>
+</ol><div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -523,10 +525,9 @@ have?</p></li>
   &lt;int&gt;
 1    35</code></pre>
 </div>
-<div class="section level1">
-<h1 id="list-any-of-the-conditions-that-occur-more-than-once-in-the-table-along-with-their-humanly-readable-names-">2 List any of the conditions that occur more than once in the table
-along with their humanly readable names.<a class="anchor" aria-label="anchor" href="#list-any-of-the-conditions-that-occur-more-than-once-in-the-table-along-with-their-humanly-readable-names-"></a></h1>
-<div class="codewrapper sourceCode" id="cb7">
+<ol start="2" style="list-style-type: decimal"><li>List any of the conditions that occur more than once in the table
+along with their humanly readable names.</li>
+</ol><div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -552,10 +553,8 @@ along with their humanly readable names.<a class="anchor" aria-label="anchor" hr
 3 Gastritis                                          2
 4 Hemorrhoids                                        2</code></pre>
 </div>
-</div>
-<div class="section level1">
-<h1 id="choose-one-patient-and-list-all-the-conditions-they-have">3 Choose one patient and list all the conditions they have?<a class="anchor" aria-label="anchor" href="#choose-one-patient-and-list-all-the-conditions-they-have"></a></h1>
-<div class="codewrapper sourceCode" id="cb9">
+<ol start="3" style="list-style-type: decimal"><li>Choose one patient and list all the conditions they have?</li>
+</ol><div class="codewrapper sourceCode" id="cb9">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -581,12 +580,12 @@ along with their humanly readable names.<a class="anchor" aria-label="anchor" hr
 </div>
 </div>
 </div>
-</div>
 <p>Question three can be repeated for different patients by changing the
-<code>patient_id</code> variable. Interestingly if you choose patient 31
-you will see that the entry for their condition and start date is
-repeated. Investigate the table further to see why this might be the
-case. (Hint: look at the <code>condition_type_concept_id</code>,
+<code>patient_id</code> variable. Interestingly if you choose patient
+<strong>31</strong> you will see that the entry for their condition and
+start date is repeated. Investigate the table further to see why this
+might be the case. (Hint: look at the
+<code>condition_type_concept_id</code>,
 <code>conditions_status_concept_id</code> and
 <code>condition_source_value</code> columns).</p>
 <div id="challenge2" class="callout challenge">
@@ -659,8 +658,9 @@ differences between these entries.</p>
 </div>
 <p>As you can see from the output, although the
 <code>condition_concept_id</code> and <code>condition_start_date</code>
-are the same for patient 31, the <code>condition_type_concept_id</code>
-and <code>condition_status_concept_id</code> differ between the entries.
+are the same for patient <strong>31</strong>, the
+<code>condition_type_concept_id</code> and
+<code>condition_status_concept_id</code> differ between the entries.
 This indicates that the same condition was recorded in different
 contexts or with different statuses, which explains the repeated entries
 in the <code>condition_occurrence</code> table. This is commonly found
@@ -704,11 +704,14 @@ inpatient visit?</p></li>
 <div id="accordionSolution3" class="accordion challenge-accordion accordion-flush">
 <div class="accordion-item">
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
-  <h4 class="accordion-header" id="headingSolution3"> 1 Find out how many different types of visits are recorded in the visit_occurrence table and link these to get their name. </h4>
+  <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
 <div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
-<div class="codewrapper sourceCode" id="cb13">
+<ol style="list-style-type: decimal"><li>Find out how many different types of visits are recorded in the
+<code>visit_occurrence</code> table and link these to get their
+name.</li>
+</ol><div class="codewrapper sourceCode" id="cb13">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -733,9 +736,8 @@ inpatient visit?</p></li>
 3             9202 Outpatient Visit                       4
 4              262 Emergency Room and Inpatient Visit     1</code></pre>
 </div>
-<div class="section level1">
-<h1 id="find-patients-who-had-more-than-one-visit-">2 Find patients who had more than one visit.<a class="anchor" aria-label="anchor" href="#find-patients-who-had-more-than-one-visit-"></a></h1>
-<div class="codewrapper sourceCode" id="cb15">
+<ol start="2" style="list-style-type: decimal"><li>Find patients who had more than one visit.</li>
+</ol><div class="codewrapper sourceCode" id="cb15">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -756,11 +758,9 @@ inpatient visit?</p></li>
 3         2           2
 4        58          10</code></pre>
 </div>
-</div>
-<div class="section level1">
-<h1 id="how-many-patients-had-both-an-emergency-room-visit-and-an-inpatient-visit">3 How many patients had both an emergency room visit and an
-inpatient visit?<a class="anchor" aria-label="anchor" href="#how-many-patients-had-both-an-emergency-room-visit-and-an-inpatient-visit"></a></h1>
-<div class="codewrapper sourceCode" id="cb17">
+<ol start="3" style="list-style-type: decimal"><li>How many patients had both an emergency room visit and an inpatient
+visit?</li>
+</ol><div class="codewrapper sourceCode" id="cb17">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -775,7 +775,6 @@ inpatient visit?<a class="anchor" aria-label="anchor" href="#how-many-patients-h
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code>[1] 8</code></pre>
-</div>
 </div>
 </div>
 </div>
@@ -865,8 +864,8 @@ any links that you are not going to use.
   "url": "https://SAFEHR-data.github.io/omop-carpentries/06_conditions_visits.html",
   "identifier": "https://SAFEHR-data.github.io/omop-carpentries/06_conditions_visits.html",
   "dateCreated": "2025-06-18",
-  "dateModified": "2026-02-01",
-  "datePublished": "2026-02-03"
+  "dateModified": "2026-02-08",
+  "datePublished": "2026-02-08"
 }
 
   </script><script>

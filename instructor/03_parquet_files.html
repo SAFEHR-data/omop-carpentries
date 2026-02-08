@@ -345,7 +345,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Parquet files</h1>
-        <p>Last updated on 2026-02-01 |
+        <p>Last updated on 2026-02-08 |
 
         <a href="https://github.com/SAFEHR-data/omop-carpentries/edit/main/episodes/03_parquet_files.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -405,8 +405,8 @@ and install the sample database. If you have not done this yet, please
 refer to the setup instructions provided earlier in the course. For now,
 we will assume that you have the sample OMOP CDM database available on
 your local machine at the following path:
-<code>workshop/data/public/</code> and the functions in a folder
-<code>workshop/code/parquet_dataset</code>.</p>
+<code>../workshop/data/public/</code> and the functions in a folder
+<code>../workshop/code/parquet_dataset</code>.</p>
 </div>
 </div>
 </div>
@@ -419,7 +419,7 @@ applications.</p>
 </section><section><h2 class="section-heading" id="exploring-parquet-files">Exploring Parquet files<a class="anchor" aria-label="anchor" href="#exploring-parquet-files"></a></h2>
 <hr class="half-width"><p>We have provided a function that will allow you to browse the
 structure of the data in the same way as we did with the database in the
-previous episode. This code is available in the
+previous episode. This code is available below or in the downloaded
 <code>workshop/code/open_omop_dataset.R</code> file. You can source this
 file to load the function into your R environment.</p>
 <div class="codewrapper sourceCode" id="cb1">
@@ -445,6 +445,18 @@ file to load the function into your R environment.</p>
 <span>    <span class="fu">purrr</span><span class="fu">::</span><span class="fu">map</span><span class="op">(</span><span class="va">open_omop_schema</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre>
 </div>
+<p><strong>CODING_NOTE</strong>: This function uses the
+<code>arrow</code> package to read in the parquet files. The
+<code>open_dataset()</code> function from the <code>arrow</code> package
+allows us to read in the parquet files without having to load the entire
+dataset into memory. This is particularly useful when working with large
+datasets. The function is reasonably complex but it is designed to be
+flexible and work with any OMOP CDM dataset that is structured in the
+same way as the one we are using for this course. It will read in all
+the parquet files in the specified directory and create a nested list
+structure that allows us to easily access the different tables in the
+dataset. We leave it to you to explore the code and understand how it
+works.</p>
 <p>Now we can use this function to open the sample OMOP CDM dataset
 located in the <code>workshop/data/public/</code> directory and explore
 it in the same way as we did with the database in the previous
@@ -460,12 +472,12 @@ episode.</p>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
   <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
 <div class="accordion-body">
 <p>Note that the path to the data directory may be different depending
 on where you have stored the sample OMOP CDM dataset on your local
 machine.</p>
-<p>Check the people have used the right path.Their environment should
+<p>Check the people have used the right path. Their environment should
 now have an entry under Data reading ‘omop List of 1’</p>
 </div>
 </div>
@@ -606,7 +618,7 @@ See $metadata for additional Schema metadata</code></pre>
 <p>You will see that this gives you a list of all the tables in this
 dataset and what columns they contain. It is obviously a much smaller
 dataset! You can explore individual tables which will also give you the
-column names.</p>
+column names and the data type of the entry.</p>
 <div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -655,7 +667,13 @@ See $metadata for additional Schema metadata</code></pre>
 # ℹ 3 more variables: race_concept_id &lt;int&gt;, gender_source_value &lt;chr&gt;,
 #   race_source_value &lt;chr&gt;</code></pre>
 </div>
-<p>or we can use the specific functions from the <code>arrow</code>
+<p><strong>CODING_NOTE</strong>: The <code>collect()</code> function is
+used to actually read the data from the parquet files into memory. This
+is necessary because the <code>open_dataset()</code> function creates a
+reference to the data rather than loading it into memory. By using
+<code>collect()</code>, we can work with the data as a regular data
+frame in R.</p>
+<p>Or we can use the specific functions from the <code>arrow</code>
 package to read in the parquet files directly.</p>
 <div class="codewrapper sourceCode" id="cb9">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -682,12 +700,17 @@ package to read in the parquet files directly.</p>
 # ℹ 3 more variables: race_concept_id &lt;int&gt;, gender_source_value &lt;chr&gt;,
 #   race_source_value &lt;chr&gt;</code></pre>
 </div>
+<p><strong>CODING_NOTE</strong>: The <code>read_parquet()</code>
+function from the <code>arrow</code> package allows us to read in a
+specific parquet file directly into R. This can be useful if we only
+want to work with a specific table from the dataset and do not want to
+load the entire dataset into memory.</p>
 <div id="accordionInstructor2" class="accordion instructor-note accordion-flush">
 <div class="accordion-item">
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor2" aria-expanded="false" aria-controls="collapseInstructor2">
   <h3 class="accordion-header" id="headingInstructor2">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
 </button>
-<div id="collapseInstructor2" class="accordion-collapse collapse" aria-labelledby="headingInstructor2" data-bs-parent="#accordionInstructor2">
+<div id="collapseInstructor2" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor2" aria-labelledby="headingInstructor2">
 <div class="accordion-body">
 <p>Check that everyone has been able to read in the person table and see
 the data.</p>
@@ -736,7 +759,7 @@ the previous episode to work with this parquet file dataset.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb11">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -751,6 +774,13 @@ the previous episode to work with this parquet file dataset.</p>
 <span>    <span class="fu">collect</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre>
 </div>
+<p><strong>CODING_NOTE</strong>: The <code>get_concept_name()</code>
+function is adapted to work with the parquet file dataset. It uses the
+<code>filter()</code> and <code>select()</code> functions from the
+<code>dplyr</code> package to query the <code>concept</code> table in
+the parquet dataset. The <code>collect()</code> function is used to read
+the result into memory so that we can work with it as a regular data
+frame in R.</p>
 </div>
 </div>
 </div>
@@ -771,6 +801,8 @@ concept_id.</p>
   &lt;chr&gt;
 1 Male        </code></pre>
 </div>
+<p><strong><em>Answer:</em></strong> The concept_id
+<strong>8507</strong> corresponds to the concept “Male”.</p>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -849,8 +881,8 @@ any links that you are not going to use.
   "url": "https://SAFEHR-data.github.io/omop-carpentries/instructor/03_parquet_files.html",
   "identifier": "https://SAFEHR-data.github.io/omop-carpentries/instructor/03_parquet_files.html",
   "dateCreated": "2025-06-18",
-  "dateModified": "2026-02-01",
-  "datePublished": "2026-02-03"
+  "dateModified": "2026-02-08",
+  "datePublished": "2026-02-08"
 }
 
   </script><script>

@@ -346,7 +346,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Measurements and Observations</h1>
-        <p>Last updated on 2026-02-01 |
+        <p>Last updated on 2026-02-08 |
 
         <a href="https://github.com/SAFEHR-data/omop-carpentries/edit/main/episodes/05_measurement_observation.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -389,7 +389,7 @@ measurement or observation concept by name</p></li>
 </div>
 </div>
 <section><h2 class="section-heading" id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a></h2>
-<hr class="half-width"><p>This lesson covers the OMOP measurement and observation tables.</p>
+<hr class="half-width"><p>This episode covers the OMOP measurement and observation tables.</p>
 <div id="callout1" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
@@ -542,15 +542,15 @@ various columns that might store a value and associated information
 <td>-</td>
 </tr><tr class="even"><td><strong>unit_concept_id</strong></td>
 <td>units of the numeric value</td>
-<td>9529</td>
+<td><strong>9529</strong></td>
 <td>kilogram</td>
 </tr><tr class="odd"><td><strong>value_as_concept_id</strong></td>
 <td>categorical value</td>
-<td>4328749</td>
+<td><strong>4328749</strong></td>
 <td>High</td>
 </tr><tr class="even"><td><strong>operator_concept_id</strong></td>
 <td>optional operators</td>
-<td>4172704</td>
+<td><strong>4172704</strong></td>
 <td>&gt;</td>
 </tr></tbody></table><p>Note where values are a concept_id, the name of that concept can be
 looked up in the concept table that is part of the OMOP vocabularies and
@@ -772,7 +772,8 @@ all persons?</p></li>
 </button>
 <div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
 <div class="accordion-body">
-<div class="codewrapper sourceCode" id="cb14">
+<ol style="list-style-type: decimal"><li>What are the units associated with <code>Heart rate</code>?</li>
+</ol><div class="codewrapper sourceCode" id="cb14">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -789,7 +790,7 @@ all persons?</p></li>
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># 1. Filter measurement table for this concept id</span></span>
+<code class="sourceCode R"><span><span class="co"># Filter measurement table for this concept id</span></span>
 <span><span class="va">heart_rate_measurements</span> <span class="op">&lt;-</span> <span class="va">omop</span><span class="op">$</span><span class="va">public</span><span class="op">$</span><span class="va">measurement</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">filter</span><span class="op">(</span><span class="va">measurement_concept_id</span> <span class="op">==</span> <span class="va">heart_rate_id</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">collect</span><span class="op">(</span><span class="op">)</span></span>
@@ -805,12 +806,13 @@ all persons?</p></li>
   &lt;chr&gt;
 1 per minute  </code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb18">
+<ol start="2" style="list-style-type: decimal"><li>What is the average value recorded for <code>Heart rate</code>
+across all persons?</li>
+</ol><div class="codewrapper sourceCode" id="cb18">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># 2. Calculate the average value recorded for this measurement</span></span>
-<span><span class="va">average_heart_rate</span> <span class="op">&lt;-</span> <span class="fu">mean</span><span class="op">(</span><span class="va">heart_rate_measurements</span><span class="op">$</span><span class="va">value_as_number</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">average_heart_rate</span> <span class="op">&lt;-</span> <span class="fu">mean</span><span class="op">(</span><span class="va">heart_rate_measurements</span><span class="op">$</span><span class="va">value_as_number</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">average_heart_rate</span></span></code></pre>
 </div>
 <div class="codewrapper">
@@ -818,12 +820,13 @@ all persons?</p></li>
 </h3>
 <pre class="output" tabindex="0"><code>[1] 95</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb20">
+<ol start="3" style="list-style-type: decimal"><li>Get the class of concept for <code>Heart rate</code>
+</li>
+</ol><div class="codewrapper sourceCode" id="cb20">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># 3. Get the class of concept for Heart rate</span></span>
-<span><span class="va">heart_rate_class</span> <span class="op">&lt;-</span> <span class="va">omop</span><span class="op">$</span><span class="va">public</span><span class="op">$</span><span class="va">concept</span> <span class="op">|&gt;</span></span>
+<code class="sourceCode R"><span><span class="va">heart_rate_class</span> <span class="op">&lt;-</span> <span class="va">omop</span><span class="op">$</span><span class="va">public</span><span class="op">$</span><span class="va">concept</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">filter</span><span class="op">(</span><span class="va">concept_id</span> <span class="op">==</span> <span class="va">heart_rate_id</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">select</span><span class="op">(</span><span class="va">concept_class_id</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">collect</span><span class="op">(</span><span class="op">)</span> </span>
@@ -927,8 +930,8 @@ any links that you are not going to use.
   "url": "https://SAFEHR-data.github.io/omop-carpentries/instructor/05_measurement_observation.html",
   "identifier": "https://SAFEHR-data.github.io/omop-carpentries/instructor/05_measurement_observation.html",
   "dateCreated": "2025-06-18",
-  "dateModified": "2026-02-01",
-  "datePublished": "2026-02-03"
+  "dateModified": "2026-02-08",
+  "datePublished": "2026-02-08"
 }
 
   </script><script>
