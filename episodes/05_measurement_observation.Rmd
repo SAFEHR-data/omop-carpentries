@@ -102,6 +102,36 @@ Columns are similar between measurement and observation.
 
 Data are stored as questions and answers. A question (e.g. `Pulse rate`) is defined by a concept_id and the answer is stored in a value column.
 
+### The `measurement` table contains the following columns (among others not listed here):
+| Column Names          | Description of content |
+|-----------------------|---------------------------------------|
+| **measurement_id** | Unique identifier for each measurement |
+| **person_id** | Identifier for the patient |
+| **measurement_concept_id** | Concept identifier for the measurement |
+| **measurement_date** | Date the measurement was taken |
+| **measurement_datetime** | Date and time the measurement was taken |
+| **operator_concept_id** | Concept identifier for the operator (e.g. less than, greater than) used in the measurement value comparison if applicable |
+| **value_as_number** | The numeric value of the measurement |
+| **value_as_concept_id** | Concept identifier for the categorical value of the measurement |
+| **unit_concept_id** | Concept identifier for the unit of measurement |
+| **range_low** | The low end of the normal range for the measurement |
+| **range_high** | The high end of the normal range for the measurement |
+| **visit_occurrence_id** | Identifier for the visit during which the measurement was taken |
+
+### The `observation` table contains the following columns (among others not listed here):
+| Column Names          | Description of content |
+|-----------------------|---------------------------------------|.
+| **observation_id** | Unique identifier for each observation |
+| **person_id** | Identifier for the patient |
+| **observation_concept_id** | Concept identifier for the observation |
+| **observation_date** | Date the observation was made |
+| **observation_datetime** | Date and time the observation was made |
+| **value_as_number** | The numeric value of the observation |
+| **value_as_string** | The string value of the observation |
+| **value_as_concept_id** | Concept identifier for the categorical value of the observation |
+| **visit_occurrence_id** | Identifier for the visit during which the observation was made |
+
+
 The **measurement_concept_id** or **observation_concept_id** columns define what has been recorded. Here are some examples : 
 
 Example Measurement concepts        | Example Observation concepts

@@ -97,6 +97,20 @@ get_concept_id <- function(name) {
 
 [Conditions](https://ohdsi.github.io/CommonDataModel/cdm54.html#conditions) are a key part of the OMOP CDM. They represent diagnoses that have been made for patients. Conditions are stored in the `condition_occurrence` table. Each record in this table represents a single occurrence of a condition for a patient. The table contains records of diseases, medical conditions, diagnoses, signs, or symptoms observed by providers or reported by patients. Conditions are mapped from diagnostic codes and represented using standardized concepts in a hierarchical structure. 
 
+### The `condition_occurrence` table contains the following columns (among others not listed here):
+| Column Names          | Description of content |
+|-----------------------|---------------------------------------|
+| **condition_occurrence_id** | Unique identifier for each condition occurrence |
+| **person_id** | Identifier for the patient |
+| **condition_concept_id** | Concept identifier for the condition |
+| **condition_start_date** | Date the condition started |
+| **condition_end_date** | Date the condition ended |
+| **condition_type_concept_id** | Concept identifier for the type of condition occurrence |
+| **condition_status_concept_id** | Concept identifier for the status of the condition occurrence |
+| **visit_occurrence_id** | Identifier for the visit during which the condition was recorded |
+| **condition_source_value** | Original value from the source data |
+| **condition_source_concept_id** | Concept identifier for the source value |
+
 ::::::::::::::::::::::::::::::::::::: challenge
 
 1. How many records are there in the `condition_occurrence` table?
@@ -201,6 +215,19 @@ omop$public$condition_occurrence |>
 
 The `visit_occurrence` table contains [events where Persons engage with the healthcare system for a duration of time](https://ohdsi.github.io/CommonDataModel/cdm54.html#visit_occurrence).
 
+### The `visit_occurrence` table contains the following columns (among others not listed here):
+| Column Names          | Description of content |
+|-----------------------|---------------------------------------|
+| **visit_occurrence_id** | Unique identifier for each visit occurrence |
+| **person_id** | Identifier for the patient |
+| **visit_concept_id** | Concept identifier for the type of visit |
+| **visit_start_date** | Date the visit started |
+| **visit_start_datetime** | Date and time the visit started |
+| **visit_end_date** | Date the visit ended |
+| **visit_end_datetime** | Date and time the visit ended |
+| **visit_type_concept_id** | Concept identifier for the type of visit |
+| **discharged_to_concept_id** | Concept identifier for where the patient was discharged to |
+| **preceding_visit_occurrence_id** | Identifier for the previous visit occurrence |
 
 The main clinical tables `condition_occurrence`, `measurement`, `observation` and `drug_exposure` all contain a `visit_occurrence_id` that links to this table.
 

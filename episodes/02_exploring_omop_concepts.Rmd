@@ -62,19 +62,19 @@ cdm <- CDMConnector::cdmFromCon(con = db, cdmSchema = "main",
 colnames(cdm$concept)
 ```
 
-
-| concept table columns           | Description |
+### The `concept` table contains the following columns:
+| Column Names          | Description of content |
 |-----------------------|---------------------------------------|
-| concept_id            | Unique identifier for the concept. |
-| concept_name          | Name or description of the concept. |
-| domain_id             | The domain to which the concept belongs (e.g. Condition, Drug). |
-| vocabulary_id         | The vocabulary from which the concept originates (e.g. SNOMED, RxNorm). |
-| concept_class_id      | Classification within the vocabulary (e.g. Clinical Finding, Ingredient). |
-| standard_concept      | 'S' for standard concepts that come from internationally accepted standard vocabularies. |
-| concept_code          | Code used by the source vocabulary to identify the concept. |
-| valid_start_date      | Date the concept became valid in OMOP. |
-| valid_end_date        | Date the concept ceased to be valid. |
-| invalid_reason        | Reason for invalidation, if applicable | 
+| **concept_id**            | Unique identifier for the concept. |
+| **concept_name**        | Name or description of the concept. |
+| **domain_id**            | The domain to which the concept belongs (e.g. Condition, Drug). |
+| **vocabulary_id**         | The vocabulary from which the concept originates (e.g. SNOMED, RxNorm). |
+| **concept_class_id**      | Classification within the vocabulary (e.g. Clinical Finding, Ingredient). |
+| **standard_concept**      | 'S' for standard concepts that come from internationally accepted standard vocabularies. |
+| **concept_code**          | Code used by the source vocabulary to identify the concept. |
+| **valid_start_date**      | Date the concept became valid in OMOP. |
+| **valid_end_date**        | Date the concept ceased to be valid. |
+| **invalid_reason**;        | Reason for invalidation, if applicable | 
 
 
 The `concept` table is the main table for looking up information about concepts. We can use R to query the `concept` table for specific attributes of concepts.
