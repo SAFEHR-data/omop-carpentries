@@ -85,23 +85,25 @@ get_concept_id <- function(name) {
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
+## Drug exposure
 
 The OMOP [drug_exposure](https://ohdsi.github.io/CommonDataModel/cdm54.html#drug_exposure) table stores exposure of a patient to medications. The purpose of records in this table is to indicate an exposure to a certain drug as best as possible. In this context a drug is defined as an active ingredient. Drug Exposures are defined by Concepts from the Drug domain, which form a complex hierarchy. As a result, one `drug_source_concept_id` may map to multiple standard `concept_id`s if it is a combination product. Records in this table represent prescriptions written, prescriptions dispensed, and drugs administered by a provider to name a few. The `drug_type_concept_id` can be used to find and filter on these types. This table includes additional information about the drug products, the quantity given, and route of administration.
 
-The main columns are :
-
-column name                        | content
-----------------      | ------------
-**drug_exposure_id**   | unique identifier given that person can get multiple exposures per visit
-**person_id**         |    the patient
-**drug_concept_id**          |   standard drug identifier, can be at different levels of granularity
-**drug_exposure_start_date** |  may also be an optional start_datetime
-**drug_exposure_end_date**   | may also be an optional end_datetime
-**drug_type_concept_id**    | where the record came from e.g. EHR administration record
-**quantity**             | the amount of drug given
-**route_concept_id**     | the route of administration e.g. oral, intravenous etc
-**visit_occurrence_id**  | the visit during which the drug was given
-**drug_source_concept_id**  | OMOP concept ID for the source value
+### The `drug_exposure` table contains the following columns (among others not listed here):
+| Column Names          | Description of content |
+|-----------------------|---------------------------------------|
+| **drug_exposure_id** | Unique identifier for each drug exposure |
+| **person_id** | Identifier for the patient |
+| **drug_concept_id** | Standard concept identifier for the drug |
+| **drug_exposure_start_date** | Date the drug exposure started |
+| **drug_exposure_start_datetime** | Date and time the drug exposure started |
+| **drug_exposure_end_date** | Date the drug exposure ended |
+| **drug_exposure_end_datetime** | Date and time the drug exposure ended |
+| **drug_type_concept_id** | Concept identifier for the type of drug exposure |
+| **quantity** | The quantity of the drug administered |
+| **route_concept_id** | Concept identifier for the route of administration |
+| **visit_occurrence_id** | Identifier for the visit during which the drug was administered |
+| **drug_source_concept_id** | OMOP concept ID for the source value |
 
 Drug data can be very complicated, as can the process of converting from the source data to OMOP. You may not find what you expect depending on this and the quality of the source data. 
 
@@ -127,6 +129,8 @@ omop$public$concept |>
 ```
 
 ***Answer:*** There are more levels than shown here, but that is a disadvantage of using a small sample database. In a full OMOP CDM database you would see more levels.
+
+**CODING NOTE**: The `distinct()` function is used to get unique values of `concept_class_id` for the RxNorm vocabulary. The `arrange()` function is then used to sort these values in alphabetical order for easier reading.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -177,11 +181,89 @@ similar
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
+This is a snapshot of the Athena table for code 871182. Athena is the OHDSI tool for exploring the OMOP vocabularies and concept relationships. It is available online at https://athena.ohdsi.org/. You can use it to look up concepts and their relationships to other concepts in the OMOP CDM.
+
 ![The OMOP Code 871182  ](fig/lorazepam-Athena.png){alt='A snapshot of the Athena table for code 871182.'}
 
 Looking at the entry for `concept_id` **871182** we can see that it is in the dm+d vocabulary. We can see that is connected to the RxNorm concept "lorazepam 1 MG Oral Tablet" which has `concept_id` **19019113**. So our assumption above was correct, but the concept table in our dataset didn't fill in the name fully so we couldn't be sure without looking it up in the  official table.
 
-TO TO: We need an example on quantity and route of administration to show how these are stored in the drug_exposure table and how they can be looked up in the concept table.
+## Quantity
+
+::::::::::::::::::::::::::::::::: challenge
+
+Work out what drugs person_id **2** was exposed to and the quantity of each drug.
+
+Remember you may need to look at the drug_concept_id and drug_source_concept_id to find the drug name and size a tablet.
+
+::::::::::::::::::::::::::::::::: solution
+```{r, warning = FALSE, message = FALSE}
+# make a copy of the drug_exposure table
+drug_exposure <- omop$public$drug_exposure |> collect()
+# filter for person_id 2
+person_2_drugs <- drug_exposure |>
+  filter(person_id == 2) |>
+  select(drug_concept_id, drug_source_concept_id, quantity) |>
+  collect()
+# now create a table with humanly readable names for the drug_concept_id and drug_source_concept_id.
+# first, get the concept names for drug_concept_id
+concept_names <- concepts |>
+  select(concept_id, concept_name) |>
+  rename(drug_concept_name = concept_name)
+# join with person_2_drugs
+person_2_drugs <- person_2_drugs |>
+  left_join(concept_names, by = c("drug_concept_id" = "concept_id"))
+# now get the concept names for drug_source_concept_id
+source_concept_names <- concepts |>
+  select(concept_id, concept_name) |>
+  rename(drug_source_concept_name = concept_name)
+# join with person_2_drugs
+person_2_drugs <- person_2_drugs |>
+  left_join(source_concept_names, by = c("drug_source_concept_id" = "concept_id"))
+person_2_drugs
+```
+***Answer:*** Person_id 2 was exposed to three drugs. 
+- They had three doses of lorazepam: two separate doses of 1 x 1mg lorazepam tablets and one dose of 0.25 x 4mg/ml injectable lorazepam.
+- They had two doses of 1 x 25mg promethazine hydrochloride tablets. 
+- They had one dose of 1 x 2mg/ml injectable ondansetron.
+
+(Note the quantity of glucose is zero.)
+
+**CODING NOTE**: We first filter the `drug_exposure` table for `person_id` **2** and select the relevant columns. Then we join this with the `concepts` table twice to get the human-readable names for both the `drug_concept_id` and the `drug_source_concept_id`. The resulting table shows the drugs person_id **2** was exposed to along with their quantities and names.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+## Administration route
+
+::::::::::::::::::::::::::::::::: challenge
+
+Find the route of administration for the drugs person_id **2** was exposed to.
+
+::::::::::::::::::::::::::::::::: solution
+```{r, warning = FALSE, message = FALSE}
+# we can use the same table we created in the previous challenge
+# we just need to get the route_concept_id and look up the name for that
+person_2_drugs <- drug_exposure |>
+  filter(person_id == 2) |>
+  select(drug_concept_id, drug_source_concept_id, quantity, route_concept_id) |>
+  collect() |>
+  left_join(concept_names, by = c("drug_concept_id" = "concept_id")) |>
+  left_join(source_concept_names, by = c("drug_source_concept_id" = "concept_id"))
+# now get the concept names for route_concept_id
+route_concept_names <- concepts |>
+  select(concept_id, concept_name) |>
+  rename(route_concept_name = concept_name)
+# join with person_2_drugs
+person_2_drugs <- person_2_drugs |>
+  left_join(route_concept_names, by = c("route_concept_id" = "concept_id"))
+person_2_drugs
+```
+
+**CODING NOTE**: We follow a similar process as in the previous challenge, but this time we also select the `route_concept_id` and join it with the `concepts` table to get the human-readable name for the route of administration. The resulting table now includes the route of administration for each drug exposure.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 

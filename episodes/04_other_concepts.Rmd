@@ -82,6 +82,19 @@ get_concept_name <- function(id) {
 
 In addition to the `concept_id` column in various OMOP tables, there are several other columns that use *_concept_id to provide information.
 
+### The `person` table contains the following columns (among others not listed here):
+| Column Names          | Description of content |
+|-----------------------|---------------------------------------|
+| **person_id** | Unique identifier for each person |
+| **gender_concept_id** | Concept identifier for the gender of the person |
+| **year_of_birth** | Year of birth of the person |
+| **month_of_birth** | Month of birth of the person |
+| **day_of_birth** | Day of birth of the person |
+| **race_concept_id** | Concept identifier for the race of the person |
+| **gender_source_value** | Source value for the gender of the person |
+| **race_source_value** | Source value for the race of the person |
+
+
 Look at the column names of the `person` table.
 ```{r, warning = FALSE, message = FALSE}
 omop$public$person
