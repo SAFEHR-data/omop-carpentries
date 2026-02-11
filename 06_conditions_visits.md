@@ -4,11 +4,6 @@ teaching: 0
 exercises: 0
 ---
 
-#```{r setup, include = FALSE}
-#source("setup.R")
-#knitr::opts_chunk$set(fig.height = 6)
-#```
-
 :::::::::::::::::::::::::::::::::::::: questions 
 
 - What are conditions in the OMOP CDM?
@@ -106,21 +101,35 @@ get_concept_id <- function(name) {
 
 [Conditions](https://ohdsi.github.io/CommonDataModel/cdm54.html#conditions) are a key part of the OMOP CDM. They represent diagnoses that have been made for patients. Conditions are stored in the `condition_occurrence` table. Each record in this table represents a single occurrence of a condition for a patient. The table contains records of diseases, medical conditions, diagnoses, signs, or symptoms observed by providers or reported by patients. Conditions are mapped from diagnostic codes and represented using standardized concepts in a hierarchical structure. 
 
+### The `condition_occurrence` table contains the following columns (among others not listed here):
+| Column Names          | Description of content |
+|-----------------------|---------------------------------------|
+| **condition_occurrence_id** | Unique identifier for each condition occurrence |
+| **person_id** | Identifier for the patient |
+| **condition_concept_id** | Concept identifier for the condition |
+| **condition_start_date** | Date the condition started |
+| **condition_end_date** | Date the condition ended |
+| **condition_type_concept_id** | Concept identifier for the type of condition occurrence |
+| **condition_status_concept_id** | Concept identifier for the status of the condition occurrence |
+| **visit_occurrence_id** | Identifier for the visit during which the condition was recorded |
+| **condition_source_value** | Original value from the source data |
+| **condition_source_concept_id** | Concept identifier for the source value |
+
 ::::::::::::::::::::::::::::::::::::: challenge
 
 1. How many records are there in the `condition_occurrence` table?
 
 2. List any of the conditions that occur more than once in the table along with their humanly readable names.
 
-3. Choose one patient and list all the conditions they have? 
+3. Choose one patient and list all the conditions they have and when they started?
 
 ::::::::::::::::::::::::::::::::::::: solution
 1. How many records are there in the `condition_occurrence` table?
 
 ``` r
 omop$public$condition_occurrence |>
-  collect() |>
-  count()
+  count() |>
+  collect()
 ```
 
 ``` output
@@ -129,6 +138,10 @@ omop$public$condition_occurrence |>
   <int>
 1    35
 ```
+
+***Answer:*** There are 35 records in the `condition_occurrence` table.
+
+**CODING NOTE:** The `count()` function is used to count the number of records in the table. It is more efficient to use `count()` directly on the database without collecting the data into R, as this allows the database to perform the counting operation, which is optimized for large datasets. We then use `collect()` to bring the result into R for display.
 
 2. List any of the conditions that occur more than once in the table along with their humanly readable names.
 
@@ -154,7 +167,10 @@ omop$public$condition_occurrence |>
 3 Gastritis                                          2
 4 Hemorrhoids                                        2
 ```
-3. Choose one patient and list all the conditions they have?
+
+**CODING NOTE:** We first group the `condition_occurrence` table by `condition_concept_id` and count the number of occurrences for each condition. We then filter to keep only those conditions that occur more than once. Finally, we join with the `concept` table to get the humanly readable names of the conditions and select the relevant columns for display.
+
+3. Choose one patient and list all the conditions they have and when they started?
 
 ``` r
 patient_id <- 1111  # Replace with the desired person_id 
@@ -174,19 +190,21 @@ omop$public$condition_occurrence |>
                  <int> <chr>                                <chr>               
 1              4230399 Closed fracture of lateral malleolus 22/07/2025          
 ```
+
+**CODING NOTE:** We filter the `condition_occurrence` table for the specified `person_id` to get all conditions for that patient. We then join with the `concept` table to get the humanly readable names of the conditions and select the relevant columns for display.
 ::::::::::::::::::::::::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-Question three can be repeated for different patients by changing the `patient_id` variable. Interestingly if you choose patient **31** you will see that the entry for their condition and start date is repeated. Investigate the table further to see why this might be the case. (Hint: look at the `condition_type_concept_id`, `conditions_status_concept_id` and `condition_source_value` columns).
+Question three can be repeated for different patients by changing the `patient_id` variable. Interestingly if you choose patient **31** you will see that the entry for their condition and start date is repeated. 
 
 ::::::::::::::::::::::::::::::::::::: challenge
 
-Investigate why patient 31 has repeated entries for their condition and start date in the `condition_occurrence` table. Look at the `condition_type_concept_id`, `conditions_status_concept_id`, and `condition_source_value` columns to understand the differences between these entries.
+Investigate why patient **31** has repeated entries for their condition and start date in the `condition_occurrence` table. Look at the `condition_type_concept_id`, `conditions_status_concept_id`, and `condition_source_value` columns to understand the differences between these entries.
 
 ::::::::::::::::::::::::::::::::::::: solution
 
 ``` r
-patient_id <- 31  # Replace with the desired person_id
+patient_id <- 31  
 omop$public$condition_occurrence |>
   filter(person_id == !!patient_id) |>
   left_join(
@@ -205,9 +223,15 @@ omop$public$condition_occurrence |>
     omop$public$concept,
     by = c("condition_status_concept_id" = "concept_id")
   ) |>
-  rename(condition_status_concept_name = concept_name) |>  
-  relocate(condition_status_concept_name, .after = condition_status_concept_id) |>
-  select(condition_concept_id, condition_concept_name, condition_start_date, condition_type_concept_id, condition_type_concept_name, condition_status_concept_id, condition_status_concept_name , condition_source_value) |>
+  rename(condition_status_concept_name = concept_name) |>
+  relocate(condition_status_concept_name,
+           .after = condition_status_concept_id) |>
+  select(condition_concept_id, condition_concept_name,
+         condition_start_date, condition_type_concept_id,
+         condition_type_concept_name,
+         condition_status_concept_id,
+         condition_status_concept_name,
+         condition_source_value) |>
   collect()
 ```
 
@@ -222,17 +246,33 @@ omop$public$condition_occurrence |>
 #   condition_status_concept_name <chr>, condition_source_value <chr>
 ```
 
+***Answer:*** The output shows that for patient **31**, the `condition_concept_id` and `condition_start_date` are identical, but the `condition_type_concept_id` and `condition_status_concept_id` differ. This indicates that the same condition was recorded in different contexts or with different statuses, which explains the repeated entries in the `condition_occurrence` table. This is commonly found in hospital records!
+
+**CODING NOTE:** We filter the `condition_occurrence` table for `person_id` **31** and join with the `concept` table multiple times to get the humanly readable names for the `condition_concept_id`, `condition_type_concept_id`, and `condition_status_concept_id`. We then select and arrange the relevant columns for display to understand the differences between the entries for this patient.
+
 ::::::::::::::::::::::::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-As you can see from the output, although the `condition_concept_id` and `condition_start_date` are the same for patient **31**, the `condition_type_concept_id` and `condition_status_concept_id` differ between the entries. This indicates that the same condition was recorded in different contexts or with different statuses, which explains the repeated entries in the `condition_occurrence` table. This is commonly found in hospital records!
 
 ## Visits
 
 The `visit_occurrence` table contains [events where Persons engage with the healthcare system for a duration of time](https://ohdsi.github.io/CommonDataModel/cdm54.html#visit_occurrence).
 
+### The `visit_occurrence` table contains the following columns (among others not listed here):
+| Column Names          | Description of content |
+|-----------------------|---------------------------------------|
+| **visit_occurrence_id** | Unique identifier for each visit occurrence |
+| **person_id** | Identifier for the patient |
+| **visit_concept_id** | Concept identifier for the type of visit |
+| **visit_start_date** | Date the visit started |
+| **visit_start_datetime** | Date and time the visit started |
+| **visit_end_date** | Date the visit ended |
+| **visit_end_datetime** | Date and time the visit ended |
+| **visit_type_concept_id** | Concept identifier for the type of visit |
+| **discharged_to_concept_id** | Concept identifier for where the patient was discharged to |
+| **preceding_visit_occurrence_id** | Identifier for the previous visit occurrence |
 
-The main clinical tables `condition_occurrence`, `measurement`, `observation` and `drug_exposure` contain a `visit_occurrence_id` that links to this table.
+The main clinical tables `condition_occurrence`, `measurement`, `observation` and `drug_exposure` all contain a `visit_occurrence_id` that links to this table.
 
 
 `visit_concept_id` specifies the kind of visit that took place using standardised OMOP concepts. These include `Inpatient visit`, `Emergency Room Visit` and `Outpatient Visit`. Inpatient visits can last for longer than one day.    
@@ -271,6 +311,15 @@ omop$public$visit_occurrence |>
 3             9202 Outpatient Visit                       4
 4              262 Emergency Room and Inpatient Visit     1
 ```
+
+***Answer:*** The different types of visits recorded in the `visit_occurrence` table along with their names are:
+- Emergency Room Visit
+- Inpatient visit
+- Outpatient Visit
+- Emergency Room and Inpatient Visit
+
+**CODING NOTE:** We use the `count()` function to count the number of occurrences of each `visit_concept_id` in the `visit_occurrence` table. We then join with the `concept` table to get the humanly readable names of the visit types and select the relevant columns for display. Finally, we arrange the results in descending order of count using the `desc()` function in conjunction with the `arrange()` function.
+
 2. Find patients who had more than one visit.
 
 ``` r
@@ -290,6 +339,9 @@ omop$public$visit_occurrence |>
 3         2           2
 4        58          10
 ```
+
+**CODING NOTE:** We group the `visit_occurrence` table by `person_id` and use `summarise()` to count the number of visits for each patient. We then filter to keep only those patients with a `visit_count` greater than 1 and collect the results into R for display.
+
 3. How many patients had both an emergency room visit and an inpatient visit?
 
 ``` r
@@ -304,6 +356,11 @@ nrow(patients_with_both_visits)
 ``` output
 [1] 8
 ```
+
+***Answer:*** The number of patients who had both an emergency room visit and an inpatient visit is 8.
+
+**CODING NOTE:** We filter the `visit_occurrence` table for the `visit_concept_id` values corresponding to emergency room visits and inpatient visits. We then group by `person_id` and use `summarise()` to count the number of distinct visit types for each patient. Finally, we count the number of patients who had more than one distinct visit type to get the number of patients who had both types of visits.
+
 ::::::::::::::::::::::::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::
 

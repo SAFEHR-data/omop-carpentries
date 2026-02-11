@@ -77,19 +77,19 @@ colnames(cdm$concept)
  [9] "valid_end_date"   "invalid_reason"  
 ```
 
-
-| concept table columns           | Description |
+### The `concept` table contains the following columns:
+| Column Names          | Description of content |
 |-----------------------|---------------------------------------|
-| concept_id            | Unique identifier for the concept. |
-| concept_name          | Name or description of the concept. |
-| domain_id             | The domain to which the concept belongs (e.g. Condition, Drug). |
-| vocabulary_id         | The vocabulary from which the concept originates (e.g. SNOMED, RxNorm). |
-| concept_class_id      | Classification within the vocabulary (e.g. Clinical Finding, Ingredient). |
-| standard_concept      | 'S' for standard concepts that come from internationally accepted standard vocabularies. |
-| concept_code          | Code used by the source vocabulary to identify the concept. |
-| valid_start_date      | Date the concept became valid in OMOP. |
-| valid_end_date        | Date the concept ceased to be valid. |
-| invalid_reason        | Reason for invalidation, if applicable | 
+| **concept_id**            | Unique identifier for the concept. |
+| **concept_name**        | Name or description of the concept. |
+| **domain_id**            | The domain to which the concept belongs (e.g. Condition, Drug). |
+| **vocabulary_id**         | The vocabulary from which the concept originates (e.g. SNOMED, RxNorm). |
+| **concept_class_id**      | Classification within the vocabulary (e.g. Clinical Finding, Ingredient). |
+| **standard_concept**      | 'S' for standard concepts that come from internationally accepted standard vocabularies. |
+| **concept_code**          | Code used by the source vocabulary to identify the concept. |
+| **valid_start_date**      | Date the concept became valid in OMOP. |
+| **valid_end_date**        | Date the concept ceased to be valid. |
+| **invalid_reason**;        | Reason for invalidation, if applicable | 
 
 
 The `concept` table is the main table for looking up information about concepts. We can use R to query the `concept` table for specific attributes of concepts.
@@ -118,7 +118,7 @@ cdm$concept |>
 
 ``` output
 # Source:   SQL [?? x 1]
-# Database: DuckDB 1.4.1 [unknown@Linux 6.8.0-1044-azure:R 4.5.2//tmp/Rtmpd8tQ6t/file17767ba676cb.duckdb]
+# Database: DuckDB 1.4.1 [unknown@Linux 6.8.0-1044-azure:R 4.5.2//tmp/RtmpGCstER/file174d25782e54.duckdb]
   n_concepts
        <dbl>
 1        444
@@ -137,7 +137,7 @@ cdm$concept |>
 
 ``` output
 # Source:   SQL [?? x 1]
-# Database: DuckDB 1.4.1 [unknown@Linux 6.8.0-1044-azure:R 4.5.2//tmp/Rtmpd8tQ6t/file17767ba676cb.duckdb]
+# Database: DuckDB 1.4.1 [unknown@Linux 6.8.0-1044-azure:R 4.5.2//tmp/RtmpGCstER/file174d25782e54.duckdb]
   n_distinct_vocabularies
                     <dbl>
 1                       9
@@ -157,7 +157,7 @@ cdm$concept |>
 
 ``` output
 # Source:   SQL [?? x 1]
-# Database: DuckDB 1.4.1 [unknown@Linux 6.8.0-1044-azure:R 4.5.2//tmp/Rtmpd8tQ6t/file17767ba676cb.duckdb]
+# Database: DuckDB 1.4.1 [unknown@Linux 6.8.0-1044-azure:R 4.5.2//tmp/RtmpGCstER/file174d25782e54.duckdb]
   n_distinct_domains
                <dbl>
 1                  8
@@ -176,7 +176,7 @@ cdm$concept |>
 
 ``` output
 # Source:   SQL [?? x 1]
-# Database: DuckDB 1.4.1 [unknown@Linux 6.8.0-1044-azure:R 4.5.2//tmp/Rtmpd8tQ6t/file17767ba676cb.duckdb]
+# Database: DuckDB 1.4.1 [unknown@Linux 6.8.0-1044-azure:R 4.5.2//tmp/RtmpGCstER/file174d25782e54.duckdb]
   n_distinct_concept_classes
                        <dbl>
 1                         21
@@ -251,8 +251,8 @@ cdm$concept |>
 ```
 
 ``` output
-[1] "ICD10CM" "LOINC"   "NDC"     "Visit"   "Gender"  "RxNorm"  "CVX"    
-[8] "SNOMED"  "None"   
+[1] "RxNorm"  "CVX"     "SNOMED"  "None"    "Gender"  "ICD10CM" "LOINC"  
+[8] "NDC"     "Visit"  
 ```
 
 **CODING_NOTE**: Here we can use `pull(x)` to pull the data x into R memory to view it. This is because we are only requiring one column of data, so we can pull that column directly into R memory without needing to use `collect()` first.
@@ -281,8 +281,8 @@ cdm$concept |>
 ```
 
 ``` output
-[1] "Drug"        "Measurement" "Condition"   "Procedure"   "Observation"
-[6] "Visit"       "Metadata"    "Gender"     
+[1] "Measurement" "Drug"        "Observation" "Visit"       "Metadata"   
+[6] "Gender"      "Condition"   "Procedure"  
 ```
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -309,13 +309,13 @@ cdm$concept |>
 ```
 
 ``` output
- [1] "Branded Drug"         "3-char nonbill code"  "Quant Branded Drug"  
- [4] "Branded Drug Comp"    "Visit"                "Context-dependent"   
- [7] "Undefined"            "Morph Abnormality"    "4-char billing code" 
-[10] "Procedure"            "Lab Test"             "Clinical Drug"       
-[13] "Clinical Finding"     "Clinical Observation" "Quant Clinical Drug" 
-[16] "CVX"                  "Ingredient"           "11-digit NDC"        
-[19] "Branded Pack"         "Clinical Drug Comp"   "Gender"              
+ [1] "CVX"                  "Ingredient"           "11-digit NDC"        
+ [4] "Branded Pack"         "Clinical Drug Comp"   "Gender"              
+ [7] "Morph Abnormality"    "4-char billing code"  "Procedure"           
+[10] "Lab Test"             "Clinical Drug"        "Clinical Finding"    
+[13] "Clinical Observation" "Quant Clinical Drug"  "Branded Drug"        
+[16] "3-char nonbill code"  "Quant Branded Drug"   "Branded Drug Comp"   
+[19] "Visit"                "Context-dependent"    "Undefined"           
 ```
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::
