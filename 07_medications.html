@@ -271,8 +271,11 @@
     <div id="flush-collapsecurrent" class="accordion-collapse collapse show" aria-labelledby="flush-headingcurrent" data-bs-parent="#accordionFlushcurrent">
       <div class="accordion-body">
         <ul><li><a href="#introduction">Introduction</a></li>
+<li><a href="#drug-exposure">Drug exposure</a></li>
 <li><a href="#drug-concepts">Drug concepts</a></li>
 <li><a href="#drug-mapping-in-the-nhs">Drug mapping in the NHS</a></li>
+<li><a href="#quantity">Quantity</a></li>
+<li><a href="#administration-route">Administration route</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
 
@@ -346,7 +349,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Medications</h1>
-        <p>Last updated on 2026-02-08 |
+        <p>Last updated on 2026-02-11 |
 
         <a href="https://github.com/SAFEHR-data/omop-carpentries/edit/main/episodes/07_medications.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -470,7 +473,8 @@ up concept names/ids.</p>
 </div>
 </div>
 </div>
-<p>The OMOP <a href="https://ohdsi.github.io/CommonDataModel/cdm54.html#drug_exposure" class="external-link">drug_exposure</a>
+</section><section><h2 class="section-heading" id="drug-exposure">Drug exposure<a class="anchor" aria-label="anchor" href="#drug-exposure"></a></h2>
+<hr class="half-width"><p>The OMOP <a href="https://ohdsi.github.io/CommonDataModel/cdm54.html#drug_exposure" class="external-link">drug_exposure</a>
 table stores exposure of a patient to medications. The purpose of
 records in this table is to indicate an exposure to a certain drug as
 best as possible. In this context a drug is defined as an active
@@ -483,34 +487,39 @@ drugs administered by a provider to name a few. The
 <code>drug_type_concept_id</code> can be used to find and filter on
 these types. This table includes additional information about the drug
 products, the quantity given, and route of administration.</p>
-<p>The main columns are :</p>
-<table class="table"><colgroup><col width="57%"><col width="42%"></colgroup><thead><tr class="header"><th>column name</th>
-<th>content</th>
+<div class="section level3">
+<h3 id="the-drug_exposure-table-contains-the-following-columns-among-others-not-listed-here">The <code>drug_exposure</code> table contains the following columns
+(among others not listed here):<a class="anchor" aria-label="anchor" href="#the-drug_exposure-table-contains-the-following-columns-among-others-not-listed-here"></a></h3>
+<table class="table"><colgroup><col width="37%"><col width="62%"></colgroup><thead><tr class="header"><th>Column Names</th>
+<th>Description of content</th>
 </tr></thead><tbody><tr class="odd"><td><strong>drug_exposure_id</strong></td>
-<td>unique identifier given that person can get multiple exposures per
-visit</td>
+<td>Unique identifier for each drug exposure</td>
 </tr><tr class="even"><td><strong>person_id</strong></td>
-<td>the patient</td>
+<td>Identifier for the patient</td>
 </tr><tr class="odd"><td><strong>drug_concept_id</strong></td>
-<td>standard drug identifier, can be at different levels of
-granularity</td>
+<td>Standard concept identifier for the drug</td>
 </tr><tr class="even"><td><strong>drug_exposure_start_date</strong></td>
-<td>may also be an optional start_datetime</td>
-</tr><tr class="odd"><td><strong>drug_exposure_end_date</strong></td>
-<td>may also be an optional end_datetime</td>
+<td>Date the drug exposure started</td>
+</tr><tr class="odd"><td><strong>drug_exposure_start_datetime</strong></td>
+<td>Date and time the drug exposure started</td>
+</tr><tr class="even"><td><strong>drug_exposure_end_date</strong></td>
+<td>Date the drug exposure ended</td>
+</tr><tr class="odd"><td><strong>drug_exposure_end_datetime</strong></td>
+<td>Date and time the drug exposure ended</td>
 </tr><tr class="even"><td><strong>drug_type_concept_id</strong></td>
-<td>where the record came from e.g. EHR administration record</td>
+<td>Concept identifier for the type of drug exposure</td>
 </tr><tr class="odd"><td><strong>quantity</strong></td>
-<td>the amount of drug given</td>
+<td>The quantity of the drug administered</td>
 </tr><tr class="even"><td><strong>route_concept_id</strong></td>
-<td>the route of administration e.g. oral, intravenous etc</td>
+<td>Concept identifier for the route of administration</td>
 </tr><tr class="odd"><td><strong>visit_occurrence_id</strong></td>
-<td>the visit during which the drug was given</td>
+<td>Identifier for the visit during which the drug was administered</td>
 </tr><tr class="even"><td><strong>drug_source_concept_id</strong></td>
 <td>OMOP concept ID for the source value</td>
 </tr></tbody></table><p>Drug data can be very complicated, as can the process of converting
 from the source data to OMOP. You may not find what you expect depending
 on this and the quality of the source data.</p>
+</div>
 </section><section><h2 class="section-heading" id="drug-concepts">Drug concepts<a class="anchor" aria-label="anchor" href="#drug-concepts"></a></h2>
 <hr class="half-width"><p>The standard OHDSI drug vocabularies are called <code>RxNorm</code>
 and <code>RxNormExtension</code>. <code>RxNorm</code> contains all drugs
@@ -562,6 +571,10 @@ in a drug hierarchy.</p>
 <p><strong><em>Answer:</em></strong> There are more levels than shown
 here, but that is a disadvantage of using a small sample database. In a
 full OMOP CDM database you would see more levels.</p>
+<p><strong>CODING NOTE</strong>: The <code>distinct()</code> function is
+used to get unique values of <code>concept_class_id</code> for the
+RxNorm vocabulary. The <code>arrange()</code> function is then used to
+sort these values in alphabetical order for easier reading.</p>
 </div>
 </div>
 </div>
@@ -678,6 +691,10 @@ regardless of how they are capitalized in the concept names.</p>
 </div>
 </div>
 </div>
+<p>This is a snapshot of the Athena table for code 871182. Athena is the
+OHDSI tool for exploring the OMOP vocabularies and concept
+relationships. It is available online at <a href="https://athena.ohdsi.org/" class="external-link uri">https://athena.ohdsi.org/</a>. You can use it to look up
+concepts and their relationships to other concepts in the OMOP CDM.</p>
 <figure><img src="fig/lorazepam-Athena.png" alt="A snapshot of the Athena table for code 871182." class="figure mx-auto d-block"><div class="figcaption">The OMOP Code 871182</div>
 </figure><p>Looking at the entry for <code>concept_id</code>
 <strong>871182</strong> we can see that it is in the dm+d vocabulary. We
@@ -686,9 +703,158 @@ Tablet” which has <code>concept_id</code> <strong>19019113</strong>. So
 our assumption above was correct, but the concept table in our dataset
 didn’t fill in the name fully so we couldn’t be sure without looking it
 up in the official table.</p>
-<p>TO TO: We need an example on quantity and route of administration to
-show how these are stored in the drug_exposure table and how they can be
-looked up in the concept table.</p>
+</section><section><h2 class="section-heading" id="quantity">Quantity<a class="anchor" aria-label="anchor" href="#quantity"></a></h2>
+<hr class="half-width"><div id="challenge3" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div class="callout-inner">
+<h3 class="callout-title">Challenge</h3>
+<div class="callout-content">
+<p>Work out what drugs person_id <strong>2</strong> was exposed to and
+the quantity of each drug.</p>
+<p>Remember you may need to look at the drug_concept_id and
+drug_source_concept_id to find the drug name and size a tablet.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution3" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
+  <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
+</button>
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div class="accordion-body">
+<div class="codewrapper sourceCode" id="cb11">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># make a copy of the drug_exposure table</span></span>
+<span><span class="va">drug_exposure</span> <span class="op">&lt;-</span> <span class="va">omop</span><span class="op">$</span><span class="va">public</span><span class="op">$</span><span class="va">drug_exposure</span> <span class="op">|&gt;</span> <span class="fu">collect</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co"># filter for person_id 2</span></span>
+<span><span class="va">person_2_drugs</span> <span class="op">&lt;-</span> <span class="va">drug_exposure</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">filter</span><span class="op">(</span><span class="va">person_id</span> <span class="op">==</span> <span class="fl">2</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="va">drug_concept_id</span>, <span class="va">drug_source_concept_id</span>, <span class="va">quantity</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">collect</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co"># now create a table with humanly readable names for the drug_concept_id and drug_source_concept_id.</span></span>
+<span><span class="co"># first, get the concept names for drug_concept_id</span></span>
+<span><span class="va">concept_names</span> <span class="op">&lt;-</span> <span class="va">concepts</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="va">concept_id</span>, <span class="va">concept_name</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">rename</span><span class="op">(</span>drug_concept_name <span class="op">=</span> <span class="va">concept_name</span><span class="op">)</span></span>
+<span><span class="co"># join with person_2_drugs</span></span>
+<span><span class="va">person_2_drugs</span> <span class="op">&lt;-</span> <span class="va">person_2_drugs</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">left_join</span><span class="op">(</span><span class="va">concept_names</span>, by <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="st">"drug_concept_id"</span> <span class="op">=</span> <span class="st">"concept_id"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co"># now get the concept names for drug_source_concept_id</span></span>
+<span><span class="va">source_concept_names</span> <span class="op">&lt;-</span> <span class="va">concepts</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="va">concept_id</span>, <span class="va">concept_name</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">rename</span><span class="op">(</span>drug_source_concept_name <span class="op">=</span> <span class="va">concept_name</span><span class="op">)</span></span>
+<span><span class="co"># join with person_2_drugs</span></span>
+<span><span class="va">person_2_drugs</span> <span class="op">&lt;-</span> <span class="va">person_2_drugs</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">left_join</span><span class="op">(</span><span class="va">source_concept_names</span>, by <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="st">"drug_source_concept_id"</span> <span class="op">=</span> <span class="st">"concept_id"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">person_2_drugs</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code># A tibble: 7 × 5
+  drug_concept_id drug_source_concept_id quantity drug_concept_name
+            &lt;int&gt;                  &lt;int&gt;    &lt;dbl&gt; &lt;chr&gt;
+1        19019113                 871182     1    lorazepam MG Oral Tablet
+2        40180065                 874635     1    promethazine hydrochloride 25…
+3        19019113                 871182     1    lorazepam MG Oral Tablet
+4        35777064               36816707     0.25 1 ML Lorazepam 4 MG/ML Inject…
+5        21049614               21255277     0    100 ML Glucose 50 MG/ML Injec…
+6        35778239               36817124     1    2 ML Ondansetron 2 MG/ML Inje…
+7        40180065                 874635     1    promethazine hydrochloride 25…
+# ℹ 1 more variable: drug_source_concept_name &lt;chr&gt;</code></pre>
+</div>
+<p><strong><em>Answer:</em></strong> Person_id 2 was exposed to three
+drugs. - They had three doses of lorazepam: two separate doses of 1 x
+1mg lorazepam tablets and one dose of 0.25 x 4mg/ml injectable
+lorazepam. - They had two doses of 1 x 25mg promethazine hydrochloride
+tablets. - They had one dose of 1 x 2mg/ml injectable ondansetron.</p>
+<p>(Note the quantity of glucose is zero.)</p>
+<p><strong>CODING NOTE</strong>: We first filter the
+<code>drug_exposure</code> table for <code>person_id</code>
+<strong>2</strong> and select the relevant columns. Then we join this
+with the <code>concepts</code> table twice to get the human-readable
+names for both the <code>drug_concept_id</code> and the
+<code>drug_source_concept_id</code>. The resulting table shows the drugs
+person_id <strong>2</strong> was exposed to along with their quantities
+and names.</p>
+</div>
+</div>
+</div>
+</div>
+</section><section><h2 class="section-heading" id="administration-route">Administration route<a class="anchor" aria-label="anchor" href="#administration-route"></a></h2>
+<hr class="half-width"><div id="challenge4" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div class="callout-inner">
+<h3 class="callout-title">Challenge</h3>
+<div class="callout-content">
+<p>Find the route of administration for the drugs person_id
+<strong>2</strong> was exposed to.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution4" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
+  <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
+</button>
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
+<div class="accordion-body">
+<div class="codewrapper sourceCode" id="cb13">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># we can use the same table we created in the previous challenge</span></span>
+<span><span class="co"># we just need to get the route_concept_id and look up the name for that</span></span>
+<span><span class="va">person_2_drugs</span> <span class="op">&lt;-</span> <span class="va">drug_exposure</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">filter</span><span class="op">(</span><span class="va">person_id</span> <span class="op">==</span> <span class="fl">2</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="va">drug_concept_id</span>, <span class="va">drug_source_concept_id</span>, <span class="va">quantity</span>, <span class="va">route_concept_id</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">collect</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">left_join</span><span class="op">(</span><span class="va">concept_names</span>, by <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="st">"drug_concept_id"</span> <span class="op">=</span> <span class="st">"concept_id"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">left_join</span><span class="op">(</span><span class="va">source_concept_names</span>, by <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="st">"drug_source_concept_id"</span> <span class="op">=</span> <span class="st">"concept_id"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co"># now get the concept names for route_concept_id</span></span>
+<span><span class="va">route_concept_names</span> <span class="op">&lt;-</span> <span class="va">concepts</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="va">concept_id</span>, <span class="va">concept_name</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">rename</span><span class="op">(</span>route_concept_name <span class="op">=</span> <span class="va">concept_name</span><span class="op">)</span></span>
+<span><span class="co"># join with person_2_drugs</span></span>
+<span><span class="va">person_2_drugs</span> <span class="op">&lt;-</span> <span class="va">person_2_drugs</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">left_join</span><span class="op">(</span><span class="va">route_concept_names</span>, by <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="st">"route_concept_id"</span> <span class="op">=</span> <span class="st">"concept_id"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">person_2_drugs</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code># A tibble: 7 × 7
+  drug_concept_id drug_source_concept_id quantity route_concept_id
+            &lt;int&gt;                  &lt;int&gt;    &lt;dbl&gt;            &lt;int&gt;
+1        19019113                 871182     1             4132161
+2        40180065                 874635     1             4132161
+3        19019113                 871182     1             4132161
+4        35777064               36816707     0.25          4302612
+5        21049614               21255277     0             4171047
+6        35778239               36817124     1             4171047
+7        40180065                 874635     1             4132161
+# ℹ 3 more variables: drug_concept_name &lt;chr&gt;, drug_source_concept_name &lt;chr&gt;,
+#   route_concept_name &lt;chr&gt;</code></pre>
+</div>
+<p><strong>CODING NOTE</strong>: We follow a similar process as in the
+previous challenge, but this time we also select the
+<code>route_concept_id</code> and join it with the <code>concepts</code>
+table to get the human-readable name for the route of administration.
+The resulting table now includes the route of administration for each
+drug exposure.</p>
+</div>
+</div>
+</div>
+</div>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -769,7 +935,7 @@ any links that you are not going to use.
   "url": "https://SAFEHR-data.github.io/omop-carpentries/07_medications.html",
   "identifier": "https://SAFEHR-data.github.io/omop-carpentries/07_medications.html",
   "dateCreated": "2025-06-18",
-  "dateModified": "2026-02-08",
+  "dateModified": "2026-02-11",
   "datePublished": "2026-02-11"
 }
 

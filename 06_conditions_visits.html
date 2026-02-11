@@ -346,7 +346,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Conditions and Visits</h1>
-        <p>Last updated on 2026-02-08 |
+        <p>Last updated on 2026-02-11 |
 
         <a href="https://github.com/SAFEHR-data/omop-carpentries/edit/main/episodes/06_conditions_visits.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -358,7 +358,6 @@
 
         
 
-<p>#<code>{r setup, include = FALSE} #source("setup.R") #knitr::opts_chunk$set(fig.height = 6) #</code></p>
 <div class="overview card">
 <h2 class="card-header">Overview</h2>
 <div class="row g-0">
@@ -483,7 +482,33 @@ contains records of diseases, medical conditions, diagnoses, signs, or
 symptoms observed by providers or reported by patients. Conditions are
 mapped from diagnostic codes and represented using standardized concepts
 in a hierarchical structure.</p>
-<div id="challenge1" class="callout challenge">
+<div class="section level3">
+<h3 id="the-condition_occurrence-table-contains-the-following-columns-among-others-not-listed-here">The <code>condition_occurrence</code> table contains the following
+columns (among others not listed here):<a class="anchor" aria-label="anchor" href="#the-condition_occurrence-table-contains-the-following-columns-among-others-not-listed-here"></a></h3>
+<table class="table"><colgroup><col width="37%"><col width="62%"></colgroup><thead><tr class="header"><th>Column Names</th>
+<th>Description of content</th>
+</tr></thead><tbody><tr class="odd"><td><strong>condition_occurrence_id</strong></td>
+<td>Unique identifier for each condition occurrence</td>
+</tr><tr class="even"><td><strong>person_id</strong></td>
+<td>Identifier for the patient</td>
+</tr><tr class="odd"><td><strong>condition_concept_id</strong></td>
+<td>Concept identifier for the condition</td>
+</tr><tr class="even"><td><strong>condition_start_date</strong></td>
+<td>Date the condition started</td>
+</tr><tr class="odd"><td><strong>condition_end_date</strong></td>
+<td>Date the condition ended</td>
+</tr><tr class="even"><td><strong>condition_type_concept_id</strong></td>
+<td>Concept identifier for the type of condition occurrence</td>
+</tr><tr class="odd"><td><strong>condition_status_concept_id</strong></td>
+<td>Concept identifier for the status of the condition occurrence</td>
+</tr><tr class="even"><td><strong>visit_occurrence_id</strong></td>
+<td>Identifier for the visit during which the condition was
+recorded</td>
+</tr><tr class="odd"><td><strong>condition_source_value</strong></td>
+<td>Original value from the source data</td>
+</tr><tr class="even"><td><strong>condition_source_concept_id</strong></td>
+<td>Concept identifier for the source value</td>
+</tr></tbody></table><div id="challenge1" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
@@ -495,8 +520,8 @@ in a hierarchical structure.</p>
 <code>condition_occurrence</code> table?</p></li>
 <li><p>List any of the conditions that occur more than once in the table
 along with their humanly readable names.</p></li>
-<li><p>Choose one patient and list all the conditions they
-have?</p></li>
+<li><p>Choose one patient and list all the conditions they have and when
+they started?</p></li>
 </ol></div>
 </div>
 </div>
@@ -505,7 +530,7 @@ have?</p></li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <ol style="list-style-type: decimal"><li>How many records are there in the <code>condition_occurrence</code>
 table?</li>
@@ -514,8 +539,8 @@ table?</li>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">omop</span><span class="op">$</span><span class="va">public</span><span class="op">$</span><span class="va">condition_occurrence</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">collect</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">count</span><span class="op">(</span><span class="op">)</span></span></code></pre>
+<span>  <span class="fu">count</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">collect</span><span class="op">(</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -525,6 +550,14 @@ table?</li>
   &lt;int&gt;
 1    35</code></pre>
 </div>
+<p><strong><em>Answer:</em></strong> There are 35 records in the
+<code>condition_occurrence</code> table.</p>
+<p><strong>CODING NOTE:</strong> The <code>count()</code> function is
+used to count the number of records in the table. It is more efficient
+to use <code>count()</code> directly on the database without collecting
+the data into R, as this allows the database to perform the counting
+operation, which is optimized for large datasets. We then use
+<code>collect()</code> to bring the result into R for display.</p>
 <ol start="2" style="list-style-type: decimal"><li>List any of the conditions that occur more than once in the table
 along with their humanly readable names.</li>
 </ol><div class="codewrapper sourceCode" id="cb7">
@@ -553,7 +586,15 @@ along with their humanly readable names.</li>
 3 Gastritis                                          2
 4 Hemorrhoids                                        2</code></pre>
 </div>
-<ol start="3" style="list-style-type: decimal"><li>Choose one patient and list all the conditions they have?</li>
+<p><strong>CODING NOTE:</strong> We first group the
+<code>condition_occurrence</code> table by
+<code>condition_concept_id</code> and count the number of occurrences
+for each condition. We then filter to keep only those conditions that
+occur more than once. Finally, we join with the <code>concept</code>
+table to get the humanly readable names of the conditions and select the
+relevant columns for display.</p>
+<ol start="3" style="list-style-type: decimal"><li>Choose one patient and list all the conditions they have and when
+they started?</li>
 </ol><div class="codewrapper sourceCode" id="cb9">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -576,6 +617,11 @@ along with their humanly readable names.</li>
                  &lt;int&gt; &lt;chr&gt;                                &lt;chr&gt;
 1              4230399 Closed fracture of lateral malleolus 22/07/2025          </code></pre>
 </div>
+<p><strong>CODING NOTE:</strong> We filter the
+<code>condition_occurrence</code> table for the specified
+<code>person_id</code> to get all conditions for that patient. We then
+join with the <code>concept</code> table to get the humanly readable
+names of the conditions and select the relevant columns for display.</p>
 </div>
 </div>
 </div>
@@ -583,11 +629,7 @@ along with their humanly readable names.</li>
 <p>Question three can be repeated for different patients by changing the
 <code>patient_id</code> variable. Interestingly if you choose patient
 <strong>31</strong> you will see that the entry for their condition and
-start date is repeated. Investigate the table further to see why this
-might be the case. (Hint: look at the
-<code>condition_type_concept_id</code>,
-<code>conditions_status_concept_id</code> and
-<code>condition_source_value</code> columns).</p>
+start date is repeated.</p>
 <div id="challenge2" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
@@ -596,9 +638,9 @@ might be the case. (Hint: look at the
 <div class="callout-inner">
 <h3 class="callout-title">Challenge</h3>
 <div class="callout-content">
-<p>Investigate why patient 31 has repeated entries for their condition
-and start date in the <code>condition_occurrence</code> table. Look at
-the <code>condition_type_concept_id</code>,
+<p>Investigate why patient <strong>31</strong> has repeated entries for
+their condition and start date in the <code>condition_occurrence</code>
+table. Look at the <code>condition_type_concept_id</code>,
 <code>conditions_status_concept_id</code>, and
 <code>condition_source_value</code> columns to understand the
 differences between these entries.</p>
@@ -610,13 +652,13 @@ differences between these entries.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb11">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">patient_id</span> <span class="op">&lt;-</span> <span class="fl">31</span>  <span class="co"># Replace with the desired person_id</span></span>
+<code class="sourceCode R"><span><span class="va">patient_id</span> <span class="op">&lt;-</span> <span class="fl">31</span>  </span>
 <span><span class="va">omop</span><span class="op">$</span><span class="va">public</span><span class="op">$</span><span class="va">condition_occurrence</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">filter</span><span class="op">(</span><span class="va">person_id</span> <span class="op">==</span> <span class="op">!</span><span class="op">!</span><span class="va">patient_id</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">left_join</span><span class="op">(</span></span>
@@ -635,9 +677,15 @@ differences between these entries.</p>
 <span>    <span class="va">omop</span><span class="op">$</span><span class="va">public</span><span class="op">$</span><span class="va">concept</span>,</span>
 <span>    by <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="st">"condition_status_concept_id"</span> <span class="op">=</span> <span class="st">"concept_id"</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">rename</span><span class="op">(</span>condition_status_concept_name <span class="op">=</span> <span class="va">concept_name</span><span class="op">)</span> <span class="op">|&gt;</span>  </span>
-<span>  <span class="fu">relocate</span><span class="op">(</span><span class="va">condition_status_concept_name</span>, .after <span class="op">=</span> <span class="va">condition_status_concept_id</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">select</span><span class="op">(</span><span class="va">condition_concept_id</span>, <span class="va">condition_concept_name</span>, <span class="va">condition_start_date</span>, <span class="va">condition_type_concept_id</span>, <span class="va">condition_type_concept_name</span>, <span class="va">condition_status_concept_id</span>, <span class="va">condition_status_concept_name</span> , <span class="va">condition_source_value</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">rename</span><span class="op">(</span>condition_status_concept_name <span class="op">=</span> <span class="va">concept_name</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">relocate</span><span class="op">(</span><span class="va">condition_status_concept_name</span>,</span>
+<span>           .after <span class="op">=</span> <span class="va">condition_status_concept_id</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="va">condition_concept_id</span>, <span class="va">condition_concept_name</span>,</span>
+<span>         <span class="va">condition_start_date</span>, <span class="va">condition_type_concept_id</span>,</span>
+<span>         <span class="va">condition_type_concept_name</span>,</span>
+<span>         <span class="va">condition_status_concept_id</span>,</span>
+<span>         <span class="va">condition_status_concept_name</span>,</span>
+<span>         <span class="va">condition_source_value</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">collect</span><span class="op">(</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="codewrapper">
@@ -652,27 +700,62 @@ differences between these entries.</p>
 #   condition_type_concept_name &lt;chr&gt;, condition_status_concept_id &lt;int&gt;,
 #   condition_status_concept_name &lt;chr&gt;, condition_source_value &lt;chr&gt;</code></pre>
 </div>
-</div>
-</div>
-</div>
-</div>
-<p>As you can see from the output, although the
-<code>condition_concept_id</code> and <code>condition_start_date</code>
-are the same for patient <strong>31</strong>, the
+<p><strong><em>Answer:</em></strong> The output shows that for patient
+<strong>31</strong>, the <code>condition_concept_id</code> and
+<code>condition_start_date</code> are identical, but the
 <code>condition_type_concept_id</code> and
-<code>condition_status_concept_id</code> differ between the entries.
-This indicates that the same condition was recorded in different
-contexts or with different statuses, which explains the repeated entries
-in the <code>condition_occurrence</code> table. This is commonly found
-in hospital records!</p>
+<code>condition_status_concept_id</code> differ. This indicates that the
+same condition was recorded in different contexts or with different
+statuses, which explains the repeated entries in the
+<code>condition_occurrence</code> table. This is commonly found in
+hospital records!</p>
+<p><strong>CODING NOTE:</strong> We filter the
+<code>condition_occurrence</code> table for <code>person_id</code>
+<strong>31</strong> and join with the <code>concept</code> table
+multiple times to get the humanly readable names for the
+<code>condition_concept_id</code>,
+<code>condition_type_concept_id</code>, and
+<code>condition_status_concept_id</code>. We then select and arrange the
+relevant columns for display to understand the differences between the
+entries for this patient.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
 </section><section><h2 class="section-heading" id="visits">Visits<a class="anchor" aria-label="anchor" href="#visits"></a></h2>
 <hr class="half-width"><p>The <code>visit_occurrence</code> table contains <a href="https://ohdsi.github.io/CommonDataModel/cdm54.html#visit_occurrence" class="external-link">events
 where Persons engage with the healthcare system for a duration of
 time</a>.</p>
-<p>The main clinical tables <code>condition_occurrence</code>,
+<div class="section level3">
+<h3 id="the-visit_occurrence-table-contains-the-following-columns-among-others-not-listed-here">The <code>visit_occurrence</code> table contains the following
+columns (among others not listed here):<a class="anchor" aria-label="anchor" href="#the-visit_occurrence-table-contains-the-following-columns-among-others-not-listed-here"></a></h3>
+<table class="table"><colgroup><col width="37%"><col width="62%"></colgroup><thead><tr class="header"><th>Column Names</th>
+<th>Description of content</th>
+</tr></thead><tbody><tr class="odd"><td><strong>visit_occurrence_id</strong></td>
+<td>Unique identifier for each visit occurrence</td>
+</tr><tr class="even"><td><strong>person_id</strong></td>
+<td>Identifier for the patient</td>
+</tr><tr class="odd"><td><strong>visit_concept_id</strong></td>
+<td>Concept identifier for the type of visit</td>
+</tr><tr class="even"><td><strong>visit_start_date</strong></td>
+<td>Date the visit started</td>
+</tr><tr class="odd"><td><strong>visit_start_datetime</strong></td>
+<td>Date and time the visit started</td>
+</tr><tr class="even"><td><strong>visit_end_date</strong></td>
+<td>Date the visit ended</td>
+</tr><tr class="odd"><td><strong>visit_end_datetime</strong></td>
+<td>Date and time the visit ended</td>
+</tr><tr class="even"><td><strong>visit_type_concept_id</strong></td>
+<td>Concept identifier for the type of visit</td>
+</tr><tr class="odd"><td><strong>discharged_to_concept_id</strong></td>
+<td>Concept identifier for where the patient was discharged to</td>
+</tr><tr class="even"><td><strong>preceding_visit_occurrence_id</strong></td>
+<td>Identifier for the previous visit occurrence</td>
+</tr></tbody></table><p>The main clinical tables <code>condition_occurrence</code>,
 <code>measurement</code>, <code>observation</code> and
-<code>drug_exposure</code> contain a <code>visit_occurrence_id</code>
-that links to this table.</p>
+<code>drug_exposure</code> all contain a
+<code>visit_occurrence_id</code> that links to this table.</p>
 <p><code>visit_concept_id</code> specifies the kind of visit that took
 place using standardised OMOP concepts. These include
 <code>Inpatient visit</code>, <code>Emergency Room Visit</code> and
@@ -706,7 +789,7 @@ inpatient visit?</p></li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <ol style="list-style-type: decimal"><li>Find out how many different types of visits are recorded in the
 <code>visit_occurrence</code> table and link these to get their
@@ -736,6 +819,18 @@ name.</li>
 3             9202 Outpatient Visit                       4
 4              262 Emergency Room and Inpatient Visit     1</code></pre>
 </div>
+<p><strong><em>Answer:</em></strong> The different types of visits
+recorded in the <code>visit_occurrence</code> table along with their
+names are: - Emergency Room Visit - Inpatient visit - Outpatient Visit -
+Emergency Room and Inpatient Visit</p>
+<p><strong>CODING NOTE:</strong> We use the <code>count()</code>
+function to count the number of occurrences of each
+<code>visit_concept_id</code> in the <code>visit_occurrence</code>
+table. We then join with the <code>concept</code> table to get the
+humanly readable names of the visit types and select the relevant
+columns for display. Finally, we arrange the results in descending order
+of count using the <code>desc()</code> function in conjunction with the
+<code>arrange()</code> function.</p>
 <ol start="2" style="list-style-type: decimal"><li>Find patients who had more than one visit.</li>
 </ol><div class="codewrapper sourceCode" id="cb15">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -758,6 +853,12 @@ name.</li>
 3         2           2
 4        58          10</code></pre>
 </div>
+<p><strong>CODING NOTE:</strong> We group the
+<code>visit_occurrence</code> table by <code>person_id</code> and use
+<code>summarise()</code> to count the number of visits for each patient.
+We then filter to keep only those patients with a
+<code>visit_count</code> greater than 1 and collect the results into R
+for display.</p>
 <ol start="3" style="list-style-type: decimal"><li>How many patients had both an emergency room visit and an inpatient
 visit?</li>
 </ol><div class="codewrapper sourceCode" id="cb17">
@@ -776,6 +877,16 @@ visit?</li>
 </h3>
 <pre class="output" tabindex="0"><code>[1] 8</code></pre>
 </div>
+<p><strong><em>Answer:</em></strong> The number of patients who had both
+an emergency room visit and an inpatient visit is 8.</p>
+<p><strong>CODING NOTE:</strong> We filter the
+<code>visit_occurrence</code> table for the
+<code>visit_concept_id</code> values corresponding to emergency room
+visits and inpatient visits. We then group by <code>person_id</code> and
+use <code>summarise()</code> to count the number of distinct visit types
+for each patient. Finally, we count the number of patients who had more
+than one distinct visit type to get the number of patients who had both
+types of visits.</p>
 </div>
 </div>
 </div>
@@ -804,6 +915,7 @@ research question.</p></li>
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
+</div>
 </section></div> <!-- / div.lesson-content -->
     </main><!-- / main#main-content.main-content --><nav class="bottom-pagination mx-md-4" aria-label="Previous and Next Chapter"><div class="d-block d-sm-block d-md-none">
         <a class="chapter-link" href="05_measurement_observation.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
@@ -864,7 +976,7 @@ any links that you are not going to use.
   "url": "https://SAFEHR-data.github.io/omop-carpentries/06_conditions_visits.html",
   "identifier": "https://SAFEHR-data.github.io/omop-carpentries/06_conditions_visits.html",
   "dateCreated": "2025-06-18",
-  "dateModified": "2026-02-08",
+  "dateModified": "2026-02-11",
   "datePublished": "2026-02-11"
 }
 
