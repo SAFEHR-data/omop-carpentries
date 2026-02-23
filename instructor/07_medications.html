@@ -348,7 +348,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Medications</h1>
-        <p>Last updated on 2026-02-11 |
+        <p>Last updated on 2026-02-23 |
 
         <a href="https://github.com/SAFEHR-data/omop-carpentries/edit/main/episodes/07_medications.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -453,8 +453,8 @@ up concept names/ids.</p>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">library</span><span class="op">(</span><span class="va">arrow</span><span class="op">)</span></span>
 <span><span class="kw">library</span><span class="op">(</span><span class="va">dplyr</span><span class="op">)</span></span>
-<span><span class="va">get_concept_name</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">id</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="va">omop</span><span class="op">$</span><span class="va">public</span><span class="op">$</span><span class="va">concept</span> <span class="op">|&gt;</span></span>
+<span><span class="va">get_concept_name</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">id</span>, <span class="va">omop_obj</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">omop_obj</span><span class="op">$</span><span class="va">public</span><span class="op">$</span><span class="va">concept</span> <span class="op">|&gt;</span></span>
 <span>    <span class="fu">filter</span><span class="op">(</span><span class="va">concept_id</span> <span class="op">==</span> <span class="op">!</span><span class="op">!</span><span class="va">id</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>    <span class="fu">select</span><span class="op">(</span><span class="va">concept_name</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>    <span class="fu">collect</span><span class="op">(</span><span class="op">)</span></span>
@@ -464,8 +464,8 @@ up concept names/ids.</p>
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">get_concept_id</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">name</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="va">omop</span><span class="op">$</span><span class="va">public</span><span class="op">$</span><span class="va">concept</span> <span class="op">|&gt;</span></span>
+<code class="sourceCode R"><span><span class="va">get_concept_id</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">name</span>, <span class="va">omop_obj</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">omop_obj</span><span class="op">$</span><span class="va">public</span><span class="op">$</span><span class="va">concept</span> <span class="op">|&gt;</span></span>
 <span>    <span class="fu">filter</span><span class="op">(</span><span class="va">concept_name</span> <span class="op">==</span> <span class="op">!</span><span class="op">!</span><span class="va">name</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>    <span class="fu">select</span><span class="op">(</span><span class="va">concept_id</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>    <span class="fu">collect</span><span class="op">(</span><span class="op">)</span></span>
@@ -545,7 +545,7 @@ in a drug hierarchy.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -630,7 +630,7 @@ the corresponding <code>RxNorm</code> <code>concept_id</code>.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -725,7 +725,7 @@ drug_source_concept_id to find the drug name and size a tablet.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb11">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -807,7 +807,7 @@ and names.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb13">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -936,8 +936,8 @@ any links that you are not going to use.
   "url": "https://SAFEHR-data.github.io/omop-carpentries/instructor/07_medications.html",
   "identifier": "https://SAFEHR-data.github.io/omop-carpentries/instructor/07_medications.html",
   "dateCreated": "2025-06-18",
-  "dateModified": "2026-02-11",
-  "datePublished": "2026-02-17"
+  "dateModified": "2026-02-23",
+  "datePublished": "2026-02-23"
 }
 
   </script><script>
