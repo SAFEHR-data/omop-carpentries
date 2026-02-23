@@ -152,7 +152,11 @@ List the first ten rows of the `concept table`, listing only the `concept_id`, `
 cdm$concept |>
   arrange(concept_id) |>
   filter(row_number() <= 10) |>
-  select(concept_id, domain_id, vocabulary_id, concept_class_id, standard_concept) |>
+  select(concept_id,
+         domain_id,
+         vocabulary_id,
+         concept_class_id,
+         standard_concept) |>
   collect()
 ```
 
@@ -256,7 +260,11 @@ cdm$concept |>
 ```{r, warning = FALSE, message = FALSE}
 cdm$concept |>
   filter(concept_id %in% c(1569708, 35208414, 44923712, 45011828)) |>
-  select(concept_id, concept_name, domain_id, vocabulary_id, standard_concept) |>
+  select(concept_id,
+         concept_name,
+         domain_id,
+         vocabulary_id,
+         standard_concept) |>
   collect()
 ```
 
@@ -277,38 +285,38 @@ Is this concept a standard concept?
 
 ```{r, warning = FALSE, message = FALSE}
 library(dplyr)
-get_concept_domain <- function(id) {
-  cdm$concept |>
+get_concept_domain <- function(id, cdm_obj) {
+  cdm_obj$concept |>
     filter(concept_id == !!id) |>
     select(domain_id) |>
     pull()
 }
 
-get_concept_vocabulary <- function(id) {
-  cdm$concept |>
+get_concept_vocabulary <- function(id, cdm_obj) {
+  cdm_obj$concept |>
     filter(concept_id == !!id) |>
     select(vocabulary_id) |>
     pull()
 }
 
-get_concept_concept_class <- function(id) {
-  cdm$concept |>
+get_concept_concept_class <- function(id, cdm_obj) {
+  cdm_obj$concept |>
     filter(concept_id == !!id) |>
     select(concept_class_id) |>
     pull()
 }
 
-get_concept_standard_status <- function(id) {
-  cdm$concept |>
+get_concept_standard_status <- function(id, cdm_obj) {
+  cdm_obj$concept |>
     filter(concept_id == !!id) |>
     select(standard_concept) |>
     pull()
 }
 
-get_concept_domain(35208414)
-get_concept_vocabulary(35208414)
-get_concept_concept_class(35208414)
-get_concept_standard_status(35208414)
+get_concept_domain(35208414, cdm)
+get_concept_vocabulary(35208414, cdm)
+get_concept_concept_class(35208414, cdm)
+get_concept_standard_status(35208414, cdm)
 
 ```
 

@@ -138,8 +138,8 @@ Adapt the code we had developed for the get_concept_name function in the previou
 ```{r, warning = FALSE, message = FALSE}
 library(arrow)
 library(dplyr)
-get_concept_name <- function(id) {
-  omop$public$concept |>
+get_concept_name <- function(id, omop_obj) {
+  omop_obj$public$concept |>
     filter(concept_id == !!id) |>
     select(concept_name) |>
     collect()
