@@ -68,8 +68,8 @@ and the useful function we created in the previous episode to look up concept na
 ```{r, warning = FALSE, message = FALSE}
 library(arrow)
 library(dplyr)
-get_concept_name <- function(id) {
-  omop$public$concept |>
+get_concept_name <- function(id, omop_obj) {
+  omop_obj$public$concept |>
     filter(concept_id == !!id) |>
     select(concept_name) |>
     collect()
@@ -124,13 +124,13 @@ It might also be useful to look up id values from the names. We can create a fun
 
 ::::::::::::::::::::::::::::::::::: challenge
 
-Create the function `get_concept_id()` that takes a `concept_name` as input and returns the `concept_id`.
+Create the function `get_concept_id()` that takes a `concept_name` and `omop_obj` as input and returns the `concept_id`.
 
 ::::::::::::::::::::::::::::::::::: solution
 
 ```{r, warning = FALSE, message = FALSE}
-get_concept_id <- function(name) {
-  omop$public$concept |>
+get_concept_id <- function(name, omop_obj) {
+  omop_obj$public$concept |>
     filter(concept_name == !!name) |>
     select(concept_id) |>
     collect()
@@ -196,9 +196,9 @@ get_concept_name(white_british$gender_concept_id)
 ```{r, warning = FALSE, message = FALSE}
 # Let's create a mini version of the concept table that contains only the concepts(the gender concepts) and the columns(concept_id, concept_name)  we want
 
-gender_concept <- omop$public$concept |> 
+gender_concept <- omop$public$concept |>
   filter(concept_id %in% c(8507, 8532)) |>
-  select(concept_id, concept_name) |> 
+  select(concept_id, concept_name) |>
   collect()
 
 # Now we can join to get the number of people of each gender
