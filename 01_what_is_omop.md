@@ -218,28 +218,28 @@ cdm$concept |>
 
 ``` output
 # Source:   SQL [?? x 1]
-# Database: DuckDB 1.4.1 [unknown@Linux 6.8.0-1044-azure:R 4.5.2//tmp/RtmpY0FW18/file17431739c2fc.duckdb]
+# Database: DuckDB 1.4.1 [unknown@Linux 6.8.0-1044-azure:R 4.5.2//tmp/Rtmpq0aYgv/file177030138961.duckdb]
   concept_name   
   <chr>          
 1 Inpatient Visit
 ```
 
-**CODING_NOTE**: We use `filter` to identify the row we want and `select` to choose the column we want. This is because we are querying a remote database, not one that is local. If we were working with a local database we could just use `cdm$concept$concept_name[cdm$concept$concept_id == 9201]` to get the same result.
+**CODING_NOTE**: We use `filter` to identify the row we want and `select` to choose the column we want. These are functions from the dplyr package that can make code clearer. This is because we are querying a remote database, not one that is local. If we were working with a local database we could just use `cdm$concept$concept_name[cdm$concept$concept_id == 9201]` to get the same result.
 
 ### A useful function
 
-Finding the humanly readable name for a `concept_id` will be a useful function. We can create a function `get_concept_name()` that takes a `concept_id` as input and returns the `concept_name`.
+Finding the humanly readable name for a `concept_id` will be a useful function. We can create a function `get_concept_name()` that takes a `concept_id` and the 'cdm' object as input and returns the `concept_name`.
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: challenge
 
-Create the function `get_concept_name()` that takes a `concept_id` as input and returns the `concept_name`.
+Create the function `get_concept_name()` that takes a `concept_id` and the 'cdm' object as input and returns the `concept_name`.
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: solution
 
 
 ``` r
-get_concept_name <- function(id) {
-  cdm$concept |>
+get_concept_name <- function(id, cdm_obj) {
+  cdm_obj$concept |>
     filter(concept_id == !!id) |>
     select(concept_name) |>
     pull()
@@ -251,45 +251,11 @@ get_concept_name <- function(id) {
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 #### Explanation of function code
-- The function is called `get_concept_name` and it takes one argument, `id`.
-- Inside the function, we query the `concept` table from the `cdm` object.
+- The function is called `get_concept_name` and it takes two arguments, `id` and `cdm_obj`.
+- Inside the function, we query the `concept` table from the `cdm_obj` object.
 - We use the `filter` function to select rows where the `concept_id` matches the input `id`. The `!!` operator is used to unquote the variable so that its value is used in the filter.
 - We then use `select` to choose only the `concept_name` column from the filtered results.
 - Finally, we use `pull()` to extract the `concept_name` as a vector, which is returned by the function. We need to use this because we are querying a remote database, not one that is local.
-
-## Other useful tables
-
-There are also other tables which will give you other information about concepts. 
-
-
-``` r
-colnames(cdm$concept)
-```
-
-``` output
- [1] "concept_id"       "concept_name"     "domain_id"        "vocabulary_id"   
- [5] "concept_class_id" "standard_concept" "concept_code"     "valid_start_date"
- [9] "valid_end_date"   "invalid_reason"  
-```
-
-
-``` r
-colnames(cdm$domain)
-```
-
-``` output
-[1] "domain_id"         "domain_name"       "domain_concept_id"
-```
-
-
-``` r
-colnames(cdm$vocabulary)
-```
-
-``` output
-[1] "vocabulary_id"         "vocabulary_name"       "vocabulary_reference" 
-[4] "vocabulary_version"    "vocabulary_concept_id"
-```
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 

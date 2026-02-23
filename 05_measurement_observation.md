@@ -72,8 +72,8 @@ and the useful functions we created in the previous episode to look up concept n
 ``` r
 library(arrow)
 library(dplyr)
-get_concept_name <- function(id) {
-  omop$public$concept |>
+get_concept_name <- function(id, omop_obj) {
+  omop_obj$public$concept |>
     filter(concept_id == !!id) |>
     select(concept_name) |>
     collect()
@@ -82,8 +82,8 @@ get_concept_name <- function(id) {
 
 
 ``` r
-get_concept_id <- function(name) {
-  omop$public$concept |>
+get_concept_id <- function(name, omop_obj) {
+  omop_obj$public$concept |>
     filter(concept_name == !!name) |>
     select(concept_id) |>
     collect()
@@ -369,7 +369,7 @@ Use the `measurement` and `concept` tables to answer the following question:
 
 ``` r
 # Get the concept id for Heart rate  
-heart_rate_id <- get_concept_id("Heart rate")$concept_id
+heart_rate_id <- get_concept_id("Heart rate", omop)$concept_id
 heart_rate_id
 ```
 
@@ -384,7 +384,7 @@ heart_rate_measurements <- omop$public$measurement |>
   collect()
 # Get the unique unit concept ids
 unique_units <- unique(heart_rate_measurements$unit_concept_id)
-get_concept_name(unique_units)
+get_concept_name(unique_units, omop)
 ```
 
 ``` output

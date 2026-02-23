@@ -71,8 +71,8 @@ and the useful function we created in the previous episode to look up concept na
 ``` r
 library(arrow)
 library(dplyr)
-get_concept_name <- function(id) {
-  omop$public$concept |>
+get_concept_name <- function(id, omop_obj) {
+  omop_obj$public$concept |>
     filter(concept_id == !!id) |>
     select(concept_name) |>
     collect()
@@ -137,11 +137,8 @@ From this we can see that the `gender_concept_id` can have values **8507** or **
 get_concept_name(8507)
 ```
 
-``` output
-# A tibble: 1 × 1
-  concept_name
-  <chr>       
-1 Male        
+``` error
+Error in get_concept_name(8507): argument "omop_obj" is missing, with no default
 ```
 
 
@@ -149,25 +146,22 @@ get_concept_name(8507)
 get_concept_name(8532)
 ```
 
-``` output
-# A tibble: 1 × 1
-  concept_name
-  <chr>       
-1 Female      
+``` error
+Error in get_concept_name(8532): argument "omop_obj" is missing, with no default
 ```
 
 It might also be useful to look up id values from the names. We can create a function `get_concept_id()` that takes a concept_name as input and returns the concept_id.
 
 ::::::::::::::::::::::::::::::::::: challenge
 
-Create the function `get_concept_id()` that takes a `concept_name` as input and returns the `concept_id`.
+Create the function `get_concept_id()` that takes a `concept_name` and `omop_obj` as input and returns the `concept_id`.
 
 ::::::::::::::::::::::::::::::::::: solution
 
 
 ``` r
-get_concept_id <- function(name) {
-  omop$public$concept |>
+get_concept_id <- function(name, omop_obj) {
+  omop_obj$public$concept |>
     filter(concept_name == !!name) |>
     select(concept_id) |>
     collect()
@@ -186,11 +180,8 @@ Check that this works by looking up the concept_id for "Female".
 get_concept_id("Female")
 ```
 
-``` output
-# A tibble: 1 × 1
-  concept_id
-       <int>
-1       8532
+``` error
+Error in get_concept_id("Female"): argument "omop_obj" is missing, with no default
 ```
 
 ***Answer:*** The concept_id for "Female" is **8532**.
@@ -213,11 +204,8 @@ Using the `person` table and the functions `get_concept_name()` and `get_concept
 get_concept_id("White")
 ```
 
-``` output
-# A tibble: 1 × 1
-  concept_id
-       <int>
-1       8527
+``` error
+Error in get_concept_id("White"): argument "omop_obj" is missing, with no default
 ```
 
 Then we need to know which patient has this race_concept_id and what the corresponding gender_concept_id is for this patient.
@@ -229,11 +217,8 @@ white <- person |>
 get_concept_name(white$gender_concept_id)
 ```
 
-``` output
-# A tibble: 1 × 1
-  concept_name
-  <chr>       
-1 Female      
+``` error
+Error in get_concept_name(white$gender_concept_id): argument "omop_obj" is missing, with no default
 ```
 
 ***Answer:*** The White patient is female. (Note the code above assumes there is only one `White` patient.)
@@ -244,11 +229,8 @@ get_concept_name(white$gender_concept_id)
 get_concept_id("White British")
 ```
 
-``` output
-# A tibble: 1 × 1
-  concept_id
-       <int>
-1   46286810
+``` error
+Error in get_concept_id("White British"): argument "omop_obj" is missing, with no default
 ```
 
 Then we need to know which patient has this race_concept_id and what the corresponding gender_concept_id is for this patient.   
@@ -259,11 +241,8 @@ white_british <- person |>
 get_concept_name(white_british$gender_concept_id) 
 ```
 
-``` output
-# A tibble: 1 × 1
-  concept_name
-  <chr>       
-1 Female      
+``` error
+Error in get_concept_name(white_british$gender_concept_id): argument "omop_obj" is missing, with no default
 ```
 
 ***Answer:*** The White British patient is female. (Note the code above assumes there is only one `White British` patient.)
@@ -274,9 +253,9 @@ get_concept_name(white_british$gender_concept_id)
 ``` r
 # Let's create a mini version of the concept table that contains only the concepts(the gender concepts) and the columns(concept_id, concept_name)  we want
 
-gender_concept <- omop$public$concept |> 
+gender_concept <- omop$public$concept |>
   filter(concept_id %in% c(8507, 8532)) |>
-  select(concept_id, concept_name) |> 
+  select(concept_id, concept_name) |>
   collect()
 
 # Now we can join to get the number of people of each gender

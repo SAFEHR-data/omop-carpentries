@@ -75,8 +75,8 @@ and the useful functions we created in the previous episode to look up concept n
 ``` r
 library(arrow)
 library(dplyr)
-get_concept_name <- function(id) {
-  omop$public$concept |>
+get_concept_name <- function(id, omop_obj) {
+  omop_obj$public$concept |>
     filter(concept_id == !!id) |>
     select(concept_name) |>
     collect()
@@ -85,8 +85,8 @@ get_concept_name <- function(id) {
 
 
 ``` r
-get_concept_id <- function(name) {
-  omop$public$concept |>
+get_concept_id <- function(name, omop_obj) {
+  omop_obj$public$concept |>
     filter(concept_name == !!name) |>
     select(concept_id) |>
     collect()

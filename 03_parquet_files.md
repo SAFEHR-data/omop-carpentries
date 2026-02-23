@@ -316,8 +316,8 @@ Adapt the code we had developed for the get_concept_name function in the previou
 ``` r
 library(arrow)
 library(dplyr)
-get_concept_name <- function(id) {
-  omop$public$concept |>
+get_concept_name <- function(id, omop_obj) {
+  omop_obj$public$concept |>
     filter(concept_id == !!id) |>
     select(concept_name) |>
     collect()
@@ -336,11 +336,8 @@ Now we can use this function to look up concept names by their concept_id.
 get_concept_name(8507)
 ```
 
-``` output
-# A tibble: 1 × 1
-  concept_name
-  <chr>       
-1 Male        
+``` error
+Error in get_concept_name(8507): argument "omop_obj" is missing, with no default
 ```
 
 ***Answer:*** The concept_id **8507** corresponds to the concept "Male".

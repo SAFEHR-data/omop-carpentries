@@ -118,7 +118,7 @@ cdm$concept |>
 
 ``` output
 # Source:   SQL [?? x 1]
-# Database: DuckDB 1.4.1 [unknown@Linux 6.8.0-1044-azure:R 4.5.2//tmp/RtmpGCstER/file174d25782e54.duckdb]
+# Database: DuckDB 1.4.1 [unknown@Linux 6.8.0-1044-azure:R 4.5.2//tmp/Rtmpcvm0t5/file17a150729fd8.duckdb]
   n_concepts
        <dbl>
 1        444
@@ -137,7 +137,7 @@ cdm$concept |>
 
 ``` output
 # Source:   SQL [?? x 1]
-# Database: DuckDB 1.4.1 [unknown@Linux 6.8.0-1044-azure:R 4.5.2//tmp/RtmpGCstER/file174d25782e54.duckdb]
+# Database: DuckDB 1.4.1 [unknown@Linux 6.8.0-1044-azure:R 4.5.2//tmp/Rtmpcvm0t5/file17a150729fd8.duckdb]
   n_distinct_vocabularies
                     <dbl>
 1                       9
@@ -157,7 +157,7 @@ cdm$concept |>
 
 ``` output
 # Source:   SQL [?? x 1]
-# Database: DuckDB 1.4.1 [unknown@Linux 6.8.0-1044-azure:R 4.5.2//tmp/RtmpGCstER/file174d25782e54.duckdb]
+# Database: DuckDB 1.4.1 [unknown@Linux 6.8.0-1044-azure:R 4.5.2//tmp/Rtmpcvm0t5/file17a150729fd8.duckdb]
   n_distinct_domains
                <dbl>
 1                  8
@@ -176,7 +176,7 @@ cdm$concept |>
 
 ``` output
 # Source:   SQL [?? x 1]
-# Database: DuckDB 1.4.1 [unknown@Linux 6.8.0-1044-azure:R 4.5.2//tmp/RtmpGCstER/file174d25782e54.duckdb]
+# Database: DuckDB 1.4.1 [unknown@Linux 6.8.0-1044-azure:R 4.5.2//tmp/Rtmpcvm0t5/file17a150729fd8.duckdb]
   n_distinct_concept_classes
                        <dbl>
 1                         21
@@ -204,7 +204,11 @@ List the first ten rows of the `concept table`, listing only the `concept_id`, `
 cdm$concept |>
   arrange(concept_id) |>
   filter(row_number() <= 10) |>
-  select(concept_id, domain_id, vocabulary_id, concept_class_id, standard_concept) |>
+  select(concept_id,
+         domain_id,
+         vocabulary_id,
+         concept_class_id,
+         standard_concept) |>
   collect()
 ```
 
@@ -251,7 +255,7 @@ cdm$concept |>
 ```
 
 ``` output
-[1] "RxNorm"  "CVX"     "SNOMED"  "None"    "Gender"  "ICD10CM" "LOINC"  
+[1] "Gender"  "RxNorm"  "CVX"     "SNOMED"  "None"    "ICD10CM" "LOINC"  
 [8] "NDC"     "Visit"  
 ```
 
@@ -281,8 +285,8 @@ cdm$concept |>
 ```
 
 ``` output
-[1] "Measurement" "Drug"        "Observation" "Visit"       "Metadata"   
-[6] "Gender"      "Condition"   "Procedure"  
+[1] "Drug"        "Measurement" "Condition"   "Procedure"   "Observation"
+[6] "Visit"       "Metadata"    "Gender"     
 ```
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -309,13 +313,13 @@ cdm$concept |>
 ```
 
 ``` output
- [1] "CVX"                  "Ingredient"           "11-digit NDC"        
- [4] "Branded Pack"         "Clinical Drug Comp"   "Gender"              
- [7] "Morph Abnormality"    "4-char billing code"  "Procedure"           
-[10] "Lab Test"             "Clinical Drug"        "Clinical Finding"    
-[13] "Clinical Observation" "Quant Clinical Drug"  "Branded Drug"        
-[16] "3-char nonbill code"  "Quant Branded Drug"   "Branded Drug Comp"   
-[19] "Visit"                "Context-dependent"    "Undefined"           
+ [1] "Branded Drug"         "3-char nonbill code"  "Quant Branded Drug"  
+ [4] "Branded Drug Comp"    "Visit"                "Context-dependent"   
+ [7] "Undefined"            "CVX"                  "Ingredient"          
+[10] "11-digit NDC"         "Branded Pack"         "Clinical Drug Comp"  
+[13] "Gender"               "Morph Abnormality"    "4-char billing code" 
+[16] "Procedure"            "Lab Test"             "Clinical Drug"       
+[19] "Clinical Finding"     "Clinical Observation" "Quant Clinical Drug" 
 ```
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -353,7 +357,11 @@ cdm$concept |>
 ``` r
 cdm$concept |>
   filter(concept_id %in% c(1569708, 35208414, 44923712, 45011828)) |>
-  select(concept_id, concept_name, domain_id, vocabulary_id, standard_concept) |>
+  select(concept_id,
+         concept_name,
+         domain_id,
+         vocabulary_id,
+         standard_concept) |>
   collect()
 ```
 
@@ -385,35 +393,35 @@ Is this concept a standard concept?
 
 ``` r
 library(dplyr)
-get_concept_domain <- function(id) {
-  cdm$concept |>
+get_concept_domain <- function(id, cdm_obj) {
+  cdm_obj$concept |>
     filter(concept_id == !!id) |>
     select(domain_id) |>
     pull()
 }
 
-get_concept_vocabulary <- function(id) {
-  cdm$concept |>
+get_concept_vocabulary <- function(id, cdm_obj) {
+  cdm_obj$concept |>
     filter(concept_id == !!id) |>
     select(vocabulary_id) |>
     pull()
 }
 
-get_concept_concept_class <- function(id) {
-  cdm$concept |>
+get_concept_concept_class <- function(id, cdm_obj) {
+  cdm_obj$concept |>
     filter(concept_id == !!id) |>
     select(concept_class_id) |>
     pull()
 }
 
-get_concept_standard_status <- function(id) {
-  cdm$concept |>
+get_concept_standard_status <- function(id, cdm_obj) {
+  cdm_obj$concept |>
     filter(concept_id == !!id) |>
     select(standard_concept) |>
     pull()
 }
 
-get_concept_domain(35208414)
+get_concept_domain(35208414, cdm)
 ```
 
 ``` output
@@ -421,7 +429,7 @@ get_concept_domain(35208414)
 ```
 
 ``` r
-get_concept_vocabulary(35208414)
+get_concept_vocabulary(35208414, cdm)
 ```
 
 ``` output
@@ -429,7 +437,7 @@ get_concept_vocabulary(35208414)
 ```
 
 ``` r
-get_concept_concept_class(35208414)
+get_concept_concept_class(35208414, cdm)
 ```
 
 ``` output
@@ -437,7 +445,7 @@ get_concept_concept_class(35208414)
 ```
 
 ``` r
-get_concept_standard_status(35208414)
+get_concept_standard_status(35208414, cdm)
 ```
 
 ``` output
