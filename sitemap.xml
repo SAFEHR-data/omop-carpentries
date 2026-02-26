@@ -49,6 +49,9 @@
     <loc>https://SAFEHR-data.github.io/omop-carpentries/concepts.html</loc>
   </url>
   <url>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/glossary.html</loc>
+  </url>
+  <url>
     <loc>https://SAFEHR-data.github.io/omop-carpentries/images.html</loc>
   </url>
   <url>
@@ -103,6 +106,9 @@
     <loc>https://SAFEHR-data.github.io/omop-carpentries/instructor/concepts.html</loc>
   </url>
   <url>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/instructor/glossary.html</loc>
+  </url>
+  <url>
     <loc>https://SAFEHR-data.github.io/omop-carpentries/instructor/images.html</loc>
   </url>
   <url>
@@ -122,6 +128,9 @@
   </url>
   <url>
     <loc>https://SAFEHR-data.github.io/omop-carpentries/instructor/profiles.html</loc>
+  </url>
+  <url>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/instructor/reference.html</loc>
   </url>
   <url>
     <loc>https://SAFEHR-data.github.io/omop-carpentries/instructor/tools.html</loc>
@@ -146,6 +155,9 @@
   </url>
   <url>
     <loc>https://SAFEHR-data.github.io/omop-carpentries/profiles.html</loc>
+  </url>
+  <url>
+    <loc>https://SAFEHR-data.github.io/omop-carpentries/reference.html</loc>
   </url>
   <url>
     <loc>https://SAFEHR-data.github.io/omop-carpentries/tools.html</loc>
