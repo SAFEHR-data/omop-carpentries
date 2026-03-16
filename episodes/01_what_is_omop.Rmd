@@ -56,14 +56,6 @@ Create a new project in your environment.
 For this episode we will be using the `CDMConnector` package to connect to an OMOP Common Data Model database. We define a function that will open this package and connect an appropriate dataset. It is listed below but you will also find it in the `workshop/code/CDMConnector` directory that you should have downloaded. This package also contains synthetic example data that can be used to demonstrate querying the data.
 
 ```{r, warning = FALSE, message = FALSE}
-
-# Libraries
-library(CDMConnector)
-library(DBI)
-library(duckdb)
-library(dplyr)
-library(dbplyr)
-
 # Connect to GiBleed if not already connected
 if (!exists("cdm") || !inherits(cdm, "cdm_reference")) {
   db_name <- "GiBleed"
