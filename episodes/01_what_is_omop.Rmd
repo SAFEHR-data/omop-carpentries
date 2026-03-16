@@ -168,7 +168,7 @@ cdm$concept |>
   select(concept_name)
 ```
 
-**CODING_NOTE**: We use `filter` to identify the row we want and `select` to choose the column we want. These are functions from the dplyr package that can make code clearer. This is because we are querying a remote database, not one that is local. If we were working with a local database we could just use `cdm$concept$concept_name[cdm$concept$concept_id == 9201]` to get the same result.
+**CODING_NOTE**: We use `filter` to identify the row we want and `select` to choose the column we want. These are functions from the dplyr package that can make code clearer. This is because we are working with a database connection. If we were working with a local R object we could use base R code: `cdm$concept$concept_name[cdm$concept$concept_id == 9201]` to get the same result.
 
 ### A useful function
 
