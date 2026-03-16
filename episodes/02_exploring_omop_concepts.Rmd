@@ -96,7 +96,6 @@ Answer the following questions using R and the `concept` table:
 
 1. How many entries are there in the `concept` table?
 ```{r, warning = FALSE, message = FALSE}
-library(dplyr)
 cdm$concept |>
   summarise(n_concepts = n()) |>
   collect()
