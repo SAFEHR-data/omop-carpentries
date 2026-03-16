@@ -367,15 +367,24 @@ any links that you are not going to use.
 <h1 id="setup-instructions">Setup instructions<a class="anchor" aria-label="anchor" href="#setup-instructions"></a></h1>
 <div class="section level2">
 <h2 id="install-r-packages">Install R Packages<a class="anchor" aria-label="anchor" href="#install-r-packages"></a></h2>
-<ul><li><p>install.packages(“dplyr”, verbose=FALSE)</p></li>
-<li><p>install.packages(“readr”, verbose=FALSE)</p></li>
-<li><p>install.packages(“purrr”, verbose=FALSE)</p></li>
-<li><p>install.packages(“CDMConnector”, verbose=FALSE)</p></li>
-<li><p>install.packages(“duckdb”, verbose=FALSE)</p></li>
-<li><p>install.packages(“lubridate”, verbose=FALSE)</p></li>
-<li><p>install.packages(“renv”, verbose=FALSE)</p></li>
-<li><p>install.packages(“arrow”, verbose=FALSE)</p></li>
-</ul></div>
+<p>Run these commands in the R terminal to install the following
+libraries needed for the courses.</p>
+<div class="codewrapper sourceCode" id="cb1">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">pkgs</span> <span class="op">&lt;-</span> <span class="fu">c</span><span class="op">(</span></span>
+<span>    <span class="st">"dplyr"</span>,</span>
+<span>    <span class="st">"readr"</span>,</span>
+<span>    <span class="st">"purrr"</span>,</span>
+<span>    <span class="st">"CDMConnector"</span>,</span>
+<span>    <span class="st">"duckdb"</span>,</span>
+<span>    <span class="st">"lubridate"</span>,</span>
+<span>    <span class="st">"arrow"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="fu">install.packages</span><span class="op">(</span><span class="va">pkgs</span><span class="op">)</span></span></code></pre>
+</div>
+</div>
 <div class="section level2">
 <h2 id="create-environment">Create environment<a class="anchor" aria-label="anchor" href="#create-environment"></a></h2>
 <ol style="list-style-type: decimal"><li>Make a new folder in your Desktop called
@@ -386,11 +395,11 @@ to this folder.</li>
 called <code>workshop</code> in the <code>omop_course</code> folder
 containing sub folders <code>code</code> and <code>data</code>.</li>
 <li>You can access this folder from the Unix shell with:</li>
-</ol><div class="codewrapper sourceCode" id="cb1">
+</ol><div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="ex">$</span> cd</span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="ex">$</span> cd Desktop/omop_course/workshop</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="ex">$</span> cd</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="ex">$</span> cd Desktop/omop_course/workshop</span></code></pre>
 </div>
 <!--
 Place links that you need to refer to multiple times across pages here. Delete
@@ -450,8 +459,8 @@ any links that you are not going to use.
   "url": "https://SAFEHR-data.github.io/omop-carpentries/index.html",
   "identifier": "https://SAFEHR-data.github.io/omop-carpentries/index.html",
   "dateCreated": "2025-06-18",
-  "dateModified": "2026-03-10",
-  "datePublished": "2026-03-10"
+  "dateModified": "2026-03-16",
+  "datePublished": "2026-03-16"
 }
 
   </script><script>
