@@ -5,21 +5,21 @@ title: Setup
 # Setup instructions
 
 ## Install R Packages
- - install.packages("dplyr", verbose=FALSE)
 
- - install.packages("readr", verbose=FALSE)
+Run these commands in the R terminal to install the following libraries needed for the courses.
 
- - install.packages("purrr", verbose=FALSE)
-
- - install.packages("CDMConnector", verbose=FALSE)
-
- - install.packages("duckdb", verbose=FALSE)
-
- - install.packages("lubridate", verbose=FALSE)
-
- - install.packages("renv", verbose=FALSE)
-
- - install.packages("arrow", verbose=FALSE)
+```r
+pkgs <- c(
+    "dplyr",
+    "readr",
+    "purrr",
+    "CDMConnector",
+    "duckdb",
+    "lubridate",
+    "arrow"
+)
+install.packages(pkgs)
+```
 
 
 ## Create environment
