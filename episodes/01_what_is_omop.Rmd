@@ -170,7 +170,7 @@ Finding the humanly readable name for a `concept_id` will be a useful function. 
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: challenge
 
-Create the function `get_concept_name()` that takes the the 'cdm' object and a `concept_id` as input and returns the `concept_name`.
+Create the function `get_concept_name()` that takes the 'cdm' object and a `concept_id` as an input and returns the `concept_name`.
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: solution
 
