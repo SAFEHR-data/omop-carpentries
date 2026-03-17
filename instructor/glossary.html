@@ -334,7 +334,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Reference</h1>
-        <p>Last updated on 2026-02-26 |
+        <p>Last updated on 2026-03-17 |
 
         <a href="https://github.com/SAFEHR-data/omop-carpentries/edit/main/learners/glossary.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -359,20 +359,23 @@ finance, and industry.</p>
 </div>
 <div class="section level2">
 <h2 id="why-use-r">Why Use R?<a class="anchor" aria-label="anchor" href="#why-use-r"></a></h2>
-<p>• Free and Open Source: R is completely free to download and use •
-Comprehensive Statistical Tools: Built-in functions for virtually any
-statistical analysis • Excellent for Data Visualization: Create
-publication-quality graphs and plots • Reproducible Research: Your
-analysis is documented in code, making it easy to share and repeat •
-Active Community: Thousands of packages extending R’s capabilities •
-Healthcare &amp; Research Focus: Widely used in clinical research,
-epidemiology, and bioinformatics</p>
-</div>
+<ul><li>Free and Open Source: R is completely free to download and use</li>
+<li>Comprehensive Statistical Tools: Built-in functions for virtually
+any statistical analysis</li>
+<li>Excellent for Data Visualization: Create publication-quality graphs
+and plots</li>
+<li>Reproducible Research: Your analysis is documented in code, making
+it easy to share and repeat</li>
+<li>Active Community: Thousands of packages extending R’s
+capabilities</li>
+<li>Healthcare &amp; Research Focus: Widely used in clinical research,
+epidemiology, and bioinformatics</li>
+</ul></div>
 <div class="section level2">
 <h2 id="what-is-rstudio">What is RStudio?<a class="anchor" aria-label="anchor" href="#what-is-rstudio"></a></h2>
 <p>RStudio is an Integrated Development Environment (IDE) for R. Think
-of it this way: • R is the engine (the programming language that does
-the work) • RStudio is the dashboard (the interface that makes R easier
+of it this way: - R is the engine (the programming language that does
+the work) - RStudio is the dashboard (the interface that makes R easier
 to use)</p>
 <p>While you can use R on its own, RStudio provides a much more
 user-friendly and productive environment.</p>
@@ -380,18 +383,18 @@ user-friendly and productive environment.</p>
 <div class="section level2">
 <h2 id="the-rstudio-interface">The RStudio Interface<a class="anchor" aria-label="anchor" href="#the-rstudio-interface"></a></h2>
 <p>When you open RStudio, you’ll see four main panes:</p>
-<p>Source/Editor Pane (Top Left) • Where you write and save your R
-scripts • Allows you to edit and run multiple lines of code • Your
+<p>Source/Editor Pane (Top Left) - Where you write and save your R
+scripts - Allows you to edit and run multiple lines of code - Your
 analysis workflow lives here</p>
-<p>Console Pane (Bottom Left) • Where R actually executes commands • You
-can type commands directly here for quick tests • Shows output and error
+<p>Console Pane (Bottom Left) - Where R actually executes commands - You
+can type commands directly here for quick tests - Shows output and error
 messages</p>
-<p>Environment/History Pane (Top Right) • Environment: Shows all
-objects, datasets, and variables currently loaded • History: Keeps track
+<p>Environment/History Pane (Top Right) - Environment: Shows all
+objects, datasets, and variables currently loaded - History: Keeps track
 of commands you’ve run</p>
-<p>Files/Plots/Packages/Help Pane (Bottom Right) • Files: Browse your
-project files • Plots: View graphs and visualizations • Packages: Manage
-installed R packages • Help: Access documentation</p>
+<p>Files/Plots/Packages/Help Pane (Bottom Right) - Files: Browse your
+project files - Plots: View graphs and visualizations - Packages: Manage
+installed R packages - Help: Access documentation</p>
 </div>
 <div class="section level2">
 <h2 id="your-first-steps-in-r">Your First Steps in R<a class="anchor" aria-label="anchor" href="#your-first-steps-in-r"></a></h2>
@@ -461,9 +464,10 @@ install:</p>
 </div>
 <div class="section level3">
 <h3 id="scripts-vs--console">Scripts vs. Console<a class="anchor" aria-label="anchor" href="#scripts-vs--console"></a></h3>
-<p>• Console: For quick tests and one-off commands • Scripts: For saving
-your analysis workflow that you can run again later</p>
-</div>
+<ul><li>Console: For quick tests and one-off commands</li>
+<li>Scripts: For saving your analysis workflow that you can run again
+later</li>
+</ul></div>
 <div class="section level3">
 <h3 id="comments">Comments<a class="anchor" aria-label="anchor" href="#comments"></a></h3>
 <p>Use # to add comments to your code:</p>
@@ -521,34 +525,40 @@ created</li>
 </ul></div>
 <div class="section level2">
 <h2 id="tips-for-getting-started">Tips for Getting Started<a class="anchor" aria-label="anchor" href="#tips-for-getting-started"></a></h2>
-<p>Use Projects: RStudio Projects keep your work organized Save Your
-Scripts: Your code is your documentation Don’t Fear Errors: Error
-messages help you learn - read them carefully Use Tab Completion: Start
-typing and press Tab for suggestions Check Your Working Directory: Know
-where R is looking for files with getwd()</p>
-</div>
+<ul><li>Use Projects: RStudio Projects keep your work organized</li>
+<li>Save Your Scripts: Your code is your documentation</li>
+<li>Don’t Fear Errors: Error messages help you learn - read them
+carefully</li>
+<li>Use Tab Completion: Start typing and press Tab for suggestions</li>
+<li>Check Your Working Directory: Know where R is looking for files with
+<code>getwd()</code>, or use the <code>here</code> library.</li>
+</ul></div>
 <div class="section level2">
 <h2 id="common-beginner-mistakes">Common Beginner Mistakes<a class="anchor" aria-label="anchor" href="#common-beginner-mistakes"></a></h2>
-<p>• Case Sensitivity: R distinguishes between Data and data • Missing
-Commas: Function arguments need commas: mean(x, na.rm = TRUE) •
-Unmatched Parentheses: Every ( needs a closing ) • Wrong Assignment
-Operator: Use &lt;- for assignment, not = (though = works in some
-contexts)</p>
-</div>
+<ul><li>Case Sensitivity: R distinguishes between Data and data</li>
+<li>Missing Commas: Function arguments need commas: mean(x, na.rm =
+TRUE)</li>
+<li>Unmatched Parentheses: Every ( needs a closing )</li>
+<li>Wrong Assignment Operator: Use &lt;- for assignment, not = (though =
+works in some contexts)</li>
+</ul></div>
 <div class="section level2">
 <h2 id="next-steps">Next Steps<a class="anchor" aria-label="anchor" href="#next-steps"></a></h2>
-<p>Once you’re comfortable with the basics: Learn to import and explore
-data Master data manipulation with packages like dplyr Create
-visualizations with ggplot2 Perform statistical analyses relevant to
-your field Generate reports with R Markdown</p>
-</div>
+<p>Once you’re comfortable with the basics:</p>
+<ul><li>Learn to import and explore data</li>
+<li>Master data manipulation with packages like dplyr</li>
+<li>Create visualizations with ggplot2</li>
+<li>Perform statistical analyses relevant to your field</li>
+<li>Generate reports with R Markdown</li>
+</ul></div>
 <div class="section level2">
 <h2 id="resources">Resources<a class="anchor" aria-label="anchor" href="#resources"></a></h2>
-<p>• Built-in Help: Type ?function_name` in the console • Cheat Sheets:
-RStudio provides excellent cheat sheets (Help → Cheat Sheets) • Stack
-Overflow: Great for troubleshooting specific problems • R for Data
-Science: Free online book at r4ds.had.co.nz</p>
-<p>Remember: Everyone starts as a beginner. The best way to learn R is
+<ul><li>Built-in Help: Type ?function_name` in the console</li>
+<li>Cheat Sheets: RStudio provides excellent cheat sheets (Help → Cheat
+Sheets)</li>
+<li>Stack Overflow: Great for troubleshooting specific problems</li>
+<li>R for Data Science: Free online book at r4ds.had.co.nz</li>
+</ul><p>Remember: Everyone starts as a beginner. The best way to learn R is
 by doing - start with simple tasks and gradually build your skills. The
 R community is welcoming and helpful, so don’t hesitate to ask
 questions!</p>
@@ -632,7 +642,7 @@ any links that you are not going to use.
   "url": "https://SAFEHR-data.github.io/omop-carpentries/instructor/glossary.html",
   "identifier": "https://SAFEHR-data.github.io/omop-carpentries/instructor/glossary.html",
   "dateCreated": "2025-06-18",
-  "dateModified": "2026-02-26",
+  "dateModified": "2026-03-17",
   "datePublished": "2026-03-17"
 }
 
