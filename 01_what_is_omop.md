@@ -57,12 +57,7 @@ For this episode we will be using the `CDMConnector` package to connect to an OM
 
 
 ``` r
-# Libraries
-library(CDMConnector)
-library(DBI)
-library(duckdb)
 library(dplyr)
-library(dbplyr)
 
 # Connect to GiBleed if not already connected
 if (!exists("cdm") || !inherits(cdm, "cdm_reference")) {
@@ -218,27 +213,27 @@ cdm$concept |>
 
 ``` output
 # Source:   SQL [?? x 1]
-# Database: DuckDB 1.4.1 [unknown@Linux 6.8.0-1044-azure:R 4.5.2//tmp/Rtmpq0aYgv/file177030138961.duckdb]
+# Database: DuckDB 1.4.1 [unknown@Linux 6.8.0-1044-azure:R 4.5.2//tmp/RtmpvBuSRV/file174e3e58e40e.duckdb]
   concept_name   
   <chr>          
 1 Inpatient Visit
 ```
 
-**CODING_NOTE**: We use `filter` to identify the row we want and `select` to choose the column we want. These are functions from the dplyr package that can make code clearer. This is because we are querying a remote database, not one that is local. If we were working with a local database we could just use `cdm$concept$concept_name[cdm$concept$concept_id == 9201]` to get the same result.
+**CODING_NOTE**: We use `filter` to identify the row(s) we want and `select` to choose the column(s) we want. These are functions from the dplyr package that can make code clearer by chaining instructions together and can be used for a local R object or database connection. If we were working with a local R object we could use also base R code: `cdm$concept$concept_name[cdm$concept$concept_id == 9201]` to get the same result - however this would command would not work with a database connection.
 
 ### A useful function
 
-Finding the humanly readable name for a `concept_id` will be a useful function. We can create a function `get_concept_name()` that takes a `concept_id` and the 'cdm' object as input and returns the `concept_name`.
+Finding the humanly readable name for a `concept_id` will be a useful function. We can create a function `get_concept_name()` that takes the 'cdm' object and a `concept_id` as an input and returns the `concept_name`.
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: challenge
 
-Create the function `get_concept_name()` that takes a `concept_id` and the 'cdm' object as input and returns the `concept_name`.
+Create the function `get_concept_name()` that takes the 'cdm' object and a `concept_id` as an input and returns the `concept_name`.
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: solution
 
 
 ``` r
-get_concept_name <- function(id, cdm_obj) {
+get_concept_name <- function(cdm_obj, id) {
   cdm_obj$concept |>
     filter(concept_id == !!id) |>
     select(concept_name) |>
@@ -251,7 +246,7 @@ get_concept_name <- function(id, cdm_obj) {
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 #### Explanation of function code
-- The function is called `get_concept_name` and it takes two arguments, `id` and `cdm_obj`.
+- The function is called `get_concept_name` and it takes two arguments, `cdm_obj` and `id`.
 - Inside the function, we query the `concept` table from the `cdm_obj` object.
 - We use the `filter` function to select rows where the `concept_id` matches the input `id`. The `!!` operator is used to unquote the variable so that its value is used in the filter.
 - We then use `select` to choose only the `concept_name` column from the filtered results.

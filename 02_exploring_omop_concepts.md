@@ -28,14 +28,14 @@ exercises: 0
 
 The primary purpose of the `concept` table is to provide a standardised representation of medical Concepts, allowing for consistent querying and analysis across healthcare databases. Users can join the `concept` table with other tables in the CDM to enrich clinical data with Concept information or use the `concept` table as a reference for mapping clinical data from source terminologies to Standard or other Concepts.
 
-An OMOP `concept_id` is a unique integer identifier. Concept_ids are defined in the OMOP `concept` table where a corresponding name and other attributes are stored. OMOP contains concept_ids for other medical vocabularies such as SNOMED and LOINC, which OMOP terms as source vocabularies.
+An OMOP `concept_id` is a unique integer identifier. These are defined in the OMOP `concept` table with a corresponding name and other attributes. OMOP contains concept_ids for other medical vocabularies such as SNOMED and LOINC, which OMOP terms as source vocabularies.
 
 Nearly everything in a hospital can be represented by an OMOP `concept_id`.
 
 
 ## Looking up OMOP concepts
 
-OMOP concepts can be looked up in [Athena](https://athena.ohdsi.org) an online tool provided by OHDSI.
+OMOP concepts can be looked up in [Athena](https://athena.ohdsi.org) an online tool provided by [OHDSI](https://www.ohdsi.org/) (Observational Health Data Sciences and Informatics, a collaboration that continues to develop OMOP).
 
 The CDMConnector package allows connection to an OMOP Common Data Model in a database. It also contains synthetic example data that can be used to demonstrate querying the data.
 
@@ -47,17 +47,11 @@ In the previous episode we set up the CDMConnector package to connect to an OMOP
 
 ``` r
 library(CDMConnector)
+library(dplyr)
 
 db_name <- "GiBleed"
 CDMConnector::requireEunomia(datasetName = db_name)
-```
 
-``` output
-
-Download completed!
-```
-
-``` r
 db <- DBI::dbConnect(duckdb::duckdb(),
                      dbdir = CDMConnector::eunomiaDir(datasetName = db_name))
 
@@ -89,7 +83,7 @@ colnames(cdm$concept)
 | **concept_code**          | Code used by the source vocabulary to identify the concept. |
 | **valid_start_date**      | Date the concept became valid in OMOP. |
 | **valid_end_date**        | Date the concept ceased to be valid. |
-| **invalid_reason**;        | Reason for invalidation, if applicable | 
+| **invalid_reason**        | Reason for invalidation, if applicable. | 
 
 
 The `concept` table is the main table for looking up information about concepts. We can use R to query the `concept` table for specific attributes of concepts.
@@ -111,14 +105,13 @@ Answer the following questions using R and the `concept` table:
 1. How many entries are there in the `concept` table?
 
 ``` r
-library(dplyr)
 cdm$concept |>
-  summarise(n_concepts = n())
+  summarise(n_concepts = n()) |>
+  collect()
 ```
 
 ``` output
-# Source:   SQL [?? x 1]
-# Database: DuckDB 1.4.1 [unknown@Linux 6.8.0-1044-azure:R 4.5.2//tmp/Rtmpcvm0t5/file17a150729fd8.duckdb]
+# A tibble: 1 × 1
   n_concepts
        <dbl>
 1        444
@@ -127,17 +120,18 @@ cdm$concept |>
 ***Answer:*** There are 444 entries in the `concept` table. This is a tiny fraction of the overall table which can be found at [Athena](https://athena.ohdsi.org)
 
 **CODING_NOTE**: The function `n()` counts the number of rows in the table and `summarise()` creates a summary table with that count. These functions are part of the `dplyr` package. When you have loaded the library once your environment will remember it for the rest of the session.
+We are also using `collect` at the end of the pipe to ensure that the data is converted to a local object in R. You can get away without using it at this stage, as R works out that you are getting a single value, but you will often need to use `collect` with database connections.
 
 2. How many distinct vocabularies are there in the `concept` table?
 
 ``` r
 cdm$concept |>
-  summarise(n_distinct_vocabularies = n_distinct(vocabulary_id))
+  summarise(n_distinct_vocabularies = n_distinct(vocabulary_id)) |>
+  collect()
 ```
 
 ``` output
-# Source:   SQL [?? x 1]
-# Database: DuckDB 1.4.1 [unknown@Linux 6.8.0-1044-azure:R 4.5.2//tmp/Rtmpcvm0t5/file17a150729fd8.duckdb]
+# A tibble: 1 × 1
   n_distinct_vocabularies
                     <dbl>
 1                       9
@@ -152,12 +146,12 @@ cdm$concept |>
 ``` r
 cdm$concept |>
   filter(domain_id != "None") |>
-  summarise(n_distinct_domains = n_distinct(domain_id))
+  summarise(n_distinct_domains = n_distinct(domain_id)) |>
+  collect()
 ```
 
 ``` output
-# Source:   SQL [?? x 1]
-# Database: DuckDB 1.4.1 [unknown@Linux 6.8.0-1044-azure:R 4.5.2//tmp/Rtmpcvm0t5/file17a150729fd8.duckdb]
+# A tibble: 1 × 1
   n_distinct_domains
                <dbl>
 1                  8
@@ -171,12 +165,12 @@ cdm$concept |>
 
 ``` r
 cdm$concept |>
-  summarise(n_distinct_concept_classes = n_distinct(concept_class_id))
+  summarise(n_distinct_concept_classes = n_distinct(concept_class_id)) |>
+  collect()
 ```
 
 ``` output
-# Source:   SQL [?? x 1]
-# Database: DuckDB 1.4.1 [unknown@Linux 6.8.0-1044-azure:R 4.5.2//tmp/Rtmpcvm0t5/file17a150729fd8.duckdb]
+# A tibble: 1 × 1
   n_distinct_concept_classes
                        <dbl>
 1                         21
@@ -228,7 +222,7 @@ cdm$concept |>
 10      80180 Condition SNOMED        Clinical Finding S               
 ```
 
-**CODING_NOTE**: The `arrange()` function orders the rows by `concept_id`. The `filter(row_number() <= 10)` function filters to the first 10 rows. The `select()` function selects only the specified columns. We have to use `collect()` to pull the data into R memory to view it. This is because we are querying a remote database, not one that is local..
+**CODING_NOTE**: The `arrange()` function orders the rows by `concept_id`. The `filter(row_number() <= 10)` function filters to the first 10 rows. The `select()` function selects only the specified columns. We have to use `collect()` to pull the data into R memory to view it. This is because we are querying a remote database, rather than a local object. In the previous challenge R would figure out that it should display the calculated result, but here we need to be explicit. 
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -255,8 +249,8 @@ cdm$concept |>
 ```
 
 ``` output
-[1] "Gender"  "RxNorm"  "CVX"     "SNOMED"  "None"    "ICD10CM" "LOINC"  
-[8] "NDC"     "Visit"  
+[1] "Gender"  "ICD10CM" "LOINC"   "NDC"     "Visit"   "RxNorm"  "CVX"    
+[8] "SNOMED"  "None"   
 ```
 
 **CODING_NOTE**: Here we can use `pull(x)` to pull the data x into R memory to view it. This is because we are only requiring one column of data, so we can pull that column directly into R memory without needing to use `collect()` first.
@@ -285,8 +279,8 @@ cdm$concept |>
 ```
 
 ``` output
-[1] "Drug"        "Measurement" "Condition"   "Procedure"   "Observation"
-[6] "Visit"       "Metadata"    "Gender"     
+[1] "Drug"        "Measurement" "Observation" "Visit"       "Metadata"   
+[6] "Gender"      "Condition"   "Procedure"  
 ```
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -295,17 +289,18 @@ cdm$concept |>
 
 ### Look at concept classes
  
- Class: A lower level category that groups concepts within a domain by what they represent in clinical data.
+ Class: A more detailed category that groups concepts within a domain by what they represent in clinical data.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::: challenge
 
-List all distinct concept_classes in the `concept` table.
+List all distinct concept_classes in the `concept` table that are in the "Drug" domain.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::: solution
 
 
 ``` r
 cdm$concept |>
+  filter(domain_id == "Drug") |>
   filter(!is.na(concept_class_id)) |>
   distinct(concept_class_id) |>
   arrange(concept_class_id) |>
@@ -313,13 +308,10 @@ cdm$concept |>
 ```
 
 ``` output
- [1] "Branded Drug"         "3-char nonbill code"  "Quant Branded Drug"  
- [4] "Branded Drug Comp"    "Visit"                "Context-dependent"   
- [7] "Undefined"            "CVX"                  "Ingredient"          
-[10] "11-digit NDC"         "Branded Pack"         "Clinical Drug Comp"  
-[13] "Gender"               "Morph Abnormality"    "4-char billing code" 
-[16] "Procedure"            "Lab Test"             "Clinical Drug"       
-[19] "Clinical Finding"     "Clinical Observation" "Quant Clinical Drug" 
+ [1] "CVX"                 "Ingredient"          "11-digit NDC"       
+ [4] "Branded Pack"        "Clinical Drug Comp"  "Branded Drug"       
+ [7] "Quant Branded Drug"  "Branded Drug Comp"   "Clinical Drug"      
+[10] "Quant Clinical Drug"
 ```
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -392,36 +384,35 @@ Is this concept a standard concept?
 
 
 ``` r
-library(dplyr)
-get_concept_domain <- function(id, cdm_obj) {
+get_concept_domain <- function(cdm_obj, id) {
   cdm_obj$concept |>
     filter(concept_id == !!id) |>
     select(domain_id) |>
     pull()
 }
 
-get_concept_vocabulary <- function(id, cdm_obj) {
+get_concept_vocabulary <- function(cdm_obj, id) {
   cdm_obj$concept |>
     filter(concept_id == !!id) |>
     select(vocabulary_id) |>
     pull()
 }
 
-get_concept_concept_class <- function(id, cdm_obj) {
+get_concept_concept_class <- function(cdm_obj, id) {
   cdm_obj$concept |>
     filter(concept_id == !!id) |>
     select(concept_class_id) |>
     pull()
 }
 
-get_concept_standard_status <- function(id, cdm_obj) {
+get_concept_standard_status <- function(cdm_obj, id) {
   cdm_obj$concept |>
     filter(concept_id == !!id) |>
     select(standard_concept) |>
     pull()
 }
 
-get_concept_domain(35208414, cdm)
+get_concept_domain(cdm, 35208414)
 ```
 
 ``` output
@@ -429,7 +420,7 @@ get_concept_domain(35208414, cdm)
 ```
 
 ``` r
-get_concept_vocabulary(35208414, cdm)
+get_concept_vocabulary(cdm, 35208414)
 ```
 
 ``` output
@@ -437,7 +428,7 @@ get_concept_vocabulary(35208414, cdm)
 ```
 
 ``` r
-get_concept_concept_class(35208414, cdm)
+get_concept_concept_class(cdm, 35208414)
 ```
 
 ``` output
@@ -445,7 +436,7 @@ get_concept_concept_class(35208414, cdm)
 ```
 
 ``` r
-get_concept_standard_status(35208414, cdm)
+get_concept_standard_status(cdm, 35208414)
 ```
 
 ``` output
@@ -455,11 +446,8 @@ get_concept_standard_status(35208414, cdm)
 ***Answer:***
 
 - The domain for `concept_id` **319835** is 'Condition'.
-
 - The vocabulary for `concept_id` **319835** is 'ICD10CM'.
-
 - The concept class for concept id **319835** is '4-char billing code'
-
 - This concept is not a standard concept (standard_concept = 'NA').
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::

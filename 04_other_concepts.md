@@ -32,7 +32,7 @@ In this episode, we will explore more concepts related to the OMOP Common Data M
 
 For this episode we will be using a sample OMOP CDM database that is pre-loaded with data. This database is a simplified version of a real-world OMOP CDM database and is intended for educational purposes only.
 
-(UCLH only) This will come in the same form as you would get data if you asked for a data extract via the SAFEHR platform (i.e. a set of parquet files).
+(UCLH only) This will come in a similar form as you would get data if you asked for a data extract via the SAFEHR platform (i.e. a set of parquet files).
 
 As part of the setup prior to this course you were asked to download and install the sample database. If you have not done this yet, please refer to the setup instructions provided earlier in the course. For now, we will assume that you have the sample OMOP CDM database available on your local machine at the following path: `workshop/data/public/` and the functions in a folder `workshop/code/parquet_dataset`.
 
@@ -40,39 +40,29 @@ You will then need to load the database as shown in the previous episode.
 
 
 ``` r
-open_omop_dataset <- function(dir) {
-  open_omop_schema <- function(path) {
-    # iterate table level folders
+library(arrow)
+library(dplyr)
+open_omop_dataset <- function(path) {
+    # iterate over table level directories
     list.dirs(path, recursive = FALSE) |>
-      # exclude folder name from path
-      # and use it as index for named list
+      # exclude folder name from path and use it as index for named list
       purrr::set_names(~ basename(.)) |>
-      # "lazy-open" list of parquet files
-      # from specified folder
+      # "lazy-load" list of parquet files from specified folder
       purrr::map(arrow::open_dataset)
-  }
-  # iterate top-level folders
-  list.dirs(dir, recursive = FALSE) |>
-    # exclude folder name from path
-    # and use it as index for named list
-    purrr::set_names(~ basename(.)) |>
-    purrr::map(open_omop_schema)
 }
 ```
 
 
 ``` r
-omop <- open_omop_dataset("./data/")
+omop <- open_omop_dataset("./data/public")
 ```
 
 and the useful function we created in the previous episode to look up concept names.
 
 
 ``` r
-library(arrow)
-library(dplyr)
-get_concept_name <- function(id, omop_obj) {
-  omop_obj$public$concept |>
+get_concept_name <- function(omop_obj, id) {
+  omop_obj$concept |>
     filter(concept_id == !!id) |>
     select(concept_name) |>
     collect()
@@ -101,7 +91,7 @@ In addition to the `concept_id` column in various OMOP tables, there are several
 Look at the column names of the `person` table.
 
 ``` r
-omop$public$person
+omop$person
 ```
 
 ``` output
@@ -126,42 +116,48 @@ For example, to get the gender name for a person, you can use the `gender_concep
 
 ``` r
 # First read in the person table
-library(dplyr)
-person <- omop$public$person |> collect()
+person <- omop$person |> 
+  collect()
 ```
 
 From this we can see that the `gender_concept_id` can have values **8507** or **8532**. We can look these up in the `concept` table using the previously defined function `get_concept_name()`.
 
 
 ``` r
-get_concept_name(8507)
+get_concept_name(omop, 8507)
 ```
 
-``` error
-Error in get_concept_name(8507): argument "omop_obj" is missing, with no default
+``` output
+# A tibble: 1 × 1
+  concept_name
+  <chr>       
+1 Male        
 ```
 
 
 ``` r
-get_concept_name(8532)
+get_concept_name(omop, 8532)
 ```
 
-``` error
-Error in get_concept_name(8532): argument "omop_obj" is missing, with no default
+``` output
+# A tibble: 1 × 1
+  concept_name
+  <chr>       
+1 Female      
 ```
 
 It might also be useful to look up id values from the names. We can create a function `get_concept_id()` that takes a concept_name as input and returns the concept_id.
 
 ::::::::::::::::::::::::::::::::::: challenge
 
-Create the function `get_concept_id()` that takes a `concept_name` and `omop_obj` as input and returns the `concept_id`.
+Create the function `get_concept_id()` that takes an `omop_obj` and a `concept_name` as input and returns the `concept_id`.
 
 ::::::::::::::::::::::::::::::::::: solution
 
 
 ``` r
-get_concept_id <- function(name, omop_obj) {
-  omop_obj$public$concept |>
+get_concept_id <- function(omop_obj, name) {
+  omop_obj$concept |>
     filter(concept_name == !!name) |>
     select(concept_id) |>
     collect()
@@ -177,11 +173,14 @@ Check that this works by looking up the concept_id for "Female".
 
 
 ``` r
-get_concept_id("Female")
+get_concept_id(omop, "Female")
 ```
 
-``` error
-Error in get_concept_id("Female"): argument "omop_obj" is missing, with no default
+``` output
+# A tibble: 1 × 1
+  concept_id
+       <int>
+1       8532
 ```
 
 ***Answer:*** The concept_id for "Female" is **8532**.
@@ -201,11 +200,14 @@ Using the `person` table and the functions `get_concept_name()` and `get_concept
 1. First we need to know the `concept_id` of the concept `White`
 
 ``` r
-get_concept_id("White")
+get_concept_id(omop, "White")
 ```
 
-``` error
-Error in get_concept_id("White"): argument "omop_obj" is missing, with no default
+``` output
+# A tibble: 1 × 1
+  concept_id
+       <int>
+1       8527
 ```
 
 Then we need to know which patient has this race_concept_id and what the corresponding gender_concept_id is for this patient.
@@ -214,11 +216,15 @@ Then we need to know which patient has this race_concept_id and what the corresp
 ``` r
 white <- person |> 
   filter(race_concept_id == 8527)
-get_concept_name(white$gender_concept_id)
+
+get_concept_name(omop, white$gender_concept_id)
 ```
 
-``` error
-Error in get_concept_name(white$gender_concept_id): argument "omop_obj" is missing, with no default
+``` output
+# A tibble: 1 × 1
+  concept_name
+  <chr>       
+1 Female      
 ```
 
 ***Answer:*** The White patient is female. (Note the code above assumes there is only one `White` patient.)
@@ -226,11 +232,14 @@ Error in get_concept_name(white$gender_concept_id): argument "omop_obj" is missi
 2. Similarly, we first need to know the `concept_id` of the concept `White British`
 
 ``` r
-get_concept_id("White British")
+get_concept_id(omop, "White British")
 ```
 
-``` error
-Error in get_concept_id("White British"): argument "omop_obj" is missing, with no default
+``` output
+# A tibble: 1 × 1
+  concept_id
+       <int>
+1   46286810
 ```
 
 Then we need to know which patient has this race_concept_id and what the corresponding gender_concept_id is for this patient.   
@@ -238,11 +247,15 @@ Then we need to know which patient has this race_concept_id and what the corresp
 ``` r
 white_british <- person |> 
   filter(race_concept_id == 46286810)
-get_concept_name(white_british$gender_concept_id) 
+
+get_concept_name(omop, white_british$gender_concept_id) 
 ```
 
-``` error
-Error in get_concept_name(white_british$gender_concept_id): argument "omop_obj" is missing, with no default
+``` output
+# A tibble: 1 × 1
+  concept_name
+  <chr>       
+1 Female      
 ```
 
 ***Answer:*** The White British patient is female. (Note the code above assumes there is only one `White British` patient.)
@@ -253,14 +266,14 @@ Error in get_concept_name(white_british$gender_concept_id): argument "omop_obj" 
 ``` r
 # Let's create a mini version of the concept table that contains only the concepts(the gender concepts) and the columns(concept_id, concept_name)  we want
 
-gender_concept <- omop$public$concept |>
+gender_concept <- omop$concept |>
   filter(concept_id %in% c(8507, 8532)) |>
   select(concept_id, concept_name) |>
   collect()
 
 # Now we can join to get the number of people of each gender
 person |> 
-  left_join(gender_concept, by = c("gender_concept_id" = "concept_id")) |>
+  left_join(gender_concept, by = join_by(gender_concept_id == concept_id)) |>
   group_by(concept_name) |>
   summarise(count = n())
 ```
@@ -287,7 +300,7 @@ For example, the `visit_occurrence` table contains a `person_id` column that lin
 
 
 ``` r
-omop$public$visit_occurrence
+omop$visit_occurrence
 ```
 
 ``` output
@@ -309,7 +322,7 @@ See $metadata for additional Schema metadata
 
 
 ``` r
-omop$public$person
+omop$person
 ```
 
 ``` output
@@ -338,10 +351,11 @@ Using the `person` and `visit_occurrence` tables, answer the following questions
 1. We can count the number of visits for each person by grouping the `visit_occurrence` table by `person_id` and counting the number of occurrences.
 
 ``` r
-visit_counts <- omop$public$visit_occurrence |>
+visit_counts <- omop$visit_occurrence |>
   group_by(person_id) |>
   summarise(visit_count = n()) |>
   collect()
+
 visit_counts
 ```
 
@@ -359,11 +373,122 @@ visit_counts
 8        58          10
 ```
 
-**CODING_NOTE**: The `group_by` function is used to group the data by `person_id`, and the `summarise` function is used to count the number of visits for each person. The `collect()` function is used to retrieve the results from the remote database.
+**CODING_NOTE**: The `group_by()` function is used to group the data by `person_id`, and the `summarise` function is used to count the number of visits for each person. The `collect()` function is used to retrieve the results from the remote database.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
+
+We can use functions from dplyr to join tables together by these links. 
+For instance, we can find all of the visits for Female patients.
+
+
+``` r
+female_patients <- omop$person |>
+  filter(gender_concept_id == 8532)
+
+female_visits <- female_patients |>
+  inner_join(omop$visit_occurrence, by = join_by(person_id)) |>
+  select(person_id, visit_occurrence_id, visit_start_date, visit_end_date) |>
+  collect()
+
+female_visits
+```
+
+``` output
+# A tibble: 8 × 4
+  person_id visit_occurrence_id visit_start_date visit_end_date
+      <int>               <int> <chr>            <chr>         
+1      1112                1102 24/12/2025       NULL          
+2      1112                1002 15/01/2024       29/01/2024    
+3     34567               55667 18/12/2025       18/12/2025    
+4     78901               44556 15/09/2004       18/09/2004    
+5        31               37923 23/07/2024       23/07/2024    
+6        31                1222 10/05/2019       10/05/2019    
+7         2                1798 16/05/2025       19/05/2025    
+8         2                 154 12/06/2025       12/06/2025    
+```
+
+**CODING_NOTE**: We have used the `inner_join` method to only keep rows where both tables have the same ids, but there are others. We also used the `join_by` function which allows us to define which column to join on, you can choose multiple columns in a join. 
+
+
+
+::::::::::::::::::::::::::::::::::: challenge
+
+Using the `person` and `visit_occurrence` tables, answer the following questions:
+
+1. How many visits did each person make, and show that person's race as a name.
+2. How many visits were there for men and women?
+
+::::::::::::::::::::::::::::::::::: solution
+
+1. We already have visit counts from the previous solution, and we need to join in the person's race,
+  and then join in the names for that race concept. 
+
+``` r
+# Using the same logic as the previous example
+visit_counts <- omop$visit_occurrence |>
+  group_by(person_id) |>
+  summarise(visit_count = n())
+
+visit_counts_with_race <- visit_counts |>
+  left_join(omop$person, by = join_by(person_id)) |>
+  left_join(omop$concept, by = join_by(race_concept_id == concept_id)) |>
+  rename(race_name = concept_name) |>
+  select(person_id, visit_count, race_name) |>
+  collect()
+  
+visit_counts_with_race
+```
+
+``` output
+# A tibble: 8 × 3
+  person_id visit_count race_name           
+      <int>       <int> <chr>               
+1      1111           1 Black               
+2      1112           2 White               
+3      1113           1 Asian               
+4     78901           1 Asian               
+5     34567           1 Asian               
+6        31           2 White British       
+7         2           2 Ethnicity not stated
+8        58          10 Ethnicity not stated
+```
+
+**CODING_NOTE**: The `rename` function allows us to change the name of a column, so that it makes more sense in the final output. 
+
+2. We use joins to get the gender of each person before summarising by their gender concept. Optionally, we can also join in the concept table 
+
+
+``` r
+# Using the same logic as the previous example
+counts_by_gender_concept <- omop$person |>
+  inner_join(omop$visit_occurrence, by = join_by(person_id)) |>
+  group_by(gender_concept_id) |>
+  summarise(visit_count = n())
+
+# we can also join in the concept name to make it human readable
+counts_by_gender_concept |>
+  left_join(omop$concept, by = join_by(gender_concept_id == concept_id)) |>
+  rename(gender = concept_name) |>
+  select(gender, visit_count) |>
+  collect()
+```
+
+``` output
+# A tibble: 2 × 2
+  gender visit_count
+  <chr>        <int>
+1 Male            12
+2 Female           8
+```
+
+**CODING_NOTE**: We are using `left_join()` when joining in concepts. If we used an `inner_join()` then if the `gender_concept_id` had a value that wasn't in the `concept` table's `concept_id` column, then these rows would be removed from the final dataset. It's always worth being careful about when you are absolutely sure you want to remove data in a join. 
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
