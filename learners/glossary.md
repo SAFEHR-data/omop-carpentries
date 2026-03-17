@@ -8,18 +8,18 @@ title: 'Reference'
 R is a powerful programming language and environment specifically designed for statistical computing and data analysis. Originally created by statisticians for statisticians, R has grown into one of the most popular tools for data science, used across academia, healthcare, finance, and industry.
 
 ## Why Use R?
-• Free and Open Source: R is completely free to download and use
-• Comprehensive Statistical Tools: Built-in functions for virtually any statistical analysis
-• Excellent for Data Visualization: Create publication-quality graphs and plots
-• Reproducible Research: Your analysis is documented in code, making it easy to share and repeat
-• Active Community: Thousands of packages extending R's capabilities
-• Healthcare & Research Focus: Widely used in clinical research, epidemiology, and bioinformatics
+- Free and Open Source: R is completely free to download and use
+- Comprehensive Statistical Tools: Built-in functions for virtually any statistical analysis
+- Excellent for Data Visualization: Create publication-quality graphs and plots
+- Reproducible Research: Your analysis is documented in code, making it easy to share and repeat
+- Active Community: Thousands of packages extending R's capabilities
+- Healthcare & Research Focus: Widely used in clinical research, epidemiology, and bioinformatics
 
 ## What is RStudio?
 
 RStudio is an Integrated Development Environment (IDE) for R. Think of it this way:
-• R is the engine (the programming language that does the work)
-• RStudio is the dashboard (the interface that makes R easier to use)
+- R is the engine (the programming language that does the work)
+- RStudio is the dashboard (the interface that makes R easier to use)
 
 While you can use R on its own, RStudio provides a much more user-friendly and productive environment.
 
@@ -28,24 +28,24 @@ While you can use R on its own, RStudio provides a much more user-friendly and p
 When you open RStudio, you'll see four main panes:
 
 Source/Editor Pane (Top Left)
-• Where you write and save your R scripts
-• Allows you to edit and run multiple lines of code
-• Your analysis workflow lives here
+- Where you write and save your R scripts
+- Allows you to edit and run multiple lines of code
+- Your analysis workflow lives here
 
 Console Pane (Bottom Left)
-• Where R actually executes commands
-• You can type commands directly here for quick tests
-• Shows output and error messages
+- Where R actually executes commands
+- You can type commands directly here for quick tests
+- Shows output and error messages
 
 Environment/History Pane (Top Right)
-• Environment: Shows all objects, datasets, and variables currently loaded
-• History: Keeps track of commands you've run
+- Environment: Shows all objects, datasets, and variables currently loaded
+- History: Keeps track of commands you've run
 
 Files/Plots/Packages/Help Pane (Bottom Right)
-• Files: Browse your project files
-• Plots: View graphs and visualizations
-• Packages: Manage installed R packages
-• Help: Access documentation
+- Files: Browse your project files
+- Plots: View graphs and visualizations
+- Packages: Manage installed R packages
+- Help: Access documentation
 
 ## Your First Steps in R
 
@@ -95,8 +95,8 @@ library(ggplot2)
 ```
 
 ### Scripts vs. Console
-• Console: For quick tests and one-off commands
-• Scripts: For saving your analysis workflow that you can run again later
+- Console: For quick tests and one-off commands
+- Scripts: For saving your analysis workflow that you can run again later
 
 ### Comments
 Use # to add comments to your code:
@@ -129,32 +129,34 @@ patientcount <- 150  # You can also comment after code
 - When assigning values to function arguments, you *must* use `=`.
 
 ## Tips for Getting Started
-Use Projects: RStudio Projects keep your work organized
-Save Your Scripts: Your code is your documentation
-Don't Fear Errors: Error messages help you learn - read them carefully
-Use Tab Completion: Start typing and press Tab for suggestions
-Check Your Working Directory: Know where R is looking for files with getwd()
+
+- Use Projects: RStudio Projects keep your work organized
+- Save Your Scripts: Your code is your documentation
+- Don't Fear Errors: Error messages help you learn - read them carefully
+- Use Tab Completion: Start typing and press Tab for suggestions
+- Check Your Working Directory: Know where R is looking for files with `getwd()`, or use the `here` library. 
 
 ## Common Beginner Mistakes
-• Case Sensitivity: R distinguishes between Data and data
-• Missing Commas: Function arguments need commas: mean(x, na.rm = TRUE)
-• Unmatched Parentheses: Every ( needs a closing )
-• Wrong Assignment Operator: Use <- for assignment, not = (though = works in some contexts)
+- Case Sensitivity: R distinguishes between Data and data
+- Missing Commas: Function arguments need commas: mean(x, na.rm = TRUE)
+- Unmatched Parentheses: Every ( needs a closing )
+- Wrong Assignment Operator: Use <- for assignment, not = (though = works in some contexts)
 
 ## Next Steps
 
 Once you're comfortable with the basics:
-Learn to import and explore data
-Master data manipulation with packages like dplyr
-Create visualizations with ggplot2
-Perform statistical analyses relevant to your field
-Generate reports with R Markdown
+
+- Learn to import and explore data
+- Master data manipulation with packages like dplyr
+- Create visualizations with ggplot2
+- Perform statistical analyses relevant to your field
+- Generate reports with R Markdown
 
 ## Resources
-• Built-in Help: Type ?function_name` in the console
-• Cheat Sheets: RStudio provides excellent cheat sheets (Help → Cheat Sheets)
-• Stack Overflow: Great for troubleshooting specific problems
-• R for Data Science: Free online book at r4ds.had.co.nz
+- Built-in Help: Type ?function_name` in the console
+- Cheat Sheets: RStudio provides excellent cheat sheets (Help → Cheat Sheets)
+- Stack Overflow: Great for troubleshooting specific problems
+- R for Data Science: Free online book at r4ds.had.co.nz
 
 Remember: Everyone starts as a beginner. The best way to learn R is by doing - start with simple tasks and gradually build your skills. The R community is welcoming and helpful, so don't hesitate to ask questions!
 

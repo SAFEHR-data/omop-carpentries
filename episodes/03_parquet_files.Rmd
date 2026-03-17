@@ -29,9 +29,9 @@ In this episode, we will explore parquet files, a popular file format for storin
 
 For this episode we will be using a sample OMOP CDM database that is pre-loaded with data. This database is a simplified version of a real-world OMOP CDM database and is intended for educational purposes only.
 
-(UCLH only) This will come in the same form as you would get data if you asked for a data extract via the SAFEHR platform (i.e. a set of parquet files).
+(UCLH only) This will come in a similar form as you would get data if you asked for a data extract via the SAFEHR platform (i.e. a set of parquet files).
 
-As part of the setup prior to this course you were asked to download and install the sample database. If you have not done this yet, please refer to the setup instructions provided earlier in the course. For now, we will assume that you have the sample OMOP CDM database available on your local machine at the following path: `../workshop/data/public/` and the functions in a folder `../workshop/code/parquet_dataset`.
+As part of the setup prior to this course you were asked to download and install the sample dataset. If you have not done this yet, please refer to the [setup instructions](../learners/setup.md). For now, we will assume that you have the sample OMOP CDM dataset available on your local machine at the following path: `../workshop/data/public/` and the functions in a folder `../workshop/code/parquet_dataset`.
 
   
 ::::::::::::::::::::::::::::::::::::::::::::::::
@@ -45,23 +45,13 @@ Parquet is a columnar storage file format that is optimized for use with big dat
 We have provided a function that will allow you to browse the structure of the data in the same way as we did with the database in the previous episode. This code is available below or in the downloaded `workshop/code/open_omop_dataset.R` file. You can source this file to load the function into your R environment.
 
 ```{r, warning = FALSE, message = FALSE}
-open_omop_dataset <- function(dir) {
-  open_omop_schema <- function(path) {
-    # iterate table level folders
+open_omop_dataset <- function(path) {
+    # iterate over table level directories
     list.dirs(path, recursive = FALSE) |>
-      # exclude folder name from path
-      # and use it as index for named list
+      # exclude folder name from path and use it as index for named list
       purrr::set_names(~ basename(.)) |>
-      # "lazy-open" list of parquet files
-      # from specified folder
+      # "lazy-load" list of parquet files from specified folder
       purrr::map(arrow::open_dataset)
-  }
-  # iterate top-level folders
-  list.dirs(dir, recursive = FALSE) |>
-    # exclude folder name from path
-    # and use it as index for named list
-    purrr::set_names(~ basename(.)) |>
-    purrr::map(open_omop_schema)
 }
 ```
 
@@ -70,31 +60,33 @@ open_omop_dataset <- function(dir) {
 Now we can use this function to open the sample OMOP CDM dataset located in the `workshop/data/public/` directory and explore it in the same way as we did with the database in the previous episode.
 
 ```{r, warning = FALSE, message = FALSE}
-omop <- open_omop_dataset("./data/")
+omop <- open_omop_dataset("./data/public")
 ```
 
 ::::::::::::::::::::::::::::::::::::: instructor
 
 Note that the path to the data directory may be different depending on where you have stored the sample OMOP CDM dataset on your local machine.
 
-Check the people have used the right path. Their environment should now have an entry under Data reading 'omop List of 1'
+Check the people have used the right path. Their environment should now have an entry under Data reading 'omop List of 8'
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 Explore the data using the following:
 ```{r, warning = FALSE, message = FALSE}
-omop$public
+omop
 ```
 
 You will see that this gives you a list of all the tables in this dataset and what columns they contain. It is obviously a much smaller dataset! You can explore individual tables which will also give you the column names and the data type of the entry.
 
 ```{r, warning = FALSE, message = FALSE}
-omop$public$person
+omop$person
 ```
 To actually open each table we can use
 ```{r, warning = FALSE, message = FALSE}
 library(dplyr)
-person <- omop$public$person |> collect()
+person <- omop$person |>
+  collect()
+
 person
 ```
 
@@ -108,7 +100,7 @@ person <- read_parquet("./data/public/person/person.parquet")
 person
 ```
 
-**CODING_NOTE**: The `read_parquet()` function from the `arrow` package allows us to read in a specific parquet file directly into R. This can be useful if we only want to work with a specific table from the dataset and do not want to load the entire dataset into memory.
+**CODING_NOTE**: The `read_parquet()` function from the `arrow` package allows us to read in a specific parquet file directly into R. This can be useful if we only want to work with a specific table from the dataset and do not need any of the other files.
 
 ::::::::::::::::::::::::::::::::::::: instructor
 
@@ -126,7 +118,7 @@ Points worth a discussion:
 
 As part of the privacy preserving policies around health data, dates of birth are often de-identified to only show the year of birth. This is why in this dataset the day and month of birth are set to 15/6 or 0/0 for all individuals.
 
-You can also see that in some cases the gender_source_value and race_source_value columns are populated while in others they are not. This depends on the policy of the individual hospital. Note the data in this dataset is a number of different sources combined together to form a single OMOP CDM database.
+You can also see that in some cases the gender_source_value and race_source_value columns are populated while in others they are not. This depends on the policy of the individual hospital. Note: the data in this dataset is a number of different sources combined together to form a single OMOP CDM database.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -136,10 +128,8 @@ Adapt the code we had developed for the get_concept_name function in the previou
 
 ::::::::::::::::::::::::::::::::::::: solution
 ```{r, warning = FALSE, message = FALSE}
-library(arrow)
-library(dplyr)
-get_concept_name <- function(id, omop_obj) {
-  omop_obj$public$concept |>
+get_concept_name <- function(omop_obj, id) {
+  omop_obj$concept |>
     filter(concept_id == !!id) |>
     select(concept_name) |>
     collect()
@@ -154,7 +144,7 @@ get_concept_name <- function(id, omop_obj) {
 Now we can use this function to look up concept names by their concept_id.
 
 ```{r, warning = FALSE, message = FALSE}
-get_concept_name(8507)
+get_concept_name(omop, 8507)
 ```
 
 ***Answer:*** The concept_id **8507** corresponds to the concept "Male".
