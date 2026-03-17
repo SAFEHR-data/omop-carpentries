@@ -166,7 +166,7 @@ cdm$concept |>
 
 ### A useful function
 
-Finding the humanly readable name for a `concept_id` will be a useful function. We can create a function `get_concept_name()` that takes the 'cdm' object and a `concept_id` as input and returns the `concept_name`.
+Finding the humanly readable name for a `concept_id` will be a useful function. We can create a function `get_concept_name()` that takes the 'cdm' object and a `concept_id` as an input and returns the `concept_name`.
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: challenge
 
