@@ -1,11 +1,4 @@
 connect_cdm <- function() {
-  # Libraries
-  library(CDMConnector)
-  library(DBI)
-  library(duckdb)
-  library(dplyr)
-  library(dbplyr)
-
   # Connect to the GiBleed database if not already connected
   if (!exists("cdm") || !inherits(cdm, "cdm_reference")) {
     db_name <- "GiBleed"
