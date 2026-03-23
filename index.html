@@ -372,26 +372,27 @@ libraries needed for the courses.</p>
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">pkgs</span> <span class="op">&lt;-</span> <span class="fu">c</span><span class="op">(</span></span>
-<span>    <span class="st">"dplyr"</span>,</span>
-<span>    <span class="st">"readr"</span>,</span>
-<span>    <span class="st">"purrr"</span>,</span>
-<span>    <span class="st">"CDMConnector"</span>,</span>
-<span>    <span class="st">"duckdb"</span>,</span>
-<span>    <span class="st">"lubridate"</span>,</span>
-<span>    <span class="st">"arrow"</span></span>
-<span><span class="op">)</span></span>
-<span><span class="fu">install.packages</span><span class="op">(</span><span class="va">pkgs</span><span class="op">)</span></span></code></pre>
+<pre class="sourceCode r" tabindex="0"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>pkgs <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>    <span class="st">"dplyr"</span>,</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>    <span class="st">"readr"</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>    <span class="st">"purrr"</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>    <span class="st">"CDMConnector"</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>    <span class="st">"duckdb"</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>    <span class="st">"lubridate"</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>    <span class="st">"arrow"</span></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a><span class="st">"arrow"</span>,</span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a><span class="st">"tibble"</span></span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>)</span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a><span class="fu">install.packages</span>(pkgs)</span></code></pre>
 </div>
 </div>
 <div class="section level2">
-<h2 id="create-environment">Create environment<a class="anchor" aria-label="anchor" href="#create-environment"></a></h2>
+<h2 id="download-course-data-and-example-code">Download course data and example code<a class="anchor" aria-label="anchor" href="#download-course-data-and-example-code"></a></h2>
 <ol style="list-style-type: decimal"><li>Make a new folder in your Desktop called
 <code>omop_course</code>.</li>
 <li>Download <a href="workshop.zip">workshop.zip</a> and move the file
 to this folder.</li>
-<li>If it’s not unzipped yet, unzip it. There should now be a folders
+<li>If it’s not unzipped yet, unzip it. There should now be a folder
 called <code>workshop</code> in the <code>omop_course</code> folder
 containing sub folders <code>code</code> and <code>data</code>.</li>
 <li>You can access this folder from the Unix shell with:</li>
@@ -459,8 +460,8 @@ any links that you are not going to use.
   "url": "https://SAFEHR-data.github.io/omop-carpentries/index.html",
   "identifier": "https://SAFEHR-data.github.io/omop-carpentries/index.html",
   "dateCreated": "2025-06-18",
-  "dateModified": "2026-03-17",
-  "datePublished": "2026-03-17"
+  "dateModified": "2026-03-23",
+  "datePublished": "2026-03-23"
 }
 
   </script><script>

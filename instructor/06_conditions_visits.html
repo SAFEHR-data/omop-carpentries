@@ -347,7 +347,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Conditions and Visits</h1>
-        <p>Last updated on 2026-02-23 |
+        <p>Last updated on 2026-03-23 |
 
         <a href="https://github.com/SAFEHR-data/omop-carpentries/edit/main/episodes/06_conditions_visits.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -379,14 +379,14 @@
 <h3 class="card-title">Objectives</h3>
 <ul><li><p>Understand the structure and purpose of the conditions table in
 the OMOP CDM.</p></li>
-<li><p>Know their visits are recorded in the visit_occurrence
+<li><p>Know that visits are recorded in the visit_occurrence
 table.</p></li>
-<li><p>Learn when and how to consider visits in data analysis.</p></li>
+<li><p>Learn how and when to consider visits in data analysis.</p></li>
 <li><p>Know that a visit is a period of time and patients can have
-multiple visits</p></li>
+multiple visits.</p></li>
 <li><p>Understand that multiple measurements, conditions etc. can occur
 within a visit.</p></li>
-<li><p>Understand that other tables link to visits</p></li>
+<li><p>Understand that other tables link to visits.</p></li>
 </ul></div>
 </div>
 </div>
@@ -405,58 +405,46 @@ within a visit.</p></li>
 pre-loaded with data. This database is a simplified version of a
 real-world OMOP CDM database and is intended for educational purposes
 only.</p>
-<p>(UCLH only) This will come in the same form as you would get data if
+<p>(UCLH only) This will come in a similar form as you would get data if
 you asked for a data extract via the SAFEHR platform (i.e. a set of
 parquet files).</p>
 <p>As part of the setup prior to this course you were asked to download
-and install the sample database. If you have not done this yet, please
-refer to the setup instructions provided earlier in the course. For now,
-we will assume that you have the sample OMOP CDM database available on
-your local machine at the following path:
-<code>workshop/data/public/</code> and the functions in a folder
-<code>workshop/code</code>.</p>
+and install the sample dataset. If you have not done this yet, please
+refer to the <a href="index.html#setup">setup instructions</a>. For now, we
+will assume that you have the sample OMOP CDM dataset available on your
+local machine at the following path: <code>./data/omop/</code> and the
+functions in a folder <code>./code/parquet_dataset</code>.</p>
 <p>You will then need to load the database as shown in the previous
 episode.</p>
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">open_omop_dataset</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">dir</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="va">open_omop_schema</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">path</span><span class="op">)</span> <span class="op">{</span></span>
-<span>    <span class="co"># iterate table level folders</span></span>
+<code class="sourceCode R"><span><span class="kw">library</span><span class="op">(</span><span class="va">dplyr</span><span class="op">)</span></span>
+<span><span class="va">open_omop_dataset</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">path</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="co"># iterate over table level directories</span></span>
 <span>    <span class="fu">list.dirs</span><span class="op">(</span><span class="va">path</span>, recursive <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>      <span class="co"># exclude folder name from path</span></span>
-<span>      <span class="co"># and use it as index for named list</span></span>
+<span>      <span class="co"># exclude folder name from path and use it as index for named list</span></span>
 <span>      <span class="fu">purrr</span><span class="fu">::</span><span class="fu">set_names</span><span class="op">(</span><span class="op">~</span> <span class="fu">basename</span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>      <span class="co"># "lazy-open" list of parquet files</span></span>
-<span>      <span class="co"># from specified folder</span></span>
+<span>      <span class="co"># "lazy-load" list of parquet files from specified folder</span></span>
 <span>      <span class="fu">purrr</span><span class="fu">::</span><span class="fu">map</span><span class="op">(</span><span class="fu">arrow</span><span class="fu">::</span><span class="va">open_dataset</span><span class="op">)</span></span>
-<span>  <span class="op">}</span></span>
-<span>  <span class="co"># iterate top-level folders</span></span>
-<span>  <span class="fu">list.dirs</span><span class="op">(</span><span class="va">dir</span>, recursive <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>    <span class="co"># exclude folder name from path</span></span>
-<span>    <span class="co"># and use it as index for named list</span></span>
-<span>    <span class="fu">purrr</span><span class="fu">::</span><span class="fu">set_names</span><span class="op">(</span><span class="op">~</span> <span class="fu">basename</span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>    <span class="fu">purrr</span><span class="fu">::</span><span class="fu">map</span><span class="op">(</span><span class="va">open_omop_schema</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre>
 </div>
 <div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">omop</span> <span class="op">&lt;-</span> <span class="fu">open_omop_dataset</span><span class="op">(</span><span class="st">"./data/"</span><span class="op">)</span></span></code></pre>
+<code class="sourceCode R"><span><span class="va">omop</span> <span class="op">&lt;-</span> <span class="fu">open_omop_dataset</span><span class="op">(</span><span class="st">"./data/omop"</span><span class="op">)</span></span></code></pre>
 </div>
 <p>and the useful functions we created in the previous episode to look
-up concept names/ids.</p>
+up concept names and ids.</p>
 <div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw">library</span><span class="op">(</span><span class="va">arrow</span><span class="op">)</span></span>
-<span><span class="kw">library</span><span class="op">(</span><span class="va">dplyr</span><span class="op">)</span></span>
-<span><span class="va">get_concept_name</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">id</span>, <span class="va">omop_obj</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="va">omop_obj</span><span class="op">$</span><span class="va">public</span><span class="op">$</span><span class="va">concept</span> <span class="op">|&gt;</span></span>
-<span>    <span class="fu">filter</span><span class="op">(</span><span class="va">concept_id</span> <span class="op">==</span> <span class="op">!</span><span class="op">!</span><span class="va">id</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<code class="sourceCode R"><span><span class="va">get_concept_name</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">omop_obj</span>, <span class="va">id</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">omop_obj</span><span class="op">$</span><span class="va">concept</span> <span class="op">|&gt;</span></span>
+<span>    <span class="fu">filter</span><span class="op">(</span><span class="va">concept_id</span> <span class="op">==</span> <span class="va">id</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>    <span class="fu">select</span><span class="op">(</span><span class="va">concept_name</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>    <span class="fu">collect</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre>
@@ -465,9 +453,9 @@ up concept names/ids.</p>
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">get_concept_id</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">name</span>, <span class="va">omop_obj</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="va">omop_obj</span><span class="op">$</span><span class="va">public</span><span class="op">$</span><span class="va">concept</span> <span class="op">|&gt;</span></span>
-<span>    <span class="fu">filter</span><span class="op">(</span><span class="va">concept_name</span> <span class="op">==</span> <span class="op">!</span><span class="op">!</span><span class="va">name</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<code class="sourceCode R"><span><span class="va">get_concept_id</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">omop_obj</span>, <span class="va">name</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">omop_obj</span><span class="op">$</span><span class="va">concept</span> <span class="op">|&gt;</span></span>
+<span>    <span class="fu">filter</span><span class="op">(</span><span class="va">concept_name</span> <span class="op">==</span> <span class="va">name</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>    <span class="fu">select</span><span class="op">(</span><span class="va">concept_id</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>    <span class="fu">collect</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre>
@@ -541,8 +529,8 @@ table?</li>
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">omop</span><span class="op">$</span><span class="va">public</span><span class="op">$</span><span class="va">condition_occurrence</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">count</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<code class="sourceCode R"><span><span class="va">omop</span><span class="op">$</span><span class="va">condition_occurrence</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">tally</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">collect</span><span class="op">(</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="codewrapper">
@@ -555,25 +543,29 @@ table?</li>
 </div>
 <p><strong><em>Answer:</em></strong> There are 35 records in the
 <code>condition_occurrence</code> table.</p>
-<p><strong>CODING NOTE:</strong> The <code>count()</code> function is
+<p><strong>CODING NOTE:</strong> The <code>tally()</code> function is
 used to count the number of records in the table. It is more efficient
-to use <code>count()</code> directly on the database without collecting
+to use <code>tally()</code> directly on the database without collecting
 the data into R, as this allows the database to perform the counting
 operation, which is optimized for large datasets. We then use
-<code>collect()</code> to bring the result into R for display.</p>
+<code>collect()</code> to run the calculation and produce the output. In
+place of <code>tally()</code> we could have used <code>count()</code>,
+which is a convenience function to group by a column and then
+<code>tally()</code>. We could have also used base R
+<code>nrow(omop$condition_occurrence)</code> in this example.</p>
 <ol start="2" style="list-style-type: decimal"><li>List any of the conditions that occur more than once in the table
 along with their humanly readable names.</li>
 </ol><div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">omop</span><span class="op">$</span><span class="va">public</span><span class="op">$</span><span class="va">condition_occurrence</span> <span class="op">|&gt;</span></span>
+<code class="sourceCode R"><span><span class="va">omop</span><span class="op">$</span><span class="va">condition_occurrence</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">condition_concept_id</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">summarise</span><span class="op">(</span>occurrences <span class="op">=</span> <span class="fu">n</span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">filter</span><span class="op">(</span><span class="va">occurrences</span> <span class="op">&gt;</span> <span class="fl">1</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">left_join</span><span class="op">(</span></span>
-<span>    <span class="va">omop</span><span class="op">$</span><span class="va">public</span><span class="op">$</span><span class="va">concept</span>,</span>
-<span>    by <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="st">"condition_concept_id"</span> <span class="op">=</span> <span class="st">"concept_id"</span><span class="op">)</span></span>
+<span>    <span class="va">omop</span><span class="op">$</span><span class="va">concept</span>,</span>
+<span>    by <span class="op">=</span> <span class="fu">join_by</span><span class="op">(</span><span class="va">condition_concept_id</span> <span class="op">==</span> <span class="va">concept_id</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">select</span><span class="op">(</span><span class="va">concept_name</span>, <span class="va">occurrences</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">collect</span><span class="op">(</span><span class="op">)</span></span></code></pre>
@@ -597,17 +589,18 @@ occur more than once. Finally, we join with the <code>concept</code>
 table to get the humanly readable names of the conditions and select the
 relevant columns for display.</p>
 <ol start="3" style="list-style-type: decimal"><li>Choose one patient and list all the conditions they have and when
-they started?</li>
+they started</li>
 </ol><div class="codewrapper sourceCode" id="cb9">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">patient_id</span> <span class="op">&lt;-</span> <span class="fl">1111</span>  <span class="co"># Replace with the desired person_id </span></span>
-<span><span class="va">omop</span><span class="op">$</span><span class="va">public</span><span class="op">$</span><span class="va">condition_occurrence</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">filter</span><span class="op">(</span><span class="va">person_id</span> <span class="op">==</span> <span class="op">!</span><span class="op">!</span><span class="va">patient_id</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span></span>
+<span><span class="va">omop</span><span class="op">$</span><span class="va">condition_occurrence</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">filter</span><span class="op">(</span><span class="va">person_id</span> <span class="op">==</span> <span class="va">patient_id</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">left_join</span><span class="op">(</span></span>
-<span>    <span class="va">omop</span><span class="op">$</span><span class="va">public</span><span class="op">$</span><span class="va">concept</span>,</span>
-<span>    by <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="st">"condition_concept_id"</span> <span class="op">=</span> <span class="st">"concept_id"</span><span class="op">)</span></span>
+<span>    <span class="va">omop</span><span class="op">$</span><span class="va">concept</span>,</span>
+<span>    by <span class="op">=</span> <span class="fu">join_by</span><span class="op">(</span><span class="va">condition_concept_id</span> <span class="op">==</span> <span class="va">concept_id</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">select</span><span class="op">(</span><span class="va">condition_concept_id</span>, <span class="va">concept_name</span>, <span class="va">condition_start_date</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">collect</span><span class="op">(</span><span class="op">)</span></span></code></pre>
@@ -617,8 +610,8 @@ they started?</li>
 </h3>
 <pre class="output" tabindex="0"><code># A tibble: 1 × 3
   condition_concept_id concept_name                         condition_start_date
-                 &lt;int&gt; &lt;chr&gt;                                &lt;chr&gt;
-1              4230399 Closed fracture of lateral malleolus 22/07/2025          </code></pre>
+                 &lt;int&gt; &lt;chr&gt;                                &lt;date&gt;
+1              4230399 Closed fracture of lateral malleolus 2025-07-22          </code></pre>
 </div>
 <p><strong>CODING NOTE:</strong> We filter the
 <code>condition_occurrence</code> table for the specified
@@ -630,9 +623,9 @@ names of the conditions and select the relevant columns for display.</p>
 </div>
 </div>
 <p>Question three can be repeated for different patients by changing the
-<code>patient_id</code> variable. Interestingly if you choose patient
-<strong>31</strong> you will see that the entry for their condition and
-start date is repeated.</p>
+<code>patient_id</code> variable. You might be surprised to see that if
+you choose patient <strong>31</strong> you will see that the entry for
+their condition and start date is repeated. This isn’t an error!</p>
 <div id="challenge2" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
@@ -662,33 +655,38 @@ differences between these entries.</p>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">patient_id</span> <span class="op">&lt;-</span> <span class="fl">31</span>  </span>
-<span><span class="va">omop</span><span class="op">$</span><span class="va">public</span><span class="op">$</span><span class="va">condition_occurrence</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">filter</span><span class="op">(</span><span class="va">person_id</span> <span class="op">==</span> <span class="op">!</span><span class="op">!</span><span class="va">patient_id</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span></span>
+<span><span class="va">omop</span><span class="op">$</span><span class="va">condition_occurrence</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">filter</span><span class="op">(</span><span class="va">person_id</span> <span class="op">==</span> <span class="va">patient_id</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">left_join</span><span class="op">(</span></span>
-<span>    <span class="va">omop</span><span class="op">$</span><span class="va">public</span><span class="op">$</span><span class="va">concept</span>,</span>
-<span>    by <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="st">"condition_concept_id"</span> <span class="op">=</span> <span class="st">"concept_id"</span><span class="op">)</span></span>
+<span>    <span class="va">omop</span><span class="op">$</span><span class="va">concept</span>,</span>
+<span>    by <span class="op">=</span> <span class="fu">join_by</span><span class="op">(</span><span class="va">condition_concept_id</span> <span class="op">==</span> <span class="va">concept_id</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">rename</span><span class="op">(</span>condition_concept_name <span class="op">=</span> <span class="va">concept_name</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">relocate</span><span class="op">(</span><span class="va">condition_concept_name</span>, .after <span class="op">=</span> <span class="va">condition_concept_id</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">left_join</span><span class="op">(</span></span>
-<span>    <span class="va">omop</span><span class="op">$</span><span class="va">public</span><span class="op">$</span><span class="va">concept</span>,</span>
-<span>    by <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="st">"condition_type_concept_id"</span> <span class="op">=</span> <span class="st">"concept_id"</span><span class="op">)</span></span>
+<span>    <span class="va">omop</span><span class="op">$</span><span class="va">concept</span>,</span>
+<span>    by <span class="op">=</span> <span class="fu">join_by</span><span class="op">(</span><span class="va">condition_type_concept_id</span> <span class="op">==</span> <span class="va">concept_id</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">rename</span><span class="op">(</span>condition_type_concept_name <span class="op">=</span> <span class="va">concept_name</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">relocate</span><span class="op">(</span><span class="va">condition_type_concept_name</span>, .after <span class="op">=</span> <span class="va">condition_type_concept_id</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">left_join</span><span class="op">(</span></span>
-<span>    <span class="va">omop</span><span class="op">$</span><span class="va">public</span><span class="op">$</span><span class="va">concept</span>,</span>
-<span>    by <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="st">"condition_status_concept_id"</span> <span class="op">=</span> <span class="st">"concept_id"</span><span class="op">)</span></span>
+<span>    <span class="va">omop</span><span class="op">$</span><span class="va">concept</span>,</span>
+<span>    by <span class="op">=</span> <span class="fu">join_by</span><span class="op">(</span><span class="va">condition_status_concept_id</span> <span class="op">==</span> <span class="va">concept_id</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">rename</span><span class="op">(</span>condition_status_concept_name <span class="op">=</span> <span class="va">concept_name</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">relocate</span><span class="op">(</span><span class="va">condition_status_concept_name</span>,</span>
 <span>           .after <span class="op">=</span> <span class="va">condition_status_concept_id</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">select</span><span class="op">(</span><span class="va">condition_concept_id</span>, <span class="va">condition_concept_name</span>,</span>
-<span>         <span class="va">condition_start_date</span>, <span class="va">condition_type_concept_id</span>,</span>
-<span>         <span class="va">condition_type_concept_name</span>,</span>
-<span>         <span class="va">condition_status_concept_id</span>,</span>
-<span>         <span class="va">condition_status_concept_name</span>,</span>
-<span>         <span class="va">condition_source_value</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">select</span><span class="op">(</span></span>
+<span>    <span class="va">condition_concept_id</span>, </span>
+<span>    <span class="va">condition_concept_name</span>,</span>
+<span>    <span class="va">condition_start_date</span>, </span>
+<span>    <span class="va">condition_type_concept_id</span>,</span>
+<span>    <span class="va">condition_type_concept_name</span>,</span>
+<span>    <span class="va">condition_status_concept_id</span>,</span>
+<span>    <span class="va">condition_status_concept_name</span>,</span>
+<span>    <span class="va">condition_source_value</span></span>
+<span>    <span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">collect</span><span class="op">(</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="codewrapper">
@@ -696,9 +694,9 @@ differences between these entries.</p>
 </h3>
 <pre class="output" tabindex="0"><code># A tibble: 2 × 8
   condition_concept_id condition_concept_name condition_start_date
-                 &lt;int&gt; &lt;chr&gt;                  &lt;chr&gt;
-1               375415 Injury of head         10/05/2019
-2               375415 Injury of head         10/05/2019
+                 &lt;int&gt; &lt;chr&gt;                  &lt;date&gt;
+1               375415 Injury of head         2019-05-10
+2               375415 Injury of head         2019-05-10
 # ℹ 5 more variables: condition_type_concept_id &lt;int&gt;,
 #   condition_type_concept_name &lt;chr&gt;, condition_status_concept_id &lt;int&gt;,
 #   condition_status_concept_name &lt;chr&gt;, condition_source_value &lt;chr&gt;</code></pre>
@@ -728,8 +726,8 @@ entries for this patient.</p>
 </div>
 </section><section><h2 class="section-heading" id="visits">Visits<a class="anchor" aria-label="anchor" href="#visits"></a></h2>
 <hr class="half-width"><p>The <code>visit_occurrence</code> table contains <a href="https://ohdsi.github.io/CommonDataModel/cdm54.html#visit_occurrence" class="external-link">events
-where Persons engage with the healthcare system for a duration of
-time</a>.</p>
+where each <code>person</code> engages with the healthcare system for a
+duration of time</a>.</p>
 <div class="section level3">
 <h3 id="the-visit_occurrence-table-contains-the-following-columns-among-others-not-listed-here">The <code>visit_occurrence</code> table contains the following
 columns (among others not listed here):<a class="anchor" aria-label="anchor" href="#the-visit_occurrence-table-contains-the-following-columns-among-others-not-listed-here"></a></h3>
@@ -757,19 +755,19 @@ columns (among others not listed here):<a class="anchor" aria-label="anchor" hre
 <td>Identifier for the previous visit occurrence</td>
 </tr></tbody></table><p>The main clinical tables <code>condition_occurrence</code>,
 <code>measurement</code>, <code>observation</code> and
-<code>drug_exposure</code> all contain a
-<code>visit_occurrence_id</code> that links to this table.</p>
+<code>drug_exposure</code> contain a <code>visit_occurrence_id</code>
+that links to this table.</p>
 <p><code>visit_concept_id</code> specifies the kind of visit that took
 place using standardised OMOP concepts. These include
 <code>Inpatient visit</code>, <code>Emergency Room Visit</code> and
 <code>Outpatient Visit</code>. Inpatient visits can last for longer than
 one day.</p>
 <p>As we have seen we don’t need to consider visits to answer all
-questions. For example if we can count the number of patients with a
-particular condition without considering visits. However, in some cases
-visits are important. For example, if we want to know how many emergency
-room visits resulted in a hospital admission we need to consider
-visits.</p>
+research questions. For example if we can count the number of patients
+with a particular condition without considering visits. However, in some
+cases visits are important. For example, if we want to know how many
+emergency room visits resulted in a hospital admission we need to
+consider visits.</p>
 <div id="challenge3" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
@@ -801,15 +799,15 @@ name.</li>
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">omop</span><span class="op">$</span><span class="va">public</span><span class="op">$</span><span class="va">visit_occurrence</span> <span class="op">|&gt;</span></span>
+<code class="sourceCode R"><span><span class="va">omop</span><span class="op">$</span><span class="va">visit_occurrence</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">count</span><span class="op">(</span><span class="va">visit_concept_id</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">left_join</span><span class="op">(</span></span>
-<span>    <span class="va">omop</span><span class="op">$</span><span class="va">public</span><span class="op">$</span><span class="va">concept</span>,</span>
-<span>    by <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="st">"visit_concept_id"</span> <span class="op">=</span> <span class="st">"concept_id"</span><span class="op">)</span></span>
+<span>    <span class="va">omop</span><span class="op">$</span><span class="va">concept</span>,</span>
+<span>    by <span class="op">=</span> <span class="fu">join_by</span><span class="op">(</span><span class="va">visit_concept_id</span> <span class="op">==</span> <span class="va">concept_id</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">select</span><span class="op">(</span><span class="va">visit_concept_id</span>, <span class="va">concept_name</span>, <span class="va">n</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">collect</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">arrange</span><span class="op">(</span><span class="fu">desc</span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span></span></code></pre>
+<span>  <span class="fu">arrange</span><span class="op">(</span><span class="fu">desc</span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">collect</span><span class="op">(</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -839,57 +837,78 @@ of count using the <code>desc()</code> function in conjunction with the
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">omop</span><span class="op">$</span><span class="va">public</span><span class="op">$</span><span class="va">visit_occurrence</span> <span class="op">|&gt;</span></span>
+<code class="sourceCode R"><span><span class="va">omop</span><span class="op">$</span><span class="va">visit_occurrence</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">person_id</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">summarise</span><span class="op">(</span>visit_count <span class="op">=</span> <span class="fu">n</span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">filter</span><span class="op">(</span><span class="va">visit_count</span> <span class="op">&gt;</span> <span class="fl">1</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">tally</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">filter</span><span class="op">(</span><span class="va">n</span> <span class="op">&gt;</span> <span class="fl">1</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">collect</span><span class="op">(</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code># A tibble: 4 × 2
-  person_id visit_count
-      &lt;int&gt;       &lt;int&gt;
-1      1112           2
-2        31           2
-3         2           2
-4        58          10</code></pre>
+  person_id     n
+      &lt;int&gt; &lt;int&gt;
+1      1112     2
+2        31     2
+3         2     2
+4        58    10</code></pre>
 </div>
 <p><strong>CODING NOTE:</strong> We group the
 <code>visit_occurrence</code> table by <code>person_id</code> and use
-<code>summarise()</code> to count the number of visits for each patient.
-We then filter to keep only those patients with a
-<code>visit_count</code> greater than 1 and collect the results into R
-for display.</p>
+<code>tally()</code> to count the number of visits for each patient. We
+then filter to keep only those patients with an <code>n</code> greater
+than 1 and collect the results into R for display. We could have also
+used the <code>summarise()</code> function instead of
+<code>tally()</code>.</p>
 <ol start="3" style="list-style-type: decimal"><li>How many patients had both an emergency room visit and an inpatient
 visit?</li>
 </ol><div class="codewrapper sourceCode" id="cb17">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">patients_with_both_visits</span> <span class="op">&lt;-</span> <span class="va">omop</span><span class="op">$</span><span class="va">public</span><span class="op">$</span><span class="va">visit_occurrence</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">filter</span><span class="op">(</span><span class="va">visit_concept_id</span> <span class="op">%in%</span> <span class="fu">c</span><span class="op">(</span><span class="fl">9203</span>, <span class="fl">9201</span>, <span class="fl">262</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<code class="sourceCode R"><span><span class="va">patients_with_both_in_one_visit</span> <span class="op">&lt;-</span> <span class="va">omop</span><span class="op">$</span><span class="va">visit_occurrence</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">filter</span><span class="op">(</span><span class="va">visit_concept_id</span> <span class="op">==</span> <span class="fl">262</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">count</span><span class="op">(</span><span class="va">person_id</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">collect</span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">patients_with_both_visits_seperately</span> <span class="op">&lt;-</span> <span class="va">omop</span><span class="op">$</span><span class="va">visit_occurrence</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">filter</span><span class="op">(</span><span class="va">visit_concept_id</span> <span class="op">%in%</span> <span class="fu">c</span><span class="op">(</span><span class="fl">9203</span>, <span class="fl">9201</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">person_id</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">summarise</span><span class="op">(</span>visit_types <span class="op">=</span> <span class="fu">n_distinct</span><span class="op">(</span><span class="va">visit_concept_id</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">filter</span><span class="op">(</span><span class="va">visit_types</span>  <span class="op">==</span> <span class="fl">2</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">collect</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="fu">nrow</span><span class="op">(</span><span class="va">patients_with_both_visits</span><span class="op">)</span></span></code></pre>
+<span></span>
+<span><span class="va">patients_with_both_in_one_visit</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">bind_rows</span><span class="op">(</span><span class="va">patients_with_both_visits_seperately</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">distinct</span><span class="op">(</span><span class="va">person_id</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">tally</span><span class="op">(</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>[1] 8</code></pre>
+<pre class="output" tabindex="0"><code># A tibble: 1 × 1
+      n
+  &lt;int&gt;
+1     2</code></pre>
 </div>
 <p><strong><em>Answer:</em></strong> The number of patients who had both
-an emergency room visit and an inpatient visit is 8.</p>
+an emergency room visit and an inpatient visit is 2.</p>
 <p><strong>CODING NOTE:</strong> We filter the
 <code>visit_occurrence</code> table for the
 <code>visit_concept_id</code> values corresponding to emergency room
-visits and inpatient visits. We then group by <code>person_id</code> and
-use <code>summarise()</code> to count the number of distinct visit types
-for each patient. Finally, we count the number of patients who had more
-than one distinct visit type to get the number of patients who had both
-types of visits.</p>
+visits and inpatient visit coded in a single concept. We then use
+<code>count(person_id)</code> to find the total number of visits per
+patient. For the next section we look at patients who have had separate
+inpatient and emergency room visits by filtering the
+<code>visit_occurrence</code> table for the
+<code>visit_concept_id</code> for both concepts. We then group by
+<code>person_id</code> and use <code>summarise()</code> to count the
+number of distinct visit types for each patient. Finally, we count the
+number of patients who had more than one distinct visit type to get the
+number of patients who had both types of visits. Then we join together
+both tables using <code>bind_rows()</code> and get the distinct patients
+before counting the number of rows with <code>tally()</code>.</p>
 </div>
 </div>
 </div>
@@ -979,8 +998,8 @@ any links that you are not going to use.
   "url": "https://SAFEHR-data.github.io/omop-carpentries/instructor/06_conditions_visits.html",
   "identifier": "https://SAFEHR-data.github.io/omop-carpentries/instructor/06_conditions_visits.html",
   "dateCreated": "2025-06-18",
-  "dateModified": "2026-02-23",
-  "datePublished": "2026-03-17"
+  "dateModified": "2026-03-23",
+  "datePublished": "2026-03-23"
 }
 
   </script><script>

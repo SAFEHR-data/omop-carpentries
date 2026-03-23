@@ -347,7 +347,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>More on concepts</h1>
-        <p>Last updated on 2026-03-17 |
+        <p>Last updated on 2026-03-23 |
 
         <a href="https://github.com/SAFEHR-data/omop-carpentries/edit/main/episodes/04_other_concepts.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -409,20 +409,19 @@ only.</p>
 you asked for a data extract via the SAFEHR platform (i.e. a set of
 parquet files).</p>
 <p>As part of the setup prior to this course you were asked to download
-and install the sample database. If you have not done this yet, please
-refer to the setup instructions provided earlier in the course. For now,
-we will assume that you have the sample OMOP CDM database available on
-your local machine at the following path:
-<code>workshop/data/public/</code> and the functions in a folder
-<code>workshop/code/parquet_dataset</code>.</p>
+and install the sample dataset. If you have not done this yet, please
+refer to the <a href="index.html#setup">setup instructions</a>. For now, we
+will assume that you have the sample OMOP CDM dataset available on your
+local machine at the following path: <code>./data/omop/</code> and the
+functions in a folder <code>./code/parquet_dataset</code>.</p>
 <p>You will then need to load the database as shown in the previous
 episode.</p>
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw">library</span><span class="op">(</span><span class="va">arrow</span><span class="op">)</span></span>
-<span><span class="kw">library</span><span class="op">(</span><span class="va">dplyr</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw">library</span><span class="op">(</span><span class="va">dplyr</span><span class="op">)</span></span>
+<span></span>
 <span><span class="va">open_omop_dataset</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">path</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="co"># iterate over table level directories</span></span>
 <span>    <span class="fu">list.dirs</span><span class="op">(</span><span class="va">path</span>, recursive <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -436,7 +435,7 @@ episode.</p>
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">omop</span> <span class="op">&lt;-</span> <span class="fu">open_omop_dataset</span><span class="op">(</span><span class="st">"./data/public"</span><span class="op">)</span></span></code></pre>
+<code class="sourceCode R"><span><span class="va">omop</span> <span class="op">&lt;-</span> <span class="fu">open_omop_dataset</span><span class="op">(</span><span class="st">"./data/omop"</span><span class="op">)</span></span></code></pre>
 </div>
 <p>and the useful function we created in the previous episode to look up
 concept names.</p>
@@ -446,7 +445,7 @@ concept names.</p>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">get_concept_name</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">omop_obj</span>, <span class="va">id</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">omop_obj</span><span class="op">$</span><span class="va">concept</span> <span class="op">|&gt;</span></span>
-<span>    <span class="fu">filter</span><span class="op">(</span><span class="va">concept_id</span> <span class="op">==</span> <span class="op">!</span><span class="op">!</span><span class="va">id</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>    <span class="fu">filter</span><span class="op">(</span><span class="va">concept_id</span> <span class="op">==</span> <span class="va">id</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>    <span class="fu">select</span><span class="op">(</span><span class="va">concept_name</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>    <span class="fu">collect</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre>
@@ -466,7 +465,7 @@ others not listed here):<a class="anchor" aria-label="anchor" href="#the-person-
 </tr></thead><tbody><tr class="odd"><td><strong>person_id</strong></td>
 <td>Unique identifier for each person</td>
 </tr><tr class="even"><td><strong>gender_concept_id</strong></td>
-<td>Concept identifier for the gender of the person</td>
+<td>Concept identifier for the <strong>sex</strong> of the person</td>
 </tr><tr class="odd"><td><strong>year_of_birth</strong></td>
 <td>Year of birth of the person</td>
 </tr><tr class="even"><td><strong>month_of_birth</strong></td>
@@ -474,11 +473,11 @@ others not listed here):<a class="anchor" aria-label="anchor" href="#the-person-
 </tr><tr class="odd"><td><strong>day_of_birth</strong></td>
 <td>Day of birth of the person</td>
 </tr><tr class="even"><td><strong>race_concept_id</strong></td>
-<td>Concept identifier for the race of the person</td>
+<td>Concept identifier for the race/ethnic background of the person</td>
 </tr><tr class="odd"><td><strong>gender_source_value</strong></td>
-<td>Source value for the gender of the person</td>
+<td>Source value for the <strong>sex</strong> of the person</td>
 </tr><tr class="even"><td><strong>race_source_value</strong></td>
-<td>Source value for the race of the person</td>
+<td>Source value for the race/ethnic background of the person</td>
 </tr></tbody></table><p>Look at the column names of the <code>person</code> table.</p>
 <div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -498,9 +497,7 @@ month_of_birth: int32
 day_of_birth: int32
 race_concept_id: int32
 gender_source_value: string
-race_source_value: string
-
-See $metadata for additional Schema metadata</code></pre>
+race_source_value: string</code></pre>
 </div>
 <p>Several of these columns end with <code>_concept_id</code>, such as
 <code>gender_concept_id</code> and <code>race_concept_id</code>. These
@@ -579,15 +576,11 @@ returns the <code>concept_id</code>.</p>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">get_concept_id</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">omop_obj</span>, <span class="va">name</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">omop_obj</span><span class="op">$</span><span class="va">concept</span> <span class="op">|&gt;</span></span>
-<span>    <span class="fu">filter</span><span class="op">(</span><span class="va">concept_name</span> <span class="op">==</span> <span class="op">!</span><span class="op">!</span><span class="va">name</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>    <span class="fu">filter</span><span class="op">(</span><span class="va">concept_name</span> <span class="op">==</span> <span class="va">name</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>    <span class="fu">select</span><span class="op">(</span><span class="va">concept_id</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>    <span class="fu">collect</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre>
 </div>
-<p><strong>CODING_NOTE</strong>: The <code>!!</code> operator is used to
-unquote the variable <code>name</code> so that it can be evaluated
-within the <code>filter</code> function and the <code>collect()</code>
-function is used to retrieve the results from the remote database.</p>
 </div>
 </div>
 </div>
@@ -729,7 +722,7 @@ women.</li>
 <span></span>
 <span><span class="co"># Now we can join to get the number of people of each gender</span></span>
 <span><span class="va">person</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">left_join</span><span class="op">(</span><span class="va">gender_concept</span>, by <span class="op">=</span> <span class="fu">join_by</span><span class="op">(</span><span class="va">gender_concept_id</span> <span class="op">==</span> <span class="va">concept_id</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">inner_join</span><span class="op">(</span><span class="va">gender_concept</span>, by <span class="op">=</span> <span class="fu">join_by</span><span class="op">(</span><span class="va">gender_concept_id</span> <span class="op">==</span> <span class="va">concept_id</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">concept_name</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">summarise</span><span class="op">(</span>count <span class="op">=</span> <span class="fu">n</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre>
 </div>
@@ -742,7 +735,7 @@ women.</li>
 1 Female           5
 2 Male             3</code></pre>
 </div>
-<p><strong>CODING_NOTE</strong>: The <code>left_join</code> function is
+<p><strong>CODING_NOTE</strong>: The <code>inner_join</code> function is
 used to combine the person table with the gender_concept table we
 created, based on the gender_concept_id. This allows us to get the
 humanly readable gender names.</p>
@@ -773,15 +766,13 @@ associated with a particular visit.</p>
 visit_occurrence_id: int32
 person_id: int32
 visit_concept_id: int32
-visit_start_date: string
-visit_start_datetime: string
-visit_end_date: string
-visit_end_datetime: string
+visit_start_date: date32[day]
+visit_start_datetime: timestamp[us, tz=UTC]
+visit_end_date: date32[day]
+visit_end_datetime: timestamp[us, tz=UTC]
 visit_type_concept_id: int32
 discharged_to_concept_id: int32
-preceding_visit_occurrence_id: int32
-
-See $metadata for additional Schema metadata</code></pre>
+preceding_visit_occurrence_id: int32</code></pre>
 </div>
 <div class="codewrapper sourceCode" id="cb26">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -801,9 +792,7 @@ month_of_birth: int32
 day_of_birth: int32
 race_concept_id: int32
 gender_source_value: string
-race_source_value: string
-
-See $metadata for additional Schema metadata</code></pre>
+race_source_value: string</code></pre>
 </div>
 <div id="challenge3" class="callout challenge">
 <div class="callout-square">
@@ -887,15 +876,15 @@ patients.</p>
 </h3>
 <pre class="output" tabindex="0"><code># A tibble: 8 × 4
   person_id visit_occurrence_id visit_start_date visit_end_date
-      &lt;int&gt;               &lt;int&gt; &lt;chr&gt;            &lt;chr&gt;
-1      1112                1102 24/12/2025       NULL
-2      1112                1002 15/01/2024       29/01/2024
-3     34567               55667 18/12/2025       18/12/2025
-4     78901               44556 15/09/2004       18/09/2004
-5        31               37923 23/07/2024       23/07/2024
-6        31                1222 10/05/2019       10/05/2019
-7         2                1798 16/05/2025       19/05/2025
-8         2                 154 12/06/2025       12/06/2025    </code></pre>
+      &lt;int&gt;               &lt;int&gt; &lt;date&gt;           &lt;date&gt;
+1      1112                1102 2025-12-24       NA
+2      1112                1002 2024-01-15       2024-01-29
+3     34567               55667 2025-12-18       2025-12-18
+4     78901               44556 2004-09-15       2004-09-18
+5        31               37923 2024-07-23       2024-07-23
+6        31                1222 2019-05-10       2019-05-10
+7         2                1798 2025-05-16       2025-05-19
+8         2                 154 2025-06-12       2025-06-12    </code></pre>
 </div>
 <p><strong>CODING_NOTE</strong>: We have used the
 <code>inner_join</code> method to only keep rows where both tables have
@@ -938,8 +927,8 @@ concept.</li>
 <span>  <span class="fu">summarise</span><span class="op">(</span>visit_count <span class="op">=</span> <span class="fu">n</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">visit_counts_with_race</span> <span class="op">&lt;-</span> <span class="va">visit_counts</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">left_join</span><span class="op">(</span><span class="va">omop</span><span class="op">$</span><span class="va">person</span>, by <span class="op">=</span> <span class="fu">join_by</span><span class="op">(</span><span class="va">person_id</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">left_join</span><span class="op">(</span><span class="va">omop</span><span class="op">$</span><span class="va">concept</span>, by <span class="op">=</span> <span class="fu">join_by</span><span class="op">(</span><span class="va">race_concept_id</span> <span class="op">==</span> <span class="va">concept_id</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">inner_join</span><span class="op">(</span><span class="va">omop</span><span class="op">$</span><span class="va">person</span>, by <span class="op">=</span> <span class="fu">join_by</span><span class="op">(</span><span class="va">person_id</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">inner_join</span><span class="op">(</span><span class="va">omop</span><span class="op">$</span><span class="va">concept</span>, by <span class="op">=</span> <span class="fu">join_by</span><span class="op">(</span><span class="va">race_concept_id</span> <span class="op">==</span> <span class="va">concept_id</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">rename</span><span class="op">(</span>race_name <span class="op">=</span> <span class="va">concept_name</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">select</span><span class="op">(</span><span class="va">person_id</span>, <span class="va">visit_count</span>, <span class="va">race_name</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">collect</span><span class="op">(</span><span class="op">)</span></span>
@@ -979,7 +968,7 @@ table</li>
 <span></span>
 <span><span class="co"># we can also join in the concept name to make it human readable</span></span>
 <span><span class="va">counts_by_gender_concept</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">left_join</span><span class="op">(</span><span class="va">omop</span><span class="op">$</span><span class="va">concept</span>, by <span class="op">=</span> <span class="fu">join_by</span><span class="op">(</span><span class="va">gender_concept_id</span> <span class="op">==</span> <span class="va">concept_id</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">inner_join</span><span class="op">(</span><span class="va">omop</span><span class="op">$</span><span class="va">concept</span>, by <span class="op">=</span> <span class="fu">join_by</span><span class="op">(</span><span class="va">gender_concept_id</span> <span class="op">==</span> <span class="va">concept_id</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">rename</span><span class="op">(</span>gender <span class="op">=</span> <span class="va">concept_name</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">select</span><span class="op">(</span><span class="va">gender</span>, <span class="va">visit_count</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">collect</span><span class="op">(</span><span class="op">)</span></span></code></pre>
@@ -993,13 +982,6 @@ table</li>
 1 Male            12
 2 Female           8</code></pre>
 </div>
-<p><strong>CODING_NOTE</strong>: We are using <code>left_join()</code>
-when joining in concepts. If we used an <code>inner_join()</code> then
-if the <code>gender_concept_id</code> had a value that wasn’t in the
-<code>concept</code> table’s <code>concept_id</code> column, then these
-rows would be removed from the final dataset. It’s always worth being
-careful about when you are absolutely sure you want to remove data in a
-join.</p>
 </div>
 </div>
 </div>
@@ -1083,8 +1065,8 @@ any links that you are not going to use.
   "url": "https://SAFEHR-data.github.io/omop-carpentries/04_other_concepts.html",
   "identifier": "https://SAFEHR-data.github.io/omop-carpentries/04_other_concepts.html",
   "dateCreated": "2025-06-18",
-  "dateModified": "2026-03-17",
-  "datePublished": "2026-03-17"
+  "dateModified": "2026-03-23",
+  "datePublished": "2026-03-23"
 }
 
   </script><script>

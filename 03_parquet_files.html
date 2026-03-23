@@ -347,7 +347,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Parquet files</h1>
-        <p>Last updated on 2026-03-17 |
+        <p>Last updated on 2026-03-23 |
 
         <a href="https://github.com/SAFEHR-data/omop-carpentries/edit/main/episodes/03_parquet_files.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -404,9 +404,8 @@ parquet files).</p>
 and install the sample dataset. If you have not done this yet, please
 refer to the <a href="index.html#setup">setup instructions</a>. For now, we
 will assume that you have the sample OMOP CDM dataset available on your
-local machine at the following path:
-<code>../workshop/data/public/</code> and the functions in a folder
-<code>../workshop/code/parquet_dataset</code>.</p>
+local machine at the following path: <code>./data/omop/</code> and the
+functions in a folder <code>./code/parquet_dataset</code>.</p>
 </div>
 </div>
 </div>
@@ -448,14 +447,13 @@ structure that allows us to easily access the different tables in the
 dataset. We leave it to you to explore the code and understand how it
 works.</p>
 <p>Now we can use this function to open the sample OMOP CDM dataset
-located in the <code>workshop/data/public/</code> directory and explore
-it in the same way as we did with the database in the previous
-episode.</p>
+located in the <code>workshop/data/omop/</code> directory and explore it
+in the same way as we did with the database in the previous episode.</p>
 <div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">omop</span> <span class="op">&lt;-</span> <span class="fu">open_omop_dataset</span><span class="op">(</span><span class="st">"./data/public"</span><span class="op">)</span></span></code></pre>
+<code class="sourceCode R"><span><span class="va">omop</span> <span class="op">&lt;-</span> <span class="fu">open_omop_dataset</span><span class="op">(</span><span class="st">"./data/omop"</span><span class="op">)</span></span></code></pre>
 </div>
 
 <p>Explore the data using the following:</p>
@@ -470,15 +468,27 @@ episode.</p>
 </h3>
 <pre class="output" tabindex="0"><code>$concept
 FileSystemDataset with 1 Parquet file
-6 columns
+10 columns
 concept_id: int32
 concept_name: string
 domain_id: string
 vocabulary_id: string
 standard_concept: string
 concept_class_id: string
+concept_code: string
+valid_start_date: date32[day]
+valid_end_date: date32[day]
+invalid_reason: string
 
-See $metadata for additional Schema metadata
+$concept_relationship
+FileSystemDataset with 1 Parquet file
+6 columns
+concept_id_1: int32
+concept_id_2: int32
+relationship_id: string
+valid_start_date: date32[day]
+valid_end_date: date32[day]
+invalid_reason: string
 
 $condition_occurrence
 FileSystemDataset with 1 Parquet file
@@ -486,15 +496,13 @@ FileSystemDataset with 1 Parquet file
 condition_occurrence_id: int32
 person_id: int32
 condition_concept_id: int32
-condition_start_date: string
-condition_end_date: string
+condition_start_date: date32[day]
+condition_end_date: date32[day]
 condition_type_concept_id: int32
 condition_status_concept_id: int32
 visit_occurrence_id: int32
 condition_source_value: string
 condition_source_concept_id: int32
-
-See $metadata for additional Schema metadata
 
 $drug_exposure
 FileSystemDataset with 1 Parquet file
@@ -502,17 +510,31 @@ FileSystemDataset with 1 Parquet file
 drug_exposure_id: int32
 person_id: int32
 drug_concept_id: int32
-drug_exposure_start_date: string
-drug_exposure_start_datetime: string
-drug_exposure_end_date: string
-drug_exposure_end_datetime: string
+drug_exposure_start_date: date32[day]
+drug_exposure_start_datetime: timestamp[us, tz=UTC]
+drug_exposure_end_date: date32[day]
+drug_exposure_end_datetime: timestamp[us, tz=UTC]
 drug_type_concept_id: int32
 quantity: double
 route_concept_id: int32
 visit_occurrence_id: int32
 drug_source_concept_id: int32
 
-See $metadata for additional Schema metadata
+$drug_strength
+FileSystemDataset with 1 Parquet file
+12 columns
+drug_concept_id: int32
+ingredient_concept_id: int32
+amount_value: double
+amount_unit_concept_id: int32
+numerator_value: double
+numerator_unit_concept_id: int32
+denominator_value: double
+denominator_unit_concept_id: int32
+box_size: double
+valid_start_date: date32[day]
+valid_end_date: date32[day]
+invalid_reason: string
 
 $measurement
 FileSystemDataset with 1 Parquet file
@@ -520,8 +542,8 @@ FileSystemDataset with 1 Parquet file
 measurement_id: int32
 person_id: int32
 measurement_concept_id: int32
-measurement_date: string
-measurement_datetime: string
+measurement_date: date32[day]
+measurement_datetime: timestamp[us, tz=UTC]
 operator_concept_id: int32
 value_as_number: double
 value_as_concept_id: int32
@@ -530,22 +552,18 @@ range_low: int32
 range_high: int32
 visit_occurrence_id: int32
 
-See $metadata for additional Schema metadata
-
 $observation
 FileSystemDataset with 1 Parquet file
 9 columns
 observation_id: int32
 person_id: int32
 observation_concept_id: int32
-observation_date: string
-observation_datetime: string
+observation_date: date32[day]
+observation_datetime: timestamp[us, tz=UTC]
 value_as_number: int32
 value_as_string: string
 value_as_concept_id: int32
 visit_occurrence_id: int32
-
-See $metadata for additional Schema metadata
 
 $person
 FileSystemDataset with 1 Parquet file
@@ -559,20 +577,16 @@ race_concept_id: int32
 gender_source_value: string
 race_source_value: string
 
-See $metadata for additional Schema metadata
-
 $procedure_occurrence
 FileSystemDataset with 1 Parquet file
 7 columns
 procedure_occurrence_id: int32
 person_id: int32
 procedure_concept_id: int32
-procedure_date: string
-procedure_datetime: string
+procedure_date: date32[day]
+procedure_datetime: timestamp[us, tz=UTC]
 procedure_type_concept_id: int32
 visit_occurrence_id: int32
-
-See $metadata for additional Schema metadata
 
 $visit_occurrence
 FileSystemDataset with 1 Parquet file
@@ -580,15 +594,13 @@ FileSystemDataset with 1 Parquet file
 visit_occurrence_id: int32
 person_id: int32
 visit_concept_id: int32
-visit_start_date: string
-visit_start_datetime: string
-visit_end_date: string
-visit_end_datetime: string
+visit_start_date: date32[day]
+visit_start_datetime: timestamp[us, tz=UTC]
+visit_end_date: date32[day]
+visit_end_datetime: timestamp[us, tz=UTC]
 visit_type_concept_id: int32
 discharged_to_concept_id: int32
-preceding_visit_occurrence_id: int32
-
-See $metadata for additional Schema metadata</code></pre>
+preceding_visit_occurrence_id: int32</code></pre>
 </div>
 <p>You will see that this gives you a list of all the tables in this
 dataset and what columns they contain. It is obviously a much smaller
@@ -612,9 +624,7 @@ month_of_birth: int32
 day_of_birth: int32
 race_concept_id: int32
 gender_source_value: string
-race_source_value: string
-
-See $metadata for additional Schema metadata</code></pre>
+race_source_value: string</code></pre>
 </div>
 <p>To actually open each table we can use</p>
 <div class="codewrapper sourceCode" id="cb7">
@@ -657,7 +667,7 @@ package to read in the parquet files directly.</p>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">library</span><span class="op">(</span><span class="va">arrow</span><span class="op">)</span></span>
-<span><span class="va">person</span> <span class="op">&lt;-</span> <span class="fu">read_parquet</span><span class="op">(</span><span class="st">"./data/public/person/person.parquet"</span><span class="op">)</span></span>
+<span><span class="va">person</span> <span class="op">&lt;-</span> <span class="fu">read_parquet</span><span class="op">(</span><span class="st">"./data/omop/person/part-0.parquet"</span><span class="op">)</span></span>
 <span><span class="va">person</span></span></code></pre>
 </div>
 <div class="codewrapper">
@@ -728,7 +738,7 @@ the previous episode to work with this parquet file dataset.</p>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">get_concept_name</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">omop_obj</span>, <span class="va">id</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">omop_obj</span><span class="op">$</span><span class="va">concept</span> <span class="op">|&gt;</span></span>
-<span>    <span class="fu">filter</span><span class="op">(</span><span class="va">concept_id</span> <span class="op">==</span> <span class="op">!</span><span class="op">!</span><span class="va">id</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>    <span class="fu">filter</span><span class="op">(</span><span class="va">concept_id</span> <span class="op">==</span> <span class="va">id</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>    <span class="fu">select</span><span class="op">(</span><span class="va">concept_name</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>    <span class="fu">collect</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre>
@@ -840,8 +850,8 @@ any links that you are not going to use.
   "url": "https://SAFEHR-data.github.io/omop-carpentries/03_parquet_files.html",
   "identifier": "https://SAFEHR-data.github.io/omop-carpentries/03_parquet_files.html",
   "dateCreated": "2025-06-18",
-  "dateModified": "2026-03-17",
-  "datePublished": "2026-03-17"
+  "dateModified": "2026-03-23",
+  "datePublished": "2026-03-23"
 }
 
   </script><script>
