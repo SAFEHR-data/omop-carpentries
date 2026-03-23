@@ -32,7 +32,7 @@ For this episode we will be using a sample OMOP CDM database that is pre-loaded 
 
 (UCLH only) This will come in a similar form as you would get data if you asked for a data extract via the SAFEHR platform (i.e. a set of parquet files).
 
-As part of the setup prior to this course you were asked to download and install the sample dataset. If you have not done this yet, please refer to the [setup instructions](../learners/setup.md). For now, we will assume that you have the sample OMOP CDM dataset available on your local machine at the following path: `../workshop/data/omop/` and the functions in a folder `../workshop/code/parquet_dataset`.
+As part of the setup prior to this course you were asked to download and install the sample dataset. If you have not done this yet, please refer to the [setup instructions](../learners/setup.md). For now, we will assume that you have the sample OMOP CDM dataset available on your local machine at the following path: `./data/omop/` and the functions in a folder `./code/parquet_dataset`.
 
 You will then need to load the database as shown in the previous episode.
 
@@ -58,7 +58,7 @@ and the useful functions we created in the previous episode to look up concept n
 ```{r, warning = FALSE, message = FALSE}
 get_concept_name <- function(omop_obj, id) {
   omop_obj$concept |>
-    filter(concept_id == !!id) |>
+    filter(concept_id == id) |>
     select(concept_name) |>
     collect()
 }
@@ -67,7 +67,7 @@ get_concept_name <- function(omop_obj, id) {
 ```{r, warning = FALSE, message = FALSE}
 get_concept_id <- function(omop_obj, name) {
   omop_obj$concept |>
-    filter(concept_name == !!name) |>
+    filter(concept_name == name) |>
     select(concept_id) |>
     collect()
 }
@@ -123,7 +123,7 @@ Also consider the `measurement` table where we have both a `measurement_date` an
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::: challenge
 
-Using the `measurement` table, graph the `Body temperature` of patient `113`over time. You can use either the `measurement_date` or `measurement_datetime` column for the x-axis.
+Using the `measurement` table, graph the `Body temperature` of patient `113` over time. You can use either the `measurement_date` or `measurement_datetime` column for the x-axis.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::: solution
 ```{r, warning = FALSE, message = FALSE}
@@ -153,7 +153,99 @@ ggplot(measurement, aes(x = measurement_datetime, y = value_as_number)) +
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-If you are working with a csv file as an input, then there are no guarantees that a dataset will have the expected data types. 
+## Converting data types
+
+If you are working with a csv file as an input, then there are no guarantees that a dataset will have the expected data types. We can simulate what this may look like by creating a new measurement table that has string types instead of the expected types.
+
+```{r, warning = FALSE, message = FALSE}
+measurement_to_fix <- omop$measurement |>
+  mutate(
+    across(c(measurement_datetime, measurement_date, value_as_number), ~ as.character((.x)))
+    ) |>
+  collect()
+
+measurement_to_fix
+```
+
+We've used the `across()` function from the `dplyr` package to apply the `as.character()` function to three columns.
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::::: challenge
+
+Using the `measurement_to_fix` table.
+
+1. Calculate the number of days between the first and last `Body temperature` measurement for each patient, sorting the final output by `patient_id`. Which patient has `Body temperature` measurements spanning mulitple days?
+2. Create a scatter plot of all `Systolic blood pressure` and `Diastolic blood pressure` measurement values that were taken between the 1st of January 2025 and 1st of October 2025, using `measurement_datetime` for the x-axis. Colour the points by the `patient_id`.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::: solution
+
+1. Calculate the number of days between the first and last `Body temperature` measurement for each patient, sorting the final output by `patient_id`. Which patient has `Body temperature` measurements spanning mulitple days?
+
+```{r, warning = FALSE, message = FALSE}
+
+# Convert the date column to a date
+measurement_with_date <- measurement_to_fix |>
+    mutate(measurement_date = as.Date(measurement_date, format = "%Y-%m-%d"))
+
+# Calculate the number of days between first and last body temperature measurement
+measurement_with_date |>
+  filter(measurement_concept_id == 3020891) |>
+  summarise(
+    first_measurement_date = min(measurement_date),
+    last_measurement_date = max(measurement_date),
+    days_between = as.integer(last_measurement_date - first_measurement_date),
+    .by = person_id
+    ) |>
+  arrange(person_id)
+```
+***Answer:*** Only patient 113 has `Body Temperature` measurements over multiple days. 
+
+
+
+**CODING NOTE**: In the code above, we converted the `measurement_date` from character to date instances using the `as.Date()` function. We then filtered the data to the concept for Body Temperature, and used `summarise()` grouped by `person_id` to calculate the first and last measurement date, and their difference in numbers of days. 
+
+
+2. Create a scatter plot of all `Systolic blood pressure` and `Diastolic blood pressure` measurement values that were taken between the 1st of January 2025 and 1st of October 2025, using `measurement_datetime` for the x-axis. Colour the plot by the `patient_id`.
+
+
+```{r, warning = FALSE, message = FALSE}
+# Correct the types of remaining columns
+measurement_fixed <- measurement_with_date |>
+  mutate(
+    measurement_datetime = as.POSIXct(measurement_datetime, tz = "UTC"),
+    value_as_number = as.double(value_as_number)
+  )
+
+# Get concepts for blood pressure
+systolic_concept <- get_concept_id(omop, "Systolic blood pressure") |>
+  pull()
+
+diastolic_concept <- get_concept_id(omop, "Diastolic blood pressure") |>
+  pull()
+
+# Filter measurements by concepts and time range
+measurement_fixed |>
+  filter(
+    measurement_concept_id %in% c(systolic_concept, diastolic_concept),
+    measurement_datetime >= "2025-01-01",
+    measurement_datetime < "2025-10-01",
+  ) |>
+  ggplot(aes(x = measurement_datetime, y = value_as_number, colour = as.factor(person_id))) +
+  geom_point() +
+  labs(
+    title = "Blood pressure measurements over time",
+    x = "Measurement taken (datetime)",
+    y = "Blood pressure",
+    colour = "person_id"
+  )
+
+```
+
+**CODING NOTE**: In the code above, we converted the `measurement_datetime` from character to datetime instances using the `as.POSIXct()` function, we would need to confirm which timezone the data is in if we haven't already been told. We also converted the `value_as_number` column to a double (numeric allowing for decimal places) data type using `as.double()`. We then found the concepts required, filtered to these and the date range and used these to plot the data using `ggplot()`. We used the `colour` option in `aes()` to define that the colour of the points should be, converting it to a factor using `as.factor()` so that the continuous variable is diplayed as categories.
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
