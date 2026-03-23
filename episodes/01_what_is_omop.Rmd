@@ -36,19 +36,17 @@ make it easier to resume work after a break.
 ::::::::::::::::::::::::::::::::::::: group-tab
 
 ### Experienced
-Create a new project in your environment.
+
+Create a new project in the `workshop` directory from the course setup.
 
 ### Need a reminder
 
 - Under the `File` menu in RStudio, click on `New project`, choose
-  `New directory`, then `New project`
-- Enter a name for this new folder (or "directory") and choose a convenient
-  location for it. This will be your **working directory** for the rest of the
-  day (e.g., `~/Desktop/r-omop`).
+  `Existing directory`, then browse to the workshop directory from the source step (e.g., `~/Desktop/omop_course/workshop`).
 - Click on `Create project`
 - Create a new file where we will type our scripts. Go to File > New File > R
   script. Click the save icon on your toolbar and save your script as
-  "`script.R`".
+  "`lessons.R`".
 :::::::::::::::::::::::::::::::::::::::::::::::
  
 ### Connect to a database
@@ -177,7 +175,7 @@ Create the function `get_concept_name()` that takes the 'cdm' object and a `conc
 ```{r, warning = FALSE, message = FALSE}
 get_concept_name <- function(cdm_obj, id) {
   cdm_obj$concept |>
-    filter(concept_id == !!id) |>
+    filter(concept_id == id) |>
     select(concept_name) |>
     pull()
 }
@@ -190,7 +188,7 @@ get_concept_name <- function(cdm_obj, id) {
 #### Explanation of function code
 - The function is called `get_concept_name` and it takes two arguments, `cdm_obj` and `id`.
 - Inside the function, we query the `concept` table from the `cdm_obj` object.
-- We use the `filter` function to select rows where the `concept_id` matches the input `id`. The `!!` operator is used to unquote the variable so that its value is used in the filter.
+- We use the `filter` function to select rows where the `concept_id` matches the input `id`.
 - We then use `select` to choose only the `concept_name` column from the filtered results.
 - Finally, we use `pull()` to extract the `concept_name` as a vector, which is returned by the function. We need to use this because we are querying a remote database, not one that is local.
 

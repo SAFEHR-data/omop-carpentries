@@ -31,7 +31,7 @@ For this episode we will be using a sample OMOP CDM database that is pre-loaded 
 
 (UCLH only) This will come in a similar form as you would get data if you asked for a data extract via the SAFEHR platform (i.e. a set of parquet files).
 
-As part of the setup prior to this course you were asked to download and install the sample dataset. If you have not done this yet, please refer to the [setup instructions](../learners/setup.md). For now, we will assume that you have the sample OMOP CDM dataset available on your local machine at the following path: `../workshop/data/public/` and the functions in a folder `../workshop/code/parquet_dataset`.
+As part of the setup prior to this course you were asked to download and install the sample dataset. If you have not done this yet, please refer to the [setup instructions](../learners/setup.md). For now, we will assume that you have the sample OMOP CDM dataset available on your local machine at the following path: `./data/omop/` and the functions in a folder `./code/parquet_dataset`.
 
   
 ::::::::::::::::::::::::::::::::::::::::::::::::
@@ -57,10 +57,10 @@ open_omop_dataset <- function(path) {
 
 **CODING_NOTE**: This function uses the `arrow` package to read in the parquet files. The `open_dataset()` function from the `arrow` package allows us to read in the parquet files without having to load the entire dataset into memory. This is particularly useful when working with large datasets. The function is reasonably complex but it is designed to be flexible and work with any OMOP CDM dataset that is structured in the same way as the one we are using for this course. It will read in all the parquet files in the specified directory and create a nested list structure that allows us to easily access the different tables in the dataset. We leave it to you to explore the code and understand how it works.
 
-Now we can use this function to open the sample OMOP CDM dataset located in the `workshop/data/public/` directory and explore it in the same way as we did with the database in the previous episode.
+Now we can use this function to open the sample OMOP CDM dataset located in the `workshop/data/omop/` directory and explore it in the same way as we did with the database in the previous episode.
 
 ```{r, warning = FALSE, message = FALSE}
-omop <- open_omop_dataset("./data/public")
+omop <- open_omop_dataset("./data/omop")
 ```
 
 ::::::::::::::::::::::::::::::::::::: instructor
@@ -96,7 +96,7 @@ Or we can use the specific functions from the `arrow` package to read in the par
 
 ```{r, warning = FALSE, message = FALSE}
 library(arrow)
-person <- read_parquet("./data/public/person/person.parquet")
+person <- read_parquet("./data/omop/person/part-0.parquet")
 person
 ```
 
@@ -130,7 +130,7 @@ Adapt the code we had developed for the get_concept_name function in the previou
 ```{r, warning = FALSE, message = FALSE}
 get_concept_name <- function(omop_obj, id) {
   omop_obj$concept |>
-    filter(concept_id == !!id) |>
+    filter(concept_id == id) |>
     select(concept_name) |>
     collect()
 }
