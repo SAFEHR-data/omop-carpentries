@@ -28,20 +28,20 @@ exercises: 0
 
 In this episode, we will explore more concepts related to the OMOP Common Data Model (CDM). We will focus on understanding how different tables in the OMOP CDM are linked together through common identifiers. This knowledge is crucial for effectively querying and analysing healthcare data stored in the OMOP format.
 
-:::::::::::::::::::::::::::::::::::::::::::::::: callout
+::::::::::::::::::::::::::::::::::::::::::::::::callout
 
 For this episode we will be using a sample OMOP CDM database that is pre-loaded with data. This database is a simplified version of a real-world OMOP CDM database and is intended for educational purposes only.
 
 (UCLH only) This will come in a similar form as you would get data if you asked for a data extract via the SAFEHR platform (i.e. a set of parquet files).
 
-As part of the setup prior to this course you were asked to download and install the sample database. If you have not done this yet, please refer to the setup instructions provided earlier in the course. For now, we will assume that you have the sample OMOP CDM database available on your local machine at the following path: `workshop/data/public/` and the functions in a folder `workshop/code/parquet_dataset`.
+As part of the setup prior to this course you were asked to download and install the sample dataset. If you have not done this yet, please refer to the [setup instructions](../learners/setup.md). For now, we will assume that you have the sample OMOP CDM dataset available on your local machine at the following path: `./data/omop/` and the functions in a folder `./code/parquet_dataset`.
 
 You will then need to load the database as shown in the previous episode.
 
 
 ``` r
-library(arrow)
 library(dplyr)
+
 open_omop_dataset <- function(path) {
     # iterate over table level directories
     list.dirs(path, recursive = FALSE) |>
@@ -54,7 +54,7 @@ open_omop_dataset <- function(path) {
 
 
 ``` r
-omop <- open_omop_dataset("./data/public")
+omop <- open_omop_dataset("./data/omop")
 ```
 
 and the useful function we created in the previous episode to look up concept names.
@@ -63,7 +63,7 @@ and the useful function we created in the previous episode to look up concept na
 ``` r
 get_concept_name <- function(omop_obj, id) {
   omop_obj$concept |>
-    filter(concept_id == !!id) |>
+    filter(concept_id == id) |>
     select(concept_name) |>
     collect()
 }
@@ -79,13 +79,13 @@ In addition to the `concept_id` column in various OMOP tables, there are several
 | Column Names          | Description of content |
 |-----------------------|---------------------------------------|
 | **person_id** | Unique identifier for each person |
-| **gender_concept_id** | Concept identifier for the gender of the person |
+| **gender_concept_id** | Concept identifier for the **sex** of the person |
 | **year_of_birth** | Year of birth of the person |
 | **month_of_birth** | Month of birth of the person |
 | **day_of_birth** | Day of birth of the person |
-| **race_concept_id** | Concept identifier for the race of the person |
-| **gender_source_value** | Source value for the gender of the person |
-| **race_source_value** | Source value for the race of the person |
+| **race_concept_id** | Concept identifier for the race/ethnic background of the person |
+| **gender_source_value** | Source value for the **sex** of the person |
+| **race_source_value** | Source value for the race/ethnic background of the person |
 
 
 Look at the column names of the `person` table.
@@ -105,8 +105,6 @@ day_of_birth: int32
 race_concept_id: int32
 gender_source_value: string
 race_source_value: string
-
-See $metadata for additional Schema metadata
 ```
 
 Several of these columns end with `_concept_id`, such as `gender_concept_id` and `race_concept_id`. These columns link to the `concept` table to provide humanly readable names for the concepts represented by these IDs.
@@ -158,13 +156,12 @@ Create the function `get_concept_id()` that takes an `omop_obj` and a `concept_n
 ``` r
 get_concept_id <- function(omop_obj, name) {
   omop_obj$concept |>
-    filter(concept_name == !!name) |>
+    filter(concept_name == name) |>
     select(concept_id) |>
     collect()
 }
 ```
 
-**CODING_NOTE**: The `!!` operator is used to unquote the variable `name` so that it can be evaluated within the `filter` function and the `collect()` function is used to retrieve the results from the remote database.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::
@@ -273,7 +270,7 @@ gender_concept <- omop$concept |>
 
 # Now we can join to get the number of people of each gender
 person |> 
-  left_join(gender_concept, by = join_by(gender_concept_id == concept_id)) |>
+  inner_join(gender_concept, by = join_by(gender_concept_id == concept_id)) |>
   group_by(concept_name) |>
   summarise(count = n())
 ```
@@ -286,7 +283,7 @@ person |>
 2 Male             3
 ```
 
-**CODING_NOTE**: The `left_join` function is used to combine the person table with the gender_concept table we created, based on the gender_concept_id. This allows us to get the humanly readable gender names. 
+**CODING_NOTE**: The `inner_join` function is used to combine the person table with the gender_concept table we created, based on the gender_concept_id. This allows us to get the humanly readable gender names. 
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -309,15 +306,13 @@ FileSystemDataset with 1 Parquet file
 visit_occurrence_id: int32
 person_id: int32
 visit_concept_id: int32
-visit_start_date: string
-visit_start_datetime: string
-visit_end_date: string
-visit_end_datetime: string
+visit_start_date: date32[day]
+visit_start_datetime: timestamp[us, tz=UTC]
+visit_end_date: date32[day]
+visit_end_datetime: timestamp[us, tz=UTC]
 visit_type_concept_id: int32
 discharged_to_concept_id: int32
 preceding_visit_occurrence_id: int32
-
-See $metadata for additional Schema metadata
 ```
 
 
@@ -336,8 +331,6 @@ day_of_birth: int32
 race_concept_id: int32
 gender_source_value: string
 race_source_value: string
-
-See $metadata for additional Schema metadata
 ```
 
 ::::::::::::::::::::::::::::::::::: challenge
@@ -398,15 +391,15 @@ female_visits
 ``` output
 # A tibble: 8 × 4
   person_id visit_occurrence_id visit_start_date visit_end_date
-      <int>               <int> <chr>            <chr>         
-1      1112                1102 24/12/2025       NULL          
-2      1112                1002 15/01/2024       29/01/2024    
-3     34567               55667 18/12/2025       18/12/2025    
-4     78901               44556 15/09/2004       18/09/2004    
-5        31               37923 23/07/2024       23/07/2024    
-6        31                1222 10/05/2019       10/05/2019    
-7         2                1798 16/05/2025       19/05/2025    
-8         2                 154 12/06/2025       12/06/2025    
+      <int>               <int> <date>           <date>        
+1      1112                1102 2025-12-24       NA            
+2      1112                1002 2024-01-15       2024-01-29    
+3     34567               55667 2025-12-18       2025-12-18    
+4     78901               44556 2004-09-15       2004-09-18    
+5        31               37923 2024-07-23       2024-07-23    
+6        31                1222 2019-05-10       2019-05-10    
+7         2                1798 2025-05-16       2025-05-19    
+8         2                 154 2025-06-12       2025-06-12    
 ```
 
 **CODING_NOTE**: We have used the `inner_join` method to only keep rows where both tables have the same ids, but there are others. We also used the `join_by` function which allows us to define which column to join on, you can choose multiple columns in a join. 
@@ -432,8 +425,8 @@ visit_counts <- omop$visit_occurrence |>
   summarise(visit_count = n())
 
 visit_counts_with_race <- visit_counts |>
-  left_join(omop$person, by = join_by(person_id)) |>
-  left_join(omop$concept, by = join_by(race_concept_id == concept_id)) |>
+  inner_join(omop$person, by = join_by(person_id)) |>
+  inner_join(omop$concept, by = join_by(race_concept_id == concept_id)) |>
   rename(race_name = concept_name) |>
   select(person_id, visit_count, race_name) |>
   collect()
@@ -469,7 +462,7 @@ counts_by_gender_concept <- omop$person |>
 
 # we can also join in the concept name to make it human readable
 counts_by_gender_concept |>
-  left_join(omop$concept, by = join_by(gender_concept_id == concept_id)) |>
+  inner_join(omop$concept, by = join_by(gender_concept_id == concept_id)) |>
   rename(gender = concept_name) |>
   select(gender, visit_count) |>
   collect()
@@ -483,7 +476,6 @@ counts_by_gender_concept |>
 2 Female           8
 ```
 
-**CODING_NOTE**: We are using `left_join()` when joining in concepts. If we used an `inner_join()` then if the `gender_concept_id` had a value that wasn't in the `concept` table's `concept_id` column, then these rows would be removed from the final dataset. It's always worth being careful about when you are absolutely sure you want to remove data in a join. 
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 

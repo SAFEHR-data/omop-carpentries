@@ -31,7 +31,7 @@ For this episode we will be using a sample OMOP CDM database that is pre-loaded 
 
 (UCLH only) This will come in a similar form as you would get data if you asked for a data extract via the SAFEHR platform (i.e. a set of parquet files).
 
-As part of the setup prior to this course you were asked to download and install the sample dataset. If you have not done this yet, please refer to the [setup instructions](../learners/setup.md). For now, we will assume that you have the sample OMOP CDM dataset available on your local machine at the following path: `../workshop/data/public/` and the functions in a folder `../workshop/code/parquet_dataset`.
+As part of the setup prior to this course you were asked to download and install the sample dataset. If you have not done this yet, please refer to the [setup instructions](../learners/setup.md). For now, we will assume that you have the sample OMOP CDM dataset available on your local machine at the following path: `./data/omop/` and the functions in a folder `./code/parquet_dataset`.
 
   
 ::::::::::::::::::::::::::::::::::::::::::::::::
@@ -58,11 +58,11 @@ open_omop_dataset <- function(path) {
 
 **CODING_NOTE**: This function uses the `arrow` package to read in the parquet files. The `open_dataset()` function from the `arrow` package allows us to read in the parquet files without having to load the entire dataset into memory. This is particularly useful when working with large datasets. The function is reasonably complex but it is designed to be flexible and work with any OMOP CDM dataset that is structured in the same way as the one we are using for this course. It will read in all the parquet files in the specified directory and create a nested list structure that allows us to easily access the different tables in the dataset. We leave it to you to explore the code and understand how it works.
 
-Now we can use this function to open the sample OMOP CDM dataset located in the `workshop/data/public/` directory and explore it in the same way as we did with the database in the previous episode.
+Now we can use this function to open the sample OMOP CDM dataset located in the `workshop/data/omop/` directory and explore it in the same way as we did with the database in the previous episode.
 
 
 ``` r
-omop <- open_omop_dataset("./data/public")
+omop <- open_omop_dataset("./data/omop")
 ```
 
 ::::::::::::::::::::::::::::::::::::: instructor
@@ -82,15 +82,27 @@ omop
 ``` output
 $concept
 FileSystemDataset with 1 Parquet file
-6 columns
+10 columns
 concept_id: int32
 concept_name: string
 domain_id: string
 vocabulary_id: string
 standard_concept: string
 concept_class_id: string
+concept_code: string
+valid_start_date: date32[day]
+valid_end_date: date32[day]
+invalid_reason: string
 
-See $metadata for additional Schema metadata
+$concept_relationship
+FileSystemDataset with 1 Parquet file
+6 columns
+concept_id_1: int32
+concept_id_2: int32
+relationship_id: string
+valid_start_date: date32[day]
+valid_end_date: date32[day]
+invalid_reason: string
 
 $condition_occurrence
 FileSystemDataset with 1 Parquet file
@@ -98,15 +110,13 @@ FileSystemDataset with 1 Parquet file
 condition_occurrence_id: int32
 person_id: int32
 condition_concept_id: int32
-condition_start_date: string
-condition_end_date: string
+condition_start_date: date32[day]
+condition_end_date: date32[day]
 condition_type_concept_id: int32
 condition_status_concept_id: int32
 visit_occurrence_id: int32
 condition_source_value: string
 condition_source_concept_id: int32
-
-See $metadata for additional Schema metadata
 
 $drug_exposure
 FileSystemDataset with 1 Parquet file
@@ -114,17 +124,31 @@ FileSystemDataset with 1 Parquet file
 drug_exposure_id: int32
 person_id: int32
 drug_concept_id: int32
-drug_exposure_start_date: string
-drug_exposure_start_datetime: string
-drug_exposure_end_date: string
-drug_exposure_end_datetime: string
+drug_exposure_start_date: date32[day]
+drug_exposure_start_datetime: timestamp[us, tz=UTC]
+drug_exposure_end_date: date32[day]
+drug_exposure_end_datetime: timestamp[us, tz=UTC]
 drug_type_concept_id: int32
 quantity: double
 route_concept_id: int32
 visit_occurrence_id: int32
 drug_source_concept_id: int32
 
-See $metadata for additional Schema metadata
+$drug_strength
+FileSystemDataset with 1 Parquet file
+12 columns
+drug_concept_id: int32
+ingredient_concept_id: int32
+amount_value: double
+amount_unit_concept_id: int32
+numerator_value: double
+numerator_unit_concept_id: int32
+denominator_value: double
+denominator_unit_concept_id: int32
+box_size: double
+valid_start_date: date32[day]
+valid_end_date: date32[day]
+invalid_reason: string
 
 $measurement
 FileSystemDataset with 1 Parquet file
@@ -132,8 +156,8 @@ FileSystemDataset with 1 Parquet file
 measurement_id: int32
 person_id: int32
 measurement_concept_id: int32
-measurement_date: string
-measurement_datetime: string
+measurement_date: date32[day]
+measurement_datetime: timestamp[us, tz=UTC]
 operator_concept_id: int32
 value_as_number: double
 value_as_concept_id: int32
@@ -142,22 +166,18 @@ range_low: int32
 range_high: int32
 visit_occurrence_id: int32
 
-See $metadata for additional Schema metadata
-
 $observation
 FileSystemDataset with 1 Parquet file
 9 columns
 observation_id: int32
 person_id: int32
 observation_concept_id: int32
-observation_date: string
-observation_datetime: string
+observation_date: date32[day]
+observation_datetime: timestamp[us, tz=UTC]
 value_as_number: int32
 value_as_string: string
 value_as_concept_id: int32
 visit_occurrence_id: int32
-
-See $metadata for additional Schema metadata
 
 $person
 FileSystemDataset with 1 Parquet file
@@ -171,20 +191,16 @@ race_concept_id: int32
 gender_source_value: string
 race_source_value: string
 
-See $metadata for additional Schema metadata
-
 $procedure_occurrence
 FileSystemDataset with 1 Parquet file
 7 columns
 procedure_occurrence_id: int32
 person_id: int32
 procedure_concept_id: int32
-procedure_date: string
-procedure_datetime: string
+procedure_date: date32[day]
+procedure_datetime: timestamp[us, tz=UTC]
 procedure_type_concept_id: int32
 visit_occurrence_id: int32
-
-See $metadata for additional Schema metadata
 
 $visit_occurrence
 FileSystemDataset with 1 Parquet file
@@ -192,15 +208,13 @@ FileSystemDataset with 1 Parquet file
 visit_occurrence_id: int32
 person_id: int32
 visit_concept_id: int32
-visit_start_date: string
-visit_start_datetime: string
-visit_end_date: string
-visit_end_datetime: string
+visit_start_date: date32[day]
+visit_start_datetime: timestamp[us, tz=UTC]
+visit_end_date: date32[day]
+visit_end_datetime: timestamp[us, tz=UTC]
 visit_type_concept_id: int32
 discharged_to_concept_id: int32
 preceding_visit_occurrence_id: int32
-
-See $metadata for additional Schema metadata
 ```
 
 You will see that this gives you a list of all the tables in this dataset and what columns they contain. It is obviously a much smaller dataset! You can explore individual tables which will also give you the column names and the data type of the entry.
@@ -221,8 +235,6 @@ day_of_birth: int32
 race_concept_id: int32
 gender_source_value: string
 race_source_value: string
-
-See $metadata for additional Schema metadata
 ```
 To actually open each table we can use
 
@@ -257,7 +269,7 @@ Or we can use the specific functions from the `arrow` package to read in the par
 
 ``` r
 library(arrow)
-person <- read_parquet("./data/public/person/person.parquet")
+person <- read_parquet("./data/omop/person/part-0.parquet")
 person
 ```
 
@@ -308,7 +320,7 @@ Adapt the code we had developed for the get_concept_name function in the previou
 ``` r
 get_concept_name <- function(omop_obj, id) {
   omop_obj$concept |>
-    filter(concept_id == !!id) |>
+    filter(concept_id == id) |>
     select(concept_name) |>
     collect()
 }

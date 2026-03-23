@@ -189,7 +189,7 @@ Let's look into filtering concepts based on their domain, vocabulary, concept_cl
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::: challenge
 
-List the first ten rows of the `concept table`, listing only the `concept_id`, `domain_id`, `vocabulary_id`, `concept_class_id` and `standard_concept` columns.
+List the first ten rows of the `concept table`, ordered by `concept_id`. List only the `concept_id`, `domain_id`, `vocabulary_id`, `concept_class_id` and `standard_concept` columns. 
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::: solution
 
@@ -308,9 +308,9 @@ cdm$concept |>
 ```
 
 ``` output
- [1] "CVX"                 "Ingredient"          "11-digit NDC"       
- [4] "Branded Pack"        "Clinical Drug Comp"  "Branded Drug"       
- [7] "Quant Branded Drug"  "Branded Drug Comp"   "Clinical Drug"      
+ [1] "Branded Drug"        "Quant Branded Drug"  "Branded Drug Comp"  
+ [4] "CVX"                 "Ingredient"          "11-digit NDC"       
+ [7] "Branded Pack"        "Clinical Drug Comp"  "Clinical Drug"      
 [10] "Quant Clinical Drug"
 ```
 
@@ -386,28 +386,28 @@ Is this concept a standard concept?
 ``` r
 get_concept_domain <- function(cdm_obj, id) {
   cdm_obj$concept |>
-    filter(concept_id == !!id) |>
+    filter(concept_id == id) |>
     select(domain_id) |>
     pull()
 }
 
 get_concept_vocabulary <- function(cdm_obj, id) {
   cdm_obj$concept |>
-    filter(concept_id == !!id) |>
+    filter(concept_id == id) |>
     select(vocabulary_id) |>
     pull()
 }
 
 get_concept_concept_class <- function(cdm_obj, id) {
   cdm_obj$concept |>
-    filter(concept_id == !!id) |>
+    filter(concept_id == id) |>
     select(concept_class_id) |>
     pull()
 }
 
 get_concept_standard_status <- function(cdm_obj, id) {
   cdm_obj$concept |>
-    filter(concept_id == !!id) |>
+    filter(concept_id == id) |>
     select(standard_concept) |>
     pull()
 }

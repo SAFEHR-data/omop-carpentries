@@ -14,11 +14,13 @@ exercises: 0
 
 ::::::::::::::::::::::::::::::::::::: objectives
 
-- Know that exposure of a patient to medications is mainly stored in the drug_exposure table
+- Know that exposure of a patient to medications is stored in the `drug_exposure` table
 
 - Understand that drug concepts can be at different levels of granularity
 
 - Understand that source values are mapped to a standard vocabulary
+
+- Understand how to access the concentration or strength of an exposure using the `drug_strength` table
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -26,52 +28,41 @@ exercises: 0
 
 This episode considers medications (the drug exposure table) in the OMOP Common Data Model (CDM).
 
-:::::::::::::::::::::::::::::::::::::::::::::::: callout
+::::::::::::::::::::::::::::::::::::::::::::::::callout
 
 For this episode we will be using a sample OMOP CDM database that is pre-loaded with data. This database is a simplified version of a real-world OMOP CDM database and is intended for educational purposes only.
 
-(UCLH only) This will come in the same form as you would get data if you asked for a data extract via the SAFEHR platform (i.e. a set of parquet files).
+(UCLH only) This will come in a similar form as you would get data if you asked for a data extract via the SAFEHR platform (i.e. a set of parquet files).
 
-As part of the setup prior to this course you were asked to download and install the sample database. If you have not done this yet, please refer to the setup instructions provided earlier in the course. For now, we will assume that you have the sample OMOP CDM database available on your local machine at the following path: `workshop/data/public/` and the functions in a folder `workshop/code`.
+As part of the setup prior to this course you were asked to download and install the sample dataset. If you have not done this yet, please refer to the [setup instructions](../learners/setup.md). For now, we will assume that you have the sample OMOP CDM dataset available on your local machine at the following path: `./data/omop/` and the functions in a folder `./code/parquet_dataset`.
 
 You will then need to load the database as shown in the previous episode.
 
 
 ``` r
-open_omop_dataset <- function(dir) {
-  open_omop_schema <- function(path) {
-    # iterate table level folders
+library(dplyr)
+open_omop_dataset <- function(path) {
+    # iterate over table level directories
     list.dirs(path, recursive = FALSE) |>
-      # exclude folder name from path
-      # and use it as index for named list
+      # exclude folder name from path and use it as index for named list
       purrr::set_names(~ basename(.)) |>
-      # "lazy-open" list of parquet files
-      # from specified folder
+      # "lazy-load" list of parquet files from specified folder
       purrr::map(arrow::open_dataset)
-  }
-  # iterate top-level folders
-  list.dirs(dir, recursive = FALSE) |>
-    # exclude folder name from path
-    # and use it as index for named list
-    purrr::set_names(~ basename(.)) |>
-    purrr::map(open_omop_schema)
 }
 ```
 
 
 ``` r
-omop <- open_omop_dataset("./data/")
+omop <- open_omop_dataset("./data/omop")
 ```
 
-and the useful functions we created in the previous episode to look up concept names/ids.
+and the useful functions we created in the previous episode to look up concept names and ids.
 
 
 ``` r
-library(arrow)
-library(dplyr)
-get_concept_name <- function(id, omop_obj) {
-  omop_obj$public$concept |>
-    filter(concept_id == !!id) |>
+get_concept_name <- function(omop_obj, id) {
+  omop_obj$concept |>
+    filter(concept_id == id) |>
     select(concept_name) |>
     collect()
 }
@@ -79,13 +70,14 @@ get_concept_name <- function(id, omop_obj) {
 
 
 ``` r
-get_concept_id <- function(name, omop_obj) {
-  omop_obj$public$concept |>
-    filter(concept_name == !!name) |>
+get_concept_id <- function(omop_obj, name) {
+  omop_obj$concept |>
+    filter(concept_name == name) |>
     select(concept_id) |>
     collect()
 }
 ```
+
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -115,22 +107,22 @@ Drug data can be very complicated, as can the process of converting from the sou
 
 The standard OHDSI drug vocabularies are called `RxNorm` and `RxNormExtension`. `RxNorm` contains all drugs currently on the US market. `RxNormExtension` is maintained by the OHDSI community and contains all other drugs.
 
-A particular concept_id can be at one of a number of different levels in a drug hierarchy. 
+A particular `concept_id` can be at one of a number of different levels in a drug hierarchy. 
 
 ::::::::::::::::::::::::::::::::: challenge
 
-List the main levels of drug concepts in RxNorm.
+List the main levels of drug concepts in RxNorm from the `concept` table (e.g. the *concept_class_id*).
 
 ::::::::::::::::::::::::::::::::: solution
 
 
 ``` r
-omop$public$concept |>
+omop$concept |>
   filter(vocabulary_id == "RxNorm") |>
   select(concept_class_id) |>
-  collect() |>
   distinct() |>
-  arrange(concept_class_id)
+  arrange(concept_class_id) |>
+  collect() 
 ```
 
 ``` output
@@ -162,27 +154,24 @@ A fuller example of the drug concept hierarchy in RxNorm is shown in the table b
 
 There are also concepts for Branded drugs and for packs of drugs (e.g. a box of 30 tablets) but these are not shown in this sample table.
 
-
 ## Drug mapping in the NHS
 
-Drugs in the NHS are standardised to the NHS Dictionary of Medicines and Devices (dm+d). dm+d is included in OMOP so there are values of OMOP concept_id for each dm+d. However because dm+d is not a standard vocabulary in OMOP it is translate once more to get to a standard OMOP concept id in `RxNorm` or `RxNormExtension` that can be used in collaborative studies. If there is a drug_concept_id value of 0 and there are source codes this can be because that drug doesn't map to a standard ID. Reminder that the source values are stored in these columns.
+Drugs in the NHS are standardised to the NHS Dictionary of Medicines and Devices (dm+d). dm+d is included in OMOP so there are values of OMOP concept_id for each dm+d. However because dm+d is not a standard vocabulary in OMOP it is translated once more to get to a standard OMOP `concept_id` in *RxNorm* or *RxNormExtension* that can be used in collaborative studies. If there is a `drug_concept_id` value of 0 and there are source codes, this can be because that drug doesn't map to a standard concept. Reminder that the source values are stored in these columns.
 
 ::::::::::::::::::::::::::::::::: challenge
 
-Look up the `concept_id` **871182** and find the corresponding `RxNorm` `concept_id`.
+Look up the `concept_id` **871182** and search through the concept table by drug name to find the likely concept in `RxNorm` and its `concept_id`.
 
 ::::::::::::::::::::::::::::::::: solution
 
 ``` r
-library(dplyr)
-# make a copy of the concept table
-concepts <- omop$public$concept |> collect()
 # look up the concept entry
-dmd_concept_1 <- concepts |>
+dmd_concept <- omop$concept |>
   filter(concept_id == 871182) |>
   select(concept_id, concept_name, domain_id, vocabulary_id, concept_class_id) |>
   collect()
-dmd_concept_1
+
+dmd_concept
 ```
 
 ``` output
@@ -195,19 +184,22 @@ dmd_concept_1
 ``` r
 # this is the dose of lorazepam
 # now look up any concepts that have a similar name
-similar <- filter(concepts, grepl('Lorazepam', concept_name, TRUE))
+similar <- filter(omop$concept, grepl('Lorazepam', concept_name, TRUE)) |>
+  collect()
+
 similar
 ```
 
 ``` output
-# A tibble: 4 × 6
+# A tibble: 4 × 10
   concept_id concept_name               domain_id vocabulary_id standard_concept
        <int> <chr>                      <chr>     <chr>         <chr>           
 1     871182 Lorazepam 1mg tablets      Drug      dm+d          ""              
 2   19019113 lorazepam MG Oral Tablet   Drug      RxNorm        "S"             
 3   35777064 1 ML Lorazepam 4 MG/ML In… Drug      RxNorm Exten… "S"             
 4   36816707 Lorazepam 4mg/1ml solutio… Drug      dm+d          ""              
-# ℹ 1 more variable: concept_class_id <chr>
+# ℹ 5 more variables: concept_class_id <chr>, concept_code <chr>,
+#   valid_start_date <date>, valid_end_date <date>, invalid_reason <chr>
 ```
 
 ***Answer:*** We can see from the resulting table that there are entries for each lorazepam dose from both the dm+d and RxNorm vocabularies. The `concept_id` **871182** corresponds to the dm+d concept "Lorazepam 1mg tablets". This seems maps to the RxNorm concept "lorazepam Oral Tablet" which has `concept_id` **19019113**, but without knowing the quantity we can't be sure which dose it maps to. This is an example of the complexity of drug data and the mapping process.
@@ -220,58 +212,92 @@ similar
 
 This is a snapshot of the Athena table for code 871182. Athena is the OHDSI tool for exploring the OMOP vocabularies and concept relationships. It is available online at https://athena.ohdsi.org/. You can use it to look up concepts and their relationships to other concepts in the OMOP CDM.
 
-![The OMOP Code 871182  ](fig/lorazepam-Athena.png){alt='A snapshot of the Athena table for code 871182.'}
+![The OMOP Code 871182](fig/lorazepam-Athena.png){alt='A snapshot of the Athena table for code 871182.'}
 
-Looking at the entry for `concept_id` **871182** we can see that it is in the dm+d vocabulary. We can see that is connected to the RxNorm concept "lorazepam 1 MG Oral Tablet" which has `concept_id` **19019113**. So our assumption above was correct, but the concept table in our dataset didn't fill in the name fully so we couldn't be sure without looking it up in the  official table.
+Looking at the entry for `concept_id` **871182** we can see that it is in the dm+d vocabulary. We can see that is connected to the RxNorm concept "lorazepam 1 MG Oral Tablet" which has `concept_id` **19019113**. So our assumption above was correct, but the concept table in our dataset didn't fill in the name fully so we couldn't be sure without looking it up in the  official table. Within the OMOP CDM there are tables (`concept_relationship`) where you can look up the relationships between concepts programatically, so this doesn't have to be manually done by using Athena. 
 
 ## Quantity
 
+There are other vocabulary tables for the OMOP CDM other than the `concept` table. [drug_strength](https://ohdsi.github.io/CommonDataModel/cdm54.html#drug_strength) stores the amount of concentration and associated units of a specific ingredient within a drug product.
+
+### The `drug_strength` table contains the following columns (among others not listed here):
+| Column Names          | Description of content |
+|-----------------------|---------------------------------------|
+| **drug_concept_id** |  Concept representing the Branded Drug or Clinical Drug Product |
+| **ingredient_concept_id** | Concept representing the active ingredient contained within the drug product  |
+| **amount_value** | Amount of active ingredient |
+| **amount_unit_concept_id** | Concept for the unit of measure for the `amount_value` |
+| **numerator_value** | Concentration of the active ingredient in the drug product |
+| **numerator_unit_concept_id** | Concept for the unit of measure for `numerator_value` |
+| **denominator_value** | Amount of total liquid in the drug product |
+| **denominator_unit_concept_id** | Concept for the unit of measure for `denominator_value` |
+
+
+Drug data can be very complicated, as can the process of converting from the source data to OMOP. You may not find what you expect depending on this and the quality of the source data. 
+
+
 ::::::::::::::::::::::::::::::::: challenge
 
-Work out what drugs person_id **2** was exposed to and the quantity of each drug.
-
-Remember you may need to look at the drug_concept_id and drug_source_concept_id to find the drug name and size a tablet.
+Work out what drugs person_id **2** was exposed to and the quantity of each drug by joining to the `drug_strength` table. Please display the names for the `drug_concept_id`. Once you have this, also display the names of `amount_unit_concept_id`, `numerator_unit_concept_id` and `denominator_unit_concept_id`.
 
 ::::::::::::::::::::::::::::::::: solution
 
 ``` r
-# make a copy of the drug_exposure table
-drug_exposure <- omop$public$drug_exposure |> collect()
 # filter for person_id 2
-person_2_drugs <- drug_exposure |>
+person_2_drugs <- omop$drug_exposure |>
   filter(person_id == 2) |>
-  select(drug_concept_id, drug_source_concept_id, quantity) |>
-  collect()
+  select(drug_exposure_id, drug_concept_id, drug_source_concept_id, quantity) 
+
 # now create a table with humanly readable names for the drug_concept_id and drug_source_concept_id.
 # first, get the concept names for drug_concept_id
-concept_names <- concepts |>
-  select(concept_id, concept_name) |>
+concept_names <- omop$concept |>
+  select(concept_id, concept_name)
+
+# join with person_2_drugs
+person_2_drugs <- person_2_drugs |>
+  left_join(concept_names, by = join_by(drug_concept_id == concept_id)) |>
   rename(drug_concept_name = concept_name)
-# join with person_2_drugs
-person_2_drugs <- person_2_drugs |>
-  left_join(concept_names, by = c("drug_concept_id" = "concept_id"))
-# now get the concept names for drug_source_concept_id
-source_concept_names <- concepts |>
-  select(concept_id, concept_name) |>
-  rename(drug_source_concept_name = concept_name)
-# join with person_2_drugs
-person_2_drugs <- person_2_drugs |>
-  left_join(source_concept_names, by = c("drug_source_concept_id" = "concept_id"))
-person_2_drugs
+
+# Join in the drug strength table and get the names
+person_2_drugs_with_strength <- person_2_drugs |>
+  left_join(omop$drug_strength, by = join_by(drug_concept_id)) |>
+  # join in names of concepts
+  left_join(concept_names, by = join_by(amount_unit_concept_id == concept_id)) |>
+  rename(amount_unit_concept_name = concept_name) |>
+  left_join(concept_names, by = join_by(numerator_unit_concept_id == concept_id)) |>
+  rename(numerator_unit_concept_name = concept_name) |>
+  left_join(concept_names, by = join_by(denominator_unit_concept_id == concept_id)) |>
+  rename(denominator_unit_concept_name = concept_name) |>
+  select(
+    drug_exposure_id,
+    drug_concept_name, 
+    quantity, 
+    amount_value, 
+    amount_unit_concept_name, 
+    numerator_value, 
+    numerator_unit_concept_name, 
+    denominator_value, 
+    denominator_unit_concept_name
+    ) |>
+  collect()
+
+person_2_drugs_with_strength
 ```
 
 ``` output
-# A tibble: 7 × 5
-  drug_concept_id drug_source_concept_id quantity drug_concept_name             
-            <int>                  <int>    <dbl> <chr>                         
-1        19019113                 871182     1    lorazepam MG Oral Tablet      
-2        40180065                 874635     1    promethazine hydrochloride 25…
-3        19019113                 871182     1    lorazepam MG Oral Tablet      
-4        35777064               36816707     0.25 1 ML Lorazepam 4 MG/ML Inject…
-5        21049614               21255277     0    100 ML Glucose 50 MG/ML Injec…
-6        35778239               36817124     1    2 ML Ondansetron 2 MG/ML Inje…
-7        40180065                 874635     1    promethazine hydrochloride 25…
-# ℹ 1 more variable: drug_source_concept_name <chr>
+# A tibble: 7 × 9
+  drug_exposure_id drug_concept_name                       quantity amount_value
+             <int> <chr>                                      <dbl>        <dbl>
+1            38914 1 ML Lorazepam 4 MG/ML Injectable Solu…     0.25           NA
+2            43725 100 ML Glucose 50 MG/ML Injectable Sol…     0              NA
+3            44660 2 ML Ondansetron 2 MG/ML Injectable so…     1              NA
+4            29587 lorazepam MG Oral Tablet                    1               1
+5            34505 promethazine hydrochloride 25 MG Oral …     1              25
+6            34506 lorazepam MG Oral Tablet                    1               1
+7            47679 promethazine hydrochloride 25 MG Oral …     1              25
+# ℹ 5 more variables: amount_unit_concept_name <chr>, numerator_value <dbl>,
+#   numerator_unit_concept_name <chr>, denominator_value <dbl>,
+#   denominator_unit_concept_name <chr>
 ```
 ***Answer:*** Person_id 2 was exposed to three drugs. 
 - They had three doses of lorazepam: two separate doses of 1 x 1mg lorazepam tablets and one dose of 0.25 x 4mg/ml injectable lorazepam.
@@ -280,7 +306,7 @@ person_2_drugs
 
 (Note the quantity of glucose is zero.)
 
-**CODING NOTE**: We first filter the `drug_exposure` table for `person_id` **2** and select the relevant columns. Then we join this with the `concepts` table twice to get the human-readable names for both the `drug_concept_id` and the `drug_source_concept_id`. The resulting table shows the drugs person_id **2** was exposed to along with their quantities and names.
+**CODING NOTE**: We first filter the `drug_exposure` table for `person_id` **2** and select the relevant columns. Then we join this with the `concept` table to get the human readable name for the drug. We then join the `drug_strength` and join the `concept` table for each of the concept column in the `drug_strength` table.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -294,26 +320,25 @@ Find the route of administration for the drugs person_id **2** was exposed to.
 ::::::::::::::::::::::::::::::::: solution
 
 ``` r
-# we can use the same table we created in the previous challenge
-# we just need to get the route_concept_id and look up the name for that
-person_2_drugs <- drug_exposure |>
+# we could have used the same table we created in the previous challenge
+person_2_drugs <- omop$drug_exposure |>
   filter(person_id == 2) |>
   select(drug_concept_id, drug_source_concept_id, quantity, route_concept_id) |>
-  collect() |>
-  left_join(concept_names, by = c("drug_concept_id" = "concept_id")) |>
-  left_join(source_concept_names, by = c("drug_source_concept_id" = "concept_id"))
-# now get the concept names for route_concept_id
-route_concept_names <- concepts |>
-  select(concept_id, concept_name) |>
-  rename(route_concept_name = concept_name)
+  left_join(concept_names, by = join_by(drug_concept_id == concept_id)) |>
+  rename(drug_concept_name = concept_name) 
+
+
 # join with person_2_drugs
 person_2_drugs <- person_2_drugs |>
-  left_join(route_concept_names, by = c("route_concept_id" = "concept_id"))
+  left_join(concept_names, by = join_by(route_concept_id == concept_id)) |>
+  rename(route_concept_name = concept_name) |>
+  collect()
+
 person_2_drugs
 ```
 
 ``` output
-# A tibble: 7 × 7
+# A tibble: 7 × 6
   drug_concept_id drug_source_concept_id quantity route_concept_id
             <int>                  <int>    <dbl>            <int>
 1        19019113                 871182     1             4132161
@@ -323,8 +348,7 @@ person_2_drugs
 5        21049614               21255277     0             4171047
 6        35778239               36817124     1             4171047
 7        40180065                 874635     1             4132161
-# ℹ 3 more variables: drug_concept_name <chr>, drug_source_concept_name <chr>,
-#   route_concept_name <chr>
+# ℹ 2 more variables: drug_concept_name <chr>, route_concept_name <chr>
 ```
 
 **CODING NOTE**: We follow a similar process as in the previous challenge, but this time we also select the `route_concept_id` and join it with the `concepts` table to get the human-readable name for the route of administration. The resulting table now includes the route of administration for each drug exposure.
@@ -338,7 +362,6 @@ person_2_drugs
 - Know that exposure of a patient to medications is mainly stored in the drug_exposure table
 - Understand that drug concepts can be at different levels of granularity
 - Understand that source values are mapped to a standard vocabulary
+- Understand how to access the concentration or strength of an exposure using the `drug_strength` table
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
-
-
