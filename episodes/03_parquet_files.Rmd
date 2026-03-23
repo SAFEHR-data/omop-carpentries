@@ -96,7 +96,7 @@ Or we can use the specific functions from the `arrow` package to read in the par
 
 ```{r, warning = FALSE, message = FALSE}
 library(arrow)
-person <- read_parquet("./data/public/person/person.parquet")
+person <- read_parquet("./data/public/person/part-0.parquet")
 person
 ```
 
