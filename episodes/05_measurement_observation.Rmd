@@ -35,7 +35,7 @@ For this episode we will be using a sample OMOP CDM database that is pre-loaded 
 
 (UCLH only) This will come in a similar form as you would get data if you asked for a data extract via the SAFEHR platform (i.e. a set of parquet files).
 
-As part of the setup prior to this course you were asked to download and install the sample dataset. If you have not done this yet, please refer to the [setup instructions](../learners/setup.md). For now, we will assume that you have the sample OMOP CDM dataset available on your local machine at the following path: `../workshop/data/public/` and the functions in a folder `../workshop/code/parquet_dataset`.
+As part of the setup prior to this course you were asked to download and install the sample dataset. If you have not done this yet, please refer to the [setup instructions](../learners/setup.md). For now, we will assume that you have the sample OMOP CDM dataset available on your local machine at the following path: `../workshop/data/omop/` and the functions in a folder `../workshop/code/parquet_dataset`.
 
 You will then need to load the database as shown in the previous episode.
 
@@ -51,7 +51,7 @@ open_omop_dataset <- function(path) {
 ```
 
 ```{r, warning = FALSE, message = FALSE}
-omop <- open_omop_dataset("./data/public")
+omop <- open_omop_dataset("./data/omop")
 ```
 
 and the useful functions we created in the previous episode to look up concept names/ids.
