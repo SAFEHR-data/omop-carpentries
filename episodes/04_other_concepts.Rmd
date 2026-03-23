@@ -127,7 +127,6 @@ get_concept_id <- function(omop_obj, name) {
 }
 ``` 
 
-**CODING_NOTE**: The `` operator is used to unquote the variable `name` so that it can be evaluated within the `filter` function and the `collect()` function is used to retrieve the results from the remote database.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::
