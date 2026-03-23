@@ -9,13 +9,18 @@ title: Setup
 Run these commands in the R terminal to install the following libraries needed for the courses.
 
 ```r
-install.packages("dplyr", verbose=FALSE)
-install.packages("readr", verbose=FALSE)
-install.packages("purrr", verbose=FALSE)
-install.packages("CDMConnector", verbose=FALSE)
-install.packages("duckdb", verbose=FALSE)
-install.packages("lubridate", verbose=FALSE)
-install.packages("arrow", verbose=FALSE)
+pkgs <- c(
+    "dplyr",
+    "readr",
+    "purrr",
+    "CDMConnector",
+    "duckdb",
+    "lubridate",
+    "arrow"
+"arrow",
+"tibble"
+)
+install.packages(pkgs)
 ```
 
 

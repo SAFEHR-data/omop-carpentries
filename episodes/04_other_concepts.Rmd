@@ -76,13 +76,13 @@ In addition to the `concept_id` column in various OMOP tables, there are several
 | Column Names          | Description of content |
 |-----------------------|---------------------------------------|
 | **person_id** | Unique identifier for each person |
-| **gender_concept_id** | Concept identifier for the gender of the person |
+| **gender_concept_id** | Concept identifier for the **sex** of the person |
 | **year_of_birth** | Year of birth of the person |
 | **month_of_birth** | Month of birth of the person |
 | **day_of_birth** | Day of birth of the person |
-| **race_concept_id** | Concept identifier for the race of the person |
-| **gender_source_value** | Source value for the gender of the person |
-| **race_source_value** | Source value for the race of the person |
+| **race_concept_id** | Concept identifier for the race/ethnic background of the person |
+| **gender_source_value** | Source value for the **sex** of the person |
+| **race_source_value** | Source value for the race/ethnic background of the person |
 
 
 Look at the column names of the `person` table.
@@ -127,7 +127,6 @@ get_concept_id <- function(omop_obj, name) {
 }
 ``` 
 
-**CODING_NOTE**: The `` operator is used to unquote the variable `name` so that it can be evaluated within the `filter` function and the `collect()` function is used to retrieve the results from the remote database.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::
@@ -195,12 +194,12 @@ gender_concept <- omop$concept |>
 
 # Now we can join to get the number of people of each gender
 person |> 
-  left_join(gender_concept, by = join_by(gender_concept_id == concept_id)) |>
+  inner_join(gender_concept, by = join_by(gender_concept_id == concept_id)) |>
   group_by(concept_name) |>
   summarise(count = n())
 ```
 
-**CODING_NOTE**: The `left_join` function is used to combine the person table with the gender_concept table we created, based on the gender_concept_id. This allows us to get the humanly readable gender names. 
+**CODING_NOTE**: The `inner_join` function is used to combine the person table with the gender_concept table we created, based on the gender_concept_id. This allows us to get the humanly readable gender names. 
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -281,8 +280,8 @@ visit_counts <- omop$visit_occurrence |>
   summarise(visit_count = n())
 
 visit_counts_with_race <- visit_counts |>
-  left_join(omop$person, by = join_by(person_id)) |>
-  left_join(omop$concept, by = join_by(race_concept_id == concept_id)) |>
+  inner_join(omop$person, by = join_by(person_id)) |>
+  inner_join(omop$concept, by = join_by(race_concept_id == concept_id)) |>
   rename(race_name = concept_name) |>
   select(person_id, visit_count, race_name) |>
   collect()
@@ -303,13 +302,12 @@ counts_by_gender_concept <- omop$person |>
 
 # we can also join in the concept name to make it human readable
 counts_by_gender_concept |>
-  left_join(omop$concept, by = join_by(gender_concept_id == concept_id)) |>
+  inner_join(omop$concept, by = join_by(gender_concept_id == concept_id)) |>
   rename(gender = concept_name) |>
   select(gender, visit_count) |>
   collect()
 ```
 
-**CODING_NOTE**: We are using `left_join()` when joining in concepts. If we used an `inner_join()` then if the `gender_concept_id` had a value that wasn't in the `concept` table's `concept_id` column, then these rows would be removed from the final dataset. It's always worth being careful about when you are absolutely sure you want to remove data in a join. 
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 

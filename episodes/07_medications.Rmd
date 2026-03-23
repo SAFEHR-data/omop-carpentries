@@ -265,8 +265,7 @@ Find the route of administration for the drugs person_id **2** was exposed to.
 
 ::::::::::::::::::::::::::::::::: solution
 ```{r, warning = FALSE, message = FALSE}
-# we could use the same table we created in the previous challenge
-# we would just to get the route_concept_id and look up the name for that
+# we could have used the same table we created in the previous challenge
 person_2_drugs <- omop$drug_exposure |>
   filter(person_id == 2) |>
   select(drug_concept_id, drug_source_concept_id, quantity, route_concept_id) |>
