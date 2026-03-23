@@ -16,9 +16,8 @@ pkgs <- c(
     "CDMConnector",
     "duckdb",
     "lubridate",
-    "arrow"
-"arrow",
-"tibble"
+    "arrow",
+    "tibble"
 )
 install.packages(pkgs)
 ```
