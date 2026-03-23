@@ -177,7 +177,7 @@ You can see from the column names within the tables that for an `observation` th
 
 Let's focus on observations.
 
-W could go through each table and use our `get_concept_name` function to work out what all these measurements and observations are, but that could get a bit tedious!
+We could go through each table and use our `get_concept_name` function to work out what all these measurements and observations are, but that could get a bit tedious!
 
 Let's try and join to the concept table and produce a table that gives us the humanly readable names to start with.
 
@@ -215,7 +215,7 @@ mini_observation <- mini_observation |>
 
 **CODING_NOTE**: In the above code we first read in the `concept` table and use `select` to get only the `concept_id` and `concept_name` columns to create a smaller table of concepts. Remember that we use `collect()` to bring the data into memory. 
 Then we create a mini version of the observation table that only contains the columns relevant to the value. 
-We then use `left_join` to join this mini observation table to the smaller concepts table joining on the `observation_concept_id` to get the name of the observation concept. We use `rename` to rename this new column to `observation_concept_name` and `relocate` to move it to be after the `observation_concept_id` column.
+We then use `inner_join` to join this mini observation table to the smaller concepts table joining on the `observation_concept_id` to get the name of the observation concept. We use `rename` to rename this new column to `observation_concept_name` and `relocate` to move it to be after the `observation_concept_id` column.
 We then repeat this process to join to the concepts table by the `value_as_concept_id` to get the name of the value concept, rename it to `value_as_concept_name` and relocate it to be after the `value_as_concept_id` column.
 We could have done this in one step by joining to the concept table twice in the same code chunk, but we have done it in two steps so that you can inspect it midway. The process is the same whether you join to the concept table once or twice, you just need to specify the correct join condition and rename the new columns appropriately.
 
@@ -306,7 +306,7 @@ get_concept_name(omop, heart_rate_units)
 
 ***Answer:*** The units associated with the `Heart rate` measurement concept are `per minute`.
 
-**CODING_NOTE**: We first use the `get_concept_id()` function to get the concept_id for "Heart rate". We then filter the `measurement` table for rows where the `measurement_concept_id` matches this concept_id. We then use `unique()` to get the unique unit concept ids associated with these heart rate measurements, and then `collect()` to bring it into memory. Finally, we use our `get_concept_name()` function to look up the names of these unit concepts.
+**CODING_NOTE**: We first use the `get_concept_id()` function to get the concept_id for "Heart rate". We then filter the `measurement` table for rows where the `measurement_concept_id` matches this concept_id. We then use `distinct()` to get the unique unit concept ids associated with these heart rate measurements, and then `collect()` to bring it into memory. Finally, we use our `get_concept_name()` function to look up the names of these unit concepts.
 Note that we use the variable `heart_rate_id` to store the id so that we can use it in subsequent code.
 
 2. What is the average value recorded for `Heart rate` across all persons?
@@ -358,7 +358,7 @@ What range should the *C reactive protein* measurement for this person fall with
 mini_measurement <- omop$measurement |>
   filter(
     person_id == 31,
-    operator_concept_id != 0
+    !is.na(operator_concept_id) & operator_concept_id != 0
     ) |>
   select(measurement_id, measurement_concept_id, operator_concept_id, value_as_number, range_low, range_high) |>
   collect() 
@@ -375,7 +375,7 @@ mini_measurement <- mini_measurement |>
   rename(operator_concept_name = concept_name) |>
   relocate(operator_concept_name, .after = operator_concept_id)
 
-View(mini_measurement)
+tibble::view(mini_measurement)
 mini_measurement
 ```
 
@@ -406,7 +406,7 @@ Using the `measurement` table, find all measurements that have a value recorded 
 :::::::::::::::::::::::: solution
 ```{r, warning = FALSE, message = FALSE}
 categorical_measurements <- omop$measurement |>
-  filter(value_as_concept_id != 0) |>
+  filter(!is.na(value_as_concept_id) & value_as_concept_id != 0) |>
   select(measurement_id, measurement_concept_id, value_as_concept_id)
 
 # Join to get names of the measurement concept id
@@ -427,7 +427,7 @@ categorical_measurements <- categorical_measurements |>
   distinct() |>
   collect()
 
-View(categorical_measurements)
+tibble::view(categorical_measurements)
 categorical_measurements
 ```
 

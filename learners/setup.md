@@ -17,6 +17,8 @@ pkgs <- c(
     "duckdb",
     "lubridate",
     "arrow"
+"arrow",
+"tibble"
 )
 install.packages(pkgs)
 ```
