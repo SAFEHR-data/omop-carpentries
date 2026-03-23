@@ -76,7 +76,7 @@ In addition to the `concept_id` column in various OMOP tables, there are several
 | Column Names          | Description of content |
 |-----------------------|---------------------------------------|
 | **person_id** | Unique identifier for each person |
-| **gender_concept_id** | Concept identifier for the gender of the person |
+| **gender_concept_id** | Concept identifier for the **sex** of the person |
 | **year_of_birth** | Year of birth of the person |
 | **month_of_birth** | Month of birth of the person |
 | **day_of_birth** | Day of birth of the person |
