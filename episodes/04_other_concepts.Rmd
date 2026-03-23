@@ -60,7 +60,7 @@ and the useful function we created in the previous episode to look up concept na
 ```{r, warning = FALSE, message = FALSE}
 get_concept_name <- function(omop_obj, id) {
   omop_obj$concept |>
-    filter(concept_id == !!id) |>
+    filter(concept_id == id) |>
     select(concept_name) |>
     collect()
 }
@@ -121,13 +121,13 @@ Create the function `get_concept_id()` that takes an `omop_obj` and a `concept_n
 ```{r, warning = FALSE, message = FALSE}
 get_concept_id <- function(omop_obj, name) {
   omop_obj$concept |>
-    filter(concept_name == !!name) |>
+    filter(concept_name == name) |>
     select(concept_id) |>
     collect()
 }
 ``` 
 
-**CODING_NOTE**: The `!!` operator is used to unquote the variable `name` so that it can be evaluated within the `filter` function and the `collect()` function is used to retrieve the results from the remote database.
+**CODING_NOTE**: The `` operator is used to unquote the variable `name` so that it can be evaluated within the `filter` function and the `collect()` function is used to retrieve the results from the remote database.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::

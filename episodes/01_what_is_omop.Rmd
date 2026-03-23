@@ -177,7 +177,7 @@ Create the function `get_concept_name()` that takes the 'cdm' object and a `conc
 ```{r, warning = FALSE, message = FALSE}
 get_concept_name <- function(cdm_obj, id) {
   cdm_obj$concept |>
-    filter(concept_id == !!id) |>
+    filter(concept_id == id) |>
     select(concept_name) |>
     pull()
 }
@@ -190,7 +190,7 @@ get_concept_name <- function(cdm_obj, id) {
 #### Explanation of function code
 - The function is called `get_concept_name` and it takes two arguments, `cdm_obj` and `id`.
 - Inside the function, we query the `concept` table from the `cdm_obj` object.
-- We use the `filter` function to select rows where the `concept_id` matches the input `id`. The `!!` operator is used to unquote the variable so that its value is used in the filter.
+- We use the `filter` function to select rows where the `concept_id` matches the input `id`.
 - We then use `select` to choose only the `concept_name` column from the filtered results.
 - Finally, we use `pull()` to extract the `concept_name` as a vector, which is returned by the function. We need to use this because we are querying a remote database, not one that is local.
 

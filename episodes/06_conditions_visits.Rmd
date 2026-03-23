@@ -63,7 +63,7 @@ and the useful functions we created in the previous episode to look up concept n
 ```{r, warning = FALSE, message = FALSE}
 get_concept_name <- function(omop_obj, id) {
   omop_obj$concept |>
-    filter(concept_id == !!id) |>
+    filter(concept_id == id) |>
     select(concept_name) |>
     collect()
 }
@@ -72,7 +72,7 @@ get_concept_name <- function(omop_obj, id) {
 ```{r, warning = FALSE, message = FALSE}
 get_concept_id <- function(omop_obj, name) {
   omop_obj$concept |>
-    filter(concept_name == !!name) |>
+    filter(concept_name == name) |>
     select(concept_id) |>
     collect()
 }

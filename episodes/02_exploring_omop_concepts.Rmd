@@ -292,28 +292,28 @@ Is this concept a standard concept?
 ```{r, warning = FALSE, message = FALSE}
 get_concept_domain <- function(cdm_obj, id) {
   cdm_obj$concept |>
-    filter(concept_id == !!id) |>
+    filter(concept_id == id) |>
     select(domain_id) |>
     pull()
 }
 
 get_concept_vocabulary <- function(cdm_obj, id) {
   cdm_obj$concept |>
-    filter(concept_id == !!id) |>
+    filter(concept_id == id) |>
     select(vocabulary_id) |>
     pull()
 }
 
 get_concept_concept_class <- function(cdm_obj, id) {
   cdm_obj$concept |>
-    filter(concept_id == !!id) |>
+    filter(concept_id == id) |>
     select(concept_class_id) |>
     pull()
 }
 
 get_concept_standard_status <- function(cdm_obj, id) {
   cdm_obj$concept |>
-    filter(concept_id == !!id) |>
+    filter(concept_id == id) |>
     select(standard_concept) |>
     pull()
 }
