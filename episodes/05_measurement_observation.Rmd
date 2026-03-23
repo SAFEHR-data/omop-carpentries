@@ -84,9 +84,8 @@ The difference between them is that measurement contains numerical or categorica
 Measurements are often lab results, vital signs or other clinical measurements such as height, weight, blood pressure, pulse rate, respiratory rate, oxygen saturations etc.
 Observations are other facts obtained through questioning or direct observation, for example smoking status, alcohol intake, family history, symptoms reported by the patient etc.
 
-A `person_id` column means that there can be multiple records per person.
-
-Columns are similar between measurement and observation. 
+A person can have multiple measurements and observations.
+Some columns are similar between measurement and observation. 
 
 ## Concepts and values
 
@@ -202,7 +201,7 @@ mini_observation <- omop$observation |>
 # Rename the new column to observation_concept_name
 # Relocate the new column to be after observation_concept_id
 mini_observation <- mini_observation |>
-  left_join(concepts, by=join_by(observation_concept_id == concept_id)) |>
+  inner_join(concepts, by=join_by(observation_concept_id == concept_id)) |>
   rename(observation_concept_name = concept_name) |>
   relocate(observation_concept_name, .after = observation_concept_id)
 
@@ -224,10 +223,10 @@ We could have done this in one step by joining to the concept table twice in the
 
 Now we can look at this named table.
 ```{r, warning = FALSE, message = FALSE}
-View(mini_observation)
+tibble::view(mini_observation)
 mini_observation
 ```
-**CODING_NOTE**: The `View()` function is used to open the `mini_observation` data frame in a spreadsheet-like viewer in RStudio. This allows us to easily explore the data and see the humanly readable names for the observation concepts and value concepts. it is more readable than using `print()` or simply typing the name of the data frame in the console, especially if the data frame has many rows and columns.
+**CODING_NOTE**: The `tibble::view()` function is used to open the `mini_observation` data frame in a spreadsheet-like viewer in RStudio. This allows us to easily explore the data and see the humanly readable names for the observation concepts and value concepts. it is more readable than using `print()` or simply typing the name of the data frame in the console, especially if the data frame has many rows and columns.
 
 ### Social indexes
 
@@ -390,7 +389,7 @@ The measurements made for person_id 31 are:
 
 The C reactive protein measurement for this person should fall within the range 0 - 5 mg/L.
 
-**CODING_NOTE**: We first filter the `measurement` table for rows where `person_id` is 31 and `operator_concept_id` is not `0`, and select only the relevant columns. We then use `collect()` to bring this data into memory. We then join to the `concepts` table to get the names of the measurement concepts and operator concepts, renaming the new columns appropriately and relocating them for better readability. Finally, we display the resulting `mini_measurement` data frame which contains the measurements made for person_id 31 along with the names of the measurement and operator concepts.
+**CODING_NOTE**: We first filter the `measurement` table for rows where `person_id` is 31 and `operator_concept_id` is filled and not `0`, and select only the relevant columns. We then use `collect()` to bring this data into memory. We then join to the `concepts` table to get the names of the measurement concepts and operator concepts, renaming the new columns appropriately and relocating them for better readability. Finally, we display the resulting `mini_measurement` data frame which contains the measurements made for person_id 31 along with the names of the measurement and operator concepts.
 
 We leave it as an exercise for the student to look up the units of each measurement.
 
@@ -417,7 +416,7 @@ categorical_measurements <- categorical_measurements |>
 
 # Join to get names of the value concept id
 categorical_measurements <- categorical_measurements |>
-  left_join(concepts, by = join_by(value_as_concept_id == concept_id)) |>
+  inner_join(concepts, by = join_by(value_as_concept_id == concept_id)) |>
   rename(value_as_concept_name = concept_name) |>
   relocate(value_as_concept_name, .after = value_as_concept_id)
 
