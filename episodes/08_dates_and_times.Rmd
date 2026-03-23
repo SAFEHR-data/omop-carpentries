@@ -155,7 +155,7 @@ ggplot(measurement, aes(x = measurement_datetime, y = value_as_number)) +
 
 ## Converting data types
 
-If you are working with a csv file as an input, then there are no guarantees that a dataset will have the expected data types. We can simulate what this may look like by creating a new measurement table that has string types instead of the expected types.
+We are working with a dataset from parquet files which contains information about the data type of each column. If you are working with a csv file as an input, then there are no guarantees that a dataset will have the expected data types. We can simulate what this may look like by creating a new measurement table that has string types instead of the expected types.
 
 ```{r, warning = FALSE, message = FALSE}
 measurement_to_fix <- omop$measurement |>
@@ -209,7 +209,7 @@ measurement_with_date |>
 
 
 ```{r, warning = FALSE, message = FALSE}
-# Correct the types of remaining columns
+# Correct the data types of remaining columns
 measurement_fixed <- measurement_with_date |>
   mutate(
     measurement_datetime = as.POSIXct(measurement_datetime, tz = "UTC"),
