@@ -295,11 +295,13 @@ heart_rate_id
 
 # Filter measurement table for this concept id
 heart_rate_measurements <- omop$measurement |>
-  filter(measurement_concept_id == heart_rate_id) |>
-  unique(heart_rate_measurements$unit_concept_id) |>
-  collect()
+  filter(measurement_concept_id == heart_rate_id) 
 
-get_concept_name(omop, unique_units)
+heart_rate_units <- heart_rate_measurements |>
+  distinct(unit_concept_id) |>
+  pull()
+
+get_concept_name(omop, heart_rate_units)
 ```
 
 ***Answer:*** The units associated with the `Heart rate` measurement concept are `per minute`.
@@ -309,13 +311,17 @@ Note that we use the variable `heart_rate_id` to store the id so that we can use
 
 2. What is the average value recorded for `Heart rate` across all persons?
 ```{r, warning = FALSE, message = FALSE}
-average_heart_rate <- mean(heart_rate_measurements$value_as_number, na.rm = TRUE)
+average_heart_rate <- heart_rate_measurements |>
+  collect() |>
+  summarise(heart_rate =   mean(value_as_number, na.rm = TRUE)
+)
+
 average_heart_rate
 ```
 
 ***Answer:*** The average value recorded for the `Heart rate` measurement concept across all persons is 95 beats per minute.
 
-**CODING_NOTE**: We use the `mean()` function to calculate the average of the `value_as_number` column in the `heart_rate_measurements` data frame. We set `na.rm = TRUE` to ignore any missing values when calculating the mean.
+**CODING_NOTE**: Here we are using `dplyr`'s `summarise()` function to apply a function to the entire dataframe. We use the `mean()` function to calculate the average of the `value_as_number` column in the `heart_rate_measurements` data frame. We set `na.rm = TRUE` to ignore any missing values when calculating the mean.
 
 
 3. Get the class of concept for `Heart rate`
