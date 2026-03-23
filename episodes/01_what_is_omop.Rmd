@@ -36,19 +36,17 @@ make it easier to resume work after a break.
 ::::::::::::::::::::::::::::::::::::: group-tab
 
 ### Experienced
-Create a new project in your environment.
+
+Create a new project in the `workshop` directory from the course setup.
 
 ### Need a reminder
 
 - Under the `File` menu in RStudio, click on `New project`, choose
-  `New directory`, then `New project`
-- Enter a name for this new folder (or "directory") and choose a convenient
-  location for it. This will be your **working directory** for the rest of the
-  day (e.g., `~/Desktop/r-omop`).
+  `Existing directory`, then browse to the workshop directory from the source step (e.g., `~/Desktop/omop_course/workshop`).
 - Click on `Create project`
 - Create a new file where we will type our scripts. Go to File > New File > R
   script. Click the save icon on your toolbar and save your script as
-  "`script.R`".
+  "`lessons.R`".
 :::::::::::::::::::::::::::::::::::::::::::::::
  
 ### Connect to a database
