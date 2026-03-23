@@ -80,9 +80,9 @@ In addition to the `concept_id` column in various OMOP tables, there are several
 | **year_of_birth** | Year of birth of the person |
 | **month_of_birth** | Month of birth of the person |
 | **day_of_birth** | Day of birth of the person |
-| **race_concept_id** | Concept identifier for the race of the person |
-| **gender_source_value** | Source value for the gender of the person |
-| **race_source_value** | Source value for the race of the person |
+| **race_concept_id** | Concept identifier for the race/ethnic background of the person |
+| **gender_source_value** | Source value for the **sex** of the person |
+| **race_source_value** | Source value for the race/ethnic background of the person |
 
 
 Look at the column names of the `person` table.
