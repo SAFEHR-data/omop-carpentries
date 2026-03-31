@@ -348,7 +348,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Measurements and Observations</h1>
-        <p>Last updated on 2026-03-23 |
+        <p>Last updated on 2026-03-31 |
 
         <a href="https://github.com/SAFEHR-data/omop-carpentries/edit/main/episodes/05_measurement_observation.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -1105,15 +1105,15 @@ this person fall within?</p>
 </h3>
 <pre class="output" tabindex="0"><code># A tibble: 6 × 8
   measurement_id measurement_concept_id measurement_concept_name
-           &lt;int&gt;                  &lt;int&gt; &lt;chr&gt;
+           &lt;dbl&gt;                  &lt;int&gt; &lt;chr&gt;
 1         351796                4301868 Pulse rate
 2         351800                4313591 Respiratory rate
 3         354289                4011919 Hemoglobin saturation with oxygen
 4         354292               44810247 LACE (length of stay, acuity of automat…
 5         354293                3020460 C reactive protein [Mass/volume] in Ser…
 6         354294               46236952 Glomerular filtration rate [Volume Rate…
-# ℹ 5 more variables: operator_concept_id &lt;int&gt;, operator_concept_name &lt;chr&gt;,
-#   value_as_number &lt;dbl&gt;, range_low &lt;int&gt;, range_high &lt;int&gt;</code></pre>
+# ℹ 5 more variables: operator_concept_id &lt;dbl&gt;, operator_concept_name &lt;chr&gt;,
+#   value_as_number &lt;dbl&gt;, range_low &lt;dbl&gt;, range_high &lt;dbl&gt;</code></pre>
 </div>
 <p><strong><em>Answer:</em></strong> The measurements made for person_id
 31 are: Pulse rate = 61 Respiratory rate = 16 Hemoglobin saturation with
@@ -1193,21 +1193,32 @@ value concept names.</p>
 <span><span class="va">categorical_measurements</span> <span class="op">&lt;-</span> <span class="va">categorical_measurements</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">select</span><span class="op">(</span><span class="va">measurement_concept_name</span>, <span class="va">value_as_concept_name</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">distinct</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">collect</span><span class="op">(</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">tibble</span><span class="fu">::</span><span class="fu">view</span><span class="op">(</span><span class="va">categorical_measurements</span><span class="op">)</span></span>
+<span>  <span class="fu">collect</span><span class="op">(</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="error" tabindex="0"><code>Error in `compute.arrow_dplyr_query()` at arrow/R/dplyr-collect.R:22:3:
+! Invalid: Incompatible data types for corresponding join field keys: FieldRef.Name(value_as_concept_id) of type double and FieldRef.Name(concept_id) of type int32</code></pre>
+</div>
+<div class="codewrapper sourceCode" id="cb30">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">tibble</span><span class="fu">::</span><span class="fu">view</span><span class="op">(</span><span class="va">categorical_measurements</span><span class="op">)</span></span>
 <span><span class="va">categorical_measurements</span></span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code># A tibble: 4 × 2
-  measurement_concept_name                                 value_as_concept_name
-  &lt;chr&gt;                                                    &lt;chr&gt;
-1 Alert Confusion Voice Pain Unresponsiveness scale        Mentally alert
-2 Blood group antibody screen [Presence] in Serum or Plas… Not present
-3 Rh [Type] in Blood                                       Positive
-4 ABO group [Type] in Blood                                Candida sp identify …</code></pre>
+<pre class="output" tabindex="0"><code>FileSystemDataset (query)
+measurement_id: double
+measurement_concept_id: int32
+measurement_concept_name: string
+value_as_concept_id: double
+value_as_concept_name: string
+
+See $.data for the source Arrow object</code></pre>
 </div>
 <p><strong><em>Answer:</em></strong> The resulting
 <code>categorical_measurements</code> data frame contains all
@@ -1314,8 +1325,8 @@ any links that you are not going to use.
   "url": "https://SAFEHR-data.github.io/omop-carpentries/instructor/05_measurement_observation.html",
   "identifier": "https://SAFEHR-data.github.io/omop-carpentries/instructor/05_measurement_observation.html",
   "dateCreated": "2025-06-18",
-  "dateModified": "2026-03-23",
-  "datePublished": "2026-03-24"
+  "dateModified": "2026-03-31",
+  "datePublished": "2026-03-31"
 }
 
   </script><script>
