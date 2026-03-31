@@ -249,8 +249,8 @@ cdm$concept |>
 ```
 
 ``` output
-[1] "Gender"  "ICD10CM" "LOINC"   "NDC"     "Visit"   "RxNorm"  "CVX"    
-[8] "SNOMED"  "None"   
+[1] "Gender"  "RxNorm"  "CVX"     "SNOMED"  "None"    "ICD10CM" "LOINC"  
+[8] "NDC"     "Visit"  
 ```
 
 **CODING_NOTE**: Here we can use `pull(x)` to pull the data x into R memory to view it. This is because we are only requiring one column of data, so we can pull that column directly into R memory without needing to use `collect()` first.
@@ -279,8 +279,8 @@ cdm$concept |>
 ```
 
 ``` output
-[1] "Drug"        "Measurement" "Observation" "Visit"       "Metadata"   
-[6] "Gender"      "Condition"   "Procedure"  
+[1] "Drug"        "Measurement" "Condition"   "Procedure"   "Observation"
+[6] "Visit"       "Metadata"    "Gender"     
 ```
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -309,9 +309,9 @@ cdm$concept |>
 
 ``` output
  [1] "Branded Drug"        "Quant Branded Drug"  "Branded Drug Comp"  
- [4] "CVX"                 "Ingredient"          "11-digit NDC"       
- [7] "Branded Pack"        "Clinical Drug Comp"  "Clinical Drug"      
-[10] "Quant Clinical Drug"
+ [4] "Clinical Drug"       "Quant Clinical Drug" "CVX"                
+ [7] "Ingredient"          "11-digit NDC"        "Branded Pack"       
+[10] "Clinical Drug Comp" 
 ```
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::
