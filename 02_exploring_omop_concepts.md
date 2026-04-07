@@ -279,7 +279,7 @@ cdm$concept |>
 ```
 
 ``` output
-[1] "Drug"        "Measurement" "Condition"   "Procedure"   "Observation"
+[1] "Measurement" "Drug"        "Condition"   "Procedure"   "Observation"
 [6] "Visit"       "Metadata"    "Gender"     
 ```
 
@@ -309,9 +309,9 @@ cdm$concept |>
 
 ``` output
  [1] "Branded Drug"        "Quant Branded Drug"  "Branded Drug Comp"  
- [4] "Clinical Drug"       "Quant Clinical Drug" "CVX"                
- [7] "Ingredient"          "11-digit NDC"        "Branded Pack"       
-[10] "Clinical Drug Comp" 
+ [4] "CVX"                 "Ingredient"          "11-digit NDC"       
+ [7] "Branded Pack"        "Clinical Drug Comp"  "Clinical Drug"      
+[10] "Quant Clinical Drug"
 ```
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::
