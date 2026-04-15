@@ -5,7 +5,7 @@
 # ensuring that the author list and other fields remain accurate.
 
 cff-version: 1.2.0
-title: FIXME
+title: UCL/H OMOP Course
 message: >-
   Please cite this lesson using the information in this file
   when you refer to it in publications, and/or if you
@@ -13,10 +13,12 @@ message: >-
   training material.
 type: dataset
 authors:
-  - given-names: FIXME
-    family-names: FIXME
+  - given-names: Keating
+    family-names: Sarah
+    orcid: "[orcid.org](https://orcid.org/0000-0002-3356-3542)"
+  - given-names: Doe
+    family-names: John
+    orcid: 0000-
 abstract: >-
-  FIXME Replace this with a short abstract describing the
-  lesson, e.g. its target audience and main intended
-  learning objectives.
+  This course provides clinicians and analysts with an introduction to the [OMOP Common Data Model](https://ohdsi.github.io/CommonDataModel/cdm54.html) and how they can use R to access data and answer clinical questions.
 license: CC-BY-4.0
