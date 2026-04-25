@@ -80,6 +80,7 @@ learners:
 - setup.md
 - reference.md
 - glossary.md
+- basic-r-functions-used.md
 
 # Information for Instructors
 instructors: instructor-notes.md
