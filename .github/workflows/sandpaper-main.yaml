@@ -3,9 +3,9 @@ name: "01 Build and Deploy Site"
 on:
   push:
     branches:
-      # - main
+      - main
       # - master
-      - lesson-development
+      #-lesson-development
   schedule:
     - cron: '0 0 * * 2'
   workflow_dispatch:
