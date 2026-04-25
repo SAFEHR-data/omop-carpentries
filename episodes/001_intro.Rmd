@@ -1,0 +1,101 @@
+---
+title: "From EHR to OMOP: Why Clinical Data Needs Structure"
+teaching: 10
+exercises: 3
+---
+
+:::::::::::::::::::::::::::::::::::::: questions 
+
+- Where does clinical data come from?
+- Why is raw EHR data difficult to analyse directly?
+- What does a data model do?
+- Why is OMOP organised as linked tables?
+- Why might OMOP data be stored in a relational database or as parquet files?
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::: objectives
+
+- describe where clinical data usually comes from
+- explain why raw EHR data is often not analysis-ready
+- explain the purpose of a common data model
+- describe, at a high level, how OMOP organises clinical data
+- distinguish between relational databases and parquet files as ways of storing and accessing OMOP data
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+## Overview
+
+Clinical data is generated during routine healthcare and usually first recorded in Electronic Health Record (EHR) systems. Although this data is rich and valuable, it is not collected mainly for research, so it often needs to be reorganised and standardised before analysis. This section introduces that journey: from EHR data, to a common data model such as OMOP, to practical storage formats such as relational databases and parquet files.
+
+
+## Clinical data starts in healthcare delivery
+
+Clinical data is the information generated during routine healthcare. This includes things like:
+
+- demographic information
+- visits and admissions
+- diagnoses
+- procedures
+- medications
+- laboratory results
+- observations
+- measurements such as blood pressure, height, and weight
+
+In most organisations, this information is first recorded in an **Electronic Health Record (EHR)** system.
+
+EHR systems are designed to support healthcare delivery. They help clinicians document what happened, communicate with colleagues, and manage the practical work of patient care. They may also support scheduling, billing, and legal record-keeping.
+
+This means that EHR data is very valuable, but it is not automatically organised in a way that makes analysis easy.
+
+## Why raw EHR data is difficult to analyse
+
+Raw EHR data reflects the realities of clinical practice. That makes it rich, but it also makes it messy from an analytical point of view.
+
+Common challenges include:
+
+- data being recorded for care rather than research
+- similar information being stored differently across organisations
+- information being spread across multiple systems or tables
+- local coding systems and workflows varying from place to place
+- records being incomplete, duplicated, or inconsistent
+
+A useful way to think about this is:
+
+> EHR data reflects real clinical work, and real clinical work is complicated.
+
+For this reason, we often need to transform source data before using it for reproducible analysis.
+
+## Why use a data model?
+
+A **data model** is a shared blueprint for how data should be organised.
+
+It defines:
+
+- what tables exist
+- what each table represents
+- how tables relate to one another
+- how important concepts should be represented
+
+Using a data model makes it easier to organise data consistently and reuse analyses across datasets.
+
+In this course, we use the **OMOP Common Data Model**. OMOP provides standard tables for common types of healthcare data, such as people, visits, conditions, drugs, measurements, and observations. It also supports the use of standard vocabularies so that similar concepts can be represented more consistently across datasets.
+
+This standardisation is one of the reasons OMOP is useful in collaborative and multi-site research.
+
+## OMOP as linked tables
+
+Clinical data is naturally relational.
+
+For example:
+
+- one person can have many visits
+- one visit can have many diagnoses
+- one visit can have many measurements
+- one patient can have repeated events over time
+
+Because of that, OMOP is organised as a set of linked tables rather than one large flat file.
+
+A simplified example looks like this:
+![Person data](fig/person_ehr.png){alt='A diagram showing how person data is recorded in an EHR, with different pieces of information stored in different tables.'}
+
