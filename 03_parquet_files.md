@@ -153,15 +153,15 @@ invalid_reason: string
 $measurement
 FileSystemDataset with 1 Parquet file
 12 columns
-measurement_id: double
+measurement_id: int32
 person_id: int32
 measurement_concept_id: int32
 measurement_date: date32[day]
 measurement_datetime: timestamp[us, tz=UTC]
-operator_concept_id: double
+operator_concept_id: int32
 value_as_number: double
-value_as_concept_id: double
-unit_concept_id: double
+value_as_concept_id: int32
+unit_concept_id: int32
 range_low: double
 range_high: double
 visit_occurrence_id: int32
@@ -204,17 +204,18 @@ visit_occurrence_id: int32
 
 $visit_occurrence
 FileSystemDataset with 1 Parquet file
-10 columns
+9 columns
 visit_occurrence_id: int32
 person_id: int32
-visit_concept_id: int32
-visit_start_date: date32[day]
-visit_start_datetime: timestamp[us, tz=UTC]
-visit_end_date: date32[day]
-visit_end_datetime: timestamp[us, tz=UTC]
+visit_concept_id: string
+visit_start_date: string
+visit_start_datetime: string
+visit_end_date: string
+visit_end_datetime: string
 visit_type_concept_id: int32
 discharged_to_concept_id: int32
-preceding_visit_occurrence_id: int32
+
+See $metadata for additional Schema metadata
 ```
 
 You will see that this gives you a list of all the tables in this dataset and what columns they contain. It is obviously a much smaller dataset! You can explore individual tables which will also give you the column names and the data type of the entry.

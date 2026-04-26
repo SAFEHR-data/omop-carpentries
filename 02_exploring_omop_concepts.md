@@ -249,7 +249,7 @@ cdm$concept |>
 ```
 
 ``` output
-[1] "Gender"  "RxNorm"  "CVX"     "SNOMED"  "None"    "ICD10CM" "LOINC"  
+[1] "RxNorm"  "CVX"     "SNOMED"  "None"    "Gender"  "ICD10CM" "LOINC"  
 [8] "NDC"     "Visit"  
 ```
 
@@ -279,8 +279,8 @@ cdm$concept |>
 ```
 
 ``` output
-[1] "Drug"        "Measurement" "Observation" "Visit"       "Metadata"   
-[6] "Gender"      "Condition"   "Procedure"  
+[1] "Drug"        "Measurement" "Condition"   "Procedure"   "Observation"
+[6] "Visit"       "Metadata"    "Gender"     
 ```
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -308,10 +308,10 @@ cdm$concept |>
 ```
 
 ``` output
- [1] "CVX"                 "Ingredient"          "11-digit NDC"       
- [4] "Branded Pack"        "Clinical Drug Comp"  "Branded Drug"       
- [7] "Quant Branded Drug"  "Branded Drug Comp"   "Clinical Drug"      
-[10] "Quant Clinical Drug"
+ [1] "Branded Drug"        "Quant Branded Drug"  "Branded Drug Comp"  
+ [4] "Clinical Drug"       "Quant Clinical Drug" "CVX"                
+ [7] "Ingredient"          "11-digit NDC"        "Branded Pack"       
+[10] "Clinical Drug Comp" 
 ```
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::

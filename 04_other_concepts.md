@@ -302,17 +302,18 @@ omop$visit_occurrence
 
 ``` output
 FileSystemDataset with 1 Parquet file
-10 columns
+9 columns
 visit_occurrence_id: int32
 person_id: int32
-visit_concept_id: int32
-visit_start_date: date32[day]
-visit_start_datetime: timestamp[us, tz=UTC]
-visit_end_date: date32[day]
-visit_end_datetime: timestamp[us, tz=UTC]
+visit_concept_id: string
+visit_start_date: string
+visit_start_datetime: string
+visit_end_date: string
+visit_end_datetime: string
 visit_type_concept_id: int32
 discharged_to_concept_id: int32
-preceding_visit_occurrence_id: int32
+
+See $metadata for additional Schema metadata
 ```
 
 
@@ -391,15 +392,15 @@ female_visits
 ``` output
 # A tibble: 8 × 4
   person_id visit_occurrence_id visit_start_date visit_end_date
-      <int>               <int> <date>           <date>        
-1      1112                1102 2025-12-24       NA            
-2      1112                1002 2024-01-15       2024-01-29    
-3     34567               55667 2025-12-18       2025-12-18    
-4     78901               44556 2004-09-15       2004-09-18    
-5        31               37923 2024-07-23       2024-07-23    
-6        31                1222 2019-05-10       2019-05-10    
-7         2                1798 2025-05-16       2025-05-19    
-8         2                 154 2025-06-12       2025-06-12    
+      <int>               <int> <chr>            <chr>         
+1      1112                1102 24/12/2025       NULL          
+2      1112                1002 15/01/2024       29/01/2024    
+3     34567               55667 18/12/2025       18/12/2025    
+4     78901               44556 15/09/2004       18/09/2004    
+5        31               37923 23/07/2024       23/07/2024    
+6        31                1222 10/05/2019       10/05/2019    
+7         2                1798 16/05/2025       19/05/2025    
+8         2                 154 12/06/2025       12/06/2025    
 ```
 
 **CODING_NOTE**: We have used the `inner_join` method to only keep rows where both tables have the same ids, but there are others. We also used the `join_by` function which allows us to define which column to join on, you can choose multiple columns in a join. 
