@@ -1,0 +1,580 @@
+---
+title: "Measurements and Observations"
+teaching: 0
+exercises: 0
+---
+
+:::::::::::::::::::::::::::::::::::::: questions 
+
+- What are the differences between measurements and observations?
+
+- How to find out what measurements and observations have been recorded for a particular person?
+
+- How to find the values of measurements and observations and associated information such as units?
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::: objectives
+
+- Know that measurements are mainly lab results and other records like pulse rate 
+
+- Know observations are other facts obtained through questioning or direct observation
+
+- Understand concept ids identify the measure or observation, values are stored in `value_as_number`, `value_as_concept_id`, or (for observation table only ) `value_as_string`. 
+
+- Be able to join to the concept table to find a particular measurement or observation concept by name
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+## Introduction
+
+This episode covers the OMOP measurement and observation tables.
+
+::::::::::::::::::::::::::::::::::::::::::::::::callout
+
+For this episode we will be using a sample OMOP CDM database that is pre-loaded with data. This database is a simplified version of a real-world OMOP CDM database and is intended for educational purposes only.
+
+(UCLH only) This will come in a similar form as you would get data if you asked for a data extract via the SAFEHR platform (i.e. a set of parquet files).
+
+As part of the setup prior to this course you were asked to download and install the sample dataset. If you have not done this yet, please refer to the [setup instructions](../learners/setup.md). For now, we will assume that you have the sample OMOP CDM dataset available on your local machine at the following path: `./data/omop/` and the functions in a folder `./code/parquet_dataset`.
+
+You will then need to load the database as shown in the previous episode.
+
+
+``` r
+open_omop_dataset <- function(path) {
+    # iterate over table level directories
+    list.dirs(path, recursive = FALSE) |>
+      # exclude folder name from path and use it as index for named list
+      purrr::set_names(~ basename(.)) |>
+      # "lazy-load" list of parquet files from specified folder
+      purrr::map(arrow::open_dataset)
+}
+```
+
+
+``` r
+omop <- open_omop_dataset("./data/omop")
+```
+
+and the useful functions we created in the previous episode to look up concept names/ids.
+
+
+``` r
+library(dplyr)
+
+get_concept_name <- function(omop_obj, id) {
+  omop_obj$concept |>
+    filter(concept_id == id) |>
+    select(concept_name) |>
+    collect()
+}
+```
+
+
+``` r
+get_concept_id <- function(omop_obj, name) {
+  omop_obj$concept |>
+    filter(concept_name == name) |>
+    select(concept_id) |>
+    collect()
+}
+```
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+The OMOP [measurement](https://ohdsi.github.io/CommonDataModel/cdm54.html#measurement) and [observation](https://ohdsi.github.io/CommonDataModel/cdm54.html#observation) tables contain information collected about a person.
+
+The difference between them is that measurement contains numerical or categorical values collected by a standardised process, whereas observation contains less standardised clinical facts. 
+Measurements are often lab results, vital signs or other clinical measurements such as height, weight, blood pressure, pulse rate, respiratory rate, oxygen saturations etc.
+Observations are other facts obtained through questioning or direct observation, for example smoking status, alcohol intake, family history, symptoms reported by the patient etc.
+
+A person can have multiple measurements and observations.
+Some columns are similar between measurement and observation. 
+
+## Concepts and values
+
+Data are stored as questions and answers. A question (e.g. `Pulse rate`) is defined by a concept_id and the answer is stored in a value column.
+
+### The `measurement` table contains the following columns (among others not listed here):
+| Column Names          | Description of content |
+|-----------------------|---------------------------------------|
+| **measurement_id** | Unique identifier for each measurement |
+| **person_id** | Identifier for the patient |
+| **measurement_concept_id** | Concept identifier for the measurement |
+| **measurement_date** | Date the measurement was taken |
+| **measurement_datetime** | Date and time the measurement was taken |
+| **operator_concept_id** | Concept identifier for the operator (e.g. less than, greater than) used in the measurement value comparison if applicable |
+| **value_as_number** | The numeric value of the measurement |
+| **value_as_concept_id** | Concept identifier for the categorical value of the measurement |
+| **unit_concept_id** | Concept identifier for the unit of measurement |
+| **range_low** | The low end of the normal range for the measurement |
+| **range_high** | The high end of the normal range for the measurement |
+| **visit_occurrence_id** | Identifier for the visit during which the measurement was taken |
+
+### The `observation` table contains the following columns (among others not listed here):
+| Column Names          | Description of content |
+|-----------------------|---------------------------------------|
+| **observation_id** | Unique identifier for each observation |
+| **person_id** | Identifier for the patient |
+| **observation_concept_id** | Concept identifier for the observation |
+| **observation_date** | Date the observation was made |
+| **observation_datetime** | Date and time the observation was made |
+| **value_as_number** | The numeric value of the observation |
+| **value_as_string** | The string value of the observation |
+| **value_as_concept_id** | Concept identifier for the categorical value of the observation |
+| **visit_occurrence_id** | Identifier for the visit during which the observation was made |
+
+
+The **measurement_concept_id** or **observation_concept_id** columns define what has been recorded. Here are some examples : 
+
+Example Measurement concepts        | Example Observation concepts
+----------------------------        | ----------------------------
+Respiratory rate                    | Respiratory function
+Pulse rate                          | Wound dressing observable
+Hemoglobin saturation with oxygen   | Mandatory breath rate
+Body temperature                    | Body position for blood pressure measurement
+Diastolic blood pressure            | Alcohol intake - finding
+Arterial oxygen saturation          | Tobacco smoking behavior - finding
+Body weight                         | Vomit appearance
+Leukocytes [#/volume] in Blood      | State of consciousness and awareness
+
+Look at the column values we have got in the tables associated with our database.
+
+
+``` r
+print("measurement column names:")
+```
+
+``` output
+[1] "measurement column names:"
+```
+
+``` r
+omop$measurement |> 
+  colnames()
+```
+
+``` output
+ [1] "measurement_id"         "person_id"              "measurement_concept_id"
+ [4] "measurement_date"       "measurement_datetime"   "operator_concept_id"   
+ [7] "value_as_number"        "value_as_concept_id"    "unit_concept_id"       
+[10] "range_low"              "range_high"             "visit_occurrence_id"   
+```
+
+``` r
+print("measurement column names:")
+```
+
+``` output
+[1] "measurement column names:"
+```
+
+``` r
+observation <- omop$observation |> 
+  colnames()
+
+observation
+```
+
+``` output
+[1] "observation_id"         "person_id"              "observation_concept_id"
+[4] "observation_date"       "observation_datetime"   "value_as_number"       
+[7] "value_as_string"        "value_as_concept_id"    "visit_occurrence_id"   
+```
+**CODING_NOTE**: The `colnames()` function is used to get the column names of the measurement and observation tables. The `print()` function is used to print a label before the column names for clarity. The column names are then printed to the console, as the default behaviour when you don't assign an output to a variable. 
+
+In the case of the observation table, we assign the column names to a variable `observation` and then print it. This is just to demonstrate that you can assign the column names to a variable if you want to use them later in your code.
+
+::::::::::::::::::::::::::::::::::: challenge
+
+Looking at the `measurement` and `observation` tables identify the various columns that might store a value and columns which help you make sense of what a value might mean.
+
+:::::::::::::::::::::::: solution
+The various **value** columns store values :
+
+column name             | data type                  | example   | concept_name
+----------------        | ------------               | --------- | -------
+`value_as_number`       | numeric value              | 1.2       | -
+`unit_concept_id`       | units of the numeric value | **9529**      | kilogram
+`value_as_concept_id`   | categorical value          | **4328749**   | High
+`operator_concept_id`   | optional operators         | **4172704**   | >
+
+Note where values are a `concept_id,` the name of that concept can be looked up in the `concept` table that is part of the OMOP vocabularies and included in most CDM instances.
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+You can see from the column names within the tables that for an `observation` the  value can be a string, a number or a concept, whereas for a `measurement` the value can be a number accompanied by a unit concept or the value can be a concept. 
+
+## Looking at observation values
+
+Let's focus on observations.
+
+We could go through each table and use our `get_concept_name` function to work out what all these measurements and observations are, but that could get a bit tedious!
+
+Let's try and join to the concept table and produce a table that gives us the humanly readable names to start with.
+
+:::::::::::::::::::::::: challenge
+
+By joining to the concept table produce a version of the observation table with concept names. Only include columns that are relevant to the value.
+
+:::::::::::::::::::::::: solution
+
+
+``` r
+# Pre-load concept names and ids
+concepts <- omop$concept |> 
+  select(concept_id, concept_name) |>
+  collect()
+
+# Create a mini observation table with only the columns relevant to value
+mini_observation <- omop$observation |>
+  select(observation_id, person_id, observation_concept_id, value_as_concept_id, value_as_number) |>
+  collect()
+
+# Join to get names of the observation concept id
+# Rename the new column to observation_concept_name
+# Relocate the new column to be after observation_concept_id
+mini_observation <- mini_observation |>
+  inner_join(concepts, by=join_by(observation_concept_id == concept_id)) |>
+  rename(observation_concept_name = concept_name) |>
+  relocate(observation_concept_name, .after = observation_concept_id)
+
+# Repeat the join to get names of the value concept id
+mini_observation <- mini_observation |>
+  left_join(concepts, by = join_by(value_as_concept_id == concept_id)) |>
+  rename(value_as_concept_name = concept_name) |>
+  relocate(value_as_concept_name, .after = value_as_concept_id)
+```
+
+**CODING_NOTE**: In the above code we first read in the `concept` table and use `select` to get only the `concept_id` and `concept_name` columns to create a smaller table of concepts. Remember that we use `collect()` to bring the data into memory. 
+Then we create a mini version of the observation table that only contains the columns relevant to the value. 
+We then use `inner_join` to join this mini observation table to the smaller concepts table joining on the `observation_concept_id` to get the name of the observation concept. We use `rename` to rename this new column to `observation_concept_name` and `relocate` to move it to be after the `observation_concept_id` column.
+We then repeat this process to join to the concepts table by the `value_as_concept_id` to get the name of the value concept, rename it to `value_as_concept_name` and relocate it to be after the `value_as_concept_id` column.
+We could have done this in one step by joining to the concept table twice in the same code chunk, but we have done it in two steps so that you can inspect it midway. The process is the same whether you join to the concept table once or twice, you just need to specify the correct join condition and rename the new columns appropriately.
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+Now we can look at this named table.
+
+``` r
+tibble::view(mini_observation)
+mini_observation
+```
+
+``` output
+# A tibble: 30 × 7
+   observation_id person_id observation_concept_id observation_concept_name     
+            <int>     <int>                  <int> <chr>                        
+ 1           6001      1111                4160001 Clinical finding present     
+ 2           6002      1111                4203130 Discharge from hospital      
+ 3           6003      1112                4138933 Admission to intensive care …
+ 4           6004      1112               45772969 On ventilator                
+ 5           6005      1112                4203130 Discharge from hospital      
+ 6           6006      1112                4103640 Amputated foot               
+ 7           6007      1112                4160001 Clinical finding present     
+ 8           6008      1113                4024958 Throat culture               
+ 9           6009      1113                4232313 Microbial identification kit…
+10           6010      1113                4160001 Clinical finding present     
+# ℹ 20 more rows
+# ℹ 3 more variables: value_as_concept_id <int>, value_as_concept_name <chr>,
+#   value_as_number <int>
+```
+**CODING_NOTE**: The `tibble::view()` function is used to open the `mini_observation` data frame in a spreadsheet-like viewer in RStudio. This allows us to easily explore the data and see the humanly readable names for the observation concepts and value concepts. it is more readable than using `print()` or simply typing the name of the data frame in the console, especially if the data frame has many rows and columns.
+
+### Social indexes
+
+::::::::::::::::::::::::::::::::::::::::::::::::instructor
+
+Could be skipped if short of time
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+It is interesting to note that some observations relate to social indexes such as deprivation indices. As noted in the title these are observations made
+in England only.
+
+:::::::::::::::::::::::: challenge
+
+Create a mini version of the concepts table that contains only the concepts relating to social indices. These concepts are those with concept_id **35812888**, **35812884**, **35812883**, **35812882**, **35812883**, **35812885**.
+
+:::::::::::::::::::::::: solution
+
+
+``` r
+social_concepts <- omop$concept |>
+  filter(concept_id %in% c(35812888, 35812884, 35812883, 35812882, 35812883, 35812885)) |>
+  collect()
+
+social_concepts
+```
+
+``` output
+# A tibble: 5 × 10
+  concept_id concept_name               domain_id vocabulary_id standard_concept
+       <int> <chr>                      <chr>     <chr>         <chr>           
+1   35812882 Index of Multiple Depriva… Observat… UK Biobank    ""              
+2   35812883 Income score (England)     Observat… UK Biobank    ""              
+3   35812884 Employment score (England) Observat… UK Biobank    ""              
+4   35812885 Health score (England)     Observat… UK Biobank    ""              
+5   35812888 Crime score (England)      Observat… UK Biobank    ""              
+# ℹ 5 more variables: concept_class_id <chr>, concept_code <chr>,
+#   valid_start_date <date>, valid_end_date <date>, invalid_reason <chr>
+```
+
+**CODING_NOTE**:  We use `%in%` to `filter` on each `concept_id` in the list given. The `collect()` function is then used to bring this filtered data into memory so that we can work with it as a regular data frame in R.
+We then display the resulting table of social concepts by simply typing the name of the data frame `social_concepts`.
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+This is an instance of a nonstandard concept being used within OMOP. 
+
+::::::::::::::::::::::::::::::::::::::::::::::::instructor
+
+Comment on the fact that these concepts are nonstandard and that this is an example of how local data can be mapped to OMOP concepts even if they are not part of the standard vocabulary.
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+## Looking at measurement values
+
+Let's now look at measurements. As we said before, measurements are often numerical values with associated units. This can arise from lab results or vital signs.
+
+:::::::::::::::::::::::: challenge
+
+Consider the concept with the name `Heart rate`.
+Use the `measurement` and `concept` tables to answer the following question:
+
+1. What are the units associated with this measurement concept?
+
+2. What is the average value recorded for this measurement across all persons?
+
+3. What class of concept is this measurement concept?
+
+:::::::::::::::::::::::: solution
+
+1. What are the units associated with `Heart rate`?
+
+``` r
+# Get the concept id for Heart rate  
+heart_rate_id <- get_concept_id(omop, "Heart rate") |>
+  pull(concept_id)
+
+heart_rate_id
+```
+
+``` output
+[1] 3027018
+```
+
+``` r
+# Filter measurement table for this concept id
+heart_rate_measurements <- omop$measurement |>
+  filter(measurement_concept_id == heart_rate_id) 
+
+heart_rate_units <- heart_rate_measurements |>
+  distinct(unit_concept_id) |>
+  pull()
+
+get_concept_name(omop, heart_rate_units)
+```
+
+``` output
+# A tibble: 1 × 1
+  concept_name
+  <chr>       
+1 per minute  
+```
+
+***Answer:*** The units associated with the `Heart rate` measurement concept are `per minute`.
+
+**CODING_NOTE**: We first use the `get_concept_id()` function to get the concept_id for "Heart rate". We then filter the `measurement` table for rows where the `measurement_concept_id` matches this concept_id. We then use `distinct()` to get the unique unit concept ids associated with these heart rate measurements, and then `collect()` to bring it into memory. Finally, we use our `get_concept_name()` function to look up the names of these unit concepts.
+Note that we use the variable `heart_rate_id` to store the id so that we can use it in subsequent code.
+
+2. What is the average value recorded for `Heart rate` across all persons?
+
+``` r
+average_heart_rate <- heart_rate_measurements |>
+  collect() |>
+  summarise(heart_rate =   mean(value_as_number, na.rm = TRUE)
+)
+
+average_heart_rate
+```
+
+``` output
+# A tibble: 1 × 1
+  heart_rate
+       <dbl>
+1         95
+```
+
+***Answer:*** The average value recorded for the `Heart rate` measurement concept across all persons is 95 beats per minute.
+
+**CODING_NOTE**: Here we are using `dplyr`'s `summarise()` function to apply a function to the entire dataframe. We use the `mean()` function to calculate the average of the `value_as_number` column in the `heart_rate_measurements` data frame. We set `na.rm = TRUE` to ignore any missing values when calculating the mean.
+
+
+3. Get the class of concept for `Heart rate`
+
+``` r
+heart_rate_class <- omop$concept |>
+  filter(concept_id == heart_rate_id) |>
+  select(concept_class_id) |>
+  collect() 
+
+heart_rate_class
+```
+
+``` output
+# A tibble: 1 × 1
+  concept_class_id    
+  <chr>               
+1 Clinical Observation
+```
+
+***Answer:*** The class of concept for `Heart rate` is `Clinical Observation`.
+
+**CODING_NOTE**: We filter the `concept` table for the row where the `concept_id` matches the `heart_rate_id`. We then select the `concept_class_id` column to get the class of concept. Finally, we use `collect()` to bring this data into memory and display it.
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+You may have noticed that one of the column names in the `measurement` table is `operator_concept_id`. This column is used to store optional operators that can be used to indicate whether a measurement value is *greater than*, *less than*, *equal to* etc. a certain value. For example, if a measurement value is recorded as "> 10", the `value_as_number` column would contain the number 10 and the `operator_concept_id` column would contain the concept id for the "greater than" operator. This allows us to capture measurements that are recorded in this way while still being able to work with the numeric value in the `value_as_number` column.
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::challenge
+
+Create a version of the `measurement` table containing columns: `measurement_id`, `measurement_concept_id`, `operator_concept_id`, `value_as_number`, `range_low` and `range_high` for person_id = **31**, leaving out any rows where `operator_concept_id` is `0`. Now add a column for the names of the measurement and operator concepts.
+
+Using this reduced `measurement` table to list the measurements made for this person.
+
+What range should the *C reactive protein* measurement for this person fall within?
+
+:::::::::::::::::::::::: solution
+
+
+``` r
+# Create a mini version of the measurement table for person_id 31
+mini_measurement <- omop$measurement |>
+  filter(
+    person_id == 31,
+    !is.na(operator_concept_id) & operator_concept_id != 0
+    ) |>
+  select(measurement_id, measurement_concept_id, operator_concept_id, value_as_number, range_low, range_high) |>
+  collect() 
+
+# Join to get names of the measurement concept id
+mini_measurement <- mini_measurement |>
+  left_join(concepts, by = join_by(measurement_concept_id == concept_id)) |>
+  rename(measurement_concept_name = concept_name) |>
+  relocate(measurement_concept_name, .after = measurement_concept_id)
+
+# Join to get names of the operator concept id
+mini_measurement <- mini_measurement |>
+  left_join(concepts, by = join_by(operator_concept_id == concept_id)) |>
+  rename(operator_concept_name = concept_name) |>
+  relocate(operator_concept_name, .after = operator_concept_id)
+
+tibble::view(mini_measurement)
+mini_measurement
+```
+
+``` output
+# A tibble: 6 × 8
+  measurement_id measurement_concept_id measurement_concept_name                
+           <dbl>                  <int> <chr>                                   
+1         351796                4301868 Pulse rate                              
+2         351800                4313591 Respiratory rate                        
+3         354289                4011919 Hemoglobin saturation with oxygen       
+4         354292               44810247 LACE (length of stay, acuity of automat…
+5         354293                3020460 C reactive protein [Mass/volume] in Ser…
+6         354294               46236952 Glomerular filtration rate [Volume Rate…
+# ℹ 5 more variables: operator_concept_id <dbl>, operator_concept_name <chr>,
+#   value_as_number <dbl>, range_low <dbl>, range_high <dbl>
+```
+
+***Answer:*** 
+The measurements made for person_id 31 are:
+    Pulse rate = 61
+    Respiratory rate = 16
+    Hemoglobin saturation with oxygen = 100
+    LACE = 4
+    C reactive protein [Mass/volume] in Serum or Plasma < 0.6
+    Glomerular filtration rate > 90
+
+The C reactive protein measurement for this person should fall within the range 0 - 5 mg/L.
+
+**CODING_NOTE**: We first filter the `measurement` table for rows where `person_id` is 31 and `operator_concept_id` is filled and not `0`, and select only the relevant columns. We then use `collect()` to bring this data into memory. We then join to the `concepts` table to get the names of the measurement concepts and operator concepts, renaming the new columns appropriately and relocating them for better readability. Finally, we display the resulting `mini_measurement` data frame which contains the measurements made for person_id 31 along with the names of the measurement and operator concepts.
+
+We leave it as an exercise for the student to look up the units of each measurement.
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+There is also a column called `value_as_concept_id` which can be used to store categorical values for measurements. For example, if a measurement is recorded as "High", the `value_as_concept_id` column would contain the `concept_id` for "High". This allows us to capture measurements that are recorded in this way while still being able to work with the categorical value in the `value_as_concept_id` column.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::challenge
+
+Using the `measurement` table, find all measurements that have a value recorded in the `value_as_concept_id` column and join to the concept table to get the names of these measurements and values. Display only the unique set of measurement concept names and value concept names.
+
+:::::::::::::::::::::::: solution
+
+``` r
+categorical_measurements <- omop$measurement |>
+  filter(!is.na(value_as_concept_id) & value_as_concept_id != 0) |>
+  select(measurement_id, measurement_concept_id, value_as_concept_id)
+
+# Join to get names of the measurement concept id
+categorical_measurements <- categorical_measurements |>
+  left_join(concepts, by = join_by(measurement_concept_id == concept_id)) |>
+  rename(measurement_concept_name = concept_name) |>
+  relocate(measurement_concept_name, .after = measurement_concept_id)
+
+# Join to get names of the value concept id
+categorical_measurements <- categorical_measurements |>
+  inner_join(concepts, by = join_by(value_as_concept_id == concept_id)) |>
+  rename(value_as_concept_name = concept_name) |>
+  relocate(value_as_concept_name, .after = value_as_concept_id)
+
+# Get unique set of measurement concept names and value concept names
+categorical_measurements <- categorical_measurements |>
+  select(measurement_concept_name, value_as_concept_name) |>
+  distinct() |>
+  collect()
+```
+
+``` error
+Error in `compute.arrow_dplyr_query()` at arrow/R/dplyr-collect.R:22:3:
+! Invalid: Incompatible data types for corresponding join field keys: FieldRef.Name(value_as_concept_id) of type double and FieldRef.Name(concept_id) of type int32
+```
+
+``` r
+tibble::view(categorical_measurements)
+categorical_measurements
+```
+
+``` output
+FileSystemDataset (query)
+measurement_id: double
+measurement_concept_id: int32
+measurement_concept_name: string
+value_as_concept_id: double
+value_as_concept_name: string
+
+See $.data for the source Arrow object
+```
+
+***Answer:*** The resulting `categorical_measurements` data frame contains all measurements that have a categorical value recorded along with the names of the measurement and value concepts.
+
+**CODING_NOTE**: We first filter the `measurement` table for rows where `value_as_concept_id` is not missing, and select only the relevant columns. We then join to the `concepts` table to get the names of the measurement concepts and value concepts, renaming the new columns appropriately and relocating them for better readability. The we then select only the measurement concept name and value concept name columns, and remove duplicates using `distinct()`. Finally, we display the resulting `categorical_measurements` data frame which contains all measurements that have a unique categorical value recorded along with the names of the measurement and value concepts. We delay using `collect()` to as late as possible, so that we only bring things into memory when needed.
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::: keypoints 
+
+- Measurements are mainly lab results and other clinical measurement records like pulse rate 
+- Observations are other facts obtained through questioning or direct observation
+- Concept ids identify the measure or observation and values are stored in `value_as_number` or `value_as_concept_id`
+- We can join to the concept table to find a particular measurement or observation concept by name
+
+::::::::::::::::::::::::::::::::::::::::::::::::
