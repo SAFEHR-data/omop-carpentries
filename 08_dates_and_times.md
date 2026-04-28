@@ -190,7 +190,7 @@ measurement_to_fix
 ``` output
 # A tibble: 353 × 12
    measurement_id person_id measurement_concept_id measurement_date
-            <dbl>     <int>                  <int> <chr>           
+            <int>     <int>                  <int> <chr>           
  1           8001      1111                3020891 2025-07-22      
  2           8002      1111                3004249 2025-07-22      
  3           8003      1111                3012888 2025-07-22      
@@ -202,8 +202,8 @@ measurement_to_fix
  9           8010      1112                3013502 2024-01-18      
 10           8011      1112                3013502 2025-12-24      
 # ℹ 343 more rows
-# ℹ 8 more variables: measurement_datetime <chr>, operator_concept_id <dbl>,
-#   value_as_number <chr>, value_as_concept_id <dbl>, unit_concept_id <dbl>,
+# ℹ 8 more variables: measurement_datetime <chr>, operator_concept_id <int>,
+#   value_as_number <chr>, value_as_concept_id <int>, unit_concept_id <int>,
 #   range_low <dbl>, range_high <dbl>, visit_occurrence_id <int>
 ```
 

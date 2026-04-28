@@ -481,14 +481,14 @@ mini_measurement
 ``` output
 # A tibble: 6 × 8
   measurement_id measurement_concept_id measurement_concept_name                
-           <dbl>                  <int> <chr>                                   
+           <int>                  <int> <chr>                                   
 1         351796                4301868 Pulse rate                              
 2         351800                4313591 Respiratory rate                        
 3         354289                4011919 Hemoglobin saturation with oxygen       
 4         354292               44810247 LACE (length of stay, acuity of automat…
 5         354293                3020460 C reactive protein [Mass/volume] in Ser…
 6         354294               46236952 Glomerular filtration rate [Volume Rate…
-# ℹ 5 more variables: operator_concept_id <dbl>, operator_concept_name <chr>,
+# ℹ 5 more variables: operator_concept_id <int>, operator_concept_name <chr>,
 #   value_as_number <dbl>, range_low <dbl>, range_high <dbl>
 ```
 
@@ -540,27 +540,19 @@ categorical_measurements <- categorical_measurements |>
   select(measurement_concept_name, value_as_concept_name) |>
   distinct() |>
   collect()
-```
 
-``` error
-Error in `compute.arrow_dplyr_query()` at arrow/R/dplyr-collect.R:22:3:
-! Invalid: Incompatible data types for corresponding join field keys: FieldRef.Name(value_as_concept_id) of type double and FieldRef.Name(concept_id) of type int32
-```
-
-``` r
 tibble::view(categorical_measurements)
 categorical_measurements
 ```
 
 ``` output
-FileSystemDataset (query)
-measurement_id: double
-measurement_concept_id: int32
-measurement_concept_name: string
-value_as_concept_id: double
-value_as_concept_name: string
-
-See $.data for the source Arrow object
+# A tibble: 4 × 2
+  measurement_concept_name                                 value_as_concept_name
+  <chr>                                                    <chr>                
+1 Alert Confusion Voice Pain Unresponsiveness scale        Mentally alert       
+2 Blood group antibody screen [Presence] in Serum or Plas… Not present          
+3 Rh [Type] in Blood                                       Positive             
+4 ABO group [Type] in Blood                                Candida sp identify …
 ```
 
 ***Answer:*** The resulting `categorical_measurements` data frame contains all measurements that have a categorical value recorded along with the names of the measurement and value concepts.

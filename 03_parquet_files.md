@@ -153,15 +153,15 @@ invalid_reason: string
 $measurement
 FileSystemDataset with 1 Parquet file
 12 columns
-measurement_id: double
+measurement_id: int32
 person_id: int32
 measurement_concept_id: int32
 measurement_date: date32[day]
 measurement_datetime: timestamp[us, tz=UTC]
-operator_concept_id: double
+operator_concept_id: int32
 value_as_number: double
-value_as_concept_id: double
-unit_concept_id: double
+value_as_concept_id: int32
+unit_concept_id: int32
 range_low: double
 range_high: double
 visit_occurrence_id: int32
