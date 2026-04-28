@@ -343,7 +343,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Parquet files</h1>
-        <p>Last updated on 2026-04-14 |
+        <p>Last updated on 2026-04-28 |
 
         <a href="https://github.com/SAFEHR-data/omop-carpentries/edit/main/episodes/03_parquet_files.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -535,15 +535,15 @@ invalid_reason: string
 $measurement
 FileSystemDataset with 1 Parquet file
 12 columns
-measurement_id: double
+measurement_id: int32
 person_id: int32
 measurement_concept_id: int32
 measurement_date: date32[day]
 measurement_datetime: timestamp[us, tz=UTC]
-operator_concept_id: double
+operator_concept_id: int32
 value_as_number: double
-value_as_concept_id: double
-unit_concept_id: double
+value_as_concept_id: int32
+unit_concept_id: int32
 range_low: double
 range_high: double
 visit_occurrence_id: int32
@@ -726,7 +726,7 @@ the previous episode to work with this parquet file dataset.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb11">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -846,8 +846,8 @@ any links that you are not going to use.
   "url": "https://SAFEHR-data.github.io/omop-carpentries/03_parquet_files.html",
   "identifier": "https://SAFEHR-data.github.io/omop-carpentries/03_parquet_files.html",
   "dateCreated": "2025-06-18",
-  "dateModified": "2026-04-14",
-  "datePublished": "2026-04-25"
+  "dateModified": "2026-04-28",
+  "datePublished": "2026-04-28"
 }
 
   </script><script>
