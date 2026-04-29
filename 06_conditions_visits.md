@@ -298,14 +298,9 @@ omop$visit_occurrence |>
   collect()
 ```
 
-``` output
-# A tibble: 4 × 3
-  visit_concept_id concept_name                           n
-             <int> <chr>                              <int>
-1             9203 Emergency Room Visit                   8
-2             9201 Inpatient Visit                        7
-3             9202 Outpatient Visit                       4
-4              262 Emergency Room and Inpatient Visit     1
+``` error
+Error in `compute.arrow_dplyr_query()` at arrow/R/dplyr-collect.R:22:3:
+! Invalid: Incompatible data types for corresponding join field keys: FieldRef.Name(visit_concept_id) of type string and FieldRef.Name(concept_id) of type int32
 ```
 
 ***Answer:*** The different types of visits recorded in the `visit_occurrence` table along with their names are:
