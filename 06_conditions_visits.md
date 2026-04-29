@@ -1,0 +1,388 @@
+---
+title: "Conditions and Visits"
+teaching: 0
+exercises: 0
+---
+
+:::::::::::::::::::::::::::::::::::::: questions 
+
+- What are conditions in the OMOP CDM?
+
+- When do we need to consider visits in our analysis?
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::: objectives
+
+- Understand the structure and purpose of the conditions table in the OMOP CDM.
+
+- Know that visits are recorded in the visit_occurrence table.
+
+- Learn how and when to consider visits in data analysis.
+
+- Know that a visit is a period of time and patients can have multiple visits.
+
+- Understand that multiple measurements, conditions etc. can occur within a visit.
+
+- Understand that other tables link to visits.
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+## Introduction
+
+This episode covers the OMOP conditions and visits table.
+
+::::::::::::::::::::::::::::::::::::::::::::::::callout
+
+For this episode we will be using a sample OMOP CDM database that is pre-loaded with data. This database is a simplified version of a real-world OMOP CDM database and is intended for educational purposes only.
+
+(UCLH only) This will come in a similar form as you would get data if you asked for a data extract via the SAFEHR platform (i.e. a set of parquet files).
+
+As part of the setup prior to this course you were asked to download and install the sample dataset. If you have not done this yet, please refer to the [setup instructions](../learners/setup.md). For now, we will assume that you have the sample OMOP CDM dataset available on your local machine at the following path: `./data/omop/` and the functions in a folder `./code/parquet_dataset`.
+
+You will then need to load the database as shown in the previous episode.
+
+
+``` r
+library(dplyr)
+open_omop_dataset <- function(path) {
+    # iterate over table level directories
+    list.dirs(path, recursive = FALSE) |>
+      # exclude folder name from path and use it as index for named list
+      purrr::set_names(~ basename(.)) |>
+      # "lazy-load" list of parquet files from specified folder
+      purrr::map(arrow::open_dataset)
+}
+```
+
+
+``` r
+omop <- open_omop_dataset("./data/omop")
+```
+
+and the useful functions we created in the previous episode to look up concept names and ids.
+
+
+``` r
+get_concept_name <- function(omop_obj, id) {
+  omop_obj$concept |>
+    filter(concept_id == id) |>
+    select(concept_name) |>
+    collect()
+}
+```
+
+
+``` r
+get_concept_id <- function(omop_obj, name) {
+  omop_obj$concept |>
+    filter(concept_name == name) |>
+    select(concept_id) |>
+    collect()
+}
+```
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+## Conditions
+
+
+[Conditions](https://ohdsi.github.io/CommonDataModel/cdm54.html#conditions) are a key part of the OMOP CDM. They represent diagnoses that have been made for patients. Conditions are stored in the `condition_occurrence` table. Each record in this table represents a single occurrence of a condition for a patient. The table contains records of diseases, medical conditions, diagnoses, signs, or symptoms observed by providers or reported by patients. Conditions are mapped from diagnostic codes and represented using standardized concepts in a hierarchical structure. 
+
+### The `condition_occurrence` table contains the following columns (among others not listed here):
+
+| Column Names          | Description of content |
+|-----------------------|---------------------------------------|
+| **condition_occurrence_id** | Unique identifier for each condition occurrence |
+| **person_id** | Identifier for the patient |
+| **condition_concept_id** | Concept identifier for the condition |
+| **condition_start_date** | Date the condition started |
+| **condition_end_date** | Date the condition ended |
+| **condition_type_concept_id** | Concept identifier for the type of condition occurrence |
+| **condition_status_concept_id** | Concept identifier for the status of the condition occurrence |
+| **visit_occurrence_id** | Identifier for the visit during which the condition was recorded |
+| **condition_source_value** | Original value from the source data |
+| **condition_source_concept_id** | Concept identifier for the source value |
+
+::::::::::::::::::::::::::::::::::::: challenge
+
+1. How many records are there in the `condition_occurrence` table?
+
+2. List any of the conditions that occur more than once in the table along with their humanly readable names.
+
+3. Choose one patient and list all the conditions they have and when they started?
+
+::::::::::::::::::::::::::::::::::::: solution
+1. How many records are there in the `condition_occurrence` table?
+
+``` r
+omop$condition_occurrence |>
+  tally() |>
+  collect()
+```
+
+``` output
+# A tibble: 1 × 1
+      n
+  <int>
+1    35
+```
+
+***Answer:*** There are 35 records in the `condition_occurrence` table.
+
+**CODING NOTE:** The `tally()` function is used to count the number of records in the table. It is more efficient to use `tally()` directly on the database without collecting the data into R, as this allows the database to perform the counting operation, which is optimized for large datasets. We then use `collect()` to run the calculation and produce the output. In place of `tally()` we could have used `count()`, which is a convenience function to group by a column and then `tally()`. We could have also used base R `nrow(omop$condition_occurrence)` in this example.
+
+2. List any of the conditions that occur more than once in the table along with their humanly readable names.
+
+``` r
+omop$condition_occurrence |>
+  group_by(condition_concept_id) |>
+  summarise(occurrences = n()) |>
+  filter(occurrences > 1) |>
+  left_join(
+    omop$concept,
+    by = join_by(condition_concept_id == concept_id)
+  ) |>
+  select(concept_name, occurrences) |>
+  collect()
+```
+
+``` output
+# A tibble: 4 × 2
+  concept_name                             occurrences
+  <chr>                                          <int>
+1 Injury of head                                     2
+2 Inflammatory disorder of digestive tract           2
+3 Gastritis                                          2
+4 Hemorrhoids                                        2
+```
+
+**CODING NOTE:** We first group the `condition_occurrence` table by `condition_concept_id` and count the number of occurrences for each condition. We then filter to keep only those conditions that occur more than once. Finally, we join with the `concept` table to get the humanly readable names of the conditions and select the relevant columns for display.
+
+3. Choose one patient and list all the conditions they have and when they started
+
+``` r
+patient_id <- 1111  # Replace with the desired person_id 
+
+omop$condition_occurrence |>
+  filter(person_id == patient_id) |>
+  left_join(
+    omop$concept,
+    by = join_by(condition_concept_id == concept_id)
+  ) |>
+  select(condition_concept_id, concept_name, condition_start_date) |>
+  collect()
+```
+
+``` output
+# A tibble: 1 × 3
+  condition_concept_id concept_name                         condition_start_date
+                 <int> <chr>                                <date>              
+1              4230399 Closed fracture of lateral malleolus 2025-07-22          
+```
+
+**CODING NOTE:** We filter the `condition_occurrence` table for the specified `person_id` to get all conditions for that patient. We then join with the `concept` table to get the humanly readable names of the conditions and select the relevant columns for display.
+::::::::::::::::::::::::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+Question three can be repeated for different patients by changing the `patient_id` variable. You might be surprised to see that if you choose patient **31** you will see that the entry for their condition and start date is repeated. This isn't an error!
+
+::::::::::::::::::::::::::::::::::::: challenge
+
+Investigate why patient **31** has repeated entries for their condition and start date in the `condition_occurrence` table. Look at the `condition_type_concept_id`, `conditions_status_concept_id`, and `condition_source_value` columns to understand the differences between these entries.
+
+::::::::::::::::::::::::::::::::::::: solution
+
+``` r
+patient_id <- 31  
+
+omop$condition_occurrence |>
+  filter(person_id == patient_id) |>
+  left_join(
+    omop$concept,
+    by = join_by(condition_concept_id == concept_id)
+  ) |>
+  rename(condition_concept_name = concept_name) |>
+  relocate(condition_concept_name, .after = condition_concept_id) |>
+  left_join(
+    omop$concept,
+    by = join_by(condition_type_concept_id == concept_id)
+  ) |>
+  rename(condition_type_concept_name = concept_name) |>
+  relocate(condition_type_concept_name, .after = condition_type_concept_id) |>
+  left_join(
+    omop$concept,
+    by = join_by(condition_status_concept_id == concept_id)
+  ) |>
+  rename(condition_status_concept_name = concept_name) |>
+  relocate(condition_status_concept_name,
+           .after = condition_status_concept_id) |>
+  select(
+    condition_concept_id, 
+    condition_concept_name,
+    condition_start_date, 
+    condition_type_concept_id,
+    condition_type_concept_name,
+    condition_status_concept_id,
+    condition_status_concept_name,
+    condition_source_value
+    ) |>
+  collect()
+```
+
+``` output
+# A tibble: 2 × 8
+  condition_concept_id condition_concept_name condition_start_date
+                 <int> <chr>                  <date>              
+1               375415 Injury of head         2019-05-10          
+2               375415 Injury of head         2019-05-10          
+# ℹ 5 more variables: condition_type_concept_id <int>,
+#   condition_type_concept_name <chr>, condition_status_concept_id <int>,
+#   condition_status_concept_name <chr>, condition_source_value <chr>
+```
+
+***Answer:*** The output shows that for patient **31**, the `condition_concept_id` and `condition_start_date` are identical, but the `condition_type_concept_id` and `condition_status_concept_id` differ. This indicates that the same condition was recorded in different contexts or with different statuses, which explains the repeated entries in the `condition_occurrence` table. This is commonly found in hospital records!
+
+**CODING NOTE:** We filter the `condition_occurrence` table for `person_id` **31** and join with the `concept` table multiple times to get the humanly readable names for the `condition_concept_id`, `condition_type_concept_id`, and `condition_status_concept_id`. We then select and arrange the relevant columns for display to understand the differences between the entries for this patient.
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+## Visits
+
+The `visit_occurrence` table contains [events where each `person` engages with the healthcare system for a duration of time](https://ohdsi.github.io/CommonDataModel/cdm54.html#visit_occurrence).
+
+### The `visit_occurrence` table contains the following columns (among others not listed here):
+| Column Names          | Description of content |
+|-----------------------|---------------------------------------|
+| **visit_occurrence_id** | Unique identifier for each visit occurrence |
+| **person_id** | Identifier for the patient |
+| **visit_concept_id** | Concept identifier for the type of visit |
+| **visit_start_date** | Date the visit started |
+| **visit_start_datetime** | Date and time the visit started |
+| **visit_end_date** | Date the visit ended |
+| **visit_end_datetime** | Date and time the visit ended |
+| **visit_type_concept_id** | Concept identifier for the type of visit |
+| **discharged_to_concept_id** | Concept identifier for where the patient was discharged to |
+| **preceding_visit_occurrence_id** | Identifier for the previous visit occurrence |
+
+The main clinical tables `condition_occurrence`, `measurement`, `observation` and `drug_exposure` contain a `visit_occurrence_id` that links to this table.
+
+`visit_concept_id` specifies the kind of visit that took place using standardised OMOP concepts. These include `Inpatient visit`, `Emergency Room Visit` and `Outpatient Visit`. Inpatient visits can last for longer than one day.    
+
+As we have seen we don't need to consider visits to answer all research questions. For example if we can count the number of patients with a particular condition without considering visits. However, in some cases visits are important. For example, if we want to know how many emergency room visits resulted in a hospital admission we need to consider visits.
+
+::::::::::::::::::::::::::::::::::::: challenge
+
+1. Find out how many different types of visits are recorded in the `visit_occurrence` table and link these to get their name.
+
+2. Find patients who had more than one visit.
+
+3. How many patients had both an emergency room visit and an inpatient visit?
+
+::::::::::::::::::::::::::::::::::::: solution
+1. Find out how many different types of visits are recorded in the `visit_occurrence` table and link these to get their name.
+
+``` r
+omop$visit_occurrence |>
+  count(visit_concept_id) |>
+  left_join(
+    omop$concept,
+    by = join_by(visit_concept_id == concept_id)
+  ) |>
+  select(visit_concept_id, concept_name, n) |>
+  arrange(desc(n)) |>
+  collect()
+```
+
+``` output
+# A tibble: 4 × 3
+  visit_concept_id concept_name                           n
+             <int> <chr>                              <int>
+1             9203 Emergency Room Visit                   8
+2             9201 Inpatient Visit                        7
+3             9202 Outpatient Visit                       4
+4              262 Emergency Room and Inpatient Visit     1
+```
+
+***Answer:*** The different types of visits recorded in the `visit_occurrence` table along with their names are:
+- Emergency Room Visit
+- Inpatient visit
+- Outpatient Visit
+- Emergency Room and Inpatient Visit
+
+**CODING NOTE:** We use the `count()` function to count the number of occurrences of each `visit_concept_id` in the `visit_occurrence` table. We then join with the `concept` table to get the humanly readable names of the visit types and select the relevant columns for display. Finally, we arrange the results in descending order of count using the `desc()` function in conjunction with the `arrange()` function.
+
+2. Find patients who had more than one visit.
+
+``` r
+omop$visit_occurrence |>
+  group_by(person_id) |>
+  tally() |>
+  filter(n > 1) |>
+  collect()
+```
+
+``` output
+# A tibble: 4 × 2
+  person_id     n
+      <int> <int>
+1      1112     2
+2        31     2
+3         2     2
+4        58    10
+```
+
+**CODING NOTE:** We group the `visit_occurrence` table by `person_id` and use `tally()` to count the number of visits for each patient. We then filter to keep only those patients with an `n` greater than 1 and collect the results into R for display. We could have also used the `summarise()` function instead of `tally()`.
+
+3. How many patients had both an emergency room visit and an inpatient visit?
+
+``` r
+patients_with_both_in_one_visit <- omop$visit_occurrence |>
+  filter(visit_concept_id == 262) |>
+  count(person_id) |>
+  collect()
+
+patients_with_both_visits_seperately <- omop$visit_occurrence |>
+  filter(visit_concept_id %in% c(9203, 9201)) |>
+  group_by(person_id) |>
+  summarise(visit_types = n_distinct(visit_concept_id)) |>
+  filter(visit_types  == 2) |>
+  collect()
+
+patients_with_both_in_one_visit |>
+  bind_rows(patients_with_both_visits_seperately) |>
+  distinct(person_id) |>
+  tally()
+```
+
+``` output
+# A tibble: 1 × 1
+      n
+  <int>
+1     2
+```
+
+***Answer:*** The number of patients who had both an emergency room visit and an inpatient visit is 2.
+
+**CODING NOTE:** We filter the `visit_occurrence` table for the `visit_concept_id` values corresponding to emergency room visits and inpatient visit coded in a single concept. We then use `count(person_id)` to find the total number of visits per patient. For the next section we look at patients who have had separate inpatient and emergency room visits by filtering the `visit_occurrence` table for the `visit_concept_id` for both concepts. We then group by `person_id` and use `summarise()` to count the number of distinct visit types for each patient. Finally, we count the number of patients who had more than one distinct visit type to get the number of patients who had both types of visits. Then we join together both tables using `bind_rows()` and get the distinct patients before counting the number of rows with `tally()`.
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+
+::::::::::::::::::::::::::::::::::::: keypoints 
+
+- Conditions are stored in the `condition_occurrence` table in the OMOP CDM.
+
+- Visits are stored in the `visit_occurrence` table and linked to other clinical tables via `visit_occurrence_id`.
+
+- A visit represents a period of time during which a patient interacts with the healthcare system and there can be multiple types of visits.
+
+- Visits may be important to consider in analyses depending on the research question.
+
+::::::::::::::::::::::::::::::::::::::::::::::::
