@@ -24,13 +24,13 @@
   <div class="container-fluid top-nav-container">
     <div class="col-md-8">
       <div class="large-logo">
-        <img id="incubator-logo" alt="Lesson Description" src="assets/images/incubator-logo.svg"><span class="badge text-bg-danger">
-          <abbr title="This lesson is in the pre-alpha phase, which means that it is in early development, but has not yet been taught.">
+        <img id="incubator-logo" alt="Lesson Description" src="assets/images/incubator-logo.svg"><span class="badge text-bg-warning">
+          <abbr title="This lesson is in the alpha phase, which means that it has been taught once and lesson authors are iterating on feedback.">
             <a href="https://docs.carpentries.org/resources/curriculum/lesson-life-cycle.html" class="external-link alert-link">
-              <i aria-hidden="true" class="icon" data-feather="alert-octagon" style="border-radius: 5px"></i>
-              Pre-Alpha
+              <i aria-hidden="true" class="icon" data-feather="alert-triangle" style="border-radius: 5px"></i>
+              Alpha
             </a>
-            <span class="visually-hidden">This lesson is in the pre-alpha phase, which means that it is in early development, but has not yet been taught.</span>
+            <span class="visually-hidden">This lesson is in the alpha phase, which means that it has been taught once and lesson authors are iterating on feedback.</span>
           </abbr>
         </span>
 
@@ -483,77 +483,77 @@ is stored in a value column.</p>
 <div class="section level3">
 <h3 id="the-measurement-table-contains-the-following-columns-among-others-not-listed-here">The <code>measurement</code> table contains the following columns
 (among others not listed here):<a class="anchor" aria-label="anchor" href="#the-measurement-table-contains-the-following-columns-among-others-not-listed-here"></a></h3>
-<table class="table"><colgroup><col width="37%"><col width="62%"></colgroup><thead><tr class="header"><th>Column Names</th>
+<table class="table"><colgroup><col width="37%"><col width="62%"></colgroup><thead><tr><th>Column Names</th>
 <th>Description of content</th>
-</tr></thead><tbody><tr class="odd"><td><strong>measurement_id</strong></td>
+</tr></thead><tbody><tr><td><strong>measurement_id</strong></td>
 <td>Unique identifier for each measurement</td>
-</tr><tr class="even"><td><strong>person_id</strong></td>
+</tr><tr><td><strong>person_id</strong></td>
 <td>Identifier for the patient</td>
-</tr><tr class="odd"><td><strong>measurement_concept_id</strong></td>
+</tr><tr><td><strong>measurement_concept_id</strong></td>
 <td>Concept identifier for the measurement</td>
-</tr><tr class="even"><td><strong>measurement_date</strong></td>
+</tr><tr><td><strong>measurement_date</strong></td>
 <td>Date the measurement was taken</td>
-</tr><tr class="odd"><td><strong>measurement_datetime</strong></td>
+</tr><tr><td><strong>measurement_datetime</strong></td>
 <td>Date and time the measurement was taken</td>
-</tr><tr class="even"><td><strong>operator_concept_id</strong></td>
+</tr><tr><td><strong>operator_concept_id</strong></td>
 <td>Concept identifier for the operator (e.g. less than, greater than)
 used in the measurement value comparison if applicable</td>
-</tr><tr class="odd"><td><strong>value_as_number</strong></td>
+</tr><tr><td><strong>value_as_number</strong></td>
 <td>The numeric value of the measurement</td>
-</tr><tr class="even"><td><strong>value_as_concept_id</strong></td>
+</tr><tr><td><strong>value_as_concept_id</strong></td>
 <td>Concept identifier for the categorical value of the measurement</td>
-</tr><tr class="odd"><td><strong>unit_concept_id</strong></td>
+</tr><tr><td><strong>unit_concept_id</strong></td>
 <td>Concept identifier for the unit of measurement</td>
-</tr><tr class="even"><td><strong>range_low</strong></td>
+</tr><tr><td><strong>range_low</strong></td>
 <td>The low end of the normal range for the measurement</td>
-</tr><tr class="odd"><td><strong>range_high</strong></td>
+</tr><tr><td><strong>range_high</strong></td>
 <td>The high end of the normal range for the measurement</td>
-</tr><tr class="even"><td><strong>visit_occurrence_id</strong></td>
+</tr><tr><td><strong>visit_occurrence_id</strong></td>
 <td>Identifier for the visit during which the measurement was taken</td>
 </tr></tbody></table></div>
 <div class="section level3">
 <h3 id="the-observation-table-contains-the-following-columns-among-others-not-listed-here">The <code>observation</code> table contains the following columns
 (among others not listed here):<a class="anchor" aria-label="anchor" href="#the-observation-table-contains-the-following-columns-among-others-not-listed-here"></a></h3>
-<table class="table"><colgroup><col width="37%"><col width="62%"></colgroup><thead><tr class="header"><th>Column Names</th>
+<table class="table"><colgroup><col width="37%"><col width="62%"></colgroup><thead><tr><th>Column Names</th>
 <th>Description of content</th>
-</tr></thead><tbody><tr class="odd"><td><strong>observation_id</strong></td>
+</tr></thead><tbody><tr><td><strong>observation_id</strong></td>
 <td>Unique identifier for each observation</td>
-</tr><tr class="even"><td><strong>person_id</strong></td>
+</tr><tr><td><strong>person_id</strong></td>
 <td>Identifier for the patient</td>
-</tr><tr class="odd"><td><strong>observation_concept_id</strong></td>
+</tr><tr><td><strong>observation_concept_id</strong></td>
 <td>Concept identifier for the observation</td>
-</tr><tr class="even"><td><strong>observation_date</strong></td>
+</tr><tr><td><strong>observation_date</strong></td>
 <td>Date the observation was made</td>
-</tr><tr class="odd"><td><strong>observation_datetime</strong></td>
+</tr><tr><td><strong>observation_datetime</strong></td>
 <td>Date and time the observation was made</td>
-</tr><tr class="even"><td><strong>value_as_number</strong></td>
+</tr><tr><td><strong>value_as_number</strong></td>
 <td>The numeric value of the observation</td>
-</tr><tr class="odd"><td><strong>value_as_string</strong></td>
+</tr><tr><td><strong>value_as_string</strong></td>
 <td>The string value of the observation</td>
-</tr><tr class="even"><td><strong>value_as_concept_id</strong></td>
+</tr><tr><td><strong>value_as_concept_id</strong></td>
 <td>Concept identifier for the categorical value of the observation</td>
-</tr><tr class="odd"><td><strong>visit_occurrence_id</strong></td>
+</tr><tr><td><strong>visit_occurrence_id</strong></td>
 <td>Identifier for the visit during which the observation was made</td>
 </tr></tbody></table><p>The <strong>measurement_concept_id</strong> or
 <strong>observation_concept_id</strong> columns define what has been
 recorded. Here are some examples :</p>
-<table class="table"><colgroup><col width="50%"><col width="50%"></colgroup><thead><tr class="header"><th>Example Measurement concepts</th>
+<table class="table"><colgroup><col width="50%"><col width="50%"></colgroup><thead><tr><th>Example Measurement concepts</th>
 <th>Example Observation concepts</th>
-</tr></thead><tbody><tr class="odd"><td>Respiratory rate</td>
+</tr></thead><tbody><tr><td>Respiratory rate</td>
 <td>Respiratory function</td>
-</tr><tr class="even"><td>Pulse rate</td>
+</tr><tr><td>Pulse rate</td>
 <td>Wound dressing observable</td>
-</tr><tr class="odd"><td>Hemoglobin saturation with oxygen</td>
+</tr><tr><td>Hemoglobin saturation with oxygen</td>
 <td>Mandatory breath rate</td>
-</tr><tr class="even"><td>Body temperature</td>
+</tr><tr><td>Body temperature</td>
 <td>Body position for blood pressure measurement</td>
-</tr><tr class="odd"><td>Diastolic blood pressure</td>
+</tr><tr><td>Diastolic blood pressure</td>
 <td>Alcohol intake - finding</td>
-</tr><tr class="even"><td>Arterial oxygen saturation</td>
+</tr><tr><td>Arterial oxygen saturation</td>
 <td>Tobacco smoking behavior - finding</td>
-</tr><tr class="odd"><td>Body weight</td>
+</tr><tr><td>Body weight</td>
 <td>Vomit appearance</td>
-</tr><tr class="even"><td>Leukocytes [#/volume] in Blood</td>
+</tr><tr><td>Leukocytes [#/volume] in Blood</td>
 <td>State of consciousness and awareness</td>
 </tr></tbody></table><p>Look at the column values we have got in the tables associated with
 our database.</p>
@@ -642,23 +642,23 @@ which help you make sense of what a value might mean.</p>
 <div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>The various <strong>value</strong> columns store values :</p>
-<table class="table"><colgroup><col width="36%"><col width="27%"><col width="20%"><col width="15%"></colgroup><thead><tr class="header"><th>column name</th>
+<table class="table"><colgroup><col width="36%"><col width="27%"><col width="20%"><col width="15%"></colgroup><thead><tr><th>column name</th>
 <th>data type</th>
 <th>example</th>
 <th>concept_name</th>
-</tr></thead><tbody><tr class="odd"><td><code>value_as_number</code></td>
+</tr></thead><tbody><tr><td><code>value_as_number</code></td>
 <td>numeric value</td>
 <td>1.2</td>
 <td>-</td>
-</tr><tr class="even"><td><code>unit_concept_id</code></td>
+</tr><tr><td><code>unit_concept_id</code></td>
 <td>units of the numeric value</td>
 <td><strong>9529</strong></td>
 <td>kilogram</td>
-</tr><tr class="odd"><td><code>value_as_concept_id</code></td>
+</tr><tr><td><code>value_as_concept_id</code></td>
 <td>categorical value</td>
 <td><strong>4328749</strong></td>
 <td>High</td>
-</tr><tr class="even"><td><code>operator_concept_id</code></td>
+</tr><tr><td><code>operator_concept_id</code></td>
 <td>optional operators</td>
 <td><strong>4172704</strong></td>
 <td>&gt;</td>
@@ -1285,7 +1285,7 @@ any links that you are not going to use.
   "identifier": "https://SAFEHR-data.github.io/omop-carpentries/05_measurement_observation.html",
   "dateCreated": "2025-06-18",
   "dateModified": "2026-04-28",
-  "datePublished": "2026-04-28"
+  "datePublished": "2026-04-30"
 }
 
   </script><script>

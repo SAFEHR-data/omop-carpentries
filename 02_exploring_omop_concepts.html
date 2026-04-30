@@ -24,13 +24,13 @@
   <div class="container-fluid top-nav-container">
     <div class="col-md-8">
       <div class="large-logo">
-        <img id="incubator-logo" alt="Lesson Description" src="assets/images/incubator-logo.svg"><span class="badge text-bg-danger">
-          <abbr title="This lesson is in the pre-alpha phase, which means that it is in early development, but has not yet been taught.">
+        <img id="incubator-logo" alt="Lesson Description" src="assets/images/incubator-logo.svg"><span class="badge text-bg-warning">
+          <abbr title="This lesson is in the alpha phase, which means that it has been taught once and lesson authors are iterating on feedback.">
             <a href="https://docs.carpentries.org/resources/curriculum/lesson-life-cycle.html" class="external-link alert-link">
-              <i aria-hidden="true" class="icon" data-feather="alert-octagon" style="border-radius: 5px"></i>
-              Pre-Alpha
+              <i aria-hidden="true" class="icon" data-feather="alert-triangle" style="border-radius: 5px"></i>
+              Alpha
             </a>
-            <span class="visually-hidden">This lesson is in the pre-alpha phase, which means that it is in early development, but has not yet been taught.</span>
+            <span class="visually-hidden">This lesson is in the alpha phase, which means that it has been taught once and lesson authors are iterating on feedback.</span>
           </abbr>
         </span>
 
@@ -451,30 +451,30 @@ concepts table. We also created the function
 </div>
 <div class="section level3">
 <h3 id="the-concept-table-contains-the-following-columns">The <code>concept</code> table contains the following columns:<a class="anchor" aria-label="anchor" href="#the-concept-table-contains-the-following-columns"></a></h3>
-<table class="table"><colgroup><col width="37%"><col width="62%"></colgroup><thead><tr class="header"><th>Column Names</th>
+<table class="table"><colgroup><col width="37%"><col width="62%"></colgroup><thead><tr><th>Column Names</th>
 <th>Description of content</th>
-</tr></thead><tbody><tr class="odd"><td><strong>concept_id</strong></td>
+</tr></thead><tbody><tr><td><strong>concept_id</strong></td>
 <td>Unique identifier for the concept.</td>
-</tr><tr class="even"><td><strong>concept_name</strong></td>
+</tr><tr><td><strong>concept_name</strong></td>
 <td>Name or description of the concept.</td>
-</tr><tr class="odd"><td><strong>domain_id</strong></td>
+</tr><tr><td><strong>domain_id</strong></td>
 <td>The domain to which the concept belongs (e.g. Condition, Drug).</td>
-</tr><tr class="even"><td><strong>vocabulary_id</strong></td>
+</tr><tr><td><strong>vocabulary_id</strong></td>
 <td>The vocabulary from which the concept originates (e.g. SNOMED,
 RxNorm).</td>
-</tr><tr class="odd"><td><strong>concept_class_id</strong></td>
+</tr><tr><td><strong>concept_class_id</strong></td>
 <td>Classification within the vocabulary (e.g. Clinical Finding,
 Ingredient).</td>
-</tr><tr class="even"><td><strong>standard_concept</strong></td>
+</tr><tr><td><strong>standard_concept</strong></td>
 <td>‘S’ for standard concepts that come from internationally accepted
 standard vocabularies.</td>
-</tr><tr class="odd"><td><strong>concept_code</strong></td>
+</tr><tr><td><strong>concept_code</strong></td>
 <td>Code used by the source vocabulary to identify the concept.</td>
-</tr><tr class="even"><td><strong>valid_start_date</strong></td>
+</tr><tr><td><strong>valid_start_date</strong></td>
 <td>Date the concept became valid in OMOP.</td>
-</tr><tr class="odd"><td><strong>valid_end_date</strong></td>
+</tr><tr><td><strong>valid_end_date</strong></td>
 <td>Date the concept ceased to be valid.</td>
-</tr><tr class="even"><td><strong>invalid_reason</strong></td>
+</tr><tr><td><strong>invalid_reason</strong></td>
 <td>Reason for invalidation, if applicable.</td>
 </tr></tbody></table><p>The <code>concept</code> table is the main table for looking up
 information about concepts. We can use R to query the
@@ -505,7 +505,7 @@ table?</p></li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <ol style="list-style-type: decimal"><li>How many entries are there in the <code>concept</code> table?</li>
 </ol><div class="codewrapper sourceCode" id="cb4">
@@ -633,7 +633,7 @@ columns.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb12">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -702,7 +702,7 @@ together.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb14">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -752,7 +752,7 @@ table it belongs to and how it’s used analytically.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb16">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -797,7 +797,7 @@ that are in the “Drug” domain.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution5" aria-expanded="false" aria-controls="collapseSolution5">
   <h4 class="accordion-header" id="headingSolution5"> Show me the solution </h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb18">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -853,7 +853,7 @@ concept_name, domain_id, vocabulary_id and standard_concept status.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution6" aria-expanded="false" aria-controls="collapseSolution6">
   <h4 class="accordion-header" id="headingSolution6"> Show me the solution </h4>
 </button>
-<div id="collapseSolution6" class="accordion-collapse collapse" data-bs-parent="#accordionSolution6" aria-labelledby="headingSolution6">
+<div id="collapseSolution6" class="accordion-collapse collapse" aria-labelledby="headingSolution6" data-bs-parent="#accordionSolution6">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb20">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -928,7 +928,7 @@ standard concept status.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution7" aria-expanded="false" aria-controls="collapseSolution7">
   <h4 class="accordion-header" id="headingSolution7"> Show me the solution </h4>
 </button>
-<div id="collapseSolution7" class="accordion-collapse collapse" data-bs-parent="#accordionSolution7" aria-labelledby="headingSolution7">
+<div id="collapseSolution7" class="accordion-collapse collapse" aria-labelledby="headingSolution7" data-bs-parent="#accordionSolution7">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb24">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1099,7 +1099,7 @@ any links that you are not going to use.
   "identifier": "https://SAFEHR-data.github.io/omop-carpentries/02_exploring_omop_concepts.html",
   "dateCreated": "2025-06-18",
   "dateModified": "2026-04-28",
-  "datePublished": "2026-04-28"
+  "datePublished": "2026-04-30"
 }
 
   </script><script>

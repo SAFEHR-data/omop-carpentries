@@ -24,13 +24,13 @@
   <div class="container-fluid top-nav-container">
     <div class="col-md-8">
       <div class="large-logo">
-        <img id="incubator-logo" alt="Lesson Description" src="../assets/images/incubator-logo.svg"><span class="badge text-bg-danger">
-          <abbr title="This lesson is in the pre-alpha phase, which means that it is in early development, but has not yet been taught.">
+        <img id="incubator-logo" alt="Lesson Description" src="../assets/images/incubator-logo.svg"><span class="badge text-bg-warning">
+          <abbr title="This lesson is in the alpha phase, which means that it has been taught once and lesson authors are iterating on feedback.">
             <a href="https://docs.carpentries.org/resources/curriculum/lesson-life-cycle.html" class="external-link alert-link">
-              <i aria-hidden="true" class="icon" data-feather="alert-octagon" style="border-radius: 5px"></i>
-              Pre-Alpha
+              <i aria-hidden="true" class="icon" data-feather="alert-triangle" style="border-radius: 5px"></i>
+              Alpha
             </a>
-            <span class="visually-hidden">This lesson is in the pre-alpha phase, which means that it is in early development, but has not yet been taught.</span>
+            <span class="visually-hidden">This lesson is in the alpha phase, which means that it has been taught once and lesson authors are iterating on feedback.</span>
           </abbr>
         </span>
 
@@ -479,31 +479,31 @@ products, the quantity given, and route of administration.</p>
 <div class="section level3">
 <h3 id="the-drug_exposure-table-contains-the-following-columns-among-others-not-listed-here">The <code>drug_exposure</code> table contains the following columns
 (among others not listed here):<a class="anchor" aria-label="anchor" href="#the-drug_exposure-table-contains-the-following-columns-among-others-not-listed-here"></a></h3>
-<table class="table"><colgroup><col width="37%"><col width="62%"></colgroup><thead><tr class="header"><th>Column Names</th>
+<table class="table"><colgroup><col width="37%"><col width="62%"></colgroup><thead><tr><th>Column Names</th>
 <th>Description of content</th>
-</tr></thead><tbody><tr class="odd"><td><strong>drug_exposure_id</strong></td>
+</tr></thead><tbody><tr><td><strong>drug_exposure_id</strong></td>
 <td>Unique identifier for each drug exposure</td>
-</tr><tr class="even"><td><strong>person_id</strong></td>
+</tr><tr><td><strong>person_id</strong></td>
 <td>Identifier for the patient</td>
-</tr><tr class="odd"><td><strong>drug_concept_id</strong></td>
+</tr><tr><td><strong>drug_concept_id</strong></td>
 <td>Standard concept identifier for the drug</td>
-</tr><tr class="even"><td><strong>drug_exposure_start_date</strong></td>
+</tr><tr><td><strong>drug_exposure_start_date</strong></td>
 <td>Date the drug exposure started</td>
-</tr><tr class="odd"><td><strong>drug_exposure_start_datetime</strong></td>
+</tr><tr><td><strong>drug_exposure_start_datetime</strong></td>
 <td>Date and time the drug exposure started</td>
-</tr><tr class="even"><td><strong>drug_exposure_end_date</strong></td>
+</tr><tr><td><strong>drug_exposure_end_date</strong></td>
 <td>Date the drug exposure ended</td>
-</tr><tr class="odd"><td><strong>drug_exposure_end_datetime</strong></td>
+</tr><tr><td><strong>drug_exposure_end_datetime</strong></td>
 <td>Date and time the drug exposure ended</td>
-</tr><tr class="even"><td><strong>drug_type_concept_id</strong></td>
+</tr><tr><td><strong>drug_type_concept_id</strong></td>
 <td>Concept identifier for the type of drug exposure</td>
-</tr><tr class="odd"><td><strong>quantity</strong></td>
+</tr><tr><td><strong>quantity</strong></td>
 <td>The quantity of the drug administered</td>
-</tr><tr class="even"><td><strong>route_concept_id</strong></td>
+</tr><tr><td><strong>route_concept_id</strong></td>
 <td>Concept identifier for the route of administration</td>
-</tr><tr class="odd"><td><strong>visit_occurrence_id</strong></td>
+</tr><tr><td><strong>visit_occurrence_id</strong></td>
 <td>Identifier for the visit during which the drug was administered</td>
-</tr><tr class="even"><td><strong>drug_source_concept_id</strong></td>
+</tr><tr><td><strong>drug_source_concept_id</strong></td>
 <td>OMOP concept ID for the source value</td>
 </tr></tbody></table><p>Drug data can be very complicated, as can the process of converting
 from the source data to OMOP. You may not find what you expect depending
@@ -571,21 +571,21 @@ sort these values in alphabetical order for easier reading.</p>
 </div>
 <p>A fuller example of the drug concept hierarchy in RxNorm is shown in
 the table below.</p>
-<table class="table"><colgroup><col width="71%"><col width="28%"></colgroup><thead><tr class="header"><th>RxNorm concept_class_id</th>
+<table class="table"><colgroup><col width="71%"><col width="28%"></colgroup><thead><tr><th>RxNorm concept_class_id</th>
 <th>Description</th>
-</tr></thead><tbody><tr class="odd"><td><strong>Clinical Drug</strong></td>
+</tr></thead><tbody><tr><td><strong>Clinical Drug</strong></td>
 <td>A combination of an ingredient, strength, and dose form (e.g.,
 <em>Ibuprofen 200 mg Oral Tablet</em>).</td>
-</tr><tr class="even"><td><strong>Clinical Drug Comp</strong></td>
+</tr><tr><td><strong>Clinical Drug Comp</strong></td>
 <td>A drug component with strength but no form (e.g., <em>Ibuprofen 200
 mg</em>).</td>
-</tr><tr class="odd"><td><strong>Clinical Drug Form</strong></td>
+</tr><tr><td><strong>Clinical Drug Form</strong></td>
 <td>A drug with a specific dose form but no strength (e.g.,
 <em>Ibuprofen Oral Tablet</em>).</td>
-</tr><tr class="even"><td><strong>Quant Clinical Drug</strong></td>
+</tr><tr><td><strong>Quant Clinical Drug</strong></td>
 <td>A clinical drug with a specific quantity (e.g., <em>Ibuprofen 200 mg
 Oral Tablet 1</em>).</td>
-</tr><tr class="odd"><td><strong>Ingredient</strong></td>
+</tr><tr><td><strong>Ingredient</strong></td>
 <td>A base active drug ingredient, without strength or dose form (e.g.,
 <em>Ibuprofen</em>).</td>
 </tr></tbody></table><p>There are also concepts for Branded drugs and for packs of drugs
@@ -706,28 +706,28 @@ ingredient within a drug product.</p>
 <div class="section level3">
 <h3 id="the-drug_strength-table-contains-the-following-columns-among-others-not-listed-here">The <code>drug_strength</code> table contains the following columns
 (among others not listed here):<a class="anchor" aria-label="anchor" href="#the-drug_strength-table-contains-the-following-columns-among-others-not-listed-here"></a></h3>
-<table class="table"><colgroup><col width="37%"><col width="62%"></colgroup><thead><tr class="header"><th>Column Names</th>
+<table class="table"><colgroup><col width="37%"><col width="62%"></colgroup><thead><tr><th>Column Names</th>
 <th>Description of content</th>
-</tr></thead><tbody><tr class="odd"><td><strong>drug_concept_id</strong></td>
+</tr></thead><tbody><tr><td><strong>drug_concept_id</strong></td>
 <td>Concept representing the Branded Drug or Clinical Drug Product</td>
-</tr><tr class="even"><td><strong>ingredient_concept_id</strong></td>
+</tr><tr><td><strong>ingredient_concept_id</strong></td>
 <td>Concept representing the active ingredient contained within the drug
 product</td>
-</tr><tr class="odd"><td><strong>amount_value</strong></td>
+</tr><tr><td><strong>amount_value</strong></td>
 <td>Amount of active ingredient</td>
-</tr><tr class="even"><td><strong>amount_unit_concept_id</strong></td>
+</tr><tr><td><strong>amount_unit_concept_id</strong></td>
 <td>Concept for the unit of measure for the
 <code>amount_value</code>
 </td>
-</tr><tr class="odd"><td><strong>numerator_value</strong></td>
+</tr><tr><td><strong>numerator_value</strong></td>
 <td>Concentration of the active ingredient in the drug product</td>
-</tr><tr class="even"><td><strong>numerator_unit_concept_id</strong></td>
+</tr><tr><td><strong>numerator_unit_concept_id</strong></td>
 <td>Concept for the unit of measure for
 <code>numerator_value</code>
 </td>
-</tr><tr class="odd"><td><strong>denominator_value</strong></td>
+</tr><tr><td><strong>denominator_value</strong></td>
 <td>Amount of total liquid in the drug product</td>
-</tr><tr class="even"><td><strong>denominator_unit_concept_id</strong></td>
+</tr><tr><td><strong>denominator_unit_concept_id</strong></td>
 <td>Concept for the unit of measure for
 <code>denominator_value</code>
 </td>
@@ -987,7 +987,7 @@ any links that you are not going to use.
   "identifier": "https://SAFEHR-data.github.io/omop-carpentries/instructor/07_medications.html",
   "dateCreated": "2025-06-18",
   "dateModified": "2026-04-28",
-  "datePublished": "2026-04-28"
+  "datePublished": "2026-04-30"
 }
 
   </script><script>
