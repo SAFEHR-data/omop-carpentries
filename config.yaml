@@ -66,6 +66,7 @@ contact: 'team@carpentries.org' # FIXME
 
 # Order of episodes in your lesson
 episodes:
+- 001_intro.Rmd
 - 01_what_is_omop.Rmd
 - 02_exploring_omop_concepts.Rmd
 - 03_parquet_files.Rmd
@@ -80,6 +81,7 @@ learners:
 - setup.md
 - reference.md
 - glossary.md
+- basic-r-functions-used.md
 
 # Information for Instructors
 instructors: instructor-notes.md
