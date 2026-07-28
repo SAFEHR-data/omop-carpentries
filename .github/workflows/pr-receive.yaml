@@ -45,7 +45,7 @@ jobs:
           pr: ${{ github.event.number }}
           invalid: ${{ fromJSON(steps.hash.outputs.json)[github.repository] }}
 
-    build-md-source:
+  build-md-source:
     name: "Build markdown source files if valid"
     needs: test-pr
     runs-on: ubuntu-22.04
@@ -56,7 +56,6 @@ jobs:
       CHIVE: ${{ github.workspace }}/site/chive
       PR: ${{ github.workspace }}/site/pr
       MD: ${{ github.workspace }}/site/built
-      MAKEFLAGS: -j2                   # limit parallel builds
     steps:
       - name: "Check Out Main Branch"
         uses: actions/checkout@v4
@@ -66,24 +65,6 @@ jobs:
         with:
           ref: md-outputs
           path: ${{ env.MD }}
-
-      - name: Install system dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y --no-install-recommends \
-            build-essential \
-            r-base-dev \
-            libcurl4-openssl-dev \
-            libssl-dev \
-            libxml2-dev \
-            libpcre2-dev \
-            libudunits2-dev \
-            libgdal-dev \
-            gdal-bin \
-            libgeos-dev \
-            libproj-dev \
-            openjdk-11-jdk
-        shell: bash
 
       - name: "Set up R"
         uses: r-lib/actions/setup-r@v2
