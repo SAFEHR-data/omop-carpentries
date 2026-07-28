@@ -21,5 +21,3 @@ convert_dataset_column_types <- function(filepath) {
 }
 
 purrr::walk(original_files, convert_dataset_column_types)
-
-
