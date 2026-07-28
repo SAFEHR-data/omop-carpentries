@@ -13,9 +13,10 @@ convert_dataset_column_types <- function(filepath) {
   print(glue::glue("Processing {filepath}"))
   open_dataset(filepath) |>
     mutate(
-      across(ends_with("_date"), ~ lubridate::dmy(.x)),
-      across(ends_with("_datetime"), ~ lubridate::dmy_hm(.x)),
-      across(ends_with("_id") & where(is.double), ~ as.integer(.x))
+      across(ends_with("_date") & where(is.character), ~ lubridate::dmy(.x)),
+      across(ends_with("_datetime") & where(is.character), ~ lubridate::dmy_hm(.x)),
+      across(ends_with("_id") & where(is.double), ~ as.integer(.x)),
+      across(any_of(c("visit_concept_id")), ~ as.integer(.x))
     ) |>
     write_dataset(path = filepath, format = "parquet", create_directory = FALSE)
 }
