@@ -64,7 +64,7 @@ Common challenges include
 
 A useful way to think about this is:
 
-EHR data reflects real clinical work, and real clinical work is complicated.
+EHR data reflects real clinical work, and real clinical work is complicated and there may not be time to properly document everything.
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -138,7 +138,7 @@ When we ask analytical questions such as which patients had a particular diagnos
  - harder to maintain
  - less efficient to store
  - more difficult to query correctly
- - more likely to contain duplication and inconsistency
+ - more likely to contain duplication and inconsistency leading to errors
 
  Relational databases avoid this by storing different kinds of information separately and linking them when needed.
 
@@ -189,6 +189,7 @@ Parquet is useful because it
 - is fast to read for analytical queries
 - works well with modern data tools
 - is portable across computing environments
+- has explicit data types so you know ahead of time if something should be a number or a date
 
 In an OMOP dataset, each table can be stored as parquet files while keeping the same structure and meaning as the database version.
 
