@@ -65,6 +65,9 @@ jobs:
         with:
           cache-version: ${{ secrets.CACHE_VERSION }}
 
+      - name: "Create workshop.zip"
+        run: bash .github/scripts/create_workshop_zip.sh
+
       - name: "Deploy Site"
         run: |
           reset <- "${{ github.event.inputs.reset }}" == "true"
