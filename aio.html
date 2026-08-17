@@ -90,7 +90,7 @@
 </div>
     </div>
   </div>
-  <hr></header><nav class="navbar navbar-expand-xl bottom-nav incubator" aria-label="Main Navigation"><div class="container-fluid nav-container">
+</header><nav class="navbar navbar-expand-xl bottom-nav incubator" aria-label="Main Navigation"><div class="container-fluid nav-container">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle Navigation">
       <span class="navbar-toggler-icon"></span>
       <span class="menu-title">Menu</span>
@@ -208,8 +208,7 @@
             </div>
 <!--/div.col -->
 
-            <hr>
-</div>
+          </div>
 <!--/div.mobile-row -->
 
           <div class="accordion accordion-flush" id="accordion-chapters-toggle">
@@ -238,7 +237,7 @@
 <div class="accordion accordion-flush" id="accordionFlush2">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading2">
-        <a href="01_what_is_omop.html">1. What is OMOP?</a>
+        <a href="001_intro.html">1. From EHR to OMOP: Why Clinical Data Needs Structure</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -250,7 +249,7 @@
 <div class="accordion accordion-flush" id="accordionFlush3">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading3">
-        <a href="02_exploring_omop_concepts.html">2. Exploring OMOP concepts with R</a>
+        <a href="01_what_is_omop.html">2. What is OMOP?</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -262,7 +261,7 @@
 <div class="accordion accordion-flush" id="accordionFlush4">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading4">
-        <a href="03_parquet_files.html">3. Parquet files</a>
+        <a href="02_exploring_omop_concepts.html">3. Exploring OMOP concepts with R</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -274,7 +273,7 @@
 <div class="accordion accordion-flush" id="accordionFlush5">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading5">
-        <a href="04_other_concepts.html">4. More on concepts</a>
+        <a href="03_parquet_files.html">4. Parquet files</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -286,7 +285,7 @@
 <div class="accordion accordion-flush" id="accordionFlush6">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading6">
-        <a href="05_measurement_observation.html">5. Measurements and Observations</a>
+        <a href="04_other_concepts.html">5. More on concepts</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -298,7 +297,7 @@
 <div class="accordion accordion-flush" id="accordionFlush7">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading7">
-        <a href="06_conditions_visits.html">6. Conditions and Visits</a>
+        <a href="05_measurement_observation.html">6. Measurements and Observations</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -310,7 +309,7 @@
 <div class="accordion accordion-flush" id="accordionFlush8">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading8">
-        <a href="07_medications.html">7. Medications</a>
+        <a href="06_conditions_visits.html">7. Conditions and Visits</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -322,7 +321,19 @@
 <div class="accordion accordion-flush" id="accordionFlush9">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading9">
-        <a href="08_dates_and_times.html">8. Dates and times</a>
+        <a href="07_medications.html">8. Medications</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush10">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading10">
+        <a href="08_dates_and_times.html">9. Dates and times</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -386,9 +397,357 @@
     <main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>All in One View</h1>
         
-<section id="aio-01_what_is_omop"><p>Content from <a href="01_what_is_omop.html">What is OMOP?</a></p>
+<section id="aio-001_intro"><p>Content from <a href="001_intro.html">From EHR to OMOP: Why Clinical Data Needs Structure</a></p>
 <hr>
-<p>Last updated on 2026-04-28 |
+<p>Last updated on 2026-08-17 |
+
+        <a href="https://github.com/SAFEHR-data/omop-carpentries/edit/main/episodes/001_intro.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
+<div class="text-end">
+          <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
+        </div>
+<div class="overview card">
+<h2 class="card-header">Overview</h2>
+<div class="row g-0">
+<div class="col-md-4">
+<div class="card-body">
+<div class="inner">
+<h3 class="card-title">Questions</h3>
+<ul>
+<li>Where does clinical data come from?</li>
+<li>Why is raw EHR data difficult to analyse directly?</li>
+<li>What does a data model do?</li>
+<li>Why is OMOP organised as linked tables?</li>
+<li>Why might OMOP data be stored in a relational database or as parquet
+files?</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="col-md-8">
+<div class="card-body">
+<div class="inner bordered">
+<h3 class="card-title">Objectives</h3>
+<ul>
+<li>describe where clinical data usually comes from</li>
+<li>explain why raw EHR data is often not analysis-ready</li>
+<li>explain the purpose of a common data model</li>
+<li>describe, at a high level, how OMOP organises clinical data</li>
+<li>distinguish between relational databases and parquet files as ways
+of storing and accessing OMOP data</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<section><h2 class="section-heading" id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
+</h2>
+<hr class="half-width">
+<p>Clinical data is generated during routine healthcare and usually
+first recorded in Electronic Health Record (EHR) systems. Although this
+data is rich and valuable, it is not collected mainly for research, so
+it often needs to be reorganised and standardised before analysis. This
+section introduces that journey from EHR data, to a common data model
+such as OMOP, to practical storage formats such as relational databases
+and parquet files.</p>
+</section><section><h2 class="section-heading" id="clinical-data-starts-in-healthcare-delivery">Clinical data starts in healthcare delivery<a class="anchor" aria-label="anchor" href="#clinical-data-starts-in-healthcare-delivery"></a>
+</h2>
+<hr class="half-width">
+<p>Clinical data is the information generated during routine healthcare.
+This includes things like</p>
+<ul>
+<li>demographic information</li>
+<li>visits and admissions</li>
+<li>diagnoses</li>
+<li>procedures</li>
+<li>medications</li>
+<li>laboratory results</li>
+<li>observations</li>
+<li>measurements such as blood pressure, height, and weight</li>
+</ul>
+<p>In most organisations, this information is first recorded in an
+<strong>Electronic Health Record (EHR)</strong> system.</p>
+<p>EHR systems are designed to support healthcare delivery. They help
+clinicians document what happened, communicate with colleagues, and
+manage the practical work of patient care. They may also support
+scheduling, billing, and legal record-keeping.</p>
+<p>This means that EHR data is very valuable, but it is not
+automatically organised in a way that makes analysis easy.</p>
+<div class="section level3">
+<h3 id="why-raw-ehr-data-is-difficult-to-analyse">Why raw EHR data is difficult to analyse<a class="anchor" aria-label="anchor" href="#why-raw-ehr-data-is-difficult-to-analyse"></a>
+</h3>
+<p>Raw EHR data reflects the realities of clinical practice. That makes
+it rich, but it also makes it messy from an analytical point of
+view.</p>
+<p>Common challenges include</p>
+<ul>
+<li>data being recorded for care rather than research</li>
+<li>similar information being stored differently across
+organisations</li>
+<li>information being spread across multiple systems or tables</li>
+<li>local coding systems and workflows varying from place to place</li>
+<li>records being incomplete, duplicated, or inconsistent</li>
+</ul>
+<div id="callout1" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<span class="callout-header">Callout</span>
+<div class="callout-inner">
+<div class="callout-content">
+<p>A useful way to think about this is:</p>
+<p>EHR data reflects real clinical work, and real clinical work is
+complicated and there may not be time to properly document
+everything.</p>
+</div>
+</div>
+</div>
+<p>For this reason, we often need to transform source data before using
+it for reproducible analysis.</p>
+</div>
+</section><section><h2 class="section-heading" id="why-use-a-data-model">Why use a data model?<a class="anchor" aria-label="anchor" href="#why-use-a-data-model"></a>
+</h2>
+<hr class="half-width">
+<p>A <strong>data model</strong> is a shared blueprint for how data
+should be organised.</p>
+<p>It defines</p>
+<ul>
+<li>what tables exist</li>
+<li>what each table represents</li>
+<li>how tables relate to one another</li>
+<li>how important concepts should be represented</li>
+</ul>
+<p>Using a data model makes it easier to organise data consistently and
+reuse analyses across datasets.</p>
+<p>In this course, we use the <strong>OMOP Common Data Model</strong>.
+OMOP provides standard tables for common types of healthcare data, such
+as people, visits, conditions, drugs, measurements, and observations. It
+also supports the use of standard vocabularies so that similar concepts
+can be represented more consistently across datasets.</p>
+<p>This standardisation is one of the reasons OMOP is useful in
+collaborative and multi-site research.</p>
+<div class="section level3">
+<h3 id="omop-as-linked-tables">OMOP as linked tables<a class="anchor" aria-label="anchor" href="#omop-as-linked-tables"></a>
+</h3>
+<p>Clinical data is naturally relational.</p>
+<p>For example</p>
+<ul>
+<li>one person can have many visits</li>
+<li>one visit can have many diagnoses</li>
+<li>one visit can have many measurements</li>
+<li>one patient can have repeated events over time</li>
+</ul>
+<p>Because of that, OMOP is organised as a set of linked tables rather
+than one large flat file.</p>
+<p>A simplified example looks like this.</p>
+<figure><img src="fig/person_ehr.png" alt="A diagram showing how person data is recorded in an EHR, with different pieces of information stored in different tables." class="figure mx-auto d-block"><div class="figcaption">Person data</div>
+</figure>
+</div>
+</section><section><h2 class="section-heading" id="why-relational-databases">Why relational databases?<a class="anchor" aria-label="anchor" href="#why-relational-databases"></a>
+</h2>
+<hr class="half-width">
+<p>A <strong>relational database</strong> stores data in multiple tables
+that are linked together.</p>
+<p>This works well for clinical data because healthcare events are
+naturally connected. For example</p>
+<ul>
+<li>one person can have many visits</li>
+<li>one visit can have many diagnoses</li>
+<li>one visit can have many measurements</li>
+<li>one patient can have many records over time</li>
+</ul>
+<p>Instead of storing all of this in one large table, a relational
+database keeps different kinds of information in separate tables and
+links them using identifiers.</p>
+<p>The flow chart for data is the same as above</p>
+<p>This structure is useful because it</p>
+<ul>
+<li>reduces duplication</li>
+<li>preserves relationships between records</li>
+<li>supports efficient joins and queries</li>
+<li>fits the way OMOP organises data</li>
+</ul>
+<p>When we ask analytical questions such as which patients had a
+particular diagnosis during a visit, or which lab results were recorded
+after a drug exposure, relational databases make it easier to combine
+information from multiple tables.</p>
+<div class="section level3">
+<h3 id="why-not-use-one-large-flat-table">Why not use one large flat table?<a class="anchor" aria-label="anchor" href="#why-not-use-one-large-flat-table"></a>
+</h3>
+<p>A single flat table would repeat the same patient and visit
+information many times.</p>
+<p>This can make the data</p>
+<ul>
+<li>harder to maintain</li>
+<li>less efficient to store</li>
+<li>more difficult to query correctly</li>
+<li>more likely to contain duplication and inconsistency leading to
+errors</li>
+</ul>
+<p>Relational databases avoid this by storing different kinds of
+information separately and linking them when needed.</p>
+<div id="challenge1" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div class="callout-inner">
+<h3 class="callout-title">Challenge</h3>
+<div class="callout-content">
+<p>Imagine you are storing the following information</p>
+<ul>
+<li>one patient</li>
+<li>three visits</li>
+<li>two diagnoses recorded during one visit</li>
+<li>four measurements recorded across two visits</li>
+</ul>
+<p>Discuss with a partner</p>
+<ol style="list-style-type: decimal">
+<li>Why might one large spreadsheet contain repeated information?</li>
+<li>Which pieces of information would make sense to store in separate
+tables?</li>
+<li>What would need to link those tables together?</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div class="accordion-body">
+<p>In one large spreadsheet, the patient’s details would need to be
+repeated on many rows. Visit details might also be repeated for each
+diagnosis or measurement linked to that visit.</p>
+<p>A relational structure would usually separate this into tables such
+as:</p>
+<ul>
+<li>a person table for patient-level information</li>
+<li>a visit table for visit-level information</li>
+<li>a condition table for diagnoses</li>
+<li>a measurement table for laboratory tests or vital signs</li>
+</ul>
+<p>These tables would be linked using identifiers such as a person
+identifier and a visit identifier.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section><section><h2 class="section-heading" id="why-parquet-files">Why parquet files?<a class="anchor" aria-label="anchor" href="#why-parquet-files"></a>
+</h2>
+<hr class="half-width">
+<p><strong>Parquet</strong> is a file format designed for efficient
+analytical work.</p>
+<p>Unlike a relational database, parquet stores data as files rather
+than as tables managed by a database server. It uses a
+<strong>columnar</strong> layout, which means values from the same
+column are stored together.</p>
+<p>This is useful for analytical tasks because we often do not need
+every column in a table. For example, if we only need a person
+identifier, a date, and a measurement value, parquet can read those
+columns without loading everything else.</p>
+<p>Parquet is useful because it</p>
+<ul>
+<li>stores data compactly</li>
+<li>supports good compression</li>
+<li>is fast to read for analytical queries</li>
+<li>works well with modern data tools</li>
+<li>is portable across computing environments</li>
+<li>has explicit data types so you know ahead of time if something
+should be a number or a date</li>
+</ul>
+<p>In an OMOP dataset, each table can be stored as parquet files while
+keeping the same structure and meaning as the database version.</p>
+<div class="section level3">
+<h3 id="columnar-storage">Columnar storage<a class="anchor" aria-label="anchor" href="#columnar-storage"></a>
+</h3>
+<p>In a row-based layout, all values from one row are stored
+together.</p>
+<p>In a columnar layout, all values from one column are stored
+together.</p>
+<p>Columnar storage is often more efficient for analytics because many
+tasks use only a subset of columns.</p>
+<div id="challenge2" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div class="callout-inner">
+<h3 class="callout-title">Challenge</h3>
+<div class="callout-content">
+<p>Imagine you are analysing a large <strong>measurement</strong> table
+and only need these columns</p>
+<ul>
+<li><code>person_id</code></li>
+<li><code>measurement_date</code></li>
+<li><code>value_as_number</code></li>
+</ul>
+<p>Discuss with a partner</p>
+<ol style="list-style-type: decimal">
+<li>Why might parquet be efficient for this task?</li>
+<li>What might be wasteful about reading the whole table if many other
+columns are not needed?</li>
+<li>Why might parquet be useful in a workflow that uses tools such as
+Arrow or DuckDB?</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
+  <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
+</button>
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div class="accordion-body">
+<p>Parquet can be efficient because it allows analytical tools to read
+only the columns needed for the task.</p>
+<p>Reading the whole table would be wasteful if many columns are
+irrelevant, because it would use more memory and more reading time than
+necessary.</p>
+<p>Parquet is also useful with tools such as Arrow or DuckDB because
+those tools are designed to work efficiently with columnar file formats
+for large-scale analysis.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="keypoints1" class="callout keypoints">
+<div class="callout-square">
+<i class="callout-icon" data-feather="key"></i>
+</div>
+<span class="callout-header">Key Points</span>
+<div class="callout-inner">
+<div class="callout-content">
+<ul>
+<li>Relational databases store data in multiple linked tables.</li>
+<li>This fits clinical data well because patients, visits, diagnoses,
+and measurements are naturally related.</li>
+<li>Separate tables reduce duplication and make querying easier.</li>
+<li>OMOP is well suited to relational databases because it is organised
+as linked tables.</li>
+<li>Parquet is a columnar file format designed for analytical
+workloads.</li>
+<li>It is efficient when only some columns from a table are needed.</li>
+<li>Parquet files are compact, portable, and work well with modern
+analytics tools.</li>
+<li>OMOP tables can be stored as parquet files while keeping the same
+data model structure.</li>
+</ul>
+</div>
+</div>
+</div>
+<!--
+Place links that you need to refer to multiple times across pages here. Delete
+any links that you are not going to use.
+ -->
+</div>
+</section></section><section id="aio-01_what_is_omop"><p>Content from <a href="01_what_is_omop.html">What is OMOP?</a></p>
+<hr>
+<p>Last updated on 2026-08-17 |
 
         <a href="https://github.com/SAFEHR-data/omop-carpentries/edit/main/episodes/01_what_is_omop.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -457,11 +816,11 @@ break.</p>
 </button>
 </div>
 </nav><div id="nav-tabContent-1" class="tab-content">
-<div id="nav-tabpanel-1-Experienced" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-1-Experienced">
+<div id="nav-tabpanel-1-Experienced" class="tab-pane show active" aria-labelledby="nav-tab-1-Experienced" role="tabpanel">
 <p>Create a new project in the <code>workshop</code> directory from the
 course setup.</p>
 </div>
-<div id="nav-tabpanel-1-Needareminder" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-Needareminder">
+<div id="nav-tabpanel-1-Needareminder" class="tab-pane" aria-labelledby="nav-tab-1-Needareminder" role="tabpanel">
 <ul>
 <li>Under the <code>File</code> menu in RStudio, click on
 <code>New project</code>, choose <code>Existing directory</code>, then
@@ -550,7 +909,7 @@ hospital?</p></li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <ol style="list-style-type: decimal">
 <li><p>The <strong>Person</strong> table</p></li>
@@ -643,7 +1002,7 @@ connect to the <code>person</code> table?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -691,8 +1050,8 @@ for <code>concept_id</code> 9201 and selecting the
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code># Source:   SQL [?? x 1]
-# Database: DuckDB 1.4.1 [unknown@Linux 6.8.0-1044-azure:R 4.5.3//tmp/Rtmp81g5qq/file586f1575b8ae.duckdb]
+<pre class="output" tabindex="0"><code># A query:  ?? x 1
+# Database: DuckDB 1.5.5 [unknown@Linux 6.8.0-1064-azure:R 4.6.1//tmp/RtmpPBcMTp/file48376cae5cdc.duckdb]
   concept_name
   &lt;chr&gt;
 1 Inpatient Visit</code></pre>
@@ -734,7 +1093,7 @@ be a useful function. We can create a function
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb11">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -792,7 +1151,7 @@ any links that you are not going to use.
 </div>
 </section></section><section id="aio-02_exploring_omop_concepts"><p>Content from <a href="02_exploring_omop_concepts.html">Exploring OMOP concepts with R</a></p>
 <hr>
-<p>Last updated on 2026-04-28 |
+<p>Last updated on 2026-08-17 |
 
         <a href="https://github.com/SAFEHR-data/omop-carpentries/edit/main/episodes/02_exploring_omop_concepts.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -990,7 +1349,7 @@ table?</p></li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <ol style="list-style-type: decimal">
 <li>How many entries are there in the <code>concept</code> table?</li>
@@ -1128,7 +1487,7 @@ columns.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb12">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1198,7 +1557,7 @@ together.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb14">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1213,8 +1572,8 @@ together.</p>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>[1] "Gender"  "ICD10CM" "LOINC"   "NDC"     "Visit"   "RxNorm"  "CVX"
-[8] "SNOMED"  "None"   </code></pre>
+<pre class="output" tabindex="0"><code>[1] "RxNorm"  "CVX"     "SNOMED"  "None"    "Gender"  "ICD10CM" "LOINC"
+[8] "NDC"     "Visit"  </code></pre>
 </div>
 <p><strong>CODING_NOTE</strong>: Here we can use <code>pull(x)</code> to
 pull the data x into R memory to view it. This is because we are only
@@ -1249,7 +1608,7 @@ table it belongs to and how it’s used analytically.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb16">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1264,8 +1623,8 @@ table it belongs to and how it’s used analytically.</p>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>[1] "Drug"        "Measurement" "Observation" "Visit"       "Metadata"
-[6] "Gender"      "Condition"   "Procedure"  </code></pre>
+<pre class="output" tabindex="0"><code>[1] "Measurement" "Drug"        "Condition"   "Procedure"   "Observation"
+[6] "Visit"       "Metadata"    "Gender"     </code></pre>
 </div>
 </div>
 </div>
@@ -1295,7 +1654,7 @@ that are in the “Drug” domain.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution5" aria-expanded="false" aria-controls="collapseSolution5">
   <h4 class="accordion-header" id="headingSolution5"> Show me the solution </h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb18">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1311,10 +1670,10 @@ that are in the “Drug” domain.</p>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code> [1] "Clinical Drug"       "Quant Clinical Drug" "CVX"
- [4] "Ingredient"          "11-digit NDC"        "Branded Pack"
- [7] "Clinical Drug Comp"  "Branded Drug"        "Quant Branded Drug"
-[10] "Branded Drug Comp"  </code></pre>
+<pre class="output" tabindex="0"><code> [1] "Branded Drug"        "Quant Branded Drug"  "Branded Drug Comp"
+ [4] "CVX"                 "Ingredient"          "11-digit NDC"
+ [7] "Branded Pack"        "Clinical Drug Comp"  "Clinical Drug"
+[10] "Quant Clinical Drug"</code></pre>
 </div>
 </div>
 </div>
@@ -1352,7 +1711,7 @@ concept_name, domain_id, vocabulary_id and standard_concept status.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution6" aria-expanded="false" aria-controls="collapseSolution6">
   <h4 class="accordion-header" id="headingSolution6"> Show me the solution </h4>
 </button>
-<div id="collapseSolution6" class="accordion-collapse collapse" aria-labelledby="headingSolution6" data-bs-parent="#accordionSolution6">
+<div id="collapseSolution6" class="accordion-collapse collapse" data-bs-parent="#accordionSolution6" aria-labelledby="headingSolution6">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb20">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1427,7 +1786,7 @@ standard concept status.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution7" aria-expanded="false" aria-controls="collapseSolution7">
   <h4 class="accordion-header" id="headingSolution7"> Show me the solution </h4>
 </button>
-<div id="collapseSolution7" class="accordion-collapse collapse" aria-labelledby="headingSolution7" data-bs-parent="#accordionSolution7">
+<div id="collapseSolution7" class="accordion-collapse collapse" data-bs-parent="#accordionSolution7" aria-labelledby="headingSolution7">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb24">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1543,7 +1902,7 @@ any links that you are not going to use.
 </div>
 </section></section><section id="aio-03_parquet_files"><p>Content from <a href="03_parquet_files.html">Parquet files</a></p>
 <hr>
-<p>Last updated on 2026-04-28 |
+<p>Last updated on 2026-08-17 |
 
         <a href="https://github.com/SAFEHR-data/omop-carpentries/edit/main/episodes/03_parquet_files.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -1790,17 +2149,16 @@ visit_occurrence_id: int32
 
 $visit_occurrence
 FileSystemDataset with 1 Parquet file
-10 columns
+9 columns
 visit_occurrence_id: int32
 person_id: int32
 visit_concept_id: int32
 visit_start_date: date32[day]
-visit_start_datetime: timestamp[us, tz=UTC]
+visit_start_datetime: timestamp[ms, tz=UTC]
 visit_end_date: date32[day]
-visit_end_datetime: timestamp[us, tz=UTC]
+visit_end_datetime: timestamp[ms, tz=UTC]
 visit_type_concept_id: int32
-discharged_to_concept_id: int32
-preceding_visit_occurrence_id: int32</code></pre>
+discharged_to_concept_id: int32</code></pre>
 </div>
 <p>You will see that this gives you a list of all the tables in this
 dataset and what columns they contain. It is obviously a much smaller
@@ -1930,7 +2288,7 @@ the previous episode to work with this parquet file dataset.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb11">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1994,7 +2352,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-04_other_concepts"><p>Content from <a href="04_other_concepts.html">More on concepts</a></p>
 <hr>
-<p>Last updated on 2026-04-28 |
+<p>Last updated on 2026-08-17 |
 
         <a href="https://github.com/SAFEHR-data/omop-carpentries/edit/main/episodes/04_other_concepts.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -2448,17 +2806,16 @@ associated with a particular visit.</p>
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code>FileSystemDataset with 1 Parquet file
-10 columns
+9 columns
 visit_occurrence_id: int32
 person_id: int32
 visit_concept_id: int32
 visit_start_date: date32[day]
-visit_start_datetime: timestamp[us, tz=UTC]
+visit_start_datetime: timestamp[ms, tz=UTC]
 visit_end_date: date32[day]
-visit_end_datetime: timestamp[us, tz=UTC]
+visit_end_datetime: timestamp[ms, tz=UTC]
 visit_type_concept_id: int32
-discharged_to_concept_id: int32
-preceding_visit_occurrence_id: int32</code></pre>
+discharged_to_concept_id: int32</code></pre>
 </div>
 <div class="codewrapper sourceCode" id="cb26">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -2705,7 +3062,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-05_measurement_observation"><p>Content from <a href="05_measurement_observation.html">Measurements and Observations</a></p>
 <hr>
-<p>Last updated on 2026-04-28 |
+<p>Last updated on 2026-08-17 |
 
         <a href="https://github.com/SAFEHR-data/omop-carpentries/edit/main/episodes/05_measurement_observation.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -3714,7 +4071,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-06_conditions_visits"><p>Content from <a href="06_conditions_visits.html">Conditions and Visits</a></p>
 <hr>
-<p>Last updated on 2026-04-28 |
+<p>Last updated on 2026-08-17 |
 
         <a href="https://github.com/SAFEHR-data/omop-carpentries/edit/main/episodes/06_conditions_visits.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -4389,7 +4746,7 @@ any links that you are not going to use.
 </div>
 </section></section><section id="aio-07_medications"><p>Content from <a href="07_medications.html">Medications</a></p>
 <hr>
-<p>Last updated on 2026-04-28 |
+<p>Last updated on 2026-08-17 |
 
         <a href="https://github.com/SAFEHR-data/omop-carpentries/edit/main/episodes/07_medications.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -4614,7 +4971,7 @@ different levels in a drug hierarchy.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -4722,7 +5079,7 @@ in <code>RxNorm</code> and its <code>concept_id</code>.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -4888,7 +5245,7 @@ Once you have this, also display the names of
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb11">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -4990,7 +5347,7 @@ the drug. We then join the <code>drug_strength</code> and join the
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb13">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -5063,7 +5420,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-08_dates_and_times"><p>Content from <a href="08_dates_and_times.html">Dates and times</a></p>
 <hr>
-<p>Last updated on 2026-04-28 |
+<p>Last updated on 2026-08-17 |
 
         <a href="https://github.com/SAFEHR-data/omop-carpentries/edit/main/episodes/08_dates_and_times.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -5330,7 +5687,7 @@ can use either the <code>measurement_date</code> or
 <span>    y <span class="op">=</span> <span class="st">"Body temperature (°C)"</span></span>
 <span>  <span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="fig/08_dates_and_times-rendered-unnamed-chunk-7-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p><strong>CODING NOTE</strong>: In the code above, we first used the
+<figure><img src="fig/08_dates_and_times-rendered-unnamed-chunk-7-1.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p><strong>CODING NOTE</strong>: In the code above, we first used the
 <code>get_concept_id()</code> function to find the concept ID for “Body
 temperature”. We then read in the <code>measurement</code> table and
 filtered for measurements of patient <code>113</code> with the relevant
@@ -5503,7 +5860,7 @@ taken between the 1st of January 2025 and 1st of October 2025, using
 <span>    colour <span class="op">=</span> <span class="st">"person_id"</span></span>
 <span>  <span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="fig/08_dates_and_times-rendered-unnamed-chunk-10-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p><strong>CODING NOTE</strong>: In the code above, we converted the
+<figure><img src="fig/08_dates_and_times-rendered-unnamed-chunk-10-1.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p><strong>CODING NOTE</strong>: In the code above, we converted the
 <code>measurement_datetime</code> from character to datetime instances
 using the <code>as.POSIXct()</code> function, we would need to confirm
 which timezone the data is in if we haven’t already been told. We also
@@ -5559,7 +5916,7 @@ any links that you are not going to use.
         | <a href="https://github.com/SAFEHR-data/omop-carpentries/blob/main/CONTRIBUTING.md" class="external-link">Contributing</a>
         | <a href="https://github.com/SAFEHR-data/omop-carpentries/" class="external-link">Source</a></p>
         <p>
-        <a href="citation.html">Cite</a>
+        <a href="https://github.com/SAFEHR-data/omop-carpentries/blob/main/" class="external-link">Cite</a>
         | <a href="mailto:team@carpentries.org">Contact</a> | <a href="https://carpentries.org/about/" class="external-link">About</a></p>
 		</div>
 		<div class="col-md-6">
@@ -5567,7 +5924,7 @@ any links that you are not going to use.
         <p>Materials licensed under <a href="LICENSE.html">CC-BY 4.0</a> by the authors</p>
 
         <p>Template licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">CC-BY 4.0</a> by <a href="https://carpentries.org/" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.20.1" class="external-link">sandpaper (0.20.1)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.9" class="external-link">pegboard (0.7.9)</a>, and <a href="https://github.com/carpentries/varnish/tree/1.1.0" class="external-link">varnish (1.1.0)</a></p>
+        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.20.2" class="external-link">sandpaper (0.20.2)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.9" class="external-link">pegboard (0.7.9)</a>, and <a href="https://github.com/carpentries/varnish/tree/1.1.1" class="external-link">varnish (1.1.1)</a></p>
 		</div>
 		</footer>
 </div> <!-- / div.container -->
@@ -5590,8 +5947,8 @@ any links that you are not going to use.
   "url": "https://SAFEHR-data.github.io/omop-carpentries/aio.html",
   "identifier": "https://SAFEHR-data.github.io/omop-carpentries/aio.html",
   "dateCreated": "2025-06-18",
-  "dateModified": "2026-05-12",
-  "datePublished": "2026-05-12"
+  "dateModified": "2026-08-17",
+  "datePublished": "2026-08-17"
 }
 
   </script><script>
