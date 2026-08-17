@@ -14,4 +14,4 @@ rsync -a --exclude '.DS_Store' \
   "$root/episodes/data/" "$staging/workshop/data/"
 
 rm -f "$root/episodes/workshop.zip"
-(cd "$staging/workshop" && zip -r "$root/episodes/workshop.zip" code data)
+(cd "$staging" && zip -r "$root/episodes/workshop.zip" workshop)
