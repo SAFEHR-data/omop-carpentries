@@ -302,17 +302,16 @@ omop$visit_occurrence
 
 ``` output
 FileSystemDataset with 1 Parquet file
-10 columns
+9 columns
 visit_occurrence_id: int32
 person_id: int32
 visit_concept_id: int32
 visit_start_date: date32[day]
-visit_start_datetime: timestamp[us, tz=UTC]
+visit_start_datetime: timestamp[ms, tz=UTC]
 visit_end_date: date32[day]
-visit_end_datetime: timestamp[us, tz=UTC]
+visit_end_datetime: timestamp[ms, tz=UTC]
 visit_type_concept_id: int32
 discharged_to_concept_id: int32
-preceding_visit_occurrence_id: int32
 ```
 
 

@@ -166,7 +166,7 @@ ggplot(measurement, aes(x = measurement_datetime, y = value_as_number)) +
   )
 ```
 
-<img src="fig/08_dates_and_times-rendered-unnamed-chunk-7-1.png" style="display: block; margin: auto;" />
+<img src="fig/08_dates_and_times-rendered-unnamed-chunk-7-1.png" alt="" style="display: block; margin: auto;" />
 
 **CODING NOTE**: In the code above, we first used the `get_concept_id()` function to find the concept ID for "Body temperature". We then read in the `measurement` table and filtered for measurements of patient `113` with the relevant concept ID. We collected this data into memory. Finally, we created a line plot of body temperature over time using `ggplot2`, we did not need to order the data by datetime as ggplot does this for us when we set the datetime column as the value for the x-axis.
 ::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -292,7 +292,7 @@ measurement_fixed |>
   )
 ```
 
-<img src="fig/08_dates_and_times-rendered-unnamed-chunk-10-1.png" style="display: block; margin: auto;" />
+<img src="fig/08_dates_and_times-rendered-unnamed-chunk-10-1.png" alt="" style="display: block; margin: auto;" />
 
 **CODING NOTE**: In the code above, we converted the `measurement_datetime` from character to datetime instances using the `as.POSIXct()` function, we would need to confirm which timezone the data is in if we haven't already been told. We also converted the `value_as_number` column to a double (numeric allowing for decimal places) data type using `as.double()`. We then found the concepts required, filtered to these and the date range and used these to plot the data using `ggplot()`. We used the `colour` option in `aes()` to define that the colour of the points should be, converting it to a factor using `as.factor()` so that the continuous variable is diplayed as categories.
 
