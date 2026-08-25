@@ -211,7 +211,7 @@ cdm$concept |>
 
 ``` output
 # A query:  ?? x 1
-# Database: DuckDB 1.5.5 [unknown@Linux 6.8.0-1064-azure:R 4.6.1//tmp/RtmpC0rj5E/file14deda97a6e.duckdb]
+# Database: DuckDB 1.5.5 [unknown@Linux 6.8.0-1064-azure:R 4.6.1//tmp/RtmpDUKwCz/file4ebc26a7efe8.duckdb]
   concept_name   
   <chr>          
 1 Inpatient Visit

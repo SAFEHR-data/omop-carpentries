@@ -279,8 +279,8 @@ cdm$concept |>
 ```
 
 ``` output
-[1] "Measurement" "Observation" "Visit"       "Metadata"    "Gender"     
-[6] "Condition"   "Procedure"   "Drug"       
+[1] "Drug"        "Measurement" "Observation" "Visit"       "Metadata"   
+[6] "Gender"      "Condition"   "Procedure"  
 ```
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::
