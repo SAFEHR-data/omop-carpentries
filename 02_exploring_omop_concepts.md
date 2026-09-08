@@ -249,7 +249,7 @@ cdm$concept |>
 ```
 
 ``` output
-[1] "ICD10CM" "LOINC"   "NDC"     "Visit"   "Gender"  "RxNorm"  "CVX"    
+[1] "Gender"  "ICD10CM" "LOINC"   "NDC"     "Visit"   "RxNorm"  "CVX"    
 [8] "SNOMED"  "None"   
 ```
 
@@ -279,7 +279,7 @@ cdm$concept |>
 ```
 
 ``` output
-[1] "Measurement" "Drug"        "Observation" "Visit"       "Metadata"   
+[1] "Drug"        "Measurement" "Observation" "Visit"       "Metadata"   
 [6] "Gender"      "Condition"   "Procedure"  
 ```
 
